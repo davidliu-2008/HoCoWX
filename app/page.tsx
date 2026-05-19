@@ -126,7 +126,6 @@ function HowPredictionsSection() {
       <div className="grid gap-4 text-sm leading-6 text-slate-600 md:grid-cols-3">
         <p>The model starts with a small base score, then adds points when official NWS data shows school-impact weather.</p>
         <p>Winter storm warnings, freezing rain, meaningful snow before the morning commute, strong gusts, and extreme cold raise the score.</p>
-        <p>Timing matters. Weather that arrives after the morning commute is treated differently than snow or ice during bus travel hours.</p>
       </div>
     </section>
   );
@@ -388,9 +387,6 @@ function MarylandComparisonSection({
             <MapPinned className="h-5 w-5 text-bay" />
             Maryland School Operations Comparison
           </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-            Comparison counties use county-specific parsers and default to Normal Operations when no current delay, closure, or modified-operation notice is found.
-          </p>
         </div>
         <div className="rounded-lg bg-ice px-3 py-2 text-sm font-medium text-bay">
           Cached for 30 minutes
@@ -486,9 +482,6 @@ export default async function Home() {
               Howard County, Maryland
             </p>
             <h1 className="text-3xl font-bold text-ink md:text-5xl">HCPSS Operations + Weather</h1>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
-              A simple local dashboard that pairs the official HCPSS operations notice with National Weather Service data.
-            </p>
           </div>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
