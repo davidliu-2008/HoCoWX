@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "HoCo Weather Channel",
+    "slug": "hoco-weather-channel",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "hocoweather",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#eff6ff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hocoweatherchannel.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#eff6ff"
+      },
+      "package": "com.hocoweatherchannel.app"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "apiBaseUrl": "https://hocoweatherchannel.vercel.app"
+    }
+  }
+}

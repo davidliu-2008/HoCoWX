@@ -6,14 +6,13 @@ import {
   Gauge,
   Info,
   Instagram,
-  MapPinned,
   School,
   Snowflake,
   Thermometer,
   Wind
 } from "lucide-react";
+import { PageTabs } from "@/components/PageTabs";
 import { getHcpssStatus } from "@/lib/hcpss-status";
-import { getMarylandOperationsComparison, type MarylandOperationStatus } from "@/lib/maryland-operations";
 import { createPrediction } from "@/lib/prediction";
 import { getWeatherSummary } from "@/lib/weather";
 import type { HcpssStatus, PredictionResult, WeatherSummary } from "@/lib/types";
@@ -152,21 +151,6 @@ function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
       </div>
     </section>
   );
-}
-
-function statusBadgeClass(statusKind: MarylandOperationStatus["statusKind"]) {
-  switch (statusKind) {
-    case "normal":
-      return "bg-emerald-100 text-emerald-800 ring-emerald-200";
-    case "delay":
-      return "bg-yellow-100 text-yellow-900 ring-yellow-200";
-    case "closed":
-      return "bg-red-100 text-red-800 ring-red-200";
-    case "virtual":
-      return "bg-blue-100 text-blue-800 ring-blue-200";
-    default:
-      return "bg-slate-100 text-slate-700 ring-slate-200";
-  }
 }
 
 function predictionBadgeClass(riskLevel: PredictionResult["riskLevel"]) {
@@ -374,94 +358,10 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
   );
 }
 
-function MarylandComparisonSection({
-  comparison
-}: {
-  comparison: LoadState<MarylandOperationStatus[]>;
-}) {
-  return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
-      <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-        <div>
-          <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
-            <MapPinned className="h-5 w-5 text-bay" />
-            Maryland School Operations Comparison
-          </h2>
-        </div>
-        <div className="rounded-lg bg-ice px-3 py-2 text-sm font-medium text-bay">
-          Cached for 30 minutes
-        </div>
-      </div>
-
-      {comparison.ok ? (
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-separate border-spacing-0 text-left text-sm">
-            <thead>
-              <tr className="text-slate-500">
-                <th className="border-b border-blue-100 px-3 py-3 font-semibold">County</th>
-                <th className="border-b border-blue-100 px-3 py-3 font-semibold">School District</th>
-                <th className="border-b border-blue-100 px-3 py-3 font-semibold">Status</th>
-                <th className="border-b border-blue-100 px-3 py-3 font-semibold">Last Updated</th>
-                <th className="border-b border-blue-100 px-3 py-3 font-semibold">Source</th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparison.data.map((item) => (
-                <tr key={item.county} className="align-top odd:bg-ice/60">
-                  <td className="border-b border-blue-50 px-3 py-3 font-semibold text-ink">
-                    {item.county}
-                    {item.county === "Howard County" ? (
-                      <span className="ml-2 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-bay">
-                        HCPSS
-                      </span>
-                    ) : null}
-                  </td>
-                  <td className="border-b border-blue-50 px-3 py-3 text-slate-700">
-                    {item.district}
-                    <span className="mt-1 block text-xs text-slate-500">
-                      {item.parserType === "authoritative"
-                        ? "Authoritative status page"
-                        : item.parserType === "county-specific"
-                          ? "County-specific parser"
-                          : "Experimental parser"}
-                    </span>
-                  </td>
-                  <td className="border-b border-blue-50 px-3 py-3">
-                    <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ring-1 ${statusBadgeClass(item.statusKind)}`}>
-                      {item.status}
-                    </span>
-                  </td>
-                  <td className="border-b border-blue-50 px-3 py-3 text-slate-600">
-                    {compactTime(item.lastUpdated ?? item.checkedAt)}
-                  </td>
-                  <td className="border-b border-blue-50 px-3 py-3">
-                    <a
-                      href={item.statusUrl}
-                      className="inline-flex items-center gap-1 font-semibold text-bay hover:underline"
-                    >
-                      Source
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
-          Maryland comparison data could not be loaded. {comparison.error}
-        </p>
-      )}
-    </section>
-  );
-}
-
 export default async function Home() {
-  const [status, weather, comparison] = await Promise.all([
+  const [status, weather] = await Promise.all([
     safeLoad(getHcpssStatus),
-    safeLoad(getWeatherSummary),
-    safeLoad(getMarylandOperationsComparison)
+    safeLoad(getWeatherSummary)
   ]);
   const prediction: LoadState<PredictionResult> = weather.ok
     ? { ok: true, data: createPrediction({ weather: weather.data }) }
@@ -500,6 +400,8 @@ export default async function Home() {
         </div>
       </header>
 
+      <PageTabs active="dashboard" />
+
       <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
         <HcpssCard status={status} />
         <PredictionCard prediction={prediction} />
@@ -515,9 +417,6 @@ export default async function Home() {
         ) : null}
         <div className="lg:col-span-2">
           <HowPredictionsSection />
-        </div>
-        <div className="lg:col-span-2">
-          <MarylandComparisonSection comparison={comparison} />
         </div>
       </div>
     </main>
