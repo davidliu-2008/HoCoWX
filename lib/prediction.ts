@@ -1,7 +1,7 @@
 import type { PredictionInput, PredictionResult } from "./types";
 
 const DISCLAIMER =
-  "This is an unofficial weather-based prediction. It does not represent or know the actual HCPSS decision.";
+  "This is an unofficial weather-based prediction. It does not represent the actual decision of a school district.";
 
 function includesAny(text: string, terms: string[]) {
   const normalized = text.toLowerCase();

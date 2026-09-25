@@ -346,7 +346,7 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
 
           <p className="leading-7 text-slate-600">{prediction.data.explanation}</p>
           <p className="mt-4 rounded-lg bg-frost p-3 text-sm font-medium text-bay">
-            {prediction.data.disclaimer} This app is not affiliated with, endorsed by, or operated by HCPSS.
+            {prediction.data.disclaimer}
           </p>
         </>
       ) : (
