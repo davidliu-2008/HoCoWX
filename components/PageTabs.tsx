@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { CloudSun, MapPinned } from "lucide-react";
+import { CloudSun, MapPinned, Mic2 } from "lucide-react";
 
-export function PageTabs({ active }: { active: "dashboard" | "maryland" }) {
-  const linkClass = (tab: "dashboard" | "maryland") =>
+type Tab = "dashboard" | "maryland" | "interview";
+
+export function PageTabs({ active }: { active: Tab }) {
+  const linkClass = (tab: Tab) =>
     [
       "inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-bold transition",
       active === tab
@@ -19,6 +21,10 @@ export function PageTabs({ active }: { active: "dashboard" | "maryland" }) {
       <Link href="/maryland-status" className={linkClass("maryland")}>
         <MapPinned className="h-4 w-4" />
         Maryland Status
+      </Link>
+      <Link href="/interview" className={linkClass("interview")}>
+        <Mic2 className="h-4 w-4" />
+        Interview
       </Link>
     </nav>
   );
