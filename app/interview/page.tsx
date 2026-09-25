@@ -66,10 +66,16 @@ export default function InterviewPage() {
         <div className="border-b border-blue-100 bg-ice/70 p-5 sm:p-6">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">Recorded March 4, 2026</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">A conversation with Superintendent Bill Barnes</h2>
-          <p className="mt-3 max-w-3xl text-slate-600">
-            David Liu, a Marriotts Ridge High School student and founder of HoCo Weather Channel, speaks with Bill Barnes,
-            Superintendent of the Howard County Public School System, which serves more than 57,000 students.
-          </p>
+          <div className="mt-3 max-w-3xl space-y-1 text-slate-600">
+            <p>
+              <span className="font-semibold text-ink">Interviewer:</span> David Liu, a Marriotts Ridge High School
+              student and founder of HoCo Weather Channel
+            </p>
+            <p>
+              <span className="font-semibold text-ink">Interviewee:</span> Bill Barnes, Superintendent of the Howard
+              County Public School System, which serves more than 57,000 students.
+            </p>
+          </div>
           <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-slate-600">
             <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-bay" /> March 4, 2026</span>
             <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-bay" /> Howard County, Maryland</span>
