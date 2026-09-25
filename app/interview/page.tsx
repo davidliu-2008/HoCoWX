@@ -73,7 +73,26 @@ export default function InterviewPage() {
           <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold text-slate-600">
             <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-bay" /> March 4, 2026</span>
             <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-bay" /> Howard County, Maryland</span>
-            <span className="inline-flex items-center gap-2"><Eye className="h-4 w-4 text-bay" /> 15.3K views</span>
+            <span className="inline-flex flex-wrap items-center gap-2">
+              <Eye className="h-4 w-4 text-bay" />
+              15.3K views
+              <a
+                href="https://www.instagram.com/p/DV7cV7skY_1/?hl=en"
+                target="_blank"
+                rel="noreferrer"
+                className="text-bay hover:underline"
+              >
+                Part 1
+              </a>
+              <a
+                href="https://www.instagram.com/p/DV7HWXFEXuw/?hl=en"
+                target="_blank"
+                rel="noreferrer"
+                className="text-bay hover:underline"
+              >
+                Part 2
+              </a>
+            </span>
           </div>
         </div>
 
@@ -116,21 +135,17 @@ export default function InterviewPage() {
 
         <aside className="h-fit rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:p-6">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">What&apos;s Next</p>
-          <h2 className="mt-2 text-xl font-bold text-ink">Upcoming collaborations</h2>
+          <h2 className="mt-2 text-xl font-bold text-ink">Upcoming Collaboration</h2>
           <p className="mt-3 leading-6 text-slate-700">
-            HoCo Weather Channel and HCPSS have confirmed plans to collaborate. A follow-up meeting with Superintendent
-            Bill Barnes is scheduled for October 1, 2026, to work out the details of weather literacy resources for the
-            upcoming winter season.
+            HoCo Weather Channel is teaming up with HCPSS to create weather literacy resources for this winter. We&apos;ll
+            meet again with Superintendent Bill Barnes on October 1 to work through the details and plan what the
+            collaboration will look like.
           </p>
           <div className="my-5 border-t border-blue-200" />
-          <h3 className="font-bold text-ink">Joint weather posts</h3>
+          <h3 className="font-bold text-ink">In Progress</h3>
           <p className="mt-2 leading-6 text-slate-700">
-            HoCo Weather Channel is also working out potential joint posts with Jason Samenow, founder and chief
-            meteorologist of Capital Weather, formerly The Washington Post&apos;s Capital Weather Gang.
-          </p>
-          <p className="mt-3 leading-6 text-slate-700">
-            Additional joint posts are being discussed with Matthew Cappucci, senior meteorologist and storm chaser for
-            MyRadar.
+            We&apos;re also exploring possible collaborations with Jason Samenow of Capital Weather Gang and Matthew
+            Cappucci, senior meteorologist and storm chaser at MyRadar.
           </p>
         </aside>
       </div>
