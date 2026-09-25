@@ -190,7 +190,7 @@ export function createPrediction({ weather, now = new Date() }: PredictionInput)
         ? "Current weather signals suggest meaningful disruption risk, especially if timing overlaps the morning commute."
         : cappedScore >= 38
           ? "Some weather factors deserve attention, but the available data does not clearly point to a closure-level event."
-          : "Current weather factors point toward routine operations, while conditions should still be monitored through official channels.",
+          : "Current weather factors point toward routine operations",
     disclaimer: DISCLAIMER,
     generatedAt: new Date().toISOString()
   };

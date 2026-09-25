@@ -78,13 +78,6 @@ export function MarylandComparisonSection({
                   </td>
                   <td className="border-b border-blue-50 px-3 py-3 text-slate-700">
                     {item.district}
-                    <span className="mt-1 block text-xs text-slate-500">
-                      {item.parserType === "authoritative"
-                        ? "Authoritative status page"
-                        : item.parserType === "county-specific"
-                          ? "County-specific parser"
-                          : "Experimental parser"}
-                    </span>
                   </td>
                   <td className="border-b border-blue-50 px-3 py-3">
                     <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ring-1 ${statusBadgeClass(item.statusKind)}`}>
