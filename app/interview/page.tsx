@@ -116,10 +116,21 @@ export default function InterviewPage() {
 
         <aside className="h-fit rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:p-6">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">What&apos;s Next</p>
-          <h2 className="mt-2 text-xl font-bold text-ink">Exploring weather literacy</h2>
+          <h2 className="mt-2 text-xl font-bold text-ink">Upcoming collaborations</h2>
           <p className="mt-3 leading-6 text-slate-700">
-            HoCo Weather Channel has a meeting scheduled for October 1, 2026, to explore a possible district partnership
-            focused on weather literacy resources for the upcoming winter season.
+            HoCo Weather Channel and HCPSS have confirmed plans to collaborate. A follow-up meeting with Superintendent
+            Bill Barnes is scheduled for October 1, 2026, to work out the details of weather literacy resources for the
+            upcoming winter season.
+          </p>
+          <div className="my-5 border-t border-blue-200" />
+          <h3 className="font-bold text-ink">Joint weather posts</h3>
+          <p className="mt-2 leading-6 text-slate-700">
+            HoCo Weather Channel is also working out potential joint posts with Jason Samenow, founder and chief
+            meteorologist of Capital Weather, formerly The Washington Post&apos;s Capital Weather Gang.
+          </p>
+          <p className="mt-3 leading-6 text-slate-700">
+            Additional joint posts are being discussed with Matthew Cappucci, senior meteorologist and storm chaser for
+            MyRadar.
           </p>
         </aside>
       </div>
