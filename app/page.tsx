@@ -404,8 +404,26 @@ export default async function Home() {
 
       <PageTabs active="dashboard" />
 
+      <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+        <HcpssCard status={status} />
+        <PredictionCard prediction={prediction} />
+        {prediction.ok ? <MorningCommuteCard prediction={prediction.data} /> : null}
+        {prediction.ok ? <RiskBreakdownCard prediction={prediction.data} /> : null}
+        <div className="lg:col-span-2">
+          <WeatherCard weather={weather} />
+        </div>
+        {weather.ok ? (
+          <div className="lg:col-span-2">
+            <HourlyTimeline weather={weather.data} />
+          </div>
+        ) : null}
+        <div className="lg:col-span-2">
+          <HowPredictionsSection />
+        </div>
+      </div>
+
       <section
-        className="mb-5 flex flex-col overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm sm:flex-row sm:items-stretch"
+        className="mb-5 mt-5 flex flex-col overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm sm:flex-row sm:items-stretch"
         aria-label="HoCo Weather Channel audience statistics"
       >
         <div className="flex items-center border-b border-blue-100 px-5 py-4 sm:w-1/3 sm:border-b-0 sm:border-r">
@@ -430,7 +448,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="mb-5 flex items-start gap-4 rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:items-center">
+      <section className="flex items-start gap-4 rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:items-center">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-bay text-white">
           <School className="h-6 w-6" />
         </div>
@@ -442,24 +460,6 @@ export default async function Home() {
           </p>
         </div>
       </section>
-
-      <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-        <HcpssCard status={status} />
-        <PredictionCard prediction={prediction} />
-        {prediction.ok ? <MorningCommuteCard prediction={prediction.data} /> : null}
-        {prediction.ok ? <RiskBreakdownCard prediction={prediction.data} /> : null}
-        <div className="lg:col-span-2">
-          <WeatherCard weather={weather} />
-        </div>
-        {weather.ok ? (
-          <div className="lg:col-span-2">
-            <HourlyTimeline weather={weather.data} />
-          </div>
-        ) : null}
-        <div className="lg:col-span-2">
-          <HowPredictionsSection />
-        </div>
-      </div>
     </main>
   );
 }
