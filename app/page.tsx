@@ -3,10 +3,10 @@ import {
   CalendarClock,
   CloudSun,
   Eye,
-  ExternalLink,
   Gauge,
   Info,
   Instagram,
+  Mail,
   School,
   Snowflake,
   Thermometer,
@@ -183,7 +183,7 @@ function compactTime(value: string | null | undefined) {
 function HcpssCard({ status }: { status: LoadState<HcpssStatus> }) {
   return (
     <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
-      <div className="mb-5 flex items-start justify-between gap-4">
+      <div className="mb-5 flex items-start gap-4">
         <div>
           <div className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
             <School className="h-4 w-4" />
@@ -193,14 +193,6 @@ function HcpssCard({ status }: { status: LoadState<HcpssStatus> }) {
             {status.ok ? status.data.operationStatus : "Status unavailable"}
           </h2>
         </div>
-        <a
-          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-blue-100 bg-ice text-slate-600 hover:border-bay hover:text-bay"
-          href="https://status.hcpss.org/"
-          aria-label="Open official HCPSS status page"
-          title="Open official HCPSS status page"
-        >
-          <ExternalLink className="h-4 w-4" />
-        </a>
       </div>
 
       {status.ok ? (
@@ -387,15 +379,24 @@ export default async function Home() {
           </div>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
-          <a
-            href="https://www.instagram.com/hocoweatherchannel/?hl=en"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
-          >
-            <Instagram className="h-4 w-4" />
-            Instagram
-          </a>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <a
+              href="mailto:howardcountyweather@gmail.com"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
+            >
+              <Mail className="h-4 w-4" />
+              Email
+            </a>
+            <a
+              href="https://www.instagram.com/hocoweatherchannel/?hl=en"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
+            >
+              <Instagram className="h-4 w-4" />
+              Instagram
+            </a>
+          </div>
           <div className="rounded-lg border border-blue-100 bg-white/90 px-4 py-3 text-sm text-slate-600 shadow-sm">
             Last updated: {formatTime(weather.ok ? weather.data.fetchedAt : status.ok ? status.data.fetchedAt : new Date().toISOString())}
           </div>

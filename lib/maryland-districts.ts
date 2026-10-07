@@ -27,7 +27,7 @@ export const marylandDistricts: MarylandDistrict[] = [
   {
     county: "Anne Arundel County",
     district: "Anne Arundel County Public Schools",
-    statusUrl: "https://www.aacounty.org/county-operations",
+    statusUrl: "https://www.aacps.org/",
     priority: 4
   },
   {

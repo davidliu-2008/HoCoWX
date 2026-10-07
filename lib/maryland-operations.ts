@@ -29,11 +29,12 @@ const countySpecificSources: Record<string, string[]> = {
     "https://www.carrollk12.org/operation/transportation-services/inclement-weather"
   ],
   "Baltimore County": ["https://www.bcps.org/", "https://www.bcps.org/about_us/emergency_notifications_school_closings_and_delays"],
-  "Anne Arundel County": ["https://www.aacps.org/", "https://www.aacounty.org/county-operations"],
+  "Anne Arundel County": ["https://www.aacps.org/"],
   "Prince George's County": ["https://www.pgcps.org/", "https://epi.pgcps.org/about-pgcps/emergency-notifications-school-closings-and-delays"]
 };
 
 const normalUnlessPopupCounties = new Set([
+  "Anne Arundel County",
   "Baltimore County",
   "Carroll County",
   "Frederick County",
@@ -143,6 +144,19 @@ function classifyExplicitCurrentStatus(text: string): ParsedStatus {
 function parseCountySpecificStatus(county: string, url: string, text: string): ParsedStatus {
   if (normalUnlessPopupCounties.has(county) && text.length === 0) {
     return defaultNormalStatus();
+  }
+
+  if (county === "Anne Arundel County") {
+    const normalized = text.replace(/\s+/g, " ").trim();
+    const schoolNotice = normalized.match(
+      /(?:aacps|anne arundel county public schools|all (?:aacps )?schools|schools and offices).{0,300}/i
+    )?.[0];
+
+    if (!schoolNotice) {
+      return { status: "Unknown", statusKind: "unknown" };
+    }
+
+    return classifyStatus(schoolNotice);
   }
 
   const explicit = classifyExplicitCurrentStatus(text);
