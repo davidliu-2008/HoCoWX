@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   CalendarClock,
   CloudSun,
+  Eye,
   ExternalLink,
   Gauge,
   Info,
@@ -9,6 +10,7 @@ import {
   School,
   Snowflake,
   Thermometer,
+  Users,
   Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
@@ -401,6 +403,32 @@ export default async function Home() {
       </header>
 
       <PageTabs active="dashboard" />
+
+      <section
+        className="mb-5 flex flex-col overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm sm:flex-row sm:items-stretch"
+        aria-label="HoCo Weather Channel audience statistics"
+      >
+        <div className="flex items-center border-b border-blue-100 px-5 py-4 sm:w-1/3 sm:border-b-0 sm:border-r">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-bay">Our Community</p>
+            <p className="mt-1 text-sm text-slate-600">Across all platforms</p>
+          </div>
+        </div>
+        <div className="flex flex-1 items-center gap-3 border-b border-blue-100 px-5 py-4 sm:border-b-0 sm:border-r">
+          <Eye className="h-6 w-6 text-bay" />
+          <div>
+            <p className="text-2xl font-bold text-ink">2.1M+</p>
+            <p className="text-sm text-slate-600">Views</p>
+          </div>
+        </div>
+        <div className="flex flex-1 items-center gap-3 px-5 py-4">
+          <Users className="h-6 w-6 text-bay" />
+          <div>
+            <p className="text-2xl font-bold text-ink">700K+</p>
+            <p className="text-sm text-slate-600">People reached</p>
+          </div>
+        </div>
+      </section>
 
       <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
         <HcpssCard status={status} />
