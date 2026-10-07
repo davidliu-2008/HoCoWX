@@ -430,6 +430,19 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="mb-5 flex items-start gap-4 rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:items-center">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-bay text-white">
+          <School className="h-6 w-6" />
+        </div>
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wide text-bay">HCPSS Partnership</p>
+          <h2 className="mt-1 text-xl font-bold text-ink">Partnering with Howard County Public School System</h2>
+          <p className="mt-1 text-slate-700">
+            We&apos;re working together on weather literacy resources, with updates coming this winter.
+          </p>
+        </div>
+      </section>
+
       <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
         <HcpssCard status={status} />
         <PredictionCard prediction={prediction} />
