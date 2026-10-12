@@ -32,7 +32,7 @@ export function SiteFooter() {
 
       <div className="mt-6 border-t border-blue-100 pt-5 text-xs leading-5 text-slate-500 sm:flex sm:items-center sm:justify-between sm:gap-6">
         <p>© {new Date().getFullYear()} HoCo Weather Channel. All rights reserved.</p>
-        <p className="mt-2 sm:mt-0">Independent student-led project. Not affiliated with or operated by HCPSS.</p>
+        <p className="mt-2 sm:mt-0">Student-led weather project and formal HCPSS partner.</p>
       </div>
     </footer>
   );

@@ -1,5 +1,7 @@
-import { AlertTriangle, CalendarClock, CloudSun, FileText, Instagram, Mail, Snowflake, Thermometer, Wind } from "lucide-react";
+import Link from "next/link";
+import { AlertTriangle, Archive, CalendarClock, CloudSun, Instagram, Mail, Snowflake, Thermometer, Wind } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
+import { archiveDailyBriefing, createArchivedBriefing } from "@/lib/briefing-archive";
 import { createPrediction } from "@/lib/prediction";
 import { getWeatherSummary } from "@/lib/weather";
 
@@ -20,6 +22,7 @@ export default async function BriefingsPage() {
   try {
     const weather = await getWeatherSummary();
     const prediction = createPrediction({ weather });
+    await archiveDailyBriefing(createArchivedBriefing(weather, prediction)).catch(() => null);
     const concerns = [
       weather.expectedSnowfallInches ? `${weather.expectedSnowfallInches} inches of snow possible before tomorrow morning` : null,
       weather.precipitationChance !== null ? `${weather.precipitationChance}% precipitation chance` : null,
@@ -85,6 +88,9 @@ export default async function BriefingsPage() {
         <div className="flex gap-2"><a href="mailto:howardcountyweather@gmail.com" className="inline-flex items-center gap-2 border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay"><Mail className="h-4 w-4" /> Email</a><a href="https://www.instagram.com/hocoweatherchannel/?hl=en" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay"><Instagram className="h-4 w-4" /> Instagram</a></div>
       </header>
       <PageTabs active="briefings" />
+      <div className="mb-3 flex justify-end">
+        <Link href="/briefings/archive" className="inline-flex items-center gap-2 border border-blue-200 bg-white px-4 py-2 text-sm font-bold text-bay"><Archive className="h-4 w-4" /> View daily archive</Link>
+      </div>
       {content}
     </main>
   );

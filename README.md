@@ -50,6 +50,21 @@ INSTAGRAM_API_VERSION="v25.0"
 Never commit the access token to GitHub. Without these values, the Instagram page displays the featured interview posts
 using Instagram's native embeds. With them, the page automatically loads posts and captions and refreshes every 30 minutes.
 
+### Daily briefing archive
+
+The briefing archive uses Supabase so daily records persist across Vercel deployments. Create a Supabase project, run
+`supabase-weather-briefings.sql` in its SQL Editor, then add these private values locally and in Vercel:
+
+```bash
+SUPABASE_URL="https://your-project.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
+CRON_SECRET="a-long-random-secret"
+```
+
+Never expose the service role key in browser code or commit it to GitHub. Vercel calls `/api/archive-briefing` daily at
+11:00 UTC, and visiting `/briefings` also ensures the current Eastern Time date has one saved briefing. The database uses
+`briefing_date` as its primary key, so repeated requests cannot create duplicate entries for the same day.
+
 ## API Routes
 
 - `/api/hcpss-status` fetches and parses the official HCPSS status page.
