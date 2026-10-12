@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { CloudSun, Instagram, MapPinned, Mic2 } from "lucide-react";
+import { BarChart3, CloudSun, Instagram, MapPinned, Mic2 } from "lucide-react";
 
-type Tab = "dashboard" | "maryland" | "interview" | "instagram";
+type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls";
 
 export function PageTabs({ active }: { active: Tab }) {
   const linkClass = (tab: Tab) =>
@@ -29,6 +29,10 @@ export function PageTabs({ active }: { active: Tab }) {
       <Link href="/instagram" className={linkClass("instagram")}>
         <Instagram className="h-4 w-4" />
         Weather Insights
+      </Link>
+      <Link href="/student-polls" className={linkClass("student-polls")}>
+        <BarChart3 className="h-4 w-4" />
+        Student Prediction Lab
       </Link>
     </nav>
   );
