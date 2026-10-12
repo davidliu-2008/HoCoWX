@@ -6,14 +6,14 @@ type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls
 export function PageTabs({ active }: { active: Tab }) {
   const linkClass = (tab: Tab) =>
     [
-      "inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 text-sm font-bold transition",
+      "inline-flex shrink-0 items-center justify-center gap-2 border-b-2 px-3 py-3 text-sm font-bold transition",
       active === tab
-        ? "border-bay bg-bay text-white shadow-sm"
-        : "border-blue-100 bg-white text-bay hover:border-bay"
+        ? "border-bay text-bay"
+        : "border-transparent text-slate-500 hover:border-blue-200 hover:text-bay"
     ].join(" ");
 
   return (
-    <nav className="mb-6 flex flex-col gap-2 sm:flex-row" aria-label="Main sections">
+    <nav className="mb-6 flex gap-1 overflow-x-auto border-y border-blue-100 bg-white/60 px-1" aria-label="Main sections">
       <Link href="/" className={linkClass("dashboard")}>
         <CloudSun className="h-4 w-4" />
         Dashboard

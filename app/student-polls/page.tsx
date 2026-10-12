@@ -247,9 +247,7 @@ export default function StudentPollsPage() {
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Students became the forecasters</h2>
           <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-700">
             These polls invited students to make their own school-operation and weather predictions after researching
-            HoCo Weather Channel resources, official forecasts, and other trusted weather sources. The goal was not just
-            to guess the outcome. It was to practice reading forecasts, comparing evidence, thinking about timing and
-            uncertainty, and making an informed decision.
+            HoCo Weather Channel resources, official forecasts, and other trusted weather sources.
           </p>
         </div>
         <div className="grid grid-cols-3 border-t border-blue-100 bg-ice/70 lg:grid-cols-1 lg:border-l lg:border-t-0">
