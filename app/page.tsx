@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  ArrowRight,
   BellRing,
   CalendarClock,
   CheckCircle2,
@@ -136,8 +137,8 @@ function HowPredictionsSection() {
 
 function PartnershipPreview() {
   return (
-    <section className="my-5 border-y border-blue-200 bg-blue-50/55 px-1 py-8 sm:px-5 lg:px-7 lg:py-10">
-      <div className="grid items-start gap-8 xl:grid-cols-[0.82fr_1.18fr] xl:gap-12">
+    <section id="partnership-preview" className="scroll-mt-5 border-y border-blue-200 bg-blue-50/55 px-1 py-6 sm:px-5 lg:px-7 lg:py-8">
+      <div className="grid items-start gap-6 xl:grid-cols-[0.82fr_1.18fr] xl:gap-8">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">What&apos;s Coming</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Weather information inside the HCPSS experience</h2>
@@ -512,22 +513,30 @@ export default async function Home() {
       <PageTabs active="dashboard" />
 
       <section
-        className="mb-5 overflow-hidden border-y border-blue-200 bg-white/80"
+        className="mb-3 overflow-hidden border-y border-blue-200 bg-white/80"
         aria-label="HoCo Weather Channel partnership and audience"
       >
         <div className="grid md:grid-cols-[1.6fr_0.7fr_0.7fr]">
-          <div className="flex items-start gap-4 px-5 py-5 md:items-center md:border-r md:border-blue-100 lg:px-7">
+          <a
+            href="#partnership-preview"
+            className="group flex items-start gap-4 px-5 py-5 transition hover:bg-blue-50 md:items-center md:border-r md:border-blue-100 lg:px-7"
+            aria-label="View what is coming through the HCPSS partnership"
+          >
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-bay text-white">
               <School className="h-6 w-6" />
             </div>
-            <div>
+            <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold uppercase tracking-wide text-bay">HCPSS Partnership</p>
               <h2 className="mt-1 text-xl font-bold text-ink">Partnering with Howard County Public School System</h2>
               <p className="mt-1 text-sm leading-6 text-slate-600 sm:text-base">
                 We&apos;re working together on weather literacy resources, with updates coming this winter.
               </p>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-bay">
+                See what&apos;s coming
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </span>
             </div>
-          </div>
+          </a>
           <div className="flex items-center gap-3 border-t border-blue-100 px-5 py-5 md:border-t-0 md:border-r">
             <Eye className="h-6 w-6 shrink-0 text-bay" />
             <div>
@@ -545,14 +554,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="grid gap-3 lg:grid-cols-[1.1fr_0.9fr]">
         <HcpssCard status={status} />
         <PredictionCard prediction={prediction} />
       </div>
 
-      <PartnershipPreview />
-
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="mt-3 grid gap-3 lg:grid-cols-2">
         {prediction.ok ? <MorningCommuteCard prediction={prediction.data} /> : null}
         {prediction.ok ? <RiskBreakdownCard prediction={prediction.data} /> : null}
         <div className="lg:col-span-2">
@@ -566,6 +573,10 @@ export default async function Home() {
         <div className="lg:col-span-2">
           <HowPredictionsSection />
         </div>
+      </div>
+
+      <div className="mt-3">
+        <PartnershipPreview />
       </div>
 
     </main>

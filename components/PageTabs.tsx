@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { BarChart3, CloudSun, Instagram, MapPinned, Mic2 } from "lucide-react";
+import { BarChart3, BookOpen, CloudSun, FileText, Instagram, MapPinned, Mic2 } from "lucide-react";
 
-type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls";
+type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "briefings";
 
 export function PageTabs({ active }: { active: Tab }) {
   const linkClass = (tab: Tab) =>
@@ -13,7 +13,7 @@ export function PageTabs({ active }: { active: Tab }) {
     ].join(" ");
 
   return (
-    <nav className="mb-6 flex gap-1 overflow-x-auto border-y border-blue-100 bg-white/60 px-1" aria-label="Main sections">
+    <nav className="mb-3 flex gap-1 overflow-x-auto border-y border-blue-100 bg-white/60 px-1" aria-label="Main sections">
       <Link href="/" className={linkClass("dashboard")}>
         <CloudSun className="h-4 w-4" />
         Dashboard
@@ -33,6 +33,14 @@ export function PageTabs({ active }: { active: Tab }) {
       <Link href="/student-polls" className={linkClass("student-polls")}>
         <BarChart3 className="h-4 w-4" />
         Student Prediction Lab
+      </Link>
+      <Link href="/weather-literacy" className={linkClass("literacy")}>
+        <BookOpen className="h-4 w-4" />
+        Weather Literacy
+      </Link>
+      <Link href="/briefings" className={linkClass("briefings")}>
+        <FileText className="h-4 w-4" />
+        Briefings
       </Link>
     </nav>
   );
