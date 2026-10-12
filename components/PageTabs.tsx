@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { CloudSun, MapPinned, Mic2 } from "lucide-react";
+import { CloudSun, Instagram, MapPinned, Mic2 } from "lucide-react";
 
-type Tab = "dashboard" | "maryland" | "interview";
+type Tab = "dashboard" | "maryland" | "interview" | "instagram";
 
 export function PageTabs({ active }: { active: Tab }) {
   const linkClass = (tab: Tab) =>
@@ -25,6 +25,10 @@ export function PageTabs({ active }: { active: Tab }) {
       <Link href="/interview" className={linkClass("interview")}>
         <Mic2 className="h-4 w-4" />
         Interview
+      </Link>
+      <Link href="/instagram" className={linkClass("instagram")}>
+        <Instagram className="h-4 w-4" />
+        Weather Insights
       </Link>
     </nav>
   );

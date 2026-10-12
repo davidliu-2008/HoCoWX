@@ -29,15 +29,26 @@ The scripts use Next's WASM compiler package so the app can also run in stricter
 
 ## Environment Variables
 
-No secrets are required.
-
-Optional:
+Optional for National Weather Service requests:
 
 ```bash
 NWS_USER_AGENT="Your app name (your-email@example.com)"
 ```
 
 The National Weather Service recommends a descriptive `User-Agent` header. The app includes a development fallback if this variable is not set.
+
+To automatically show Instagram posts and captions, the HoCo Weather Channel Instagram account must be a professional
+Creator or Business account connected through a Meta developer app. Add these values locally in `.env.local` and in the
+Vercel project's Environment Variables settings:
+
+```bash
+INSTAGRAM_USER_ID="your_instagram_professional_account_id"
+INSTAGRAM_ACCESS_TOKEN="your_long_lived_instagram_access_token"
+INSTAGRAM_API_VERSION="v25.0"
+```
+
+Never commit the access token to GitHub. Without these values, the Instagram page displays the featured interview posts
+using Instagram's native embeds. With them, the page automatically loads posts and captions and refreshes every 30 minutes.
 
 ## API Routes
 

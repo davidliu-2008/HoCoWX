@@ -33,7 +33,7 @@ export const metadata = {
 
 export default function InterviewPage() {
   return (
-    <main className="mx-auto min-h-screen w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <main className="min-h-screen w-full px-3 py-6 sm:px-5 lg:px-6">
       <header className="mb-6 flex flex-col gap-4 border-b border-blue-100 pb-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img
@@ -111,8 +111,11 @@ export default function InterviewPage() {
           </div>
         </div>
 
-        <div className="p-3 sm:p-6">
-          <div className="aspect-video overflow-hidden rounded-lg bg-slate-950">
+      </section>
+
+      <div className="mb-5 grid gap-5 lg:h-[clamp(390px,38vw,650px)] lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.65fr)]">
+        <section className="flex min-h-0 flex-col rounded-lg border border-blue-100 bg-white p-3 shadow-sm sm:p-5">
+          <div className="min-h-[260px] flex-1 overflow-hidden rounded-lg bg-slate-950">
             <iframe
               src={DRIVE_PREVIEW_URL}
               title="Interview with HCPSS Superintendent Bill Barnes"
@@ -130,11 +133,9 @@ export default function InterviewPage() {
             Open the recording in Google Drive
             <ExternalLink className="h-4 w-4" />
           </a>
-        </div>
-      </section>
+        </section>
 
-      <div className="grid gap-5 lg:grid-cols-[1fr_0.42fr]">
-        <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
+        <section className="min-h-0 rounded-lg border border-blue-100 bg-white p-5 shadow-sm sm:p-6 lg:overflow-y-auto">
           <h2 className="text-2xl font-bold text-ink">Interview Questions</h2>
           <ol className="mt-5 space-y-4">
             {questions.map((question, index) => (
@@ -147,8 +148,9 @@ export default function InterviewPage() {
             ))}
           </ol>
         </section>
+      </div>
 
-        <aside className="h-fit rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:p-6">
+      <aside className="rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:p-6">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">What&apos;s Next</p>
           <h2 className="mt-2 text-xl font-bold text-ink">Upcoming Collaboration</h2>
           <p className="mt-3 leading-6 text-slate-700">
@@ -162,8 +164,7 @@ export default function InterviewPage() {
             We&apos;re also exploring possible collaborations with Jason Samenow of Capital Weather Gang and Matthew
             Cappucci, senior meteorologist and storm chaser at MyRadar.
           </p>
-        </aside>
-      </div>
+      </aside>
     </main>
   );
 }
