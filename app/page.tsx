@@ -391,7 +391,11 @@ export default async function Home() {
 
       <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-ink md:text-5xl">HCPSS Operations + Weather</h1>
+          <p className="mb-2 text-sm font-bold uppercase tracking-wide text-bay">HoCo Weather Channel</p>
+          <h1 className="text-4xl font-black leading-tight text-ink md:text-6xl">By students. For students.</h1>
+          <p className="mt-3 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
+            Local weather, school operations, and environmental news for the Maryland community.
+          </p>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
           <div className="rounded-lg border border-blue-100 bg-white/90 px-4 py-3 text-sm text-slate-600 shadow-sm">
