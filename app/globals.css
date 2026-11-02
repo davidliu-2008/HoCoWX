@@ -24,3 +24,36 @@ main article[class*="shadow"] {
 a {
   text-underline-offset: 3px;
 }
+
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+::view-transition-old(root) {
+  animation: 140ms ease-out both page-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 180ms ease-out both page-fade-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
