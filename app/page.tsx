@@ -229,7 +229,6 @@ function HcpssCard({ status }: { status: LoadState<HcpssStatus> }) {
           <p className="leading-7 text-slate-600">{status.data.message}</p>
           <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-500">
             <span>Update date: {status.data.updateDate ?? "Not listed"}</span>
-            <span>Fetched: {formatTime(status.data.fetchedAt)}</span>
           </div>
         </>
       ) : (
@@ -391,19 +390,8 @@ export default async function Home() {
       <PageTabs active="dashboard" />
 
       <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <img
-            src="/hoco-weather-channel-logo.png"
-            alt="HoCo Weather Channel"
-            className="h-20 w-20 rounded-lg border border-blue-100 bg-white object-contain p-2 shadow-sm"
-          />
-          <div>
-            <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
-              <CalendarClock className="h-4 w-4" />
-              Howard County, Maryland
-            </p>
-            <h1 className="text-3xl font-bold text-ink md:text-5xl">HCPSS Operations + Weather</h1>
-          </div>
+        <div>
+          <h1 className="text-3xl font-bold text-ink md:text-5xl">HCPSS Operations + Weather</h1>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
           <div className="rounded-lg border border-blue-100 bg-white/90 px-4 py-3 text-sm text-slate-600 shadow-sm">

@@ -210,18 +210,11 @@ export default function StudentPollsPage() {
       <PageTabs active="student-polls" />
 
       <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <img
-            src="/hoco-weather-channel-logo.png"
-            alt="HoCo Weather Channel"
-            className="h-20 w-20 rounded-lg border border-blue-100 bg-white object-contain p-2 shadow-sm"
-          />
-          <div>
-            <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
-              <BarChart3 className="h-4 w-4" /> Weather Literacy in Action
-            </p>
-            <h1 className="text-3xl font-bold text-ink md:text-5xl">Student Prediction Lab</h1>
-          </div>
+        <div>
+          <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
+            <BarChart3 className="h-4 w-4" /> Weather Literacy in Action
+          </p>
+          <h1 className="text-3xl font-bold text-ink md:text-5xl">Student Prediction Lab</h1>
         </div>
       </header>
 
@@ -270,7 +263,6 @@ export default function StudentPollsPage() {
           <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><Users className="h-4 w-4" /> Poll Tracker</p>
           <h2 className="mt-1 text-2xl font-bold text-ink">Student predictions</h2>
         </div>
-        <p className="max-w-lg text-right text-sm text-slate-500">Percentages are reproduced from the archived Instagram results and may not total exactly 100% because of rounding.</p>
       </div>
 
       <section className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">

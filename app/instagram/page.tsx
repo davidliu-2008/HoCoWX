@@ -64,18 +64,11 @@ export default async function InstagramPage() {
       <PageTabs active="instagram" />
 
       <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <img
-            src="/hoco-weather-channel-logo.png"
-            alt="HoCo Weather Channel"
-            className="h-20 w-20 rounded-lg border border-blue-100 bg-white object-contain p-2 shadow-sm"
-          />
-          <div>
-            <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
-              <Instagram className="h-4 w-4" /> Weather Literacy &amp; Updates
-            </p>
-            <h1 className="text-3xl font-bold text-ink md:text-5xl">Weather Updates &amp; Insights</h1>
-          </div>
+        <div>
+          <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
+            <Instagram className="h-4 w-4" /> Weather Literacy &amp; Updates
+          </p>
+          <h1 className="text-3xl font-bold text-ink md:text-5xl">Weather Updates &amp; Insights</h1>
         </div>
       </header>
 
