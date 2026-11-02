@@ -33,8 +33,8 @@ export default async function PredictionsPage() {
 
       <header className="px-4 py-10 sm:px-6 sm:py-14">
         <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><Gauge className="h-4 w-4" /> Predictions</p>
-        <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">See the prediction. Understand the reasoning.</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">The model turns National Weather Service data into a transparent weather-impact score. Every factor and point adjustment is shown below.</p>
+        <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
       </header>
 
       {prediction ? (
@@ -59,7 +59,7 @@ export default async function PredictionsPage() {
 
           <section className="px-5 py-12 sm:px-8 sm:py-16">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">How predictions are made</p>
-            <h2 className="mt-2 max-w-4xl text-3xl font-black leading-tight text-ink sm:text-4xl">A rule-based model, not a hidden algorithm.</h2>
+            <h2 className="mt-2 max-w-4xl text-3xl font-black leading-tight text-ink sm:text-4xl">A transparent rule-based model.</h2>
             <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600">The model begins with a low baseline score. It then adds or subtracts points using observable weather factors. More points indicate a greater chance that weather could disrupt school operations.</p>
 
             <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">

@@ -15,12 +15,12 @@ function HcpssPartnership() {
         <div>
           <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><School className="h-4 w-4" /> Formal HCPSS Partnership</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Weather information inside the HCPSS experience</h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">HoCo Weather Channel will be integrated into the official HCPSS structure, bringing timely environmental news and weather literacy resources to approximately 66,000 students and staff.</p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">HoCo Weather Channel will be integrated into the official HCPSS structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
 
           <div className="mt-6 divide-y divide-blue-100 border-y border-blue-100">
             <PartnershipPoint icon={<CheckCircle2 className="h-5 w-5" />} title="Working with the HCPSS weather team">Developing useful weather information and literacy resources for the school community.</PartnershipPoint>
             <PartnershipPoint icon={<CheckCircle2 className="h-5 w-5" />} title="Contributing to weather-related discussions">Sitting in on operational decision discussions and contributing weather analysis to help determine those decisions.</PartnershipPoint>
-            <PartnershipPoint icon={<Users className="h-5 w-5" />} title="Reaching the full HCPSS community">Serving environmental news through familiar district platforms used by students and staff.</PartnershipPoint>
+            <PartnershipPoint icon={<Users className="h-5 w-5" />} title="Reaching the full HCPSS community">Serving environmental news through familiar district platforms used by students, staff, and parents.</PartnershipPoint>
           </div>
         </div>
 
