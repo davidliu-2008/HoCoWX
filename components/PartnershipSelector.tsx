@@ -1,33 +1,10 @@
-"use client";
-
-import { useState } from "react";
 import { BellRing, CheckCircle2, CloudSun, School, Snowflake, Users } from "lucide-react";
 
 type Partnership = "hcpss" | "capital-weather";
 
-export function PartnershipSelector() {
-  const [selected, setSelected] = useState<Partnership>("hcpss");
-
+export function PartnershipSelector({ selected }: { selected: Partnership }) {
   return (
-    <div className="space-y-5 px-4 py-5 sm:px-6 sm:py-6">
-      <section className="flex flex-col gap-3 border border-blue-100 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-bay">Choose a partnership</p>
-          <p className="mt-1 text-sm text-slate-600">Explore current collaborations and what each one is building.</p>
-        </div>
-        <label className="flex min-w-0 flex-col gap-1.5 text-sm font-semibold text-ink sm:w-80">
-          Partnership
-          <select
-            value={selected}
-            onChange={(event) => setSelected(event.target.value as Partnership)}
-            className="w-full border border-blue-200 bg-white px-3 py-3 text-base font-semibold text-ink outline-none focus:border-bay focus:ring-2 focus:ring-blue-100"
-          >
-            <option value="hcpss">Howard County Public Schools</option>
-            <option value="capital-weather">Capital Weather Gang</option>
-          </select>
-        </label>
-      </section>
-
+    <div className="px-4 py-5 sm:px-6 sm:py-6">
       {selected === "hcpss" ? <HcpssPartnership /> : <CapitalWeatherPartnership />}
     </div>
   );

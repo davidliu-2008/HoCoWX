@@ -1,4 +1,4 @@
-import { ExternalLink, Instagram, Mail } from "lucide-react";
+import { ExternalLink, Instagram, Mail, Music2 } from "lucide-react";
 import { InstagramEmbeds } from "@/components/InstagramEmbeds";
 import { PageTabs } from "@/components/PageTabs";
 import { getInstagramFeed, type InstagramMedia } from "@/lib/instagram";
@@ -77,7 +77,7 @@ export default async function InstagramPage() {
             <h1 className="text-3xl font-bold text-ink md:text-5xl">Weather Updates &amp; Insights</h1>
           </div>
         </div>
-        <div className="flex flex-col gap-2 sm:flex-row">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <a
             href="mailto:howardcountyweather@gmail.com"
             className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
@@ -91,6 +91,9 @@ export default async function InstagramPage() {
             className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
           >
             <Instagram className="h-4 w-4" /> Instagram
+          </a>
+          <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay">
+            <Music2 className="h-4 w-4" /> Spotify
           </a>
         </div>
       </header>

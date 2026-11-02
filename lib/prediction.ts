@@ -1,8 +1,5 @@
 import type { PredictionInput, PredictionResult } from "./types";
 
-const DISCLAIMER =
-  "This is an unofficial weather-based prediction. It does not represent the actual decision of a school district.";
-
 function includesAny(text: string, terms: string[]) {
   const normalized = text.toLowerCase();
   return terms.some((term) => normalized.includes(term));
@@ -191,7 +188,6 @@ export function createPrediction({ weather, now = new Date() }: PredictionInput)
         : cappedScore >= 38
           ? "Some weather factors deserve attention, but the available data does not clearly point to a closure-level event."
           : "Current weather factors point toward routine operations",
-    disclaimer: DISCLAIMER,
     generatedAt: new Date().toISOString()
   };
 }

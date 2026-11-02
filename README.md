@@ -1,12 +1,12 @@
 # HCPSS Operations + Weather
 
-A simple unofficial Next.js dashboard for Howard County, Maryland that shows:
+A student-led Next.js dashboard for Howard County, Maryland that shows:
 
 - Current official HCPSS operational status from [status.hcpss.org](https://status.hcpss.org/)
 - Local National Weather Service data for Ellicott City / Howard County
 - A transparent rule-based school operations prediction
 
-The prediction is intentionally conservative and unofficial. It does not know or represent the actual HCPSS decision.
+The weather-based prediction is intentionally conservative and explains the factors behind its score.
 
 ## Tech Stack
 

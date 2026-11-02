@@ -6,6 +6,7 @@ import {
   Info,
   Instagram,
   Mail,
+  Music2,
   School,
   Snowflake,
   Thermometer,
@@ -137,7 +138,7 @@ function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
         <CloudSun className="h-5 w-5 text-bay" />
         Hourly Forecast Timeline
       </h2>
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {weather.hourlyForecast.slice(0, 8).map((hour) => (
           <div key={hour.time} className="rounded-lg border border-blue-100 bg-ice p-4">
             <div className="mb-2 text-sm font-bold text-ink">{compactTime(hour.time)}</div>
@@ -302,7 +303,7 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
     <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
       <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-ink">
         <Gauge className="h-5 w-5 text-bay" />
-        Unofficial Prediction
+        Prediction
       </h2>
 
       {prediction.ok ? (
@@ -337,9 +338,6 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
           </div>
 
           <p className="leading-7 text-slate-600">{prediction.data.explanation}</p>
-          <p className="mt-4 rounded-lg bg-frost p-3 text-sm font-medium text-bay">
-            {prediction.data.disclaimer}
-          </p>
         </>
       ) : (
         <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
@@ -379,7 +377,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
-          <div className="flex flex-col gap-2 sm:flex-row">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
             <a
               href="mailto:howardcountyweather@gmail.com"
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
@@ -395,6 +393,15 @@ export default async function Home() {
             >
               <Instagram className="h-4 w-4" />
               Instagram
+            </a>
+            <a
+              href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
+            >
+              <Music2 className="h-4 w-4" />
+              Spotify
             </a>
           </div>
           <div className="rounded-lg border border-blue-100 bg-white/90 px-4 py-3 text-sm text-slate-600 shadow-sm">
@@ -412,10 +419,14 @@ export default async function Home() {
         <div className="grid gap-4 lg:grid-cols-2">
           {prediction.ok ? <MorningCommuteCard prediction={prediction.data} /> : null}
           {prediction.ok ? <RiskBreakdownCard prediction={prediction.data} /> : null}
-          <div className="grid gap-4 lg:col-span-2 lg:grid-cols-[0.9fr_1.1fr] [&>section]:h-full">
+          <div className="lg:col-span-2">
             <WeatherCard weather={weather} />
-            {weather.ok ? <HourlyTimeline weather={weather.data} /> : null}
           </div>
+          {weather.ok ? (
+            <div className="lg:col-span-2">
+              <HourlyTimeline weather={weather.data} />
+            </div>
+          ) : null}
           <div className="lg:col-span-2">
             <HowPredictionsSection />
           </div>

@@ -68,6 +68,5 @@ export type PredictionResult = {
     explanation: string;
   };
   explanation: string;
-  disclaimer: string;
   generatedAt: string;
 };

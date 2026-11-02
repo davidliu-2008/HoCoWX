@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Mail } from "lucide-react";
+import { Instagram, Mail, Music2 } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -26,6 +26,14 @@ export function SiteFooter() {
             className="inline-flex items-center gap-1.5 hover:text-bay"
           >
             <Instagram className="h-4 w-4" /> Instagram
+          </a>
+          <a
+            href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 hover:text-bay"
+          >
+            <Music2 className="h-4 w-4" /> Spotify
           </a>
         </div>
       </div>

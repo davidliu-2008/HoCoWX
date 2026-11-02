@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BarChart3, BookOpen, CloudSun, Handshake, Instagram, MapPinned, Mic2 } from "lucide-react";
+import { BarChart3, BookOpen, ChevronDown, CloudSun, Handshake, Instagram, MapPinned, Mic2 } from "lucide-react";
 
 type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships";
 
@@ -13,7 +13,7 @@ export function PageTabs({ active }: { active: Tab }) {
     ].join(" ");
 
   return (
-    <nav className="flex gap-1 overflow-x-auto border-y border-blue-100 bg-white/60 px-1" aria-label="Main sections">
+    <nav className="relative z-40 flex flex-wrap gap-1 overflow-visible border-y border-blue-100 bg-white/90 px-1" aria-label="Main sections">
       <Link href="/" className={linkClass("dashboard")}>
         <CloudSun className="h-4 w-4" />
         Dashboard
@@ -38,10 +38,21 @@ export function PageTabs({ active }: { active: Tab }) {
         <BookOpen className="h-4 w-4" />
         Weather Literacy
       </Link>
-      <Link href="/partnerships" className={linkClass("partnerships")}>
-        <Handshake className="h-4 w-4" />
-        Partnerships
-      </Link>
+      <details className="group relative">
+        <summary className={`${linkClass("partnerships")} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}>
+          <Handshake className="h-4 w-4" />
+          Partnerships
+          <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
+        </summary>
+        <div className="absolute right-0 top-full z-50 mt-1 min-w-64 border border-blue-100 bg-white p-1 shadow-lg">
+          <Link href="/partnerships?partner=hcpss" className="block px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-blue-50 hover:text-bay">
+            Howard County Public Schools
+          </Link>
+          <Link href="/partnerships?partner=capital-weather" className="block border-t border-blue-50 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-blue-50 hover:text-bay">
+            Capital Weather Gang
+          </Link>
+        </div>
+      </details>
     </nav>
   );
 }
