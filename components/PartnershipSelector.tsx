@@ -1,11 +1,9 @@
-import { BellRing, CheckCircle2, CloudSun, School, Snowflake, Users } from "lucide-react";
+import { BellRing, CheckCircle2, School, Snowflake, Users } from "lucide-react";
 
-type Partnership = "hcpss" | "capital-weather";
-
-export function PartnershipSelector({ selected }: { selected: Partnership }) {
+export function PartnershipSelector() {
   return (
     <div className="px-4 py-5 sm:px-6 sm:py-6">
-      {selected === "hcpss" ? <HcpssPartnership /> : <CapitalWeatherPartnership />}
+      <HcpssPartnership />
     </div>
   );
 }
@@ -46,29 +44,6 @@ function HcpssPartnership() {
                 <p className="mt-3 text-xs leading-5 text-slate-500">Sample layout for discussion purposes. Final placement and language will be developed with HCPSS.</p>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CapitalWeatherPartnership() {
-  return (
-    <section className="overflow-hidden border border-blue-200 bg-white">
-      <div className="grid lg:grid-cols-[0.42fr_0.58fr]">
-        <div className="bg-navy p-6 text-white sm:p-8">
-          <CloudSun className="h-8 w-8 text-blue-200" />
-          <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-blue-200">Capital Weather Partnership</p>
-          <h2 className="mt-2 text-3xl font-bold">Connecting students with regional weather expertise</h2>
-        </div>
-        <div className="p-6 sm:p-8 lg:p-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-bay">Capital Weather Gang</p>
-          <h3 className="mt-2 text-2xl font-bold text-ink">Weather communication beyond Howard County</h3>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-700">HoCo Weather Channel is developing a partnership with Jason Samenow and Capital Weather Gang to expand student weather literacy, strengthen regional weather communication, and explore opportunities for collaboration.</p>
-          <div className="mt-6 border-l-4 border-bay bg-blue-50 px-5 py-4">
-            <p className="font-bold text-ink">Collaboration in development</p>
-            <p className="mt-1 text-sm leading-6 text-slate-600">More information will be added as the partnership takes shape.</p>
           </div>
         </div>
       </div>

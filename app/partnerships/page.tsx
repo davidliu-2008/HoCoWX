@@ -7,14 +7,7 @@ export const metadata = {
   description: "HoCo Weather Channel partnerships supporting student weather literacy and communication."
 };
 
-export default async function PartnershipsPage({
-  searchParams
-}: {
-  searchParams: Promise<{ partner?: string }>;
-}) {
-  const params = await searchParams;
-  const selected = params.partner === "capital-weather" ? "capital-weather" : "hcpss";
-
+export default function PartnershipsPage() {
   return (
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="partnerships" />
@@ -35,7 +28,7 @@ export default async function PartnershipsPage({
         </div>
       </header>
 
-      <PartnershipSelector selected={selected} />
+      <PartnershipSelector />
     </main>
   );
 }
