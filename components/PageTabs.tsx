@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BarChart3, BookOpen, ChevronDown, CloudSun, GraduationCap, Handshake, Instagram, MapPinned, Mic2, School } from "lucide-react";
+import { BarChart3, BookOpen, ChevronDown, CloudSun, GraduationCap, Handshake, Instagram, Mail, MapPinned, Mic2, Podcast, School } from "lucide-react";
 
 type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships";
 
@@ -11,7 +11,7 @@ export function PageTabs({ active }: { active: Tab }) {
         ? "border-bay text-bay"
         : "border-transparent text-slate-500 hover:border-blue-200 hover:text-bay"
     ].join(" ");
-  const menuLinkClass = "flex items-center gap-3 px-5 py-4 text-base font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-bay";
+  const menuLinkClass = "flex min-h-14 items-center gap-3 px-5 py-4 text-base font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-bay";
   const operationsActive = active === "maryland" || active === "interview";
   const learningActive = active === "instagram" || active === "student-polls" || active === "literacy";
 
@@ -28,7 +28,7 @@ export function PageTabs({ active }: { active: Tab }) {
           School Operations
           <ChevronDown className="h-4 w-4 transition group-hover:rotate-180 group-focus-within:rotate-180" />
         </span>
-        <div role="menu" className="pointer-events-none invisible absolute left-0 top-full z-50 min-w-64 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+        <div role="menu" className="pointer-events-none invisible absolute left-0 top-full z-50 w-72 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
           <Link href="/maryland-status" className={menuLinkClass}>
             <MapPinned className="h-4 w-4 text-bay" /> Maryland Status
           </Link>
@@ -44,7 +44,7 @@ export function PageTabs({ active }: { active: Tab }) {
           Learn
           <ChevronDown className="h-4 w-4 transition group-hover:rotate-180 group-focus-within:rotate-180" />
         </span>
-        <div role="menu" className="pointer-events-none invisible absolute left-0 top-full z-50 min-w-64 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+        <div role="menu" className="pointer-events-none invisible absolute left-0 top-full z-50 w-72 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
           <Link href="/instagram" className={menuLinkClass}>
             <Instagram className="h-4 w-4 text-bay" /> Weather Insights
           </Link>
@@ -61,6 +61,40 @@ export function PageTabs({ active }: { active: Tab }) {
         <Handshake className="h-5 w-5" />
         Partnerships
       </Link>
+
+      <div className="ml-auto flex shrink-0 items-stretch border-l border-blue-100">
+        <a
+          href="mailto:howardcountyweather@gmail.com"
+          className={itemClass(false)}
+          aria-label="Email HoCo Weather Channel"
+          title="Email"
+        >
+          <Mail className="h-5 w-5" />
+          <span className="hidden xl:inline">Email</span>
+        </a>
+        <a
+          href="https://www.instagram.com/hocoweatherchannel/?hl=en"
+          target="_blank"
+          rel="noreferrer"
+          className={itemClass(false)}
+          aria-label="HoCo Weather Channel on Instagram"
+          title="Instagram"
+        >
+          <Instagram className="h-5 w-5" />
+          <span className="hidden xl:inline">Instagram</span>
+        </a>
+        <a
+          href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5"
+          target="_blank"
+          rel="noreferrer"
+          className={itemClass(false)}
+          aria-label="HoCo Weather Channel podcast"
+          title="Podcast"
+        >
+          <Podcast className="h-5 w-5" />
+          <span className="hidden xl:inline">Podcast</span>
+        </a>
+      </div>
     </nav>
   );
 }
