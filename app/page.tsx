@@ -137,7 +137,7 @@ function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
         <CloudSun className="h-5 w-5 text-bay" />
         Hourly Forecast Timeline
       </h2>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2">
         {weather.hourlyForecast.slice(0, 8).map((hour) => (
           <div key={hour.time} className="rounded-lg border border-blue-100 bg-ice p-4">
             <div className="mb-2 text-sm font-bold text-ink">{compactTime(hour.time)}</div>
@@ -411,14 +411,10 @@ export default async function Home() {
       <div className="grid gap-px bg-blue-100 lg:grid-cols-2">
         {prediction.ok ? <MorningCommuteCard prediction={prediction.data} /> : null}
         {prediction.ok ? <RiskBreakdownCard prediction={prediction.data} /> : null}
-        <div className="lg:col-span-2">
+        <div className="grid gap-px bg-blue-100 lg:col-span-2 lg:grid-cols-[0.9fr_1.1fr] [&>section]:h-full">
           <WeatherCard weather={weather} />
+          {weather.ok ? <HourlyTimeline weather={weather.data} /> : null}
         </div>
-        {weather.ok ? (
-          <div className="lg:col-span-2">
-            <HourlyTimeline weather={weather.data} />
-          </div>
-        ) : null}
         <div className="lg:col-span-2">
           <HowPredictionsSection />
         </div>
