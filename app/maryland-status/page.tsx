@@ -1,4 +1,4 @@
-import { Instagram, Mail, Music2 } from "lucide-react";
+import { Instagram, Mail, Podcast } from "lucide-react";
 import { MarylandComparisonSection } from "@/components/MarylandComparisonSection";
 import { PageTabs } from "@/components/PageTabs";
 import { getMarylandOperationsComparison, type MarylandOperationStatus } from "@/lib/maryland-operations";
@@ -59,7 +59,7 @@ export default async function MarylandStatusPage() {
             Instagram
           </a>
           <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay">
-            <Music2 className="h-4 w-4" /> Spotify
+            <Podcast className="h-4 w-4" /> Podcast
           </a>
         </div>
       </header>

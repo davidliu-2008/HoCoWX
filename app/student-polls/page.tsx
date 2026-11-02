@@ -1,4 +1,4 @@
-import { BarChart3, BookOpen, Brain, Instagram, Mail, Music2, Search, Users } from "lucide-react";
+import { BarChart3, BookOpen, Brain, Instagram, Mail, Podcast, Search, Users } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 
 type PollOption = {
@@ -239,7 +239,7 @@ export default function StudentPollsPage() {
             <Instagram className="h-4 w-4" /> Instagram
           </a>
           <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay">
-            <Music2 className="h-4 w-4" /> Spotify
+            <Podcast className="h-4 w-4" /> Podcast
           </a>
         </div>
       </header>

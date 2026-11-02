@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Mail, Music2 } from "lucide-react";
+import { Instagram, Mail, Podcast } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -33,7 +33,7 @@ export function SiteFooter() {
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-bay"
           >
-            <Music2 className="h-4 w-4" /> Spotify
+            <Podcast className="h-4 w-4" /> Podcast
           </a>
         </div>
       </div>
