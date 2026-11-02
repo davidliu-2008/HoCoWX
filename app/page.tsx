@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   AlertTriangle,
   CalendarClock,
@@ -14,6 +15,37 @@ import { getHcpssStatus } from "@/lib/hcpss-status";
 import { createPrediction } from "@/lib/prediction";
 import { getWeatherSummary } from "@/lib/weather";
 import type { HcpssStatus, PredictionResult, WeatherSummary } from "@/lib/types";
+
+const homepageTitle = "HoCo Weather Channel | Howard County Weather & School Closings";
+const homepageDescription = "Get Howard County, Maryland weather forecasts, HCPSS school closing updates, snow day predictions, and local weather alerts from HoCo Weather Channel.";
+const homepageUrl = "https://hocoweatherchannel.org/";
+
+export const metadata: Metadata = {
+  title: { absolute: homepageTitle },
+  description: homepageDescription,
+  alternates: { canonical: homepageUrl },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: homepageTitle,
+    description: homepageDescription,
+    url: homepageUrl,
+    siteName: "HoCo Weather Channel",
+    type: "website",
+    locale: "en_US",
+    images: [{
+      url: "https://hocoweatherchannel.org/hoco-weather-channel-logo.png",
+      width: 500,
+      height: 500,
+      alt: "HoCo Weather Channel logo"
+    }]
+  },
+  twitter: {
+    card: "summary",
+    title: homepageTitle,
+    description: homepageDescription,
+    images: ["https://hocoweatherchannel.org/hoco-weather-channel-logo.png"]
+  }
+};
 
 export const dynamic = "force-dynamic";
 
