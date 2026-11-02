@@ -64,7 +64,7 @@ export default function WeatherLiteracyPage() {
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">Start Here</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Understand the weather before making the call</h2>
           <p className="mt-3 text-base leading-7 text-slate-700">
-            Weather literacy means knowing what a forecast says, what it does not say, and how changing conditions affect real decisions. Use these guides when reviewing a HoCoWX briefing or making your own prediction.
+            Weather literacy means knowing what a forecast says, what it does not say, and how changing conditions affect real decisions. Use these guides when reviewing a HoCoWX update or making your own prediction.
           </p>
         </div>
       </section>

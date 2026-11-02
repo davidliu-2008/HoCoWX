@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { BarChart3, BookOpen, CloudSun, FileText, Instagram, MapPinned, Mic2 } from "lucide-react";
+import { BarChart3, BookOpen, CloudSun, Handshake, Instagram, MapPinned, Mic2 } from "lucide-react";
 
-type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "briefings";
+type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships";
 
 export function PageTabs({ active }: { active: Tab }) {
   const linkClass = (tab: Tab) =>
@@ -38,9 +38,9 @@ export function PageTabs({ active }: { active: Tab }) {
         <BookOpen className="h-4 w-4" />
         Weather Literacy
       </Link>
-      <Link href="/briefings" className={linkClass("briefings")}>
-        <FileText className="h-4 w-4" />
-        Briefings
+      <Link href="/partnerships" className={linkClass("partnerships")}>
+        <Handshake className="h-4 w-4" />
+        Partnerships
       </Link>
     </nav>
   );

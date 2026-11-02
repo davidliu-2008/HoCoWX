@@ -15,7 +15,7 @@ export function SiteFooter() {
 
         <div className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-slate-600">
           <Link href="/weather-literacy" className="hover:text-bay">Weather Literacy</Link>
-          <Link href="/briefings" className="hover:text-bay">Weather Briefings</Link>
+          <Link href="/partnerships" className="hover:text-bay">Partnerships</Link>
           <a href="mailto:howardcountyweather@gmail.com" className="inline-flex items-center gap-1.5 hover:text-bay">
             <Mail className="h-4 w-4" /> Email
           </a>
