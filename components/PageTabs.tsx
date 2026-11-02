@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BarChart3, BookOpen, ChevronDown, Instagram, Mail, MapPinned, Mic2, Podcast } from "lucide-react";
 
-type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships";
+type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships";
 
 export function PageTabs({ active }: { active: Tab }) {
   const itemClass = (isActive: boolean) =>
@@ -27,6 +27,10 @@ export function PageTabs({ active }: { active: Tab }) {
       <div className="flex flex-wrap items-stretch justify-end">
         <Link href="/" className={itemClass(active === "dashboard")}>
           Dashboard
+        </Link>
+
+        <Link href="/predictions" className={itemClass(active === "predictions")}>
+          Predictions
         </Link>
 
         <div className="group relative">

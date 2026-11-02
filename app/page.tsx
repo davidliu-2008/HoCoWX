@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   AlertTriangle,
   CalendarClock,
   CloudSun,
   Gauge,
-  Info,
   School,
   Snowflake,
   Thermometer,
@@ -141,21 +141,6 @@ function MorningCommuteCard({ prediction }: { prediction: PredictionResult }) {
           </li>
         ))}
       </ul>
-    </section>
-  );
-}
-
-function HowPredictionsSection() {
-  return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
-      <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
-        <Info className="h-5 w-5 text-bay" />
-        How Predictions Are Made
-      </h2>
-      <div className="grid gap-4 text-sm leading-6 text-slate-600 md:grid-cols-3">
-        <p>The model starts with a small base score, then adds points when official NWS data shows school-impact weather.</p>
-        <p>Winter storm warnings, freezing rain, meaningful snow before the morning commute, strong gusts, and extreme cold raise the score.</p>
-      </div>
     </section>
   );
 }
@@ -366,6 +351,9 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
           </div>
 
           <p className="leading-7 text-slate-600">{prediction.data.explanation}</p>
+          <Link href="/predictions" className="mt-5 inline-flex items-center font-bold text-bay hover:underline">
+            See how this prediction is made
+          </Link>
         </>
       ) : (
         <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
@@ -421,9 +409,6 @@ export default async function Home() {
               <HourlyTimeline weather={weather.data} />
             </div>
           ) : null}
-          <div className="lg:col-span-2">
-            <HowPredictionsSection />
-          </div>
         </div>
       </div>
 
