@@ -42,6 +42,8 @@ const lessons = [
 export default function WeatherLiteracyPage() {
   return (
     <main className="min-h-screen w-full px-3 py-6 sm:px-5 lg:px-6">
+      <PageTabs active="literacy" />
+
       <header className="mb-6 flex flex-col gap-4 border-b border-blue-100 pb-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img src="/hoco-weather-channel-logo.png" alt="HoCo Weather Channel" className="h-20 w-20 border border-blue-100 bg-white object-contain p-2" />
@@ -56,8 +58,6 @@ export default function WeatherLiteracyPage() {
           <a href="https://www.instagram.com/hocoweatherchannel/?hl=en" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay"><Instagram className="h-4 w-4" /> Instagram</a>
         </div>
       </header>
-
-      <PageTabs active="literacy" />
 
       <section className="border-y border-blue-200 bg-blue-50/60 px-5 py-7 sm:px-7">
         <div className="max-w-4xl">

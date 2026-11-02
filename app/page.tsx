@@ -1,9 +1,7 @@
 import {
   AlertTriangle,
-  ArrowRight,
   CalendarClock,
   CloudSun,
-  Eye,
   Gauge,
   Info,
   Instagram,
@@ -11,7 +9,6 @@ import {
   School,
   Snowflake,
   Thermometer,
-  Users,
   Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
@@ -364,6 +361,8 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen w-full px-3 py-6 sm:px-5 lg:px-6">
+      <PageTabs active="dashboard" />
+
       <header className="mb-6 flex flex-col gap-4 border-b border-blue-100 pb-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img
@@ -403,50 +402,6 @@ export default async function Home() {
           </div>
         </div>
       </header>
-
-      <PageTabs active="dashboard" />
-
-      <section
-        className="mb-3 overflow-hidden border-y border-blue-200 bg-white/80"
-        aria-label="HoCo Weather Channel partnership and audience"
-      >
-        <div className="grid md:grid-cols-[1.6fr_0.7fr_0.7fr]">
-          <a
-            href="/partnerships"
-            className="group flex items-start gap-4 px-5 py-5 transition hover:bg-blue-50 md:items-center md:border-r md:border-blue-100 lg:px-7"
-            aria-label="View what is coming through the HCPSS partnership"
-          >
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-bay text-white">
-              <School className="h-6 w-6" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold uppercase tracking-wide text-bay">HCPSS Partnership</p>
-              <h2 className="mt-1 text-xl font-bold text-ink">Partnering with Howard County Public School System</h2>
-              <p className="mt-1 text-sm leading-6 text-slate-600 sm:text-base">
-                We&apos;re working together on weather literacy resources, with updates coming this winter.
-              </p>
-              <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-bay">
-                See what&apos;s coming
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-              </span>
-            </div>
-          </a>
-          <div className="flex items-center gap-3 border-t border-blue-100 px-5 py-5 md:border-t-0 md:border-r">
-            <Eye className="h-6 w-6 shrink-0 text-bay" />
-            <div>
-              <p className="text-2xl font-bold text-ink">2.1M+</p>
-              <p className="text-sm text-slate-600">Views across all platforms</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 border-t border-blue-100 px-5 py-5 md:border-t-0">
-            <Users className="h-6 w-6 shrink-0 text-bay" />
-            <div>
-              <p className="text-2xl font-bold text-ink">700K+</p>
-              <p className="text-sm text-slate-600">People reached</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <div className="grid gap-3 lg:grid-cols-[1.1fr_0.9fr]">
         <HcpssCard status={status} />

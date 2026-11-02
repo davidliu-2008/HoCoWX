@@ -207,6 +207,8 @@ export const metadata = {
 export default function StudentPollsPage() {
   return (
     <main className="min-h-screen w-full px-3 py-6 sm:px-5 lg:px-6">
+      <PageTabs active="student-polls" />
+
       <header className="mb-6 flex flex-col gap-4 border-b border-blue-100 pb-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img
@@ -238,8 +240,6 @@ export default function StudentPollsPage() {
           </a>
         </div>
       </header>
-
-      <PageTabs active="student-polls" />
 
       <section className="mb-5 grid overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm lg:grid-cols-[1.25fr_0.75fr]">
         <div className="p-6 sm:p-8">

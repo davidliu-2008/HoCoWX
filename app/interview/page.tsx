@@ -34,6 +34,8 @@ export const metadata = {
 export default function InterviewPage() {
   return (
     <main className="min-h-screen w-full px-3 py-6 sm:px-5 lg:px-6">
+      <PageTabs active="interview" />
+
       <header className="mb-6 flex flex-col gap-4 border-b border-blue-100 pb-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img
@@ -68,8 +70,6 @@ export default function InterviewPage() {
           </a>
         </div>
       </header>
-
-      <PageTabs active="interview" />
 
       <section className="mb-5 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm">
         <div className="border-b border-blue-100 bg-ice/70 p-5 sm:p-6">
