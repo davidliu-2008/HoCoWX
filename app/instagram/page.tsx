@@ -1,4 +1,4 @@
-import { ExternalLink, Instagram, Mail, Podcast } from "lucide-react";
+import { ExternalLink, Instagram } from "lucide-react";
 import { InstagramEmbeds } from "@/components/InstagramEmbeds";
 import { PageTabs } from "@/components/PageTabs";
 import { getInstagramFeed, type InstagramMedia } from "@/lib/instagram";
@@ -76,25 +76,6 @@ export default async function InstagramPage() {
             </p>
             <h1 className="text-3xl font-bold text-ink md:text-5xl">Weather Updates &amp; Insights</h1>
           </div>
-        </div>
-        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          <a
-            href="mailto:howardcountyweather@gmail.com"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
-          >
-            <Mail className="h-4 w-4" /> Email
-          </a>
-          <a
-            href="https://www.instagram.com/hocoweatherchannel/?hl=en"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay"
-          >
-            <Instagram className="h-4 w-4" /> Instagram
-          </a>
-          <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg border border-blue-100 bg-white px-4 py-3 text-sm font-semibold text-bay shadow-sm hover:border-bay">
-            <Podcast className="h-4 w-4" /> Podcast
-          </a>
         </div>
       </header>
 

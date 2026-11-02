@@ -16,7 +16,7 @@ export function PageTabs({ active }: { active: Tab }) {
   const learningActive = active === "instagram" || active === "student-polls" || active === "literacy";
 
   return (
-    <nav className="relative z-40 flex flex-wrap gap-1 overflow-visible border-y border-blue-100 bg-white/90 px-2" aria-label="Main sections">
+    <nav className="sticky top-0 z-50 flex flex-wrap gap-1 overflow-visible border-y border-blue-100 bg-white/95 px-2 shadow-sm backdrop-blur" aria-label="Main sections">
       <Link href="/" className={itemClass(active === "dashboard")}>
         <CloudSun className="h-5 w-5" />
         Dashboard
@@ -62,7 +62,7 @@ export function PageTabs({ active }: { active: Tab }) {
         Partnerships
       </Link>
 
-      <div className="ml-auto flex shrink-0 items-stretch border-l border-blue-100">
+      <div className="ml-auto flex shrink-0 items-stretch">
         <a
           href="mailto:howardcountyweather@gmail.com"
           className={itemClass(false)}
