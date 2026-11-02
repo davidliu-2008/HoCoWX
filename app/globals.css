@@ -43,6 +43,18 @@ a {
   }
 }
 
+@keyframes section-reveal {
+  from {
+    opacity: 0.72;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 ::view-transition-old(root) {
   animation: 140ms ease-out both page-fade-out;
 }
@@ -51,9 +63,23 @@ a {
   animation: 180ms ease-out both page-fade-in;
 }
 
+@supports (animation-timeline: view()) {
+  main section,
+  main article {
+    animation: section-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 4% cover 18%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
+    animation: none;
+  }
+
+  main section,
+  main article {
     animation: none;
   }
 }

@@ -22,13 +22,13 @@ export function PageTabs({ active }: { active: Tab }) {
         Dashboard
       </Link>
 
-      <details className="group relative">
-        <summary className={`${itemClass(operationsActive)} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}>
+      <div className="group relative">
+        <button type="button" aria-haspopup="menu" className={itemClass(operationsActive)}>
           <School className="h-4 w-4" />
           School Operations
-          <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
-        </summary>
-        <div className="absolute left-0 top-full z-50 mt-1 min-w-64 border border-blue-100 bg-white p-1 shadow-lg">
+          <ChevronDown className="h-4 w-4 transition group-hover:rotate-180 group-focus-within:rotate-180" />
+        </button>
+        <div role="menu" className="pointer-events-none invisible absolute left-0 top-full z-50 min-w-64 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
           <Link href="/maryland-status" className={menuLinkClass}>
             <MapPinned className="h-4 w-4 text-bay" /> Maryland Status
           </Link>
@@ -36,15 +36,15 @@ export function PageTabs({ active }: { active: Tab }) {
             <Mic2 className="h-4 w-4 text-bay" /> Superintendent Interview
           </Link>
         </div>
-      </details>
+      </div>
 
-      <details className="group relative">
-        <summary className={`${itemClass(learningActive)} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}>
+      <div className="group relative">
+        <button type="button" aria-haspopup="menu" className={itemClass(learningActive)}>
           <GraduationCap className="h-4 w-4" />
           Learn
-          <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
-        </summary>
-        <div className="absolute left-0 top-full z-50 mt-1 min-w-64 border border-blue-100 bg-white p-1 shadow-lg">
+          <ChevronDown className="h-4 w-4 transition group-hover:rotate-180 group-focus-within:rotate-180" />
+        </button>
+        <div role="menu" className="pointer-events-none invisible absolute left-0 top-full z-50 min-w-64 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
           <Link href="/instagram" className={menuLinkClass}>
             <Instagram className="h-4 w-4 text-bay" /> Weather Insights
           </Link>
@@ -55,15 +55,15 @@ export function PageTabs({ active }: { active: Tab }) {
             <BarChart3 className="h-4 w-4 text-bay" /> Student Prediction Lab
           </Link>
         </div>
-      </details>
+      </div>
 
-      <details className="group relative">
-        <summary className={`${itemClass(active === "partnerships")} cursor-pointer list-none [&::-webkit-details-marker]:hidden`}>
+      <div className="group relative">
+        <button type="button" aria-haspopup="menu" className={itemClass(active === "partnerships")}>
           <Handshake className="h-4 w-4" />
           Partnerships
-          <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
-        </summary>
-        <div className="absolute right-0 top-full z-50 mt-1 min-w-64 border border-blue-100 bg-white p-1 shadow-lg">
+          <ChevronDown className="h-4 w-4 transition group-hover:rotate-180 group-focus-within:rotate-180" />
+        </button>
+        <div role="menu" className="pointer-events-none invisible absolute right-0 top-full z-50 min-w-64 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
           <Link href="/partnerships?partner=hcpss" className={menuLinkClass}>
             <School className="h-4 w-4 text-bay" /> Howard County Public Schools
           </Link>
@@ -71,7 +71,7 @@ export function PageTabs({ active }: { active: Tab }) {
             <CloudSun className="h-4 w-4 text-bay" /> Capital Weather Gang
           </Link>
         </div>
-      </details>
+      </div>
     </nav>
   );
 }
