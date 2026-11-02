@@ -41,10 +41,10 @@ const lessons = [
 
 export default function WeatherLiteracyPage() {
   return (
-    <main className="min-h-screen w-full px-3 pb-6 sm:px-5 lg:px-6">
+    <main className="min-h-screen w-full pb-6">
       <PageTabs active="literacy" />
 
-      <header className="flex flex-col gap-4 border-b border-blue-100 py-5 md:flex-row md:items-end md:justify-between">
+      <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img src="/hoco-weather-channel-logo.png" alt="HoCo Weather Channel" className="h-20 w-20 border border-blue-100 bg-white object-contain p-2" />
           <div>

@@ -13,8 +13,7 @@ body {
 }
 
 main {
-  margin-inline: auto;
-  max-width: 1600px;
+  width: 100%;
 }
 
 main section[class*="shadow"],

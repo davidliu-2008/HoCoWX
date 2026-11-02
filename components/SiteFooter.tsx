@@ -3,7 +3,7 @@ import { Instagram, Mail } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="mx-auto mt-4 w-full max-w-[1600px] border-t border-blue-100 px-4 py-6 sm:px-6">
+    <footer className="mt-4 w-full border-t border-blue-100 px-4 py-6 sm:px-6">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="font-bold text-ink">HoCo Weather Channel</p>
