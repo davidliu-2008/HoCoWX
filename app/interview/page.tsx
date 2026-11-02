@@ -132,12 +132,6 @@ export default function InterviewPage() {
             meet again with Superintendent Bill Barnes on October 1 to work through the details and plan what the
             collaboration will look like.
           </p>
-          <div className="my-5 border-t border-blue-200" />
-          <h3 className="font-bold text-ink">In Progress</h3>
-          <p className="mt-2 leading-6 text-slate-700">
-            We&apos;re also exploring possible collaborations with Jason Samenow of Capital Weather Gang and Matthew
-            Cappucci, senior meteorologist and storm chaser at MyRadar.
-          </p>
       </aside>
     </main>
   );

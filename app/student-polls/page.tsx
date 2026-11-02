@@ -1,4 +1,4 @@
-import { BarChart3, BookOpen, Brain, Search, Users } from "lucide-react";
+import { BarChart3, BookOpen, Brain, Search } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 
 type PollOption = {
@@ -158,10 +158,10 @@ const polls: StudentPoll[] = [
   }
 ];
 
-const totalVotes = polls.reduce(
-  (pollTotal, poll) => pollTotal + poll.options.reduce((optionTotal, option) => optionTotal + option.votes, 0),
-  0
-);
+const getPollTotal = (poll: StudentPoll) => poll.options.reduce((total, option) => total + option.votes, 0);
+const sortedPolls = [...polls].sort((first, second) => getPollTotal(second) - getPollTotal(first));
+const totalVotes = polls.reduce((total, poll) => total + getPollTotal(poll), 0);
+const largestPoll = getPollTotal(sortedPolls[0]);
 
 function PollCard({ poll, index }: { poll: StudentPoll; index: number }) {
   const total = poll.options.reduce((sum, option) => sum + option.votes, 0);
@@ -218,8 +218,8 @@ export default function StudentPollsPage() {
         </div>
       </header>
 
-      <section className="mb-5 grid overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="p-6 sm:p-8">
+      <section className="mb-5 overflow-hidden rounded-lg border border-blue-100 bg-white p-6 shadow-sm sm:p-8">
+        <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">2025–26 Student Poll Archive</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Students became the forecasters</h2>
           <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-700">
@@ -227,18 +227,18 @@ export default function StudentPollsPage() {
             HoCo Weather Channel resources, official forecasts, and other trusted weather sources.
           </p>
         </div>
-        <div className="grid grid-cols-3 border-t border-blue-100 bg-ice/70 lg:grid-cols-1 lg:border-l lg:border-t-0">
-          <div className="flex flex-col justify-center border-r border-blue-100 p-5 lg:border-b lg:border-r-0">
-            <span className="text-3xl font-bold text-ink">{polls.length}</span>
-            <span className="text-sm text-slate-600">Archived polls</span>
+        <div className="mt-8 grid gap-6 border-t border-blue-100 pt-7 sm:grid-cols-3">
+          <div>
+            <span className="block text-4xl font-black text-bay sm:text-5xl">{polls.length}</span>
+            <span className="mt-2 block text-sm font-bold uppercase tracking-wide text-slate-600">Archived polls</span>
           </div>
-          <div className="flex flex-col justify-center border-r border-blue-100 p-5 lg:border-b lg:border-r-0">
-            <span className="text-3xl font-bold text-ink">{totalVotes.toLocaleString()}</span>
-            <span className="text-sm text-slate-600">Student votes</span>
+          <div>
+            <span className="block text-4xl font-black text-bay sm:text-5xl">{totalVotes.toLocaleString()}</span>
+            <span className="mt-2 block text-sm font-bold uppercase tracking-wide text-slate-600">Student votes</span>
           </div>
-          <div className="flex flex-col justify-center p-5">
-            <span className="text-3xl font-bold text-ink">1,082</span>
-            <span className="text-sm text-slate-600">Largest poll</span>
+          <div>
+            <span className="block text-4xl font-black text-bay sm:text-5xl">{largestPoll.toLocaleString()}</span>
+            <span className="mt-2 block text-sm font-bold uppercase tracking-wide text-slate-600">Largest poll</span>
           </div>
         </div>
       </section>
@@ -258,15 +258,8 @@ export default function StudentPollsPage() {
         </div>
       </section>
 
-      <div className="mb-5 flex items-end justify-between gap-4">
-        <div>
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><Users className="h-4 w-4" /> Poll Tracker</p>
-          <h2 className="mt-1 text-2xl font-bold text-ink">Student predictions</h2>
-        </div>
-      </div>
-
       <section className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
-        {polls.map((poll, index) => <PollCard key={`${poll.question}-${index}`} poll={poll} index={index} />)}
+        {sortedPolls.map((poll, index) => <PollCard key={`${poll.question}-${index}`} poll={poll} index={index} />)}
       </section>
     </main>
   );
