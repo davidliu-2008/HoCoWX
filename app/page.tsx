@@ -360,10 +360,10 @@ export default async function Home() {
     : { ok: false, error: weather.error };
 
   return (
-    <main className="min-h-screen w-full px-3 py-6 sm:px-5 lg:px-6">
+    <main className="min-h-screen w-full px-3 pb-6 sm:px-5 lg:px-6">
       <PageTabs active="dashboard" />
 
-      <header className="mb-6 flex flex-col gap-4 border-b border-blue-100 pb-6 md:flex-row md:items-end md:justify-between">
+      <header className="flex flex-col gap-4 border-b border-blue-100 py-5 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img
             src="/hoco-weather-channel-logo.png"
@@ -403,12 +403,12 @@ export default async function Home() {
         </div>
       </header>
 
-      <div className="grid gap-3 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="grid gap-px bg-blue-100 lg:grid-cols-[1.1fr_0.9fr]">
         <HcpssCard status={status} />
         <PredictionCard prediction={prediction} />
       </div>
 
-      <div className="mt-3 grid gap-3 lg:grid-cols-2">
+      <div className="grid gap-px bg-blue-100 lg:grid-cols-2">
         {prediction.ok ? <MorningCommuteCard prediction={prediction.data} /> : null}
         {prediction.ok ? <RiskBreakdownCard prediction={prediction.data} /> : null}
         <div className="lg:col-span-2">

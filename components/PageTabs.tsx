@@ -13,7 +13,7 @@ export function PageTabs({ active }: { active: Tab }) {
     ].join(" ");
 
   return (
-    <nav className="mb-3 flex gap-1 overflow-x-auto border-y border-blue-100 bg-white/60 px-1" aria-label="Main sections">
+    <nav className="flex gap-1 overflow-x-auto border-y border-blue-100 bg-white/60 px-1" aria-label="Main sections">
       <Link href="/" className={linkClass("dashboard")}>
         <CloudSun className="h-4 w-4" />
         Dashboard

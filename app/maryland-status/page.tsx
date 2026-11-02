@@ -24,10 +24,10 @@ export default async function MarylandStatusPage() {
   const comparison = await safeLoad<MarylandOperationStatus[]>(getMarylandOperationsComparison);
 
   return (
-    <main className="min-h-screen w-full px-3 py-6 sm:px-5 lg:px-6">
+    <main className="min-h-screen w-full px-3 pb-6 sm:px-5 lg:px-6">
       <PageTabs active="maryland" />
 
-      <header className="mb-6 flex flex-col gap-4 border-b border-blue-100 pb-6 md:flex-row md:items-end md:justify-between">
+      <header className="flex flex-col gap-4 border-b border-blue-100 py-5 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <img
             src="/hoco-weather-channel-logo.png"
