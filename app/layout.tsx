@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   title: "HoCo Weather Channel",
   description: "Howard County school operations, local weather, and student-led weather literacy.",
   icons: {
-    icon: "/hoco-weather-channel-logo.png",
-    shortcut: "/hoco-weather-channel-logo.png",
-    apple: "/hoco-weather-channel-logo.png"
+    icon: "/hoco-weather-channel-icon.png",
+    shortcut: "/hoco-weather-channel-icon.png",
+    apple: "/hoco-weather-channel-icon.png"
   }
 };
 

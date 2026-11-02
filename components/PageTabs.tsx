@@ -6,7 +6,7 @@ type Tab = "dashboard" | "maryland" | "interview" | "instagram" | "student-polls
 export function PageTabs({ active }: { active: Tab }) {
   const itemClass = (isActive: boolean) =>
     [
-      "inline-flex shrink-0 items-center justify-center gap-2 border-b-2 px-3 py-3 text-sm font-bold transition sm:px-4",
+      "inline-flex min-h-16 shrink-0 items-center justify-center gap-2 border-b-2 px-3 py-3 text-sm font-bold transition sm:px-4",
       isActive
         ? "border-bay text-bay"
         : "border-transparent text-slate-500 hover:border-blue-200 hover:text-bay"
