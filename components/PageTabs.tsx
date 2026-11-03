@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { BarChart3, BookOpen, ChevronDown, Instagram, Mail, MapPinned, Mic2, Podcast } from "lucide-react";
+import { BarChart3, BookOpen, ChevronDown, Instagram, Mail, MapPinned, Mic2, Podcast, UsersRound } from "lucide-react";
 
-type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships";
+type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships" | "about";
 
 export function PageTabs({ active }: { active: Tab }) {
   const itemClass = (isActive: boolean) =>
@@ -13,7 +13,7 @@ export function PageTabs({ active }: { active: Tab }) {
     ].join(" ");
   const menuLinkClass = "flex min-h-12 items-center gap-2.5 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-bay";
   const operationsActive = active === "maryland" || active === "interview";
-  const learningActive = active === "instagram" || active === "student-polls" || active === "literacy";
+  const learningActive = active === "instagram" || active === "student-polls" || active === "literacy" || active === "about";
 
   return (
     <nav className="sticky top-0 z-50 flex flex-wrap items-stretch overflow-visible border-b border-blue-100 bg-white/95 px-4 shadow-sm backdrop-blur sm:px-6" aria-label="Main sections">
@@ -54,7 +54,10 @@ export function PageTabs({ active }: { active: Tab }) {
             <ChevronDown className="h-3.5 w-3.5 transition group-hover:rotate-180 group-focus-within:rotate-180" />
           </span>
           <div role="menu" className="pointer-events-none invisible absolute left-0 top-full z-50 w-64 translate-y-1 border border-blue-100 bg-white p-1 opacity-0 shadow-lg transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-            <Link href="/instagram" className={menuLinkClass}>
+            <Link href="/about" className={menuLinkClass}>
+              <UsersRound className="h-4 w-4 text-bay" /> About
+            </Link>
+            <Link href="/instagram" className={`${menuLinkClass} border-t border-blue-50`}>
               <Instagram className="h-4 w-4 text-bay" /> Weather Insights
             </Link>
             <Link href="/weather-literacy" className={`${menuLinkClass} border-t border-blue-50`}>

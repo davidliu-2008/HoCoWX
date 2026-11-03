@@ -4,6 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://hocoweatherchannel.org";
   const paths = [
     "/",
+    "/about",
     "/predictions",
     "/maryland-status",
     "/interview",
