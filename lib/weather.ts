@@ -69,6 +69,47 @@ function formatHourlyPeriod(period: NwsPeriod) {
   };
 }
 
+function schoolImpactForPeriod(period: NwsPeriod) {
+  const text = `${period.shortForecast} ${period.detailedForecast}`.toLowerCase();
+  const precipitation = period.probabilityOfPrecipitation?.value ?? 0;
+
+  if (/ice storm|freezing rain|blizzard|heavy snow|tornado|hurricane/.test(text)) {
+    return { level: "High" as const, reason: "Significant hazardous weather could affect school travel." };
+  }
+
+  if (/snow|sleet|thunderstorm|heavy rain|damaging wind|strong wind/.test(text) || precipitation >= 60) {
+    return { level: "Medium" as const, reason: "Weather may affect arrival, dismissal, or outdoor activities." };
+  }
+
+  return { level: "Low" as const, reason: "No major school-day weather disruptions are indicated." };
+}
+
+function buildSchoolDayOutlook(periods: NwsPeriod[]) {
+  return periods
+    .filter((period) => period.isDaytime)
+    .filter((period) => {
+      const day = new Date(period.startTime).getDay();
+      return day !== 0 && day !== 6;
+    })
+    .slice(0, 5)
+    .map((period) => {
+      const impact = schoolImpactForPeriod(period);
+
+      return {
+        date: period.startTime,
+        dayName: new Intl.DateTimeFormat("en-US", {
+          weekday: "long",
+          timeZone: "America/New_York"
+        }).format(new Date(period.startTime)),
+        temperatureF: period.temperature,
+        precipitationChance: period.probabilityOfPrecipitation?.value ?? null,
+        shortForecast: period.shortForecast,
+        impactLevel: impact.level,
+        impactReason: impact.reason
+      };
+    });
+}
+
 function inchesFromMillimeters(value: number | null) {
   if (value === null) {
     return null;
@@ -197,6 +238,7 @@ export async function getWeatherSummary(): Promise<WeatherSummary> {
     detailedForecast: nextPeriods[0]?.detailedForecast ?? null,
     forecastDiscussion: point.properties.forecastDiscussion ?? null,
     hourlyForecast: hourly.properties.periods.slice(0, 12).map(formatHourlyPeriod),
+    schoolDayOutlook: buildSchoolDayOutlook(forecast.properties.periods),
     fetchedAt: new Date().toISOString()
   };
 

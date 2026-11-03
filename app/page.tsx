@@ -5,11 +5,14 @@ import {
   ArrowRight,
   AlertTriangle,
   BookOpen,
+  CalendarDays,
   CalendarClock,
   CloudSun,
   Gauge,
   GraduationCap,
+  ExternalLink,
   Mic2,
+  Radar,
   School,
   Snowflake,
   Thermometer,
@@ -208,6 +211,94 @@ function predictionBadgeClass(riskLevel: PredictionResult["riskLevel"]) {
     default:
       return "bg-emerald-100 text-emerald-800 ring-emerald-200";
   }
+}
+
+function outlookBadgeClass(level: "Low" | "Medium" | "High") {
+  switch (level) {
+    case "High":
+      return "bg-red-100 text-red-800";
+    case "Medium":
+      return "bg-amber-100 text-amber-900";
+    default:
+      return "bg-emerald-100 text-emerald-800";
+  }
+}
+
+function FiveDaySchoolOutlook({ weather }: { weather: WeatherSummary }) {
+  const days = weather.schoolDayOutlook ?? [];
+
+  return (
+    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
+      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-bold uppercase tracking-wide text-bay">School-week planning</p>
+          <h2 className="mt-1 flex items-center gap-2 text-2xl font-black text-ink md:text-3xl">
+            <CalendarDays className="h-6 w-6 text-bay" /> Five-Day School Outlook
+          </h2>
+        </div>
+        <p className="text-sm text-slate-500">Weather impact only · NWS forecast</p>
+      </div>
+
+      {days.length ? (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {days.map((day) => (
+            <article key={day.date} className="flex min-h-64 flex-col rounded-lg bg-ice p-4">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <h3 className="font-black text-ink">{day.dayName}</h3>
+                  <p className="mt-0.5 text-xs text-slate-500">{compactTime(day.date).split(",")[0]}</p>
+                </div>
+                <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${outlookBadgeClass(day.impactLevel)}`}>
+                  {day.impactLevel}
+                </span>
+              </div>
+              <p className="mt-5 text-3xl font-black text-bay">{day.temperatureF}°</p>
+              <p className="mt-1 text-sm font-semibold leading-5 text-slate-700">{day.shortForecast}</p>
+              <p className="mt-2 text-xs font-medium text-slate-500">Precipitation {day.precipitationChance ?? 0}%</p>
+              <p className="mt-auto pt-5 text-xs leading-5 text-slate-600">{day.impactReason}</p>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p className="rounded-lg bg-ice p-4 text-sm text-slate-600">The school-day outlook is temporarily unavailable.</p>
+      )}
+    </section>
+  );
+}
+
+function LiveRadar() {
+  const radarPage = "https://radar.weather.gov/station/KLWX/standard";
+
+  return (
+    <section className="overflow-hidden rounded-lg bg-navy text-white shadow-panel">
+      <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="flex flex-col justify-center p-6 md:p-8 lg:p-10">
+          <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Updated by the National Weather Service</p>
+          <h2 className="mt-2 flex items-center gap-2 text-3xl font-black">
+            <Radar className="h-7 w-7" /> Live Regional Radar
+          </h2>
+          <p className="mt-4 leading-7 text-blue-100">
+            Animated KLWX radar covers Howard County and the Baltimore-Washington region. The loop updates approximately every five minutes.
+          </p>
+          <a
+            href={radarPage}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex w-fit items-center gap-2 rounded-md bg-white px-4 py-3 font-bold text-navy transition hover:bg-blue-50"
+          >
+            Open interactive radar <ExternalLink className="h-4 w-4" />
+          </a>
+        </div>
+        <a href={radarPage} target="_blank" rel="noreferrer" className="relative block min-h-80 bg-black lg:min-h-[520px]">
+          <img
+            src="https://radar.weather.gov/ridge/standard/KLWX_loop.gif"
+            alt="Animated National Weather Service KLWX regional radar loop"
+            className="absolute inset-0 h-full w-full object-contain"
+          />
+        </a>
+      </div>
+    </section>
+  );
 }
 
 function compactTime(value: string | null | undefined) {
@@ -473,6 +564,8 @@ export default async function Home() {
 
         <WeatherCard weather={weather} />
         {weather.ok ? <HourlyTimeline weather={weather.data} /> : null}
+        {weather.ok ? <FiveDaySchoolOutlook weather={weather.data} /> : null}
+        <LiveRadar />
 
         {prediction.ok ? (
           <section className="grid gap-5 rounded-lg bg-blue-50 p-5 md:grid-cols-2 md:p-7">

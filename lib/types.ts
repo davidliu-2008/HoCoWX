@@ -29,7 +29,18 @@ export type WeatherSummary = {
   detailedForecast: string | null;
   forecastDiscussion: string | null;
   hourlyForecast: HourlyForecastPoint[];
+  schoolDayOutlook?: SchoolDayOutlookPoint[];
   fetchedAt: string;
+};
+
+export type SchoolDayOutlookPoint = {
+  date: string;
+  dayName: string;
+  temperatureF: number;
+  precipitationChance: number | null;
+  shortForecast: string;
+  impactLevel: "Low" | "Medium" | "High";
+  impactReason: string;
 };
 
 export type HourlyForecastPoint = {
