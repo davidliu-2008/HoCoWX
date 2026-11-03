@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
+  ArrowRight,
   AlertTriangle,
+  BookOpen,
   CalendarClock,
   CloudSun,
   Gauge,
+  GraduationCap,
+  Mic2,
   School,
   Snowflake,
   Thermometer,
@@ -86,7 +90,7 @@ function Stat({
   value: string;
 }) {
   return (
-    <div className="rounded-lg border border-blue-100 bg-white p-4">
+    <div className="border-l-2 border-blue-200 pl-4">
       <div className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-500">
         {icon}
         {label}
@@ -98,7 +102,7 @@ function Stat({
 
 function RiskBreakdownCard({ prediction }: { prediction: PredictionResult }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
+    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
       <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
         <Gauge className="h-5 w-5 text-bay" />
         Risk Score Breakdown
@@ -147,14 +151,14 @@ function MorningCommuteCard({ prediction }: { prediction: PredictionResult }) {
 
 function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
+    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
       <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
         <CloudSun className="h-5 w-5 text-bay" />
         Hourly Forecast Timeline
       </h2>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2">
         {weather.hourlyForecast.slice(0, 8).map((hour) => (
-          <div key={hour.time} className="rounded-lg border border-blue-100 bg-ice p-4">
+          <div key={hour.time} className="w-52 shrink-0 snap-start rounded-lg bg-ice p-4 md:w-56">
             <div className="mb-2 text-sm font-bold text-ink">{compactTime(hour.time)}</div>
             <div className="text-2xl font-bold text-bay">{hour.temperatureF} F</div>
             <p className="mt-1 min-h-10 text-sm leading-5 text-slate-600">{hour.shortForecast}</p>
@@ -228,7 +232,7 @@ function HcpssCard({ status }: { status: LoadState<HcpssStatus> }) {
 function WeatherCard({ weather }: { weather: LoadState<WeatherSummary> }) {
   if (!weather.ok) {
     return (
-      <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
+      <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
         <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
           <CloudSun className="h-5 w-5 text-bay" />
           Howard County Weather
@@ -243,14 +247,16 @@ function WeatherCard({ weather }: { weather: LoadState<WeatherSummary> }) {
   const data = weather.data;
 
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
+    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
             <CloudSun className="h-5 w-5 text-bay" />
             Howard County Weather
           </h2>
-          <p className="mt-1 text-sm text-slate-500">{data.location}</p>
+          <p className="mt-1 text-sm text-slate-500">
+            {data.location} · Data from the National Weather Service
+          </p>
         </div>
         <span className="rounded-full bg-frost px-3 py-1 text-sm font-semibold text-bay">
           {data.shortForecast ?? "Forecast"}
@@ -313,7 +319,7 @@ function WeatherCard({ weather }: { weather: LoadState<WeatherSummary> }) {
 
 function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult> }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
+    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
       <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-ink">
         <Gauge className="h-5 w-5 text-bay" />
         Prediction
@@ -338,7 +344,7 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
             </div>
           </div>
 
-          <div className="mb-5 rounded-lg border border-blue-100 bg-ice p-4">
+          <div className="mb-5 rounded-lg bg-ice p-4">
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">Top factors</h3>
             <ul className="space-y-2">
               {prediction.data.topFactors.map((factor) => (
@@ -377,41 +383,100 @@ export default async function Home() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="dashboard" />
 
-      <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="mb-2 text-sm font-bold uppercase tracking-wide text-bay">HoCo Weather Channel</p>
-          <h1 className="text-4xl font-black leading-tight text-ink md:text-6xl">By students. For students.</h1>
-          <p className="mt-3 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
-            Local weather, school operations, and environmental news for the Maryland community.
-          </p>
-        </div>
-        <div className="flex flex-col gap-2 sm:items-end">
-          <div className="rounded-lg border border-blue-100 bg-white/90 px-4 py-3 text-sm text-slate-600 shadow-sm">
-            Last updated: {formatTime(weather.ok ? weather.data.fetchedAt : status.ok ? status.data.fetchedAt : new Date().toISOString())}
+      <header className="home-hero mt-4 overflow-hidden rounded-lg bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+        <div className="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div>
+            <p className="mb-4 text-sm font-bold uppercase tracking-wide text-blue-200">HoCo Weather Channel</p>
+            <h1 className="max-w-4xl text-4xl font-black leading-tight md:text-6xl">By students. For students.</h1>
+            <p className="mt-4 max-w-2xl text-lg leading-8 text-blue-100 md:text-xl">
+              Local weather, school operations, and environmental news for the Maryland community.
+            </p>
+            <Link href="#today" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-navy transition hover:bg-blue-50">
+              View today&apos;s forecast <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-5 border-t border-white/20 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <div>
+              <p className="text-sm font-semibold text-blue-200">Now</p>
+              <p className="mt-1 text-4xl font-black">
+                {weather.ok && weather.data.currentTemperatureF !== null ? `${weather.data.currentTemperatureF}°` : "--"}
+              </p>
+              <p className="mt-1 text-sm leading-5 text-blue-100">{weather.ok ? weather.data.shortForecast ?? "Forecast unavailable" : "Weather unavailable"}</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-blue-200">HCPSS</p>
+              <p className="mt-1 text-xl font-black leading-tight">{status.ok ? status.data.operationStatus : "Unavailable"}</p>
+              <p className="mt-2 text-sm text-blue-100">Updated {formatTime(status.ok ? status.data.fetchedAt : undefined)}</p>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="space-y-4 px-4 py-5 sm:px-6 sm:py-6">
-        <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+      <div id="today" className="space-y-6 px-4 py-7 sm:px-6 sm:py-9">
+        <div className="mb-1 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-wide text-bay">Today at a glance</p>
+            <h2 className="mt-1 text-3xl font-black text-ink md:text-4xl">The morning dashboard</h2>
+          </div>
+          <p className="text-sm text-slate-500">Updated {formatTime(weather.ok ? weather.data.fetchedAt : status.ok ? status.data.fetchedAt : new Date().toISOString())}</p>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
           <HcpssCard status={status} />
           <PredictionCard prediction={prediction} />
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-2">
-          {prediction.ok ? <MorningCommuteCard prediction={prediction.data} /> : null}
-          {prediction.ok ? <RiskBreakdownCard prediction={prediction.data} /> : null}
-          <div className="lg:col-span-2">
-            <WeatherCard weather={weather} />
-          </div>
-          {weather.ok ? (
-            <div className="lg:col-span-2">
-              <HourlyTimeline weather={weather.data} />
+        <WeatherCard weather={weather} />
+        {weather.ok ? <HourlyTimeline weather={weather.data} /> : null}
+
+        {prediction.ok ? (
+          <section className="grid gap-5 rounded-lg bg-blue-50 p-5 md:grid-cols-2 md:p-7">
+            <MorningCommuteCard prediction={prediction.data} />
+            <div className="flex flex-col justify-center px-1 py-3 md:px-5">
+              <p className="text-sm font-bold uppercase tracking-wide text-bay">Prediction details</p>
+              <h2 className="mt-2 text-3xl font-black text-ink">Every point has a reason.</h2>
+              <p className="mt-3 max-w-xl leading-7 text-slate-600">
+                Review the full score, weather factors, commute timing, and rules behind today&apos;s school operations prediction.
+              </p>
+              <Link href="/predictions" className="mt-5 inline-flex items-center gap-2 font-bold text-bay hover:underline">
+                Open the prediction breakdown <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-          ) : null}
-        </div>
+          </section>
+        ) : null}
       </div>
 
+      <section className="home-editorial-band bg-white px-4 py-10 sm:px-6 md:py-14">
+        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-wide text-bay">Beyond the forecast</p>
+            <h2 className="mt-2 text-3xl font-black text-ink md:text-5xl">Weather knowledge built for students.</h2>
+            <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
+              Learn how to read forecasts, understand winter hazards, and make evidence-based predictions with official weather sources.
+            </p>
+            <Link href="/weather-literacy" className="mt-6 inline-flex items-center gap-2 font-bold text-bay hover:underline">
+              Visit the Weather Literacy Center <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Link href="/weather-literacy" className="editorial-link group bg-ice">
+              <BookOpen className="h-7 w-7 text-bay" />
+              <h3>Weather Literacy</h3>
+              <p>Guides, official sources, and forecasting fundamentals.</p>
+            </Link>
+            <Link href="/student-polls" className="editorial-link group bg-sky-50">
+              <GraduationCap className="h-7 w-7 text-bay" />
+              <h3>Student Prediction Lab</h3>
+              <p>See how students evaluated real weather events.</p>
+            </Link>
+            <Link href="/interview" className="editorial-link group bg-blue-50">
+              <Mic2 className="h-7 w-7 text-bay" />
+              <h3>Superintendent Interview</h3>
+              <p>Hear how school operations decisions are made.</p>
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

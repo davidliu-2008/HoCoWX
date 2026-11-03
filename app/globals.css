@@ -12,7 +12,7 @@ html {
 
 body {
   min-height: 100vh;
-  background: #f7faff;
+  background: #f3f7fc;
   color: #172033;
 }
 
@@ -37,7 +37,57 @@ main > div {
 
 main section[class*="shadow"],
 main article[class*="shadow"] {
-  box-shadow: none;
+  box-shadow: 0 16px 42px rgba(16, 33, 63, 0.07);
+}
+
+.home-hero {
+  background-image:
+    radial-gradient(circle at 85% 20%, rgba(96, 165, 250, 0.35), transparent 28%),
+    linear-gradient(135deg, #0e2a54 0%, #123e77 58%, #2563eb 130%);
+}
+
+.home-editorial-band {
+  width: 100%;
+  max-width: none;
+}
+
+.home-editorial-band > div {
+  width: min(calc(100% - 2rem), 1440px);
+  margin-inline: auto;
+}
+
+.editorial-link {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.editorial-link:hover {
+  transform: translateY(-4px);
+  background-color: #eaf4ff;
+}
+
+.editorial-link h3 {
+  color: #10213f;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.editorial-link p {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .home-editorial-band > div {
+    width: min(calc(100% - 3rem), 1440px);
+  }
 }
 
 a {
