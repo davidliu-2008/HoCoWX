@@ -333,3 +333,8 @@ export async function getMarylandOperationsComparison() {
 
   return value;
 }
+
+export async function getMarylandDistrictStatus(county: string) {
+  const district = marylandDistricts.find((item) => item.slug === county);
+  return district ? fetchDistrictStatus(district) : null;
+}
