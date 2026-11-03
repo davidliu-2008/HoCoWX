@@ -11,6 +11,18 @@ export const metadata = {
   description: "Current school-operation prediction and a transparent explanation of the weather-based model."
 };
 
+const predictionHistory = [
+  { date: "March 16, 2026", prediction: "Early Dismissal", confidence: 90, outcome: "Early Dismissal" },
+  { date: "March 2, 2026", prediction: "Delay", confidence: 55, outcome: "Delay" },
+  { date: "February 24, 2026", prediction: "Normal Operations", confidence: 85, outcome: "Normal Operations" },
+  { date: "February 23, 2026", prediction: "Closure", confidence: 90, outcome: "Closure" },
+  { date: "February 3, 2026", prediction: "Delay", confidence: 70, outcome: "Delay" },
+  { date: "February 2, 2026", prediction: "Delay", confidence: 75, outcome: "Delay" },
+  { date: "January 30, 2026", prediction: "Closure", confidence: 90, outcome: "Closure" },
+  { date: "January 29, 2026", prediction: "Closure", confidence: 95, outcome: "Closure" },
+  { date: "January 28, 2026", prediction: "Closure", confidence: 85, outcome: "Closure" }
+];
+
 function badgeClass(riskLevel: PredictionResult["riskLevel"]) {
   if (riskLevel === "High") return "bg-red-100 text-red-800";
   if (riskLevel === "Medium") return "bg-yellow-100 text-yellow-900";
@@ -54,6 +66,53 @@ export default async function PredictionsPage() {
               <ul className="mt-5 space-y-4">
                 {prediction.topFactors.map((factor) => <li key={factor} className="flex gap-3 text-sm leading-6 text-slate-700"><AlertTriangle className="mt-1 h-4 w-4 shrink-0 text-warning" />{factor}</li>)}
               </ul>
+            </div>
+          </section>
+
+          <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
+            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-wide text-bay">2026 prediction record</p>
+                <h2 className="mt-2 text-4xl font-black leading-tight text-ink sm:text-5xl">9 documented calls matched the final outcome.</h2>
+                <div className="mt-7 flex gap-8">
+                  <div>
+                    <p className="text-4xl font-black text-bay">9/9</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-500">Matched calls</p>
+                  </div>
+                  <div>
+                    <p className="text-4xl font-black text-ink">100%</p>
+                    <p className="mt-1 text-sm font-semibold text-slate-500">Documented match rate</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="overflow-hidden rounded-lg bg-blue-50/60">
+                <div className="hidden grid-cols-[1.05fr_1fr_0.8fr_1fr] gap-4 px-5 py-3 text-xs font-bold uppercase tracking-wide text-slate-500 md:grid">
+                  <span>Date</span><span>Prediction</span><span>Confidence</span><span>Final outcome</span>
+                </div>
+                <div className="divide-y divide-blue-100">
+                  {predictionHistory.map((entry) => (
+                    <article key={entry.date} className="grid gap-3 bg-white/80 px-5 py-4 md:grid-cols-[1.05fr_1fr_0.8fr_1fr] md:items-center md:gap-4">
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Date</span>
+                        <p className="font-bold text-ink">{entry.date}</p>
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Prediction</span>
+                        <p className="font-semibold text-slate-700">{entry.prediction}</p>
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Confidence</span>
+                        <p className="text-sm font-semibold text-slate-600">{entry.confidence}%</p>
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Final outcome</span>
+                        <p className="inline-flex items-center gap-2 font-bold text-emerald-700"><CheckCircle2 className="h-4 w-4" />{entry.outcome}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
 
