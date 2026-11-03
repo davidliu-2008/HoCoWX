@@ -36,18 +36,19 @@ export default function InterviewPage() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="interview" />
 
-      <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
+      <header className="page-hero flex flex-col gap-4 px-5 py-12 sm:px-8 sm:py-16 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
             <Mic2 className="h-4 w-4" />
             HoCo Weather Channel Interview
           </p>
-          <h1 className="text-3xl font-bold text-ink md:text-5xl">Inside HCPSS Weather Decisions</h1>
+          <h1 className="text-4xl font-black text-ink md:text-6xl">Inside HCPSS Weather Decisions</h1>
+          <p className="mt-3 max-w-2xl text-lg leading-8">Superintendent Bill Barnes explains the people, evidence, timing, and operational realities behind weather-related school decisions.</p>
         </div>
       </header>
 
-      <section className="mb-5 overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm">
-        <div className="border-b border-blue-100 bg-ice/70 p-5 sm:p-6">
+      <section className="mb-6 mt-6 overflow-hidden rounded-lg bg-white shadow-panel">
+        <div className="bg-ice/70 p-5 sm:p-7">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">Recorded March 4, 2026</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">A conversation with Superintendent Bill Barnes</h2>
           <div className="mt-3 max-w-3xl space-y-1 text-slate-600">
@@ -87,8 +88,8 @@ export default function InterviewPage() {
 
       </section>
 
-      <div className="mb-5 grid gap-5 lg:h-[clamp(390px,38vw,650px)] lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.65fr)]">
-        <section className="flex min-h-0 flex-col rounded-lg border border-blue-100 bg-white p-3 shadow-sm sm:p-5">
+      <div className="mb-6 grid gap-5 lg:h-[clamp(390px,38vw,650px)] lg:grid-cols-[minmax(0,1.55fr)_minmax(340px,0.65fr)]">
+        <section className="flex min-h-0 flex-col rounded-lg bg-white p-3 shadow-panel sm:p-5">
           <div className="min-h-[260px] flex-1 overflow-hidden rounded-lg bg-slate-950">
             <iframe
               src={DRIVE_PREVIEW_URL}
@@ -109,7 +110,7 @@ export default function InterviewPage() {
           </a>
         </section>
 
-        <section className="min-h-0 rounded-lg border border-blue-100 bg-white p-5 shadow-sm sm:p-6 lg:overflow-y-auto">
+        <section className="min-h-0 rounded-lg bg-white p-5 shadow-panel sm:p-6 lg:overflow-y-auto">
           <h2 className="text-2xl font-bold text-ink">Interview Questions</h2>
           <ol className="mt-5 space-y-4">
             {questions.map((question, index) => (
@@ -124,7 +125,7 @@ export default function InterviewPage() {
         </section>
       </div>
 
-      <aside className="rounded-lg border border-blue-200 bg-blue-50 p-5 shadow-sm sm:p-6">
+      <aside className="rounded-lg bg-blue-50 p-5 sm:p-7">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">What&apos;s Next</p>
           <h2 className="mt-2 text-xl font-bold text-ink">Upcoming Collaboration</h2>
           <p className="mt-3 leading-6 text-slate-700">

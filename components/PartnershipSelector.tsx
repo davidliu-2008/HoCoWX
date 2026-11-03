@@ -2,7 +2,7 @@ import { BellRing, CheckCircle2, School, Snowflake, Users } from "lucide-react";
 
 export function PartnershipSelector() {
   return (
-    <div className="px-4 py-5 sm:px-6 sm:py-6">
+    <div className="px-4 py-6 sm:px-6 sm:py-8">
       <HcpssPartnership />
     </div>
   );
@@ -10,7 +10,7 @@ export function PartnershipSelector() {
 
 function HcpssPartnership() {
   return (
-    <section className="overflow-hidden border border-blue-200 bg-blue-50/55">
+    <section className="overflow-hidden rounded-lg bg-blue-50/70 shadow-panel">
       <div className="grid items-start gap-8 p-5 sm:p-7 xl:grid-cols-[0.82fr_1.18fr] xl:p-8">
         <div>
           <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><School className="h-4 w-4" /> Formal HCPSS Partnership</p>
@@ -29,7 +29,7 @@ function HcpssPartnership() {
             <div><p className="text-xs font-semibold uppercase tracking-wide text-bay">Proof of concept</p><h3 className="mt-1 font-bold text-ink">Sample Canvas homepage announcement</h3></div>
             <span className="rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold text-bay">Concept preview</span>
           </div>
-          <div className="overflow-hidden border border-slate-200 bg-white">
+          <div className="overflow-hidden rounded-lg bg-white shadow-panel">
             <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3">
               <div className="flex items-center gap-3"><div className="h-8 w-8 bg-red-700" aria-hidden="true" /><div><p className="text-xs text-slate-500">HCPSS Canvas</p><p className="text-sm font-bold text-slate-800">Student Homepage</p></div></div>
               <BellRing className="h-5 w-5 text-slate-500" />

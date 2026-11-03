@@ -53,7 +53,7 @@ export default function WeatherLiteracyPage() {
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="literacy" />
 
-      <header className="px-4 py-10 sm:px-6 sm:py-14">
+      <header className="page-hero px-5 py-12 sm:px-8 sm:py-16">
         <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><BookOpen className="h-4 w-4" /> Weather Literacy Center</p>
         <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather, not just react to it.</h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>

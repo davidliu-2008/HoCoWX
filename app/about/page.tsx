@@ -49,7 +49,7 @@ export default function AboutPage() {
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="about" />
 
-      <header className="grid gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+      <header className="page-hero grid gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">About HoCo Weather Channel</p>
           <h1 className="mt-3 max-w-5xl text-5xl font-black leading-tight text-ink sm:text-7xl">Weather information students can understand and use.</h1>

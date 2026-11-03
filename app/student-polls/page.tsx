@@ -168,7 +168,7 @@ function PollCard({ poll, index }: { poll: StudentPoll; index: number }) {
   const leadingOption = poll.options.reduce((leader, option) => option.votes > leader.votes ? option : leader);
 
   return (
-    <article className="rounded-lg border border-blue-100 bg-white p-5 shadow-sm">
+    <article className="rounded-lg bg-white p-5 shadow-panel transition duration-200 hover:-translate-y-1">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-bay">Poll {index + 1} · {poll.category}</p>
@@ -209,16 +209,17 @@ export default function StudentPollsPage() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="student-polls" />
 
-      <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
+      <header className="page-hero flex flex-col gap-4 px-5 py-12 sm:px-8 sm:py-16 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
             <BarChart3 className="h-4 w-4" /> Weather Literacy in Action
           </p>
-          <h1 className="text-3xl font-bold text-ink md:text-5xl">Student Prediction Lab</h1>
+          <h1 className="text-4xl font-black text-ink md:text-6xl">Student Prediction Lab</h1>
+          <p className="mt-3 max-w-2xl text-lg leading-8">A record of students researching conditions, weighing uncertainty, and making weather-based school operation predictions.</p>
         </div>
       </header>
 
-      <section className="mb-5 overflow-hidden rounded-lg border border-blue-100 bg-white p-6 shadow-sm sm:p-8">
+      <section className="mb-6 mt-6 overflow-hidden rounded-lg bg-white p-6 shadow-panel sm:p-8">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">2025–26 Student Poll Archive</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Students became the forecasters</h2>
@@ -243,16 +244,16 @@ export default function StudentPollsPage() {
         </div>
       </section>
 
-      <section className="mb-5 grid gap-4 md:grid-cols-3">
-        <div className="flex gap-3 rounded-lg border border-blue-100 bg-white p-5 shadow-sm">
+      <section className="mb-6 grid gap-4 md:grid-cols-3">
+        <div className="flex gap-3 rounded-lg bg-blue-50/70 p-5">
           <Search className="mt-0.5 h-5 w-5 shrink-0 text-bay" />
           <div><h2 className="font-bold text-ink">Research</h2><p className="mt-1 text-sm leading-6 text-slate-600">Review forecasts, alerts, models, and timing.</p></div>
         </div>
-        <div className="flex gap-3 rounded-lg border border-blue-100 bg-white p-5 shadow-sm">
+        <div className="flex gap-3 rounded-lg bg-blue-50/70 p-5">
           <BookOpen className="mt-0.5 h-5 w-5 shrink-0 text-bay" />
           <div><h2 className="font-bold text-ink">Compare</h2><p className="mt-1 text-sm leading-6 text-slate-600">Use multiple sources and weigh conflicting information.</p></div>
         </div>
-        <div className="flex gap-3 rounded-lg border border-blue-100 bg-white p-5 shadow-sm">
+        <div className="flex gap-3 rounded-lg bg-blue-50/70 p-5">
           <Brain className="mt-0.5 h-5 w-5 shrink-0 text-bay" />
           <div><h2 className="font-bold text-ink">Predict</h2><p className="mt-1 text-sm leading-6 text-slate-600">Make an evidence-based call and see how classmates reasoned.</p></div>
         </div>

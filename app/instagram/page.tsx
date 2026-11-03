@@ -28,7 +28,7 @@ function InstagramCard({ item }: { item: InstagramMedia }) {
   const preview = item.media_type === "VIDEO" ? item.thumbnail_url || item.media_url : item.media_url;
 
   return (
-    <article className="overflow-hidden rounded-lg border border-blue-100 bg-white shadow-sm">
+    <article className="overflow-hidden rounded-lg bg-white shadow-panel transition duration-200 hover:-translate-y-1">
       <a href={item.permalink} target="_blank" rel="noreferrer" className="block bg-slate-100">
         {preview ? (
           <img src={preview} alt="" className="aspect-square w-full object-cover" loading="lazy" />
@@ -63,17 +63,18 @@ export default async function InstagramPage() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="instagram" />
 
-      <header className="flex flex-col gap-4 border-b border-blue-100 px-4 py-5 sm:px-6 md:flex-row md:items-end md:justify-between">
+      <header className="page-hero flex flex-col gap-4 px-5 py-12 sm:px-8 sm:py-16 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
             <Instagram className="h-4 w-4" /> Weather Literacy &amp; Updates
           </p>
-          <h1 className="text-3xl font-bold text-ink md:text-5xl">Weather Updates &amp; Insights</h1>
+          <h1 className="text-4xl font-black text-ink md:text-6xl">Weather Updates &amp; Insights</h1>
+          <p className="mt-3 max-w-2xl text-lg leading-8">Local forecasts, environmental stories, and weather literacy published for the student community.</p>
         </div>
       </header>
 
       {feed.items.length > 0 ? (
-        <section>
+        <section className="pt-8">
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
               <p className="text-sm font-semibold uppercase tracking-wide text-bay">Latest Updates</p>
@@ -86,8 +87,8 @@ export default async function InstagramPage() {
           </div>
         </section>
       ) : (
-        <section>
-          <div className="mb-5 rounded-lg border border-blue-100 bg-white p-5 shadow-sm">
+        <section className="pt-8">
+          <div className="mb-5 rounded-lg bg-white p-6 shadow-panel">
             <h2 className="text-xl font-bold text-ink">Featured Weather Updates</h2>
             <p className="mt-1 text-slate-600">
               These Instagram posts include the original media and descriptions. The complete automatic feed will appear

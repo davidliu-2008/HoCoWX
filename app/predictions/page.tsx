@@ -43,7 +43,7 @@ export default async function PredictionsPage() {
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="predictions" />
 
-      <header className="px-4 py-10 sm:px-6 sm:py-14">
+      <header className="page-hero px-5 py-12 sm:px-8 sm:py-16">
         <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><Gauge className="h-4 w-4" /> Predictions</p>
         <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>

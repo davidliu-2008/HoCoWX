@@ -40,7 +40,7 @@ export function MarylandComparisonSection({
   comparison: LoadState<MarylandOperationStatus[]>;
 }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
+    <section className="mt-6 overflow-hidden rounded-lg bg-white p-5 shadow-panel md:p-7">
       <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
