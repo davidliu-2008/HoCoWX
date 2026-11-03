@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -12,6 +13,8 @@ import {
   School,
   Snowflake,
   Thermometer,
+  TrendingDown,
+  TrendingUp,
   Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
@@ -100,6 +103,30 @@ function Stat({
   );
 }
 
+function TemperatureComparison({ weather }: { weather: WeatherSummary }) {
+  const current = weather.currentTemperatureF;
+  const yesterday = weather.yesterdayTemperatureF;
+
+  if (current === null || yesterday === null || yesterday === undefined) {
+    return <span>Yesterday comparison unavailable</span>;
+  }
+
+  const difference = current - yesterday;
+
+  if (difference === 0) {
+    return <span>Same temperature as this time yesterday</span>;
+  }
+
+  const warmer = difference > 0;
+
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      {warmer ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+      {Math.abs(difference)}° {warmer ? "warmer" : "colder"} than this time yesterday
+    </span>
+  );
+}
+
 function RiskBreakdownCard({ prediction }: { prediction: PredictionResult }) {
   return (
     <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
@@ -151,7 +178,7 @@ function MorningCommuteCard({ prediction }: { prediction: PredictionResult }) {
 
 function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
   return (
-    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
+    <section id="hourly-forecast" className="scroll-mt-24 rounded-lg bg-white p-5 shadow-panel md:p-7">
       <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
         <CloudSun className="h-5 w-5 text-bay" />
         Hourly Forecast Timeline
@@ -286,6 +313,10 @@ function WeatherCard({ weather }: { weather: LoadState<WeatherSummary> }) {
         />
       </div>
 
+      <div className="mt-4 inline-flex rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-bay">
+        <TemperatureComparison weather={data} />
+      </div>
+
       <div className="mt-5 space-y-4">
         <div>
           <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-slate-500">
@@ -383,15 +414,24 @@ export default async function Home() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="dashboard" />
 
-      <header className="home-hero mt-4 overflow-hidden rounded-lg bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
-        <div className="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+      <header className="home-hero relative mt-4 overflow-hidden rounded-lg bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+        <Image
+          src="/photography/howard-county-winter-sunset.jpg"
+          alt="Snow-covered Howard County landscape beneath a winter sunset"
+          fill
+          priority
+          sizes="(max-width: 1480px) 100vw, 1440px"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#091b36]/95 via-[#102f5c]/82 to-[#12305f]/45" />
+        <div className="relative z-10 grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <p className="mb-4 text-sm font-bold uppercase tracking-wide text-blue-200">HoCo Weather Channel</p>
             <h1 className="max-w-4xl text-4xl font-black leading-tight md:text-6xl">By students. For students.</h1>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-blue-100 md:text-xl">
               Local weather, school operations, and environmental news for the Maryland community.
             </p>
-            <Link href="#today" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-navy transition hover:bg-blue-50">
+            <Link href="#hourly-forecast" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-navy transition hover:bg-blue-50">
               View today&apos;s forecast <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -402,6 +442,11 @@ export default async function Home() {
                 {weather.ok && weather.data.currentTemperatureF !== null ? `${weather.data.currentTemperatureF}°` : "--"}
               </p>
               <p className="mt-1 text-sm leading-5 text-blue-100">{weather.ok ? weather.data.shortForecast ?? "Forecast unavailable" : "Weather unavailable"}</p>
+              {weather.ok ? (
+                <p className="mt-2 text-xs font-semibold leading-5 text-blue-100">
+                  <TemperatureComparison weather={weather.data} />
+                </p>
+              ) : null}
             </div>
             <div>
               <p className="text-sm font-semibold text-blue-200">HCPSS</p>
@@ -447,8 +492,18 @@ export default async function Home() {
       </div>
 
       <section className="home-editorial-band bg-white px-4 py-10 sm:px-6 md:py-14">
-        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
-          <div>
+        <div className="space-y-8">
+          <div className="grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div className="relative min-h-72 overflow-hidden rounded-lg sm:min-h-96">
+              <Image
+                src="/photography/winter-weather-literacy.jpg"
+                alt="A winter scene with snow-covered holly and local wildlife"
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="lg:px-6">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Beyond the forecast</p>
             <h2 className="mt-2 text-3xl font-black text-ink md:text-5xl">Weather knowledge built for students.</h2>
             <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
@@ -457,6 +512,7 @@ export default async function Home() {
             <Link href="/weather-literacy" className="mt-6 inline-flex items-center gap-2 font-bold text-bay hover:underline">
               Visit the Weather Literacy Center <ArrowRight className="h-4 w-4" />
             </Link>
+            </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
             <Link href="/weather-literacy" className="editorial-link group bg-ice">

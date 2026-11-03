@@ -41,9 +41,7 @@ main article[class*="shadow"] {
 }
 
 .home-hero {
-  background-image:
-    radial-gradient(circle at 85% 20%, rgba(96, 165, 250, 0.35), transparent 28%),
-    linear-gradient(135deg, #0e2a54 0%, #123e77 58%, #2563eb 130%);
+  background-color: #12305f;
 }
 
 .home-editorial-band {

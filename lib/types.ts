@@ -17,6 +17,7 @@ export type WeatherAlert = {
 export type WeatherSummary = {
   location: string;
   currentTemperatureF: number | null;
+  yesterdayTemperatureF?: number | null;
   precipitationChance: number | null;
   expectedSnowfallInches: number | null;
   windSpeed: string | null;

@@ -25,6 +25,13 @@ type GridValue = {
   value: number | null;
 };
 
+type ObservationFeature = {
+  properties: {
+    timestamp?: string;
+    temperature?: { value: number | null };
+  };
+};
+
 async function fetchNwsJson<T>(url: string): Promise<T> {
   const response = await fetch(url, {
     headers: {
@@ -68,6 +75,41 @@ function inchesFromMillimeters(value: number | null) {
   }
 
   return Math.round((value / 25.4) * 10) / 10;
+}
+
+function celsiusToFahrenheit(value: number) {
+  return Math.round((value * 9) / 5 + 32);
+}
+
+async function fetchYesterdayTemperature(observationStationsUrl: string) {
+  try {
+    const stations = await fetchNwsJson<{ features: Array<{ id: string }> }>(observationStationsUrl);
+    const stationUrl = stations.features[0]?.id;
+
+    if (!stationUrl) {
+      return null;
+    }
+
+    const target = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const start = new Date(target.getTime() - 90 * 60 * 1000).toISOString();
+    const end = new Date(target.getTime() + 90 * 60 * 1000).toISOString();
+    const observations = await fetchNwsJson<{ features: ObservationFeature[] }>(
+      `${stationUrl}/observations?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`
+    );
+
+    const closest = observations.features
+      .filter((feature) => feature.properties.timestamp && feature.properties.temperature?.value !== null)
+      .sort((a, b) => {
+        const aDistance = Math.abs(new Date(a.properties.timestamp as string).getTime() - target.getTime());
+        const bDistance = Math.abs(new Date(b.properties.timestamp as string).getTime() - target.getTime());
+        return aDistance - bDistance;
+      })[0];
+    const celsius = closest?.properties.temperature?.value;
+
+    return typeof celsius === "number" ? celsiusToFahrenheit(celsius) : null;
+  } catch {
+    return null;
+  }
 }
 
 function sumSnowfallBeforeTomorrowMorning(values: GridValue[] | undefined) {
@@ -121,16 +163,18 @@ export async function getWeatherSummary(): Promise<WeatherSummary> {
       forecastHourly: string;
       forecastGridData: string;
       forecastDiscussion?: string;
+      observationStations: string;
     };
   }>(`https://api.weather.gov/points/${LAT},${LON}`);
 
-  const [forecast, hourly, grid, alerts] = await Promise.all([
+  const [forecast, hourly, grid, alerts, yesterdayTemperatureF] = await Promise.all([
     fetchNwsJson<{ properties: { periods: NwsPeriod[] } }>(point.properties.forecast),
     fetchNwsJson<{ properties: { periods: NwsPeriod[] } }>(point.properties.forecastHourly),
     fetchNwsJson<{ properties: { snowfall?: { values: GridValue[] } } }>(point.properties.forecastGridData),
     fetchNwsJson<{ features: Array<Parameters<typeof formatAlert>[0]> }>(
       `https://api.weather.gov/alerts/active?point=${LAT},${LON}`
-    )
+    ),
+    fetchYesterdayTemperature(point.properties.observationStations)
   ]);
 
   const current = hourly.properties.periods[0] ?? null;
@@ -141,6 +185,7 @@ export async function getWeatherSummary(): Promise<WeatherSummary> {
   const value: WeatherSummary = {
     location: LOCATION,
     currentTemperatureF: current?.temperature ?? null,
+    yesterdayTemperatureF,
     precipitationChance: current?.probabilityOfPrecipitation?.value ?? null,
     expectedSnowfallInches: sumSnowfallBeforeTomorrowMorning(grid.properties.snowfall?.values),
     windSpeed: current?.windSpeed ?? null,
