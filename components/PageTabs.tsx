@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
   BarChart3,
   BookOpen,
@@ -68,10 +69,29 @@ const mobileLinks = [
 
 export function PageTabs({ active }: { active: Tab }) {
   const activeMobileLink = useRef<HTMLAnchorElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
+  const [county, setCounty] = useState("howard");
+
+  const countyHref = (href: string) => county === "howard" ? href : `${href}?county=${encodeURIComponent(county)}`;
 
   useEffect(() => {
     activeMobileLink.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [active]);
+
+  useEffect(() => {
+    const queryCounty = new URLSearchParams(window.location.search).get("county");
+    if (queryCounty) {
+      setCounty(queryCounty);
+      localStorage.setItem("hocowx-county", queryCounty);
+      return;
+    }
+    const saved = localStorage.getItem("hocowx-county");
+    if (saved && saved !== "howard") {
+      setCounty(saved);
+      router.replace(`${pathname}?county=${encodeURIComponent(saved)}`);
+    }
+  }, [pathname, router]);
 
   const desktopItem = (isActive: boolean) =>
     `inline-flex min-h-20 items-center gap-2 border-b-2 px-3 text-sm font-bold transition ${
@@ -82,13 +102,13 @@ export function PageTabs({ active }: { active: Tab }) {
   return (
     <nav className="sticky top-0 z-50 border-b border-blue-100 bg-white/95 shadow-sm backdrop-blur" aria-label="Main sections">
       <div className="mx-auto flex min-h-16 w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:min-h-20">
-        <Link href="/" className="mr-auto flex shrink-0 items-center gap-3" aria-label="HoCo Weather Channel home">
+        <Link href={countyHref("/")} className="mr-auto flex shrink-0 items-center gap-3" aria-label="HoCo Weather Channel home">
           <img src="/hoco-weather-channel-icon.png" alt="" className="h-14 w-14 shrink-0 object-contain lg:h-16 lg:w-16" />
           <span className="hidden text-base font-black leading-tight text-ink sm:block">HoCo Weather<br />Channel</span>
         </Link>
 
         <div className="hidden items-stretch lg:flex">
-          <Link href="/" className={desktopItem(active === "dashboard")}>Dashboard</Link>
+          <Link href={countyHref("/")} className={desktopItem(active === "dashboard")}>Dashboard</Link>
           {groups.map((group) => {
             const isActive = group.tabs.some((tab) => tab === active);
             return (
@@ -100,7 +120,7 @@ export function PageTabs({ active }: { active: Tab }) {
                 <div className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 rounded-lg border border-blue-100 bg-white p-2 opacity-0 shadow-xl transition-opacity duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
                   {group.links.map((item) => {
                     const Icon = item.icon;
-                    return <Link key={item.href} href={item.href} className={menuLink}><Icon className="h-4 w-4 text-bay" />{item.label}</Link>;
+                    return <Link key={item.href} href={countyHref(item.href)} className={menuLink}><Icon className="h-4 w-4 text-bay" />{item.label}</Link>;
                   })}
                 </div>
               </div>
@@ -117,7 +137,7 @@ export function PageTabs({ active }: { active: Tab }) {
 
       <div className="no-scrollbar flex w-full gap-1 overflow-x-auto border-t border-blue-50 px-4 lg:hidden" aria-label="Mobile sections">
         {mobileLinks.map((item) => (
-          <Link ref={active === item.tab ? activeMobileLink : undefined} key={item.href} href={item.href} className={`shrink-0 border-b-2 px-3 py-3 text-xs font-bold ${active === item.tab ? "border-bay text-bay" : "border-transparent text-slate-600"}`}>
+          <Link ref={active === item.tab ? activeMobileLink : undefined} key={item.href} href={countyHref(item.href)} className={`shrink-0 border-b-2 px-3 py-3 text-xs font-bold ${active === item.tab ? "border-bay text-bay" : "border-transparent text-slate-600"}`}>
             {item.label}
           </Link>
         ))}

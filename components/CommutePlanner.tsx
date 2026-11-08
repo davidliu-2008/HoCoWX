@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AlertTriangle, Check, CloudRain, ExternalLink, LoaderCircle, MapPin, School, Wind } from "lucide-react";
 
 type DistrictOption = { slug: string; county: string };
@@ -25,6 +26,7 @@ type CommuteData = {
 };
 
 const STORAGE_KEY = "hocowx-commute-preferences";
+const COUNTY_STORAGE_KEY = "hocowx-county";
 
 function riskClass(level: CommuteData["riskLevel"]) {
   if (level === "High") return "bg-red-100 text-red-800";
@@ -32,8 +34,9 @@ function riskClass(level: CommuteData["riskLevel"]) {
   return "bg-emerald-100 text-emerald-800";
 }
 
-export function CommutePlanner({ districts }: { districts: DistrictOption[] }) {
-  const [county, setCounty] = useState("howard");
+export function CommutePlanner({ districts, initialCounty }: { districts: DistrictOption[]; initialCounty: string }) {
+  const router = useRouter();
+  const [county, setCounty] = useState(initialCounty);
   const [window, setWindow] = useState<CommuteWindow>("morning");
   const [data, setData] = useState<CommuteData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -43,19 +46,23 @@ export function CommutePlanner({ districts }: { districts: DistrictOption[] }) {
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null") as { county?: string; window?: CommuteWindow } | null;
-      if (saved?.county && districts.some((district) => district.slug === saved.county)) setCounty(saved.county);
+      const globalCounty = localStorage.getItem(COUNTY_STORAGE_KEY);
+      if (initialCounty !== "howard") setCounty(initialCounty);
+      else if (globalCounty && districts.some((district) => district.slug === globalCounty)) setCounty(globalCounty);
+      else if (saved?.county && districts.some((district) => district.slug === saved.county)) setCounty(saved.county);
       if (saved?.window === "morning" || saved?.window === "afternoon") setWindow(saved.window);
     } catch {
       localStorage.removeItem(STORAGE_KEY);
     }
     setReady(true);
-  }, [districts]);
+  }, [districts, initialCounty]);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ county, window }));
+      localStorage.setItem(COUNTY_STORAGE_KEY, county);
       const response = await fetch(`/api/county-commute?county=${encodeURIComponent(county)}&window=${window}`);
       const result = await response.json();
       if (!response.ok) throw new Error(result.detail ?? result.error ?? "Commute data could not be loaded.");
@@ -71,12 +78,18 @@ export function CommutePlanner({ districts }: { districts: DistrictOption[] }) {
     if (ready) void load();
   }, [load, ready]);
 
+  function changeCounty(nextCounty: string) {
+    setCounty(nextCounty);
+    localStorage.setItem(COUNTY_STORAGE_KEY, nextCounty);
+    router.replace(nextCounty === "howard" ? "/commute" : `/commute?county=${encodeURIComponent(nextCounty)}`);
+  }
+
   return (
     <div className="space-y-5">
       <section className="grid gap-5 rounded-lg bg-white p-5 shadow-panel sm:p-7 lg:grid-cols-[1fr_0.72fr]">
         <label className="block">
           <span className="mb-2 block text-sm font-bold text-ink">Maryland county</span>
-          <select value={county} onChange={(event) => setCounty(event.target.value)} className="min-h-12 w-full rounded-md border border-blue-200 bg-white px-4 text-base text-ink outline-none focus:border-bay focus:ring-2 focus:ring-blue-100">
+          <select value={county} onChange={(event) => changeCounty(event.target.value)} className="min-h-12 w-full rounded-md border border-blue-200 bg-white px-4 text-base text-ink outline-none focus:border-bay focus:ring-2 focus:ring-blue-100">
             {districts.map((district) => <option key={district.slug} value={district.slug}>{district.county}</option>)}
           </select>
         </label>

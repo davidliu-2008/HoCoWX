@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   description: "A personalized morning and afternoon school commute weather outlook for every Maryland public school district."
 };
 
-export default function CommutePage() {
+export default async function CommutePage({ searchParams }: { searchParams: Promise<{ county?: string }> }) {
+  const requestedCounty = (await searchParams).county ?? "howard";
+  const initialCounty = marylandDistricts.some((district) => district.slug === requestedCounty) ? requestedCounty : "howard";
   return (
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="commute" />
@@ -21,7 +23,7 @@ export default function CommutePage() {
         <p className="max-w-2xl text-lg leading-8 text-slate-600">Choose a county and travel window for a focused NWS weather outlook. Your preference stays on this device for the next visit.</p>
       </header>
       <section className="px-5 pb-12 sm:px-8">
-        <CommutePlanner districts={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} />
+        <CommutePlanner districts={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} initialCounty={initialCounty} />
       </section>
     </main>
   );

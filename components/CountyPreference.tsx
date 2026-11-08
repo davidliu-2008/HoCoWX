@@ -32,7 +32,6 @@ export function CountyPreference({ counties, selected }: { counties: CountyOptio
         <span className="grid h-10 w-10 place-items-center rounded-full bg-blue-50 text-bay"><MapPin className="h-5 w-5" /></span>
         <div>
           <p className="text-sm font-bold text-ink">Your Maryland county</p>
-          <p className="text-xs text-slate-500">Howard County and HCPSS are the default.</p>
         </div>
       </div>
       <label className="sm:min-w-72">

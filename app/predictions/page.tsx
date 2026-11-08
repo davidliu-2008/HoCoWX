@@ -1,6 +1,7 @@
 import { AlertTriangle, CalendarClock, CheckCircle2, Gauge, Info, Snowflake, ThermometerSnowflake, Wind } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 import { createPrediction } from "@/lib/prediction";
+import { getMarylandDistrict } from "@/lib/maryland-districts";
 import { getWeatherSummary } from "@/lib/weather";
 import type { PredictionResult } from "@/lib/types";
 
@@ -29,12 +30,14 @@ function badgeClass(riskLevel: PredictionResult["riskLevel"]) {
   return "bg-emerald-100 text-emerald-800";
 }
 
-export default async function PredictionsPage() {
+export default async function PredictionsPage({ searchParams }: { searchParams: Promise<{ county?: string }> }) {
   let prediction: PredictionResult | null = null;
   let error: string | null = null;
+  const requestedCounty = (await searchParams).county ?? "howard";
+  const district = getMarylandDistrict(requestedCounty) ?? getMarylandDistrict("howard")!;
 
   try {
-    prediction = createPrediction({ weather: await getWeatherSummary() });
+    prediction = createPrediction({ weather: await getWeatherSummary({ latitude: district.latitude, longitude: district.longitude, location: district.county }) });
   } catch (caught) {
     error = caught instanceof Error ? caught.message : "Prediction data could not be loaded.";
   }
@@ -46,7 +49,7 @@ export default async function PredictionsPage() {
       <header className="page-hero px-5 py-12 sm:px-8 sm:py-16">
         <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><Gauge className="h-4 w-4" /> Predictions</p>
         <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{district.county} National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
       </header>
 
       {prediction ? (
