@@ -16,6 +16,70 @@ body {
   color: #172033;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.social-nav-button,
+.footer-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.social-nav-button {
+  color: #64748b;
+}
+
+.social-nav-button:hover {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+.footer-icon-button {
+  color: #dbeafe;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.footer-icon-button:hover {
+  color: #12305f;
+  background: white;
+}
+
+.surface-primary {
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0 16px 42px rgba(16, 33, 63, 0.07);
+}
+
+.surface-info {
+  border-radius: 0.5rem;
+  background: #f4f9ff;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-badge--normal { background: #d1fae5; color: #065f46; }
+.status-badge--monitor { background: #fef3c7; color: #78350f; }
+.status-badge--closed { background: #fee2e2; color: #991b1b; }
+.status-badge--modified { background: #dbeafe; color: #1e40af; }
+.status-badge--unknown { background: #e2e8f0; color: #334155; }
+
 main {
   width: 100%;
 }

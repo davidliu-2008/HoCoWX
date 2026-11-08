@@ -130,6 +130,44 @@ function TemperatureComparison({ weather }: { weather: WeatherSummary }) {
   );
 }
 
+function TodayBar({
+  status,
+  weather,
+  prediction
+}: {
+  status: LoadState<HcpssStatus>;
+  weather: LoadState<WeatherSummary>;
+  prediction: LoadState<PredictionResult>;
+}) {
+  const alerts = weather.ok ? weather.data.alerts.length : null;
+  const updatedAt = weather.ok ? weather.data.fetchedAt : status.ok ? status.data.fetchedAt : null;
+
+  return (
+    <section className="mt-4 grid overflow-hidden rounded-lg bg-white shadow-panel sm:grid-cols-2 lg:grid-cols-5">
+      <div className="px-5 py-4">
+        <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Temperature</p>
+        <p className="mt-1 text-2xl font-black text-ink">{weather.ok && weather.data.currentTemperatureF !== null ? `${weather.data.currentTemperatureF}°F` : "Unavailable"}</p>
+      </div>
+      <div className="border-t border-blue-50 px-5 py-4 sm:border-l sm:border-t-0">
+        <p className="text-xs font-bold uppercase tracking-wide text-slate-500">HCPSS</p>
+        <p className="mt-1 font-black text-ink">{status.ok ? status.data.operationStatus : "Unavailable"}</p>
+      </div>
+      <div className="border-t border-blue-50 px-5 py-4 lg:border-l lg:border-t-0">
+        <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Prediction</p>
+        <p className="mt-1 font-black text-ink">{prediction.ok ? prediction.data.label : "Unavailable"}</p>
+      </div>
+      <div className="border-t border-blue-50 px-5 py-4 sm:border-l lg:border-t-0">
+        <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Active alerts</p>
+        <p className="mt-1 text-2xl font-black text-ink">{alerts === null ? "--" : alerts}</p>
+      </div>
+      <div className="border-t border-blue-50 px-5 py-4 lg:border-l lg:border-t-0">
+        <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Last updated</p>
+        <p className="mt-1 text-sm font-bold leading-6 text-ink">{formatTime(updatedAt)}</p>
+      </div>
+    </section>
+  );
+}
+
 function RiskBreakdownCard({ prediction }: { prediction: PredictionResult }) {
   return (
     <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
@@ -548,15 +586,9 @@ export default async function Home() {
         </div>
       </header>
 
-      <div id="today" className="space-y-6 px-4 py-7 sm:px-6 sm:py-9">
-        <div className="mb-1 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-bay">Today at a glance</p>
-            <h2 className="mt-1 text-3xl font-black text-ink md:text-4xl">The morning dashboard</h2>
-          </div>
-          <p className="text-sm text-slate-500">Updated {formatTime(weather.ok ? weather.data.fetchedAt : status.ok ? status.data.fetchedAt : new Date().toISOString())}</p>
-        </div>
+      <TodayBar status={status} weather={weather} prediction={prediction} />
 
+      <div id="today" className="space-y-6 px-4 py-7 sm:px-6 sm:py-9">
         <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
           <HcpssCard status={status} />
           <PredictionCard prediction={prediction} />

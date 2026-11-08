@@ -54,8 +54,27 @@ export function MarylandComparisonSection({
       </div>
 
       {comparison.ok ? (
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-separate border-spacing-0 text-left text-sm">
+        <>
+          <div className="grid gap-3 md:hidden">
+            {comparison.data.map((item) => (
+              <article key={item.county} className={`rounded-lg p-4 ${item.county === "Howard County" ? "bg-blue-50 ring-1 ring-blue-200" : "bg-ice"}`}>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-black text-ink">{item.county}</h3>
+                    <p className="mt-1 text-xs leading-5 text-slate-500">{item.district}</p>
+                  </div>
+                  <span className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ring-1 ${statusBadgeClass(item.statusKind)}`}>{item.status}</span>
+                </div>
+                <div className="mt-4 flex items-center justify-between gap-3 border-t border-blue-100 pt-3 text-xs text-slate-500">
+                  <span>Updated {compactTime(item.lastUpdated ?? item.checkedAt)}</span>
+                  <a href={item.statusUrl} className="inline-flex items-center gap-1 font-bold text-bay">Official source <ExternalLink className="h-3.5 w-3.5" /></a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="hidden overflow-x-auto md:block">
+            <table className="min-w-full border-separate border-spacing-0 text-left text-sm">
             <thead>
               <tr className="text-slate-500">
                 <th className="border-b border-blue-100 px-3 py-3 font-semibold">County</th>
@@ -99,8 +118,9 @@ export function MarylandComparisonSection({
                 </tr>
               ))}
             </tbody>
-          </table>
-        </div>
+            </table>
+          </div>
+        </>
       ) : (
         <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
           Maryland comparison data could not be loaded. {comparison.error}

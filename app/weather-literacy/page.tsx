@@ -71,11 +71,18 @@ export default function WeatherLiteracyPage() {
         <p className="mt-4 text-lg font-black text-bay">By students. For students.</p>
       </header>
 
-      <section className="bg-white/60 px-5 py-10 sm:px-8 sm:py-12">
-        <SectionHeading eyebrow="Choose a guide" title="Start with the question you are trying to answer.">Weather literacy is a process. Use these five guides in order for a complete forecast, or jump directly to the skill you need.</SectionHeading>
-        <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-          {guideLinks.map((guide) => <a key={guide.href} href={guide.href} className="group bg-blue-50/60 p-5 transition duration-300 hover:-translate-y-1 hover:bg-blue-50"><span className="text-sm font-black text-blue-300">{guide.number}</span><h2 className="mt-5 text-xl font-bold text-ink">{guide.title}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{guide.text}</p><ArrowRight className="mt-5 h-4 w-4 text-bay transition group-hover:translate-x-1" /></a>)}
+      <section className="bg-white/60 px-5 py-8 sm:px-8 sm:py-10">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading eyebrow="Choose a guide" title="Start with the skill you need.">Follow all five guides for a complete forecast, or jump directly to one topic.</SectionHeading>
         </div>
+        <nav className="no-scrollbar sticky top-[7.1rem] z-30 -mx-2 mt-7 flex gap-2 overflow-x-auto rounded-lg bg-white/95 p-2 shadow-panel backdrop-blur lg:top-20" aria-label="Weather literacy guides">
+          {guideLinks.map((guide) => (
+            <a key={guide.href} href={guide.href} className="group flex min-w-48 shrink-0 items-center gap-3 rounded-md px-4 py-3 transition hover:bg-blue-50">
+              <span className="text-sm font-black text-blue-300">{guide.number}</span>
+              <span className="text-sm font-bold text-ink group-hover:text-bay">{guide.title}</span>
+            </a>
+          ))}
+        </nav>
 
         <figure className="mt-10 grid overflow-hidden rounded-lg bg-ice lg:grid-cols-[0.62fr_0.38fr] lg:items-stretch">
           <img
