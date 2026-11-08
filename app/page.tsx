@@ -520,10 +520,6 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="dashboard" />
 
-      <div className="px-4 pt-4 sm:px-6">
-        <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} />
-      </div>
-
       <header className="home-hero relative mt-4 overflow-hidden rounded-lg bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
         <Image
           src="/photography/howard-county-winter-sunset.jpg"
@@ -566,6 +562,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           </div>
         </div>
       </header>
+
+      <div className="px-4 pt-6 sm:px-6">
+        <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} />
+      </div>
 
       <div id="today" className="space-y-6 px-4 py-7 sm:px-6 sm:py-9">
         <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
