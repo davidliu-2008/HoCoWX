@@ -80,6 +80,27 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section className="grid gap-8 bg-white px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+        <div>
+          <p className="text-sm font-bold uppercase tracking-wide text-bay">Our audience</p>
+          <h2 className="mt-2 text-4xl font-black leading-tight text-ink sm:text-5xl">Built around the questions students actually ask.</h2>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-3">
+          <div>
+            <p className="text-4xl font-black text-bay">80,000+</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Students, staff, and parents served through the HCPSS community.</p>
+          </div>
+          <div>
+            <p className="text-4xl font-black text-bay">Nearly 10K</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Student weather and school-operation predictions submitted through polls.</p>
+          </div>
+          <div>
+            <p className="text-4xl font-black text-bay">2M+</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Views, with more than 700,000 accounts reached across platforms.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="grid gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.72fr_1.28fr]">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">How it started</p>
@@ -169,27 +190,6 @@ export default function AboutPage() {
             <h3 className="mt-4 text-xl font-bold text-ink">Students joined the forecast</h3>
             <p className="mt-2 text-sm leading-6 text-slate-600">Nearly 10,000 student poll predictions turned weather updates into active learning, and an HCPSS partnership expanded the work into district weather literacy.</p>
           </article>
-        </div>
-      </section>
-
-      <section className="grid gap-8 bg-navy px-5 py-12 text-white sm:px-8 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Our audience</p>
-          <h2 className="mt-2 text-4xl font-black leading-tight sm:text-5xl">Built around the questions students actually ask.</h2>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-3">
-          <div>
-            <p className="text-4xl font-black">80,000+</p>
-            <p className="mt-2 text-sm leading-6 text-blue-100">Students, staff, and parents served through the HCPSS community.</p>
-          </div>
-          <div>
-            <p className="text-4xl font-black">Nearly 10K</p>
-            <p className="mt-2 text-sm leading-6 text-blue-100">Student weather and school-operation predictions submitted through polls.</p>
-          </div>
-          <div>
-            <p className="text-4xl font-black">2M+</p>
-            <p className="mt-2 text-sm leading-6 text-blue-100">Views, with more than 700,000 accounts reached across platforms.</p>
-          </div>
         </div>
       </section>
 

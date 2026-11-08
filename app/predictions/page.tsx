@@ -51,21 +51,24 @@ export default async function PredictionsPage() {
 
       {prediction ? (
         <>
-          <section className="grid gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[1.15fr_0.85fr]">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-bay">How predictions are made</p>
-              <h2 className="mt-2 max-w-4xl text-3xl font-black leading-tight text-ink sm:text-4xl">A transparent rule-based model.</h2>
-              <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600">The model begins with a low baseline score. It then adds or subtracts points using observable weather factors. More points indicate a greater chance that weather could disrupt school operations.</p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <Factor icon={<AlertTriangle className="h-6 w-6" />} title="Official alerts">Winter Storm and Ice Storm Warnings add substantial risk because they signal hazardous travel or significant impacts.</Factor>
-                <Factor icon={<ThermometerSnowflake className="h-6 w-6" />} title="Ice and freezing rain">Ice receives heavy weight because even a thin glaze can make untreated roads, sidewalks, and parking lots dangerous.</Factor>
-                <Factor icon={<Snowflake className="h-6 w-6" />} title="Snow amount">Snow before the morning commute increases risk, with additional weight as expected accumulation rises.</Factor>
-                <Factor icon={<CalendarClock className="h-6 w-6" />} title="Timing">Weather during the 5–9 AM commute matters more than precipitation arriving after students and staff reach school.</Factor>
-                <Factor icon={<Wind className="h-6 w-6" />} title="Wind and cold">Strong gusts during snow or ice, poor visibility, and extreme cold can raise transportation and safety concerns.</Factor>
-                <Factor icon={<CheckCircle2 className="h-6 w-6" />} title="Improving conditions">Later timing, rising temperatures, or precipitation ending before travel can reduce the overall score.</Factor>
-              </div>
+          <section className="px-5 py-12 sm:px-8 sm:py-16">
+            <p className="text-sm font-bold uppercase tracking-wide text-bay">How predictions are made</p>
+            <div className="mt-2 grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+              <h2 className="max-w-4xl text-3xl font-black leading-tight text-ink sm:text-4xl">A transparent rule-based model.</h2>
+              <p className="max-w-4xl text-lg leading-8 text-slate-600">The model begins with a low baseline score. It then adds or subtracts points using observable weather factors. More points indicate a greater chance that weather could disrupt school operations.</p>
             </div>
-            <div className="bg-blue-50/55 p-6 sm:p-8">
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              <Factor icon={<AlertTriangle className="h-6 w-6" />} title="Official alerts">Winter Storm and Ice Storm Warnings add substantial risk because they signal hazardous travel or significant impacts.</Factor>
+              <Factor icon={<ThermometerSnowflake className="h-6 w-6" />} title="Ice and freezing rain">Ice receives heavy weight because even a thin glaze can make untreated roads, sidewalks, and parking lots dangerous.</Factor>
+              <Factor icon={<Snowflake className="h-6 w-6" />} title="Snow amount">Snow before the morning commute increases risk, with additional weight as expected accumulation rises.</Factor>
+              <Factor icon={<CalendarClock className="h-6 w-6" />} title="Timing">Weather during the 5–9 AM commute matters more than precipitation arriving after students and staff reach school.</Factor>
+              <Factor icon={<Wind className="h-6 w-6" />} title="Wind and cold">Strong gusts during snow or ice, poor visibility, and extreme cold can raise transportation and safety concerns.</Factor>
+              <Factor icon={<CheckCircle2 className="h-6 w-6" />} title="Improving conditions">Later timing, rising temperatures, or precipitation ending before travel can reduce the overall score.</Factor>
+            </div>
+          </section>
+
+          <section className="grid gap-8 bg-blue-50/45 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2">
+            <div className="bg-white/80 p-6 sm:p-8">
               <p className="text-sm font-bold uppercase tracking-wide text-bay">Risk score breakdown</p>
               <h2 className="mt-2 text-3xl font-black text-ink">Today&apos;s score</h2>
               <div className="mt-6 space-y-3">
@@ -77,13 +80,10 @@ export default async function PredictionsPage() {
                 ))}
               </div>
             </div>
-          </section>
-
-          <section className="bg-blue-50/45 px-5 py-12 sm:px-8 sm:py-16">
-            <div className="mx-auto max-w-4xl">
+            <div className="bg-white/80 p-6 sm:p-8">
               <p className="text-sm font-bold uppercase tracking-wide text-bay">Morning commute</p>
               <h2 className="mt-2 text-3xl font-black text-ink">5 AM–9 AM risk</h2>
-              <div className="mt-6 bg-white/80 p-6">
+              <div className="mt-6">
                 <div className="flex flex-wrap items-center justify-between gap-3"><span className={`px-3 py-1.5 text-sm font-bold ${badgeClass(prediction.morningCommuteRisk.label)}`}>{prediction.morningCommuteRisk.label}</span><strong className="text-3xl text-ink">{prediction.morningCommuteRisk.score}/100</strong></div>
                 <ul className="mt-6 space-y-3">{prediction.morningCommuteRisk.factors.map((factor) => <li key={factor} className="flex gap-3 text-sm leading-6 text-slate-700"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-bay" />{factor}</li>)}</ul>
               </div>
