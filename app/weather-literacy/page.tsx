@@ -75,15 +75,6 @@ export default function WeatherLiteracyPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading eyebrow="Choose a guide" title="Start with the skill you need.">Follow all five guides for a complete forecast, or jump directly to one topic.</SectionHeading>
         </div>
-        <nav className="no-scrollbar sticky top-[7.1rem] z-30 -mx-2 mt-7 flex gap-2 overflow-x-auto rounded-lg bg-white/95 p-2 shadow-panel backdrop-blur lg:top-20" aria-label="Weather literacy guides">
-          {guideLinks.map((guide) => (
-            <a key={guide.href} href={guide.href} className="group flex min-w-48 shrink-0 items-center gap-3 rounded-md px-4 py-3 transition hover:bg-blue-50">
-              <span className="text-sm font-black text-blue-300">{guide.number}</span>
-              <span className="text-sm font-bold text-ink group-hover:text-bay">{guide.title}</span>
-            </a>
-          ))}
-        </nav>
-
         <figure className="mt-10 grid overflow-hidden rounded-lg bg-ice lg:grid-cols-[0.62fr_0.38fr] lg:items-stretch">
           <img
             src="/photography/winter-wildlife-birds.jpg"
@@ -100,6 +91,17 @@ export default function WeatherLiteracyPage() {
           </figcaption>
         </figure>
       </section>
+
+      <div className="sticky top-[7.1rem] z-30 lg:top-20">
+        <nav className="no-scrollbar flex gap-2 overflow-x-auto rounded-lg bg-white/95 p-2 shadow-panel backdrop-blur" aria-label="Weather literacy guides">
+          {guideLinks.map((guide) => (
+            <a key={guide.href} href={guide.href} className="group flex min-w-48 shrink-0 items-center gap-3 rounded-md px-4 py-3 transition hover:bg-blue-50">
+              <span className="text-sm font-black text-blue-300">{guide.number}</span>
+              <span className="text-sm font-bold text-ink group-hover:text-bay">{guide.title}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
 
       <section id="forecast" className="scroll-mt-24 px-5 py-12 sm:px-8 sm:py-16">
         <SectionHeading eyebrow="Guide 01" title="Read the whole forecast.">A weather icon or snowfall map never tells the full story. Use multiple official products and identify what is known, what is uncertain, and when conditions matter most.</SectionHeading>

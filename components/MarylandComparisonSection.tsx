@@ -41,15 +41,12 @@ export function MarylandComparisonSection({
 }) {
   return (
     <section className="mt-6 overflow-hidden rounded-lg bg-white p-5 shadow-panel md:p-7">
-      <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      <div className="mb-5">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
             <MapPinned className="h-5 w-5 text-bay" />
             Maryland School Operations Comparison
           </h2>
-        </div>
-        <div className="rounded-lg bg-ice px-3 py-2 text-sm font-medium text-bay">
-          Cached for 30 minutes
         </div>
       </div>
 

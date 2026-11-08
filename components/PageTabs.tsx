@@ -97,7 +97,7 @@ export function PageTabs({ active }: { active: Tab }) {
                   {group.label}
                   <ChevronDown className="h-3.5 w-3.5 transition group-hover:rotate-180" />
                 </span>
-                <div className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-1 rounded-lg border border-blue-100 bg-white p-2 opacity-0 shadow-xl transition duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="pointer-events-none invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 rounded-lg border border-blue-100 bg-white p-2 opacity-0 shadow-xl transition-opacity duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100">
                   {group.links.map((item) => {
                     const Icon = item.icon;
                     return <Link key={item.href} href={item.href} className={menuLink}><Icon className="h-4 w-4 text-bay" />{item.label}</Link>;

@@ -372,9 +372,6 @@ function WeatherCard({ weather }: { weather: LoadState<WeatherSummary> }) {
             <CloudSun className="h-5 w-5 text-bay" />
             Howard County Weather
           </h2>
-          <p className="mt-1 text-sm text-slate-500">
-            {data.location} · Data from the National Weather Service
-          </p>
         </div>
         <span className="rounded-full bg-frost px-3 py-1 text-sm font-semibold text-bay">
           {data.shortForecast ?? "Forecast"}
