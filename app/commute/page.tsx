@@ -21,7 +21,7 @@ export default function CommutePage() {
         <p className="max-w-2xl text-lg leading-8 text-slate-600">Choose a county and travel window for a focused NWS weather outlook. Your preference stays on this device for the next visit.</p>
       </header>
       <section className="px-5 pb-12 sm:px-8">
-        <CommutePlanner districts={marylandDistricts.map(({ slug, county, district }) => ({ slug, county, district }))} />
+        <CommutePlanner districts={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} />
       </section>
     </main>
   );

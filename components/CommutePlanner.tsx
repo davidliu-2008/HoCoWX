@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AlertTriangle, Check, CloudRain, ExternalLink, LoaderCircle, MapPin, School, Wind } from "lucide-react";
 
-type DistrictOption = { slug: string; county: string; district: string };
+type DistrictOption = { slug: string; county: string };
 type CommuteWindow = "morning" | "afternoon";
 type CommuteData = {
   county: string;
@@ -75,9 +75,9 @@ export function CommutePlanner({ districts }: { districts: DistrictOption[] }) {
     <div className="space-y-5">
       <section className="grid gap-5 rounded-lg bg-white p-5 shadow-panel sm:p-7 lg:grid-cols-[1fr_0.72fr]">
         <label className="block">
-          <span className="mb-2 block text-sm font-bold text-ink">Maryland school district</span>
+          <span className="mb-2 block text-sm font-bold text-ink">Maryland county</span>
           <select value={county} onChange={(event) => setCounty(event.target.value)} className="min-h-12 w-full rounded-md border border-blue-200 bg-white px-4 text-base text-ink outline-none focus:border-bay focus:ring-2 focus:ring-blue-100">
-            {districts.map((district) => <option key={district.slug} value={district.slug}>{district.county} · {district.district}</option>)}
+            {districts.map((district) => <option key={district.slug} value={district.slug}>{district.county}</option>)}
           </select>
         </label>
         <fieldset>
