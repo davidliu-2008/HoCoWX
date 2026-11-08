@@ -1,11 +1,8 @@
 import type { WeatherAlert, WeatherSummary } from "./types";
 
-const LAT = 39.2673;
-const LON = -76.7983;
-const LOCATION = "Ellicott City, Howard County, MD";
 const CACHE_TTL_MS = 10 * 60 * 1000;
 
-let cachedWeather: { value: WeatherSummary; expiresAt: number } | null = null;
+const weatherCache = new Map<string, { value: WeatherSummary; expiresAt: number }>();
 
 type NwsPeriod = {
   name: string;
@@ -191,8 +188,18 @@ function formatAlert(feature: {
   };
 }
 
-export async function getWeatherSummary(): Promise<WeatherSummary> {
+export async function getWeatherSummary({
+  latitude = 39.2673,
+  longitude = -76.7983,
+  location = "Howard County"
+}: {
+  latitude?: number;
+  longitude?: number;
+  location?: string;
+} = {}): Promise<WeatherSummary> {
   const now = Date.now();
+  const cacheKey = `${latitude},${longitude}`;
+  const cachedWeather = weatherCache.get(cacheKey);
 
   if (cachedWeather && cachedWeather.expiresAt > now) {
     return cachedWeather.value;
@@ -206,14 +213,14 @@ export async function getWeatherSummary(): Promise<WeatherSummary> {
       forecastDiscussion?: string;
       observationStations: string;
     };
-  }>(`https://api.weather.gov/points/${LAT},${LON}`);
+  }>(`https://api.weather.gov/points/${latitude},${longitude}`);
 
   const [forecast, hourly, grid, alerts, yesterdayTemperatureF] = await Promise.all([
     fetchNwsJson<{ properties: { periods: NwsPeriod[] } }>(point.properties.forecast),
     fetchNwsJson<{ properties: { periods: NwsPeriod[] } }>(point.properties.forecastHourly),
     fetchNwsJson<{ properties: { snowfall?: { values: GridValue[] } } }>(point.properties.forecastGridData),
     fetchNwsJson<{ features: Array<Parameters<typeof formatAlert>[0]> }>(
-      `https://api.weather.gov/alerts/active?point=${LAT},${LON}`
+      `https://api.weather.gov/alerts/active?point=${latitude},${longitude}`
     ),
     fetchYesterdayTemperature(point.properties.observationStations)
   ]);
@@ -224,7 +231,7 @@ export async function getWeatherSummary(): Promise<WeatherSummary> {
   const morning = chooseMorningPeriod(nextPeriods);
 
   const value: WeatherSummary = {
-    location: LOCATION,
+    location,
     currentTemperatureF: current?.temperature ?? null,
     yesterdayTemperatureF,
     precipitationChance: current?.probabilityOfPrecipitation?.value ?? null,
@@ -242,10 +249,10 @@ export async function getWeatherSummary(): Promise<WeatherSummary> {
     fetchedAt: new Date().toISOString()
   };
 
-  cachedWeather = {
+  weatherCache.set(cacheKey, {
     value,
     expiresAt: now + CACHE_TTL_MS
-  };
+  });
 
   return value;
 }

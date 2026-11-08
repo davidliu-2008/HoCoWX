@@ -21,7 +21,10 @@ import {
   Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
+import { CountyPreference } from "@/components/CountyPreference";
 import { getHcpssStatus } from "@/lib/hcpss-status";
+import { getMarylandDistrictStatus } from "@/lib/maryland-operations";
+import { getMarylandDistrict, marylandDistricts } from "@/lib/maryland-districts";
 import { createPrediction } from "@/lib/prediction";
 import { getWeatherSummary } from "@/lib/weather";
 import type { HcpssStatus, PredictionResult, WeatherSummary } from "@/lib/types";
@@ -315,14 +318,14 @@ function compactTime(value: string | null | undefined) {
   }).format(new Date(value));
 }
 
-function HcpssCard({ status }: { status: LoadState<HcpssStatus> }) {
+function DistrictStatusCard({ status, isHoward }: { status: LoadState<HcpssStatus>; isHoward: boolean }) {
   return (
     <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
       <div className="mb-5 flex items-start gap-4">
         <div>
           <div className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
             <School className="h-4 w-4" />
-            Official HCPSS Status
+            Official {isHoward ? "HCPSS" : "District"} Status
           </div>
           <h2 className="text-2xl font-bold text-ink md:text-3xl">
             {status.ok ? status.data.operationStatus : "Status unavailable"}
@@ -347,13 +350,13 @@ function HcpssCard({ status }: { status: LoadState<HcpssStatus> }) {
   );
 }
 
-function WeatherCard({ weather }: { weather: LoadState<WeatherSummary> }) {
+function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; county: string }) {
   if (!weather.ok) {
     return (
       <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
         <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
           <CloudSun className="h-5 w-5 text-bay" />
-          Howard County Weather
+          {county} Weather
         </h2>
         <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
           Weather data could not be loaded. {weather.error}
@@ -370,7 +373,7 @@ function WeatherCard({ weather }: { weather: LoadState<WeatherSummary> }) {
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
             <CloudSun className="h-5 w-5 text-bay" />
-            Howard County Weather
+            {county} Weather
           </h2>
         </div>
         <span className="rounded-full bg-frost px-3 py-1 text-sm font-semibold text-bay">
@@ -489,10 +492,25 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
   );
 }
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<{ county?: string }> }) {
+  const requestedCounty = (await searchParams).county ?? "howard";
+  const district = getMarylandDistrict(requestedCounty) ?? getMarylandDistrict("howard")!;
+  const isHoward = district.slug === "howard";
   const [status, weather] = await Promise.all([
-    safeLoad(getHcpssStatus),
-    safeLoad(getWeatherSummary)
+    safeLoad(async () => {
+      if (isHoward) return getHcpssStatus();
+      const operation = await getMarylandDistrictStatus(district.slug);
+      if (!operation) throw new Error("District status is unavailable.");
+      return {
+        heading: `${district.county} school operations`,
+        updateDate: operation.lastUpdated,
+        operationStatus: operation.status,
+        message: operation.matchedText ?? `Check the official ${district.district} source for additional details.`,
+        sourceUrl: operation.statusUrl,
+        fetchedAt: operation.checkedAt
+      } satisfies HcpssStatus;
+    }),
+    safeLoad(() => getWeatherSummary({ latitude: district.latitude, longitude: district.longitude, location: district.county }))
   ]);
   const prediction: LoadState<PredictionResult> = weather.ok
     ? { ok: true, data: createPrediction({ weather: weather.data }) }
@@ -501,6 +519,10 @@ export default async function Home() {
   return (
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="dashboard" />
+
+      <div className="px-4 pt-4 sm:px-6">
+        <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} />
+      </div>
 
       <header className="home-hero relative mt-4 overflow-hidden rounded-lg bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
         <Image
@@ -537,7 +559,7 @@ export default async function Home() {
               ) : null}
             </div>
             <div>
-              <p className="text-sm font-semibold text-blue-200">HCPSS</p>
+              <p className="text-sm font-semibold text-blue-200">{isHoward ? "HCPSS" : district.county}</p>
               <p className="mt-1 text-xl font-black leading-tight">{status.ok ? status.data.operationStatus : "Unavailable"}</p>
               <p className="mt-2 text-sm text-blue-100">Updated {formatTime(status.ok ? status.data.fetchedAt : undefined)}</p>
             </div>
@@ -547,11 +569,11 @@ export default async function Home() {
 
       <div id="today" className="space-y-6 px-4 py-7 sm:px-6 sm:py-9">
         <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <HcpssCard status={status} />
+          <DistrictStatusCard status={status} isHoward={isHoward} />
           <PredictionCard prediction={prediction} />
         </div>
 
-        <WeatherCard weather={weather} />
+        <WeatherCard weather={weather} county={district.county} />
         {weather.ok ? <HourlyTimeline weather={weather.data} /> : null}
         {weather.ok ? <FiveDaySchoolOutlook weather={weather.data} /> : null}
         <LiveRadar />
