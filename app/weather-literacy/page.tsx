@@ -53,7 +53,18 @@ export default function WeatherLiteracyPage() {
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="literacy" />
 
-      <header className="page-hero px-5 py-12 sm:px-8 sm:py-16">
+      <header className="page-hero literacy-video-hero px-5 py-12 sm:px-8 sm:py-16">
+        <video
+          className="literacy-video-hero__media"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/photography/snowfall-video-poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="/video/snowfall-background.m4v" type="video/mp4" />
+        </video>
         <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><BookOpen className="h-4 w-4" /> Weather Literacy Center</p>
         <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather, not just react to it.</h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>
@@ -65,6 +76,22 @@ export default function WeatherLiteracyPage() {
         <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
           {guideLinks.map((guide) => <a key={guide.href} href={guide.href} className="group bg-blue-50/60 p-5 transition duration-300 hover:-translate-y-1 hover:bg-blue-50"><span className="text-sm font-black text-blue-300">{guide.number}</span><h2 className="mt-5 text-xl font-bold text-ink">{guide.title}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{guide.text}</p><ArrowRight className="mt-5 h-4 w-4 text-bay transition group-hover:translate-x-1" /></a>)}
         </div>
+
+        <figure className="mt-10 grid overflow-hidden rounded-lg bg-ice lg:grid-cols-[0.62fr_0.38fr] lg:items-stretch">
+          <img
+            src="/photography/winter-wildlife-birds.jpg"
+            alt="Two birds moving through fresh snow in Howard County"
+            className="h-full min-h-[320px] w-full object-cover"
+            loading="lazy"
+          />
+          <figcaption className="flex flex-col justify-center p-7 sm:p-10">
+            <p className="text-sm font-bold uppercase tracking-wide text-bay">Begin with observation</p>
+            <h2 className="mt-3 text-3xl font-black leading-tight text-ink">Look closely at what the weather is doing now.</h2>
+            <p className="mt-4 leading-7 text-slate-600">
+              Fresh snow, changing visibility, wind movement, melting, and refreezing are local clues. Pair what you observe with official measurements before drawing a conclusion.
+            </p>
+          </figcaption>
+        </figure>
       </section>
 
       <section id="forecast" className="scroll-mt-24 px-5 py-12 sm:px-8 sm:py-16">

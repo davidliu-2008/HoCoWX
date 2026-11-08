@@ -72,6 +72,34 @@ main article[class*="shadow"] {
   color: #bfdbfe;
 }
 
+.literacy-video-hero {
+  background-image: url("/photography/snowfall-video-poster.jpg");
+}
+
+.literacy-video-hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, rgba(9, 27, 54, 0.96) 0%, rgba(18, 48, 95, 0.82) 64%, rgba(18, 48, 95, 0.58) 100%);
+}
+
+.literacy-video-hero__media {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .literacy-video-hero__media {
+    display: none;
+  }
+}
+
 .home-editorial-band {
   width: 100%;
   max-width: none;

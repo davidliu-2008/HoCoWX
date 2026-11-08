@@ -130,6 +130,22 @@ export default function AboutPage() {
             <p className="mt-3 text-sm leading-6 text-slate-600">Documents local weather and seasonal conditions through photography used across HoCo Weather Channel.</p>
           </article>
         </div>
+
+        <figure className="mt-10 grid overflow-hidden rounded-lg bg-navy text-white lg:grid-cols-[1.25fr_0.75fr] lg:items-stretch">
+          <img
+            src="/photography/winter-wildlife-squirrel.jpg"
+            alt="A squirrel standing in fresh snow in Howard County"
+            className="h-full min-h-[320px] w-full object-cover"
+            loading="lazy"
+          />
+          <figcaption className="flex flex-col justify-center p-7 sm:p-10">
+            <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Local conditions, documented</p>
+            <h3 className="mt-3 text-3xl font-black leading-tight">Weather is part of the community story.</h3>
+            <p className="mt-4 text-base leading-7 text-blue-100">
+              Student photography records how winter weather changes local landscapes, wildlife, travel, and daily life across Howard County.
+            </p>
+          </figcaption>
+        </figure>
       </section>
 
       <section className="grid gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr]">
