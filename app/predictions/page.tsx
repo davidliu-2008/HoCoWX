@@ -49,7 +49,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       <header className="page-hero px-5 py-12 sm:px-8 sm:py-16">
         <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><Gauge className="h-4 w-4" /> Predictions</p>
         <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{district.county} National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
       </header>
 
       {prediction ? (
@@ -108,9 +108,9 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                 <div className="hidden grid-cols-[1.05fr_1fr_0.8fr_1fr] gap-4 px-5 py-3 text-xs font-bold uppercase tracking-wide text-slate-500 md:grid">
                   <span>Date</span><span>Prediction</span><span>Confidence</span><span>Final outcome</span>
                 </div>
-                <div className="divide-y divide-blue-100">
+                <div className="space-y-2 p-2">
                   {predictionHistory.map((entry) => (
-                    <article key={entry.date} className="grid gap-3 bg-white/80 px-5 py-4 md:grid-cols-[1.05fr_1fr_0.8fr_1fr] md:items-center md:gap-4">
+                    <article key={entry.date} className="grid gap-3 rounded-md bg-white/90 px-5 py-4 md:grid-cols-[1.05fr_1fr_0.8fr_1fr] md:items-center md:gap-4">
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Date</span><p className="font-bold text-ink">{entry.date}</p></div>
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Prediction</span><p className="font-semibold text-slate-700">{entry.prediction}</p></div>
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Confidence</span><p className="text-sm font-semibold text-slate-600">{entry.confidence}%</p></div>
