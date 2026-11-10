@@ -10,6 +10,7 @@ import {
   UsersRound
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
+import { AnimatedStat } from "@/components/AnimatedStat";
 
 export const metadata: Metadata = {
   title: "About | HoCo Weather Channel",
@@ -59,44 +60,23 @@ export default function AboutPage() {
         </p>
       </header>
 
-      <section className="grid gap-8 bg-navy px-5 py-12 text-white sm:px-8 sm:py-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Our mission</p>
-          <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">Make local weather clear, useful, and connected to daily life.</h2>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-3">
-          <div>
-            <p className="text-3xl font-black text-white">Inform</p>
-            <p className="mt-2 text-sm leading-6 text-blue-100">Give students and families timely forecasts focused on the conditions that affect school and travel.</p>
-          </div>
-          <div>
-            <p className="text-3xl font-black text-white">Explain</p>
-            <p className="mt-2 text-sm leading-6 text-blue-100">Translate weather data and uncertainty into language people can quickly understand.</p>
-          </div>
-          <div>
-            <p className="text-3xl font-black text-white">Teach</p>
-            <p className="mt-2 text-sm leading-6 text-blue-100">Help students read trusted sources, question decisions, evaluate evidence, and make informed predictions of their own.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="grid gap-8 bg-white px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+      <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">Our audience</p>
-          <h2 className="mt-2 text-4xl font-black leading-tight text-ink sm:text-5xl">Built around the questions students actually ask.</h2>
+          <h2 className="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink sm:text-5xl">Student-led weather communication with measurable reach.</h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-3">
-          <div>
-            <p className="text-4xl font-black text-bay">80,000+</p>
+        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+          <div className="border-l-2 border-blue-200 pl-5">
+            <AnimatedStat target={80000} />
             <p className="mt-2 text-sm leading-6 text-slate-600">Students, staff, and parents served through the HCPSS community.</p>
           </div>
-          <div>
-            <p className="text-4xl font-black text-bay">Nearly 10K</p>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Student weather and school-operation predictions submitted through polls.</p>
+          <div className="border-l-2 border-blue-200 pl-5">
+            <AnimatedStat target={700000} />
+            <p className="mt-2 text-sm leading-6 text-slate-600">People impacted nationwide across HoCo Weather Channel platforms and partnerships.</p>
           </div>
-          <div>
-            <p className="text-4xl font-black text-bay">2M+</p>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Views, with more than 700,000 accounts reached across platforms.</p>
+          <div className="border-l-2 border-blue-200 pl-5">
+            <AnimatedStat target={2.2} suffix="M+" decimals={1} />
+            <p className="mt-2 text-sm leading-6 text-slate-600">Views across weather updates, forecasts, and educational content.</p>
           </div>
         </div>
       </section>
@@ -112,12 +92,6 @@ export default function AboutPage() {
           </p>
           <p>
             That moment revealed a disconnect between available weather information and the decisions affecting students, families, and staff. HoCo Weather Channel was built to bridge that gap by translating meteorological information into digestible forecasts and school operation predictions.
-          </p>
-          <p>
-            The format changed as students became part of the process. School-operation forecasts gave them a reason to examine snowfall totals, ice accretion, timing, and uncertainty. Polls then invited students to research the conditions and make nearly 10,000 predictions of their own.
-          </p>
-          <p className="border-l-4 border-bay pl-6 text-2xl font-bold leading-9 text-ink">
-            The goal is to help a community gain the confidence to understand the evidence and make informed decisions for itself.
           </p>
         </div>
       </section>
