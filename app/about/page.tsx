@@ -45,11 +45,10 @@ export default function AboutPage() {
       <PageTabs active="about" />
 
       <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
-        <div>
+        <div className="text-center">
           <p className="text-sm font-bold uppercase tracking-wide text-bay">Our audience</p>
-          <h2 className="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink sm:text-5xl">Student-led weather communication with measurable reach.</h2>
         </div>
-        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+        <div className="mt-10 grid gap-8 text-center sm:grid-cols-3">
           <div>
             <AnimatedStat target={80000} />
             <p className="mt-2 text-sm leading-6 text-slate-600">Students, staff, and parents served through the HCPSS community.</p>
@@ -125,7 +124,6 @@ export default function AboutPage() {
       <section className="grid gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr]">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">Our history</p>
-          <h2 className="mt-2 text-4xl font-black text-ink">Built one step at a time.</h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           <article className="rounded-lg bg-ice p-6">

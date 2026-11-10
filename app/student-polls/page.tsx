@@ -1,4 +1,5 @@
-import { BarChart3, BookOpen, Brain, Search } from "lucide-react";
+import { BarChart3 } from "lucide-react";
+import { AnimatedStat } from "@/components/AnimatedStat";
 import { PageTabs } from "@/components/PageTabs";
 
 type PollOption = {
@@ -209,53 +210,38 @@ export default function StudentPollsPage() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="student-polls" />
 
-      <header className="page-hero flex flex-col gap-4 px-5 py-12 sm:px-8 sm:py-16 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
+      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
+        <div className="mx-auto max-w-4xl">
+          <p className="mb-2 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
             <BarChart3 className="h-4 w-4" /> Weather Literacy in Action
           </p>
           <h1 className="text-4xl font-black text-ink md:text-6xl">Student Prediction Lab</h1>
-          <p className="mt-3 max-w-2xl text-lg leading-8">A record of students researching conditions, weighing uncertainty, and making weather-based school operation predictions.</p>
+          <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">A record of students researching conditions, weighing uncertainty, and making weather-based school operation predictions.</p>
         </div>
       </header>
 
-      <section className="mb-6 mt-6 overflow-hidden rounded-lg bg-white p-6 shadow-panel sm:p-8">
-        <div>
+      <section className="mb-6 mt-6 overflow-hidden rounded-lg bg-white p-6 text-center shadow-panel sm:p-8">
+        <div className="mx-auto max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">2025–26 Student Poll Archive</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Students became the forecasters</h2>
-          <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-700">
+          <p className="mt-4 text-lg leading-8 text-slate-700">
             These polls invited students to make their own school-operation and weather predictions after researching
             HoCo Weather Channel resources, official forecasts, and other trusted weather sources.
           </p>
         </div>
         <div className="mt-8 grid gap-6 border-t border-blue-100 pt-7 sm:grid-cols-3">
           <div>
-            <span className="block text-4xl font-black text-bay sm:text-5xl">{polls.length}</span>
+            <AnimatedStat target={polls.length} suffix="" />
             <span className="mt-2 block text-sm font-bold uppercase tracking-wide text-slate-600">Archived polls</span>
           </div>
           <div>
-            <span className="block text-4xl font-black text-bay sm:text-5xl">{totalVotes.toLocaleString()}</span>
+            <AnimatedStat target={totalVotes} suffix="" />
             <span className="mt-2 block text-sm font-bold uppercase tracking-wide text-slate-600">Student votes</span>
           </div>
           <div>
-            <span className="block text-4xl font-black text-bay sm:text-5xl">{largestPoll.toLocaleString()}</span>
+            <AnimatedStat target={largestPoll} suffix="" />
             <span className="mt-2 block text-sm font-bold uppercase tracking-wide text-slate-600">Largest poll</span>
           </div>
-        </div>
-      </section>
-
-      <section className="mb-6 grid gap-4 md:grid-cols-3">
-        <div className="flex gap-3 rounded-lg bg-blue-50/70 p-5">
-          <Search className="mt-0.5 h-5 w-5 shrink-0 text-bay" />
-          <div><h2 className="font-bold text-ink">Research</h2><p className="mt-1 text-sm leading-6 text-slate-600">Review forecasts, alerts, models, and timing.</p></div>
-        </div>
-        <div className="flex gap-3 rounded-lg bg-blue-50/70 p-5">
-          <BookOpen className="mt-0.5 h-5 w-5 shrink-0 text-bay" />
-          <div><h2 className="font-bold text-ink">Compare</h2><p className="mt-1 text-sm leading-6 text-slate-600">Use multiple sources and weigh conflicting information.</p></div>
-        </div>
-        <div className="flex gap-3 rounded-lg bg-blue-50/70 p-5">
-          <Brain className="mt-0.5 h-5 w-5 shrink-0 text-bay" />
-          <div><h2 className="font-bold text-ink">Predict</h2><p className="mt-1 text-sm leading-6 text-slate-600">Make an evidence-based call and see how classmates reasoned.</p></div>
         </div>
       </section>
 

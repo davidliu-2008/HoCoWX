@@ -46,20 +46,17 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="predictions" />
 
-      <header className="page-hero px-5 py-12 sm:px-8 sm:py-16">
-        <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><Gauge className="h-4 w-4" /> Predictions</p>
-        <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
+      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
+        <p className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><Gauge className="h-4 w-4" /> Predictions</p>
+        <h1 className="mx-auto mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
+        <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
       </header>
 
       {prediction ? (
         <>
           <section className="px-5 py-12 sm:px-8 sm:py-16">
-            <p className="text-sm font-bold uppercase tracking-wide text-bay">How predictions are made</p>
-            <div className="mt-2 grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
-              <h2 className="max-w-4xl text-3xl font-black leading-tight text-ink sm:text-4xl">A transparent rule-based model.</h2>
-              <p className="max-w-4xl text-lg leading-8 text-slate-600">The model begins with a low baseline score. It then adds or subtracts points using observable weather factors. More points indicate a greater chance that weather could disrupt school operations.</p>
-            </div>
+            <p className="text-center text-sm font-bold uppercase tracking-wide text-bay">How predictions are made</p>
+            <p className="mx-auto mt-4 max-w-4xl text-center text-lg leading-8 text-slate-600">The model begins with a low baseline score. It then adds or subtracts points using observable weather factors. More points indicate a greater chance that weather could disrupt school operations.</p>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               <Factor icon={<AlertTriangle className="h-6 w-6" />} title="Official alerts">Winter Storm and Ice Storm Warnings add substantial risk because they signal hazardous travel or significant impacts.</Factor>
               <Factor icon={<ThermometerSnowflake className="h-6 w-6" />} title="Ice and freezing rain">Ice receives heavy weight because even a thin glaze can make untreated roads, sidewalks, and parking lots dangerous.</Factor>
@@ -95,10 +92,9 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
 
           <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
             <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
-              <div>
+              <div className="text-center lg:flex lg:flex-col lg:justify-center">
                 <p className="text-sm font-bold uppercase tracking-wide text-bay">2026 prediction record</p>
-                <h2 className="mt-2 text-4xl font-black leading-tight text-ink sm:text-5xl">9 documented calls matched the final outcome.</h2>
-                <div className="mt-7 flex gap-8">
+                <div className="mt-7 flex justify-center gap-8">
                   <div><p className="text-4xl font-black text-bay">9/9</p><p className="mt-1 text-sm font-semibold text-slate-500">Matched calls</p></div>
                   <div><p className="text-4xl font-black text-ink">100%</p><p className="mt-1 text-sm font-semibold text-slate-500">Documented match rate</p></div>
                 </div>

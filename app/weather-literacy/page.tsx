@@ -53,7 +53,7 @@ export default function WeatherLiteracyPage() {
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="literacy" />
 
-      <header className="page-hero literacy-video-hero px-5 py-12 sm:px-8 sm:py-16">
+      <header className="page-hero literacy-video-hero px-5 py-12 text-center sm:px-8 sm:py-16">
         <video
           className="literacy-video-hero__media"
           autoPlay
@@ -65,10 +65,9 @@ export default function WeatherLiteracyPage() {
         >
           <source src="/video/snowfall-background.m4v" type="video/mp4" />
         </video>
-        <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><BookOpen className="h-4 w-4" /> Weather Literacy Center</p>
-        <h1 className="mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather, not just react to it.</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>
-        <p className="mt-4 text-lg font-black text-bay">By students. For students.</p>
+        <p className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><BookOpen className="h-4 w-4" /> Weather Literacy Center</p>
+        <h1 className="mx-auto mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather.</h1>
+        <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>
       </header>
 
       <section className="bg-white/60 px-5 py-8 sm:px-8 sm:py-10">
@@ -154,7 +153,7 @@ export default function WeatherLiteracyPage() {
       </section>
 
       <section id="school" className="scroll-mt-24 px-5 py-12 sm:px-8 sm:py-16">
-        <SectionHeading eyebrow="Guide 03" title="Evaluate the school day, not just the storm total.">A school-operation forecast is a transportation and timing question. Consider buses, walkers, staff travel, neighborhood roads, parking lots, and treatment time.</SectionHeading>
+        <SectionHeading eyebrow="Guide 03" title="Evaluate the school day.">A school-operation forecast is a transportation and timing question. Consider buses, walkers, staff travel, neighborhood roads, parking lots, and treatment time.</SectionHeading>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{schoolFactors.map(({ title, icon: Icon, text }) => <article key={title} className="bg-blue-50/55 p-6"><Icon className="h-6 w-6 text-bay" /><h3 className="mt-4 text-xl font-bold text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></article>)}</div>
         <figure className="mt-10 grid overflow-hidden bg-white/80 p-5 sm:p-8 lg:grid-cols-[0.52fr_0.48fr] lg:items-center">
           <img src="https://www.weather.gov/images/wrn/Infographics/2020/bridges-freeze-first-2020.png" alt="National Weather Service infographic explaining why bridges freeze before other roads" className="h-full max-h-[620px] w-full object-contain" loading="lazy" />
