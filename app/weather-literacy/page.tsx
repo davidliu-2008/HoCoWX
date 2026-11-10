@@ -50,7 +50,7 @@ function Step({ number, title, children }: { number: string; title: string; chil
 
 export default function WeatherLiteracyPage() {
   return (
-    <main className="min-h-screen w-full pb-8">
+    <main className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="literacy" />
 
       <header className="page-hero literacy-video-hero px-5 py-12 text-center sm:px-8 sm:py-16">

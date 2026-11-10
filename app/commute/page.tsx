@@ -13,7 +13,7 @@ export default async function CommutePage({ searchParams }: { searchParams: Prom
   const requestedCounty = (await searchParams).county ?? "howard";
   const initialCounty = marylandDistricts.some((district) => district.slug === requestedCounty) ? requestedCounty : "howard";
   return (
-    <main className="min-h-screen w-full pb-8">
+    <main className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="commute" />
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
         <div className="mx-auto max-w-4xl">

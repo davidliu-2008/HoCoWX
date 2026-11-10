@@ -120,6 +120,16 @@ main article[class*="shadow"] {
   box-shadow: 0 16px 42px rgba(16, 33, 63, 0.07);
 }
 
+.integrated-page section[class*="shadow"] {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.integrated-page > section,
+.integrated-page > div:not(:first-child) {
+  transition: background-color 180ms ease;
+}
+
 .home-hero {
   background-color: #12305f;
 }

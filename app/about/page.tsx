@@ -41,7 +41,7 @@ const openRoles = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen w-full pb-8">
+    <main className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="about" />
 
       <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">

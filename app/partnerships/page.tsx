@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PartnershipsPage() {
   return (
-    <main className="min-h-screen w-full pb-6">
+    <main className="integrated-page min-h-screen w-full pb-6">
       <PageTabs active="partnerships" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">

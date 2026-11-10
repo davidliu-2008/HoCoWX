@@ -43,7 +43,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
   }
 
   return (
-    <main className="min-h-screen w-full pb-8">
+    <main className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="predictions" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">

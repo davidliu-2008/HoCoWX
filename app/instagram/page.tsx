@@ -60,7 +60,7 @@ export default async function InstagramPage() {
   const feed = await getInstagramFeed();
 
   return (
-    <main className="min-h-screen w-full pb-6">
+    <main className="integrated-page min-h-screen w-full pb-6">
       <PageTabs active="instagram" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
