@@ -36,14 +36,14 @@ export default function InterviewPage() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="interview" />
 
-      <header className="page-hero flex flex-col gap-4 px-5 py-12 sm:px-8 sm:py-16 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
+      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
+        <div className="mx-auto max-w-3xl">
+          <p className="mb-2 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
             <Mic2 className="h-4 w-4" />
             HoCo Weather Channel Interview
           </p>
           <h1 className="text-4xl font-black text-ink md:text-6xl">Inside HCPSS Weather Decisions</h1>
-          <p className="mt-3 max-w-2xl text-lg leading-8">Superintendent Bill Barnes explains the people, evidence, timing, and operational realities behind weather-related school decisions.</p>
+          <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">Superintendent Bill Barnes explains the people, evidence, timing, and operational realities behind weather-related school decisions.</p>
         </div>
       </header>
 

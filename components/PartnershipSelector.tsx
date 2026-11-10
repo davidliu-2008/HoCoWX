@@ -2,7 +2,7 @@ import { BellRing, CheckCircle2, School, Snowflake, Users } from "lucide-react";
 
 export function PartnershipSelector() {
   return (
-    <div className="px-4 py-6 sm:px-6 sm:py-8">
+    <div className="px-4 py-8 sm:px-6 sm:py-10">
       <HcpssPartnership />
     </div>
   );
@@ -13,7 +13,7 @@ function HcpssPartnership() {
     <section className="overflow-hidden rounded-lg bg-blue-50/70 shadow-panel">
       <div className="grid items-start gap-8 p-5 sm:p-7 xl:grid-cols-[0.82fr_1.18fr] xl:p-8">
         <div>
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><School className="h-4 w-4" /> Formal HCPSS Partnership</p>
+          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><School className="h-4 w-4" /> Formal HCPSS partnership</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Weather information inside the HCPSS experience</h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">HoCo Weather Channel will be integrated into the official HCPSS structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
 

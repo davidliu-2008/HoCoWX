@@ -14,6 +14,22 @@ body {
   min-height: 100vh;
   background: #f3f7fc;
   color: #172033;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: break-word;
 }
 
 .no-scrollbar {
@@ -121,6 +137,10 @@ main article[class*="shadow"] {
   background-position: center;
   background-size: cover;
   color: white;
+}
+
+.page-hero > div {
+  margin-inline: auto;
 }
 
 .page-hero h1 {

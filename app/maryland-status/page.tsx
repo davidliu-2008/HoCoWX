@@ -26,13 +26,13 @@ export default async function MarylandStatusPage() {
     <main className="min-h-screen w-full pb-6">
       <PageTabs active="maryland" />
 
-      <header className="page-hero flex flex-col gap-4 px-5 py-12 sm:px-8 sm:py-16 md:flex-row md:items-end md:justify-between">
-        <div>
+      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
+        <div className="mx-auto max-w-3xl">
           <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-bay">
             Nearby Districts
           </p>
           <h1 className="text-4xl font-black text-ink md:text-6xl">Maryland School Status</h1>
-          <p className="mt-3 max-w-2xl text-lg leading-8">Compare current operations across Maryland public school districts and open each district&apos;s official source.</p>
+          <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">Compare current operations across Maryland public school districts and open each district&apos;s official source.</p>
         </div>
       </header>
 
