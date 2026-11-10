@@ -125,6 +125,10 @@ main article[class*="shadow"] {
   box-shadow: none;
 }
 
+.integrated-page {
+  padding-bottom: 0;
+}
+
 .integrated-page > section,
 .integrated-page > div:not(:first-child) {
   transition: background-color 180ms ease;
