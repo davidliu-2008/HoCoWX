@@ -71,7 +71,11 @@ export default function AboutPage() {
         </div>
         <div className="space-y-6 text-lg leading-8 text-slate-600">
           <p>
-            Weather information has long been technical, fragmented, and written for older audiences. Students still feel its consequences every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
+            Weather information historically moved through a top-down system led by experts. Younger audiences now increasingly rely on websites, apps, social media, family, and friends for forecasts. Students still feel the consequences of weather every day through bus rides, school schedules, outdoor activities, and decisions that affect their families. {" "}
+            <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-bay hover:underline">
+              NOAA research on the changing weather information landscape
+            </a>
+            .
           </p>
           <p>
             HoCo Weather Channel launched in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
