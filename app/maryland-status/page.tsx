@@ -28,9 +28,6 @@ export default async function MarylandStatusPage() {
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
         <div className="mx-auto max-w-3xl">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-bay">
-            Nearby Districts
-          </p>
           <h1 className="text-4xl font-black text-ink md:text-6xl">Maryland School Status</h1>
           <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">Compare current operations across Maryland public school districts and open each district&apos;s official source.</p>
         </div>

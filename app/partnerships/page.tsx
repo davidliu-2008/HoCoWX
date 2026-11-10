@@ -13,7 +13,6 @@ export default function PartnershipsPage() {
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
         <div className="mx-auto max-w-3xl">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-bay">Working Together</p>
           <h1 className="text-4xl font-black text-ink md:text-6xl">Partnerships</h1>
           <p className="mt-2 text-lg text-slate-600">Building stronger weather communication and literacy for students.</p>
           <div className="mx-auto mt-7 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">

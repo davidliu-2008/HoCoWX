@@ -1,4 +1,3 @@
-import { BarChart3 } from "lucide-react";
 import { AnimatedStat } from "@/components/AnimatedStat";
 import { PageTabs } from "@/components/PageTabs";
 
@@ -212,9 +211,6 @@ export default function StudentPollsPage() {
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
         <div className="mx-auto max-w-4xl">
-          <p className="mb-2 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
-            <BarChart3 className="h-4 w-4" /> Weather Literacy in Action
-          </p>
           <h1 className="text-4xl font-black text-ink md:text-6xl">Student Prediction Lab</h1>
           <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">A record of students researching conditions, weighing uncertainty, and making weather-based school operation predictions.</p>
         </div>

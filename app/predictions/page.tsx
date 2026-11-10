@@ -1,4 +1,4 @@
-import { AlertTriangle, CalendarClock, CheckCircle2, Gauge, Info, Snowflake, ThermometerSnowflake, Wind } from "lucide-react";
+import { AlertTriangle, CalendarClock, CheckCircle2, Info, Snowflake, ThermometerSnowflake, Wind } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 import { createPrediction } from "@/lib/prediction";
 import { getMarylandDistrict } from "@/lib/maryland-districts";
@@ -47,8 +47,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       <PageTabs active="predictions" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <p className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><Gauge className="h-4 w-4" /> Predictions</p>
-        <h1 className="mx-auto mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
+        <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
       </header>
 

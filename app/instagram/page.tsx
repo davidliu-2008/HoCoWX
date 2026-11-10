@@ -65,9 +65,6 @@ export default async function InstagramPage() {
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
         <div className="mx-auto max-w-3xl">
-          <p className="mb-2 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
-            <Instagram className="h-4 w-4" /> Weather Literacy &amp; Updates
-          </p>
           <h1 className="text-4xl font-black text-ink md:text-6xl">Weather Updates &amp; Insights</h1>
           <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">Local forecasts, environmental stories, and weather literacy published for the student community.</p>
         </div>

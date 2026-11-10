@@ -1,5 +1,5 @@
 import {
-  AlertTriangle, ArrowRight, BookOpen, CheckCircle2, Clock3, CloudRain, CloudSnow,
+  AlertTriangle, ArrowRight, CheckCircle2, Clock3, CloudRain, CloudSnow,
   ExternalLink, Gauge, Layers3, Map, Radar, School, Snowflake, ThermometerSnowflake, Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
@@ -65,8 +65,7 @@ export default function WeatherLiteracyPage() {
         >
           <source src="/video/snowfall-background.m4v" type="video/mp4" />
         </video>
-        <p className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wide text-bay"><BookOpen className="h-4 w-4" /> Weather Literacy Center</p>
-        <h1 className="mx-auto mt-3 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather.</h1>
+        <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather.</h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>
       </header>
 
