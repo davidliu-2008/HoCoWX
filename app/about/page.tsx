@@ -67,7 +67,7 @@ export default function AboutPage() {
       <section className="grid gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.72fr_1.28fr]">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">How it started</p>
-          <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">Weather shapes students&apos; lives. The information should speak to them.</h2>
+          <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">Weather insights built for students.</h2>
         </div>
         <div className="space-y-6 text-lg leading-8 text-slate-600">
           <p>
