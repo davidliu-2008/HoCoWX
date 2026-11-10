@@ -67,14 +67,14 @@ export default function AboutPage() {
       <section className="grid gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.72fr_1.28fr]">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">How it started</p>
-          <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">A gap between the forecast and the decisions people felt.</h2>
+          <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">Weather shapes students&apos; lives. The information should speak to them.</h2>
         </div>
         <div className="space-y-6 text-lg leading-8 text-slate-600">
           <p>
-            David Liu conceptualized HoCo Weather Channel in December 2024. The project launched in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding.
+            Weather information has long been technical, fragmented, and written for older audiences. Students still feel its consequences every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
           </p>
           <p>
-            That moment revealed a disconnect between available weather information and the decisions affecting students, families, and staff. HoCo Weather Channel was built to bridge that gap by translating meteorological information into digestible forecasts and school operation predictions.
+            HoCo Weather Channel launched in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
           </p>
         </div>
       </section>
@@ -119,29 +119,6 @@ export default function AboutPage() {
             </p>
           </figcaption>
         </figure>
-      </section>
-
-      <section className="grid gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.7fr_1.3fr]">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wide text-bay">Our history</p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <article className="rounded-lg bg-ice p-6">
-            <p className="text-4xl font-black text-bay">2024</p>
-            <h3 className="mt-4 text-xl font-bold text-ink">Concept developed</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">The idea for a student-led local weather and school operations service began in December.</p>
-          </article>
-          <article className="rounded-lg bg-blue-50 p-6">
-            <p className="text-4xl font-black text-bay">2025</p>
-            <h3 className="mt-4 text-xl font-bold text-ink">HoCo Weather Channel launched</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">The channel launched in November with local forecasting and school operation predictions.</p>
-          </article>
-          <article className="rounded-lg bg-sky-50 p-6">
-            <p className="text-4xl font-black text-bay">2026</p>
-            <h3 className="mt-4 text-xl font-bold text-ink">Students joined the forecast</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Nearly 10,000 student poll predictions turned weather updates into active learning, and an HCPSS partnership expanded the work into district weather literacy.</p>
-          </article>
-        </div>
       </section>
 
       <section className="bg-white px-5 py-14 sm:px-8 sm:py-20">
