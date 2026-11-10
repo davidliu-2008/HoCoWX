@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Instagram, Mail, Podcast } from "lucide-react";
 
 const footerLinks = [
@@ -28,6 +29,23 @@ export function SiteFooter() {
             <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="footer-icon-button" aria-label="Podcast"><Podcast className="h-4 w-4" /></a>
           </div>
         </div>
+      </div>
+      <div className="mx-auto mt-8 w-full max-w-[1440px]">
+        <a
+          href="https://www.visualcrossing.com/"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-block transition-opacity hover:opacity-85"
+          aria-label="Visit Visual Crossing Weather"
+        >
+          <Image
+            src="/attribution/visual-crossing-weather.png"
+            alt="Powered by Visual Crossing Weather"
+            width={3000}
+            height={750}
+            className="h-auto w-48 sm:w-56"
+          />
+        </a>
       </div>
       <div className="mx-auto mt-8 flex w-full max-w-[1440px] flex-col gap-2 border-t border-white/15 pt-5 text-xs leading-5 text-blue-200 sm:flex-row sm:justify-between">
         <p>© {new Date().getFullYear()} HoCo Weather Channel. All rights reserved.</p>
