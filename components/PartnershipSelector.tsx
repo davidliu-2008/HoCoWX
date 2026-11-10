@@ -84,7 +84,7 @@ function VisualCrossingSponsorship() {
       <p className="text-lg font-bold text-bay sm:text-xl">Visual Crossing Weather Data Sponsorship</p>
       <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-ink sm:text-4xl">More weather data for deeper student analysis.</h2>
       <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
-        Visual Crossing provides HoCo Weather Channel with expanded access to current conditions, forecasts, and historical weather records. These tools support forecast research, model development, and clearer explanations of how past and upcoming conditions may affect schools and communities.
+        Visual Crossing sponsors HoCo Weather Channel by providing complimentary access to its paid professional weather-data platform. Its current conditions, forecasts, and historical weather records support forecast research, model development, and clearer explanations of how past and upcoming conditions may affect schools and communities.
       </p>
 
       <div className="mt-10 grid gap-8 md:grid-cols-3">
@@ -99,15 +99,6 @@ function VisualCrossingSponsorship() {
         </CapitalWeatherPoint>
       </div>
 
-      <a
-        href="https://www.visualcrossing.com/"
-        target="_blank"
-        rel="noreferrer"
-        className="mt-10 inline-block transition-opacity hover:opacity-85"
-        aria-label="Visit Visual Crossing Weather"
-      >
-        <img src="/attribution/visual-crossing-weather.png" alt="Powered by Visual Crossing Weather" className="h-auto w-56 sm:w-64" />
-      </a>
     </section>
   );
 }
