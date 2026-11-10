@@ -50,31 +50,21 @@ export default function AboutPage() {
     <main className="min-h-screen w-full pb-8">
       <PageTabs active="about" />
 
-      <header className="page-hero grid gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wide text-bay">About HoCo Weather Channel</p>
-          <h1 className="mt-3 max-w-5xl text-5xl font-black leading-tight text-ink sm:text-7xl">Weather information students can understand and use.</h1>
-        </div>
-        <p className="max-w-2xl text-lg leading-8 text-slate-600">
-          HoCo Weather Channel is a student-led weather service translating complex meteorological information into clear local forecasts, school operation predictions, and weather literacy resources for Maryland students, families, and staff.
-        </p>
-      </header>
-
       <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">Our audience</p>
           <h2 className="mt-2 max-w-4xl text-4xl font-black leading-tight text-ink sm:text-5xl">Student-led weather communication with measurable reach.</h2>
         </div>
         <div className="mt-10 grid gap-8 sm:grid-cols-3">
-          <div className="border-l-2 border-blue-200 pl-5">
+          <div>
             <AnimatedStat target={80000} />
             <p className="mt-2 text-sm leading-6 text-slate-600">Students, staff, and parents served through the HCPSS community.</p>
           </div>
-          <div className="border-l-2 border-blue-200 pl-5">
+          <div>
             <AnimatedStat target={700000} />
             <p className="mt-2 text-sm leading-6 text-slate-600">People impacted nationwide across HoCo Weather Channel platforms and partnerships.</p>
           </div>
-          <div className="border-l-2 border-blue-200 pl-5">
+          <div>
             <AnimatedStat target={2.2} suffix="M+" decimals={1} />
             <p className="mt-2 text-sm leading-6 text-slate-600">Views across weather updates, forecasts, and educational content.</p>
           </div>
@@ -102,7 +92,6 @@ export default function AboutPage() {
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Student leadership</p>
             <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">Meet the team</h2>
           </div>
-          <p className="max-w-xl text-base leading-7 text-slate-600">Students bring forecasting, communication, and visual storytelling together in one community weather service.</p>
         </div>
 
         <div className="mt-9 grid gap-4 md:grid-cols-3">

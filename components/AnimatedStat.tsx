@@ -28,7 +28,7 @@ export function AnimatedStat({
       if (!entry.isIntersecting) return;
       observer.disconnect();
       const startedAt = performance.now();
-      const duration = 1250;
+      const duration = 2400;
 
       function frame(now: number) {
         const progress = Math.min((now - startedAt) / duration, 1);

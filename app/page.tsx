@@ -6,7 +6,6 @@ import {
   AlertTriangle,
   BookOpen,
   CalendarDays,
-  CalendarClock,
   CloudSun,
   Gauge,
   GraduationCap,
@@ -151,33 +150,6 @@ function RiskBreakdownCard({ prediction }: { prediction: PredictionResult }) {
           </div>
         ))}
       </div>
-    </section>
-  );
-}
-
-function MorningCommuteCard({ prediction }: { prediction: PredictionResult }) {
-  return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
-      <div className="mb-4 flex items-start justify-between gap-3">
-        <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
-          <CalendarClock className="h-5 w-5 text-bay" />
-          Morning Commute Risk
-        </h2>
-        <span className={`rounded-full px-3 py-1 text-xs font-bold ring-1 ${predictionBadgeClass(prediction.morningCommuteRisk.label)}`}>
-          {prediction.morningCommuteRisk.label}
-        </span>
-      </div>
-      <p className="mb-4 text-sm leading-6 text-slate-600">
-        Focused on the 5 AM-9 AM school travel window. Score: {prediction.morningCommuteRisk.score}/100.
-      </p>
-      <ul className="space-y-2">
-        {prediction.morningCommuteRisk.factors.map((factor) => (
-          <li key={factor} className="flex gap-2 text-sm leading-6 text-slate-700">
-            <AlertTriangle className="mt-1 h-4 w-4 shrink-0 text-bay" />
-            <span>{factor}</span>
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }
@@ -578,21 +550,6 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         {weather.ok ? <FiveDaySchoolOutlook weather={weather.data} /> : null}
         <LiveRadar />
 
-        {prediction.ok ? (
-          <section className="grid gap-5 rounded-lg bg-blue-50 p-5 md:grid-cols-2 md:p-7">
-            <MorningCommuteCard prediction={prediction.data} />
-            <div className="flex flex-col justify-center px-1 py-3 md:px-5">
-              <p className="text-sm font-bold uppercase tracking-wide text-bay">Prediction details</p>
-              <h2 className="mt-2 text-3xl font-black text-ink">Every point has a reason.</h2>
-              <p className="mt-3 max-w-xl leading-7 text-slate-600">
-                Review the full score, weather factors, commute timing, and rules behind today&apos;s school operations prediction.
-              </p>
-              <Link href="/predictions" className="mt-5 inline-flex items-center gap-2 font-bold text-bay hover:underline">
-                Open the prediction breakdown <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </section>
-        ) : null}
       </div>
 
       <section className="home-editorial-band bg-white px-4 py-10 sm:px-6 md:py-14">
