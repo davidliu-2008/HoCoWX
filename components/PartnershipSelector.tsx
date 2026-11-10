@@ -1,9 +1,10 @@
-import { BellRing, CheckCircle2, School, Snowflake, Users } from "lucide-react";
+import { BellRing, CheckCircle2, MessagesSquare, Radio, School, Snowflake, TrendingUp, Users } from "lucide-react";
 
 export function PartnershipSelector() {
   return (
-    <div className="px-4 py-8 sm:px-6 sm:py-10">
+    <div className="space-y-8 px-4 py-8 sm:px-6 sm:py-10">
       <HcpssPartnership />
+      <CapitalWeatherPartnership />
     </div>
   );
 }
@@ -13,9 +14,16 @@ function HcpssPartnership() {
     <section className="overflow-hidden rounded-lg bg-blue-50/70 shadow-panel">
       <div className="grid items-start gap-8 p-5 sm:p-7 xl:grid-cols-[0.82fr_1.18fr] xl:p-8">
         <div>
+          <div className="mb-6 inline-flex rounded-lg bg-white px-4 py-2 shadow-sm">
+            <img
+              src="/partners/hcpss-logo.png"
+              alt="Howard County Public School System"
+              className="h-16 w-64 object-cover object-center sm:h-20 sm:w-80"
+            />
+          </div>
           <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><School className="h-4 w-4" /> Formal HCPSS partnership</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Weather information inside the HCPSS experience</h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">HoCo Weather Channel will be integrated into the official HCPSS structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">Through a multi-year agreement with HCPSS, HoCo Weather Channel will be integrated into the district&apos;s official structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
 
           <div className="mt-6 divide-y divide-blue-100 border-y border-blue-100">
             <PartnershipPoint icon={<CheckCircle2 className="h-5 w-5" />} title="Working with the HCPSS weather team">Developing useful weather information and literacy resources for the school community.</PartnershipPoint>
@@ -48,6 +56,47 @@ function HcpssPartnership() {
         </div>
       </div>
     </section>
+  );
+}
+
+function CapitalWeatherPartnership() {
+  return (
+    <section className="overflow-hidden rounded-lg bg-navy text-white shadow-panel">
+      <div className="px-5 py-10 text-center sm:px-8 sm:py-12">
+        <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-lg bg-white p-3 shadow-lg sm:h-36 sm:w-36">
+          <img src="/partners/capital-weather-logo.png" alt="Capital Weather" className="h-full w-full object-contain" />
+        </div>
+        <p className="flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-200">
+          <Radio className="h-4 w-4" /> Capital Weather partnership
+        </p>
+        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-4xl">Connecting detailed forecasts to the decisions students feel.</h2>
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-blue-100 sm:text-lg">
+          HoCo Weather Channel and Capital Weather are working together to expand both audiences, translate detailed forecasts into clear school impacts, and strengthen severe-weather communication.
+        </p>
+      </div>
+
+      <div className="grid border-t border-white/15 md:grid-cols-3">
+        <CapitalWeatherPoint icon={<TrendingUp className="h-6 w-6" />} title="Growing both audiences">
+          Sharing trusted weather information across both communities so more students and families can reach useful local forecasts.
+        </CapitalWeatherPoint>
+        <CapitalWeatherPoint icon={<MessagesSquare className="h-6 w-6" />} title="Clear school impact communication">
+          Turning detailed forecasts into direct explanations of timing, travel conditions, and possible effects on the school day during severe weather.
+        </CapitalWeatherPoint>
+        <CapitalWeatherPoint icon={<Snowflake className="h-6 w-6" />} title="Stronger prediction models">
+          Combining forecasting experience and school-impact analysis to continue improving the prediction model system.
+        </CapitalWeatherPoint>
+      </div>
+    </section>
+  );
+}
+
+function CapitalWeatherPoint({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
+  return (
+    <article className="px-6 py-7 text-center md:border-l md:border-white/15 md:first:border-l-0 sm:px-8">
+      <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-blue-200">{icon}</span>
+      <h3 className="mt-4 text-xl font-bold">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-blue-100">{children}</p>
+    </article>
   );
 }
 
