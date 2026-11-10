@@ -14,13 +14,6 @@ function HcpssPartnership() {
     <section className="overflow-hidden rounded-lg bg-blue-50/70 shadow-panel">
       <div className="grid items-start gap-8 p-5 sm:p-7 xl:grid-cols-[0.82fr_1.18fr] xl:p-8">
         <div>
-          <div className="mb-6 inline-flex rounded-lg bg-white px-4 py-2 shadow-sm">
-            <img
-              src="/partners/hcpss-logo.png"
-              alt="Howard County Public School System"
-              className="h-16 w-64 object-cover object-center sm:h-20 sm:w-80"
-            />
-          </div>
           <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><School className="h-4 w-4" /> Formal HCPSS partnership</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Weather information inside the HCPSS experience</h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">Through a multi-year agreement with HCPSS, HoCo Weather Channel will be integrated into the district&apos;s official structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
@@ -63,9 +56,6 @@ function CapitalWeatherPartnership() {
   return (
     <section className="overflow-hidden rounded-lg bg-navy text-white shadow-panel">
       <div className="px-5 py-10 text-center sm:px-8 sm:py-12">
-        <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-lg bg-white p-3 shadow-lg sm:h-36 sm:w-36">
-          <img src="/partners/capital-weather-logo.png" alt="Capital Weather" className="h-full w-full object-contain" />
-        </div>
         <p className="flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-200">
           <Radio className="h-4 w-4" /> Capital Weather partnership
         </p>
