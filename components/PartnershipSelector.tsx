@@ -12,13 +12,15 @@ export function PartnershipSelector() {
 function HcpssPartnership() {
   return (
     <section className="overflow-hidden rounded-lg bg-blue-50/70 shadow-panel">
-      <div className="grid items-start gap-8 p-5 sm:p-7 xl:grid-cols-[0.82fr_1.18fr] xl:p-8">
-        <div>
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay"><School className="h-4 w-4" /> Formal HCPSS partnership</p>
-          <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Weather information inside the HCPSS experience</h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">Through a multi-year agreement with HCPSS, HoCo Weather Channel will be integrated into the district&apos;s official structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
+      <div className="px-5 py-10 text-center sm:px-8 sm:py-12">
+        <p className="flex items-center justify-center gap-2 text-lg font-bold text-bay sm:text-xl"><School className="h-5 w-5" /> Howard County Public School System Partnership</p>
+        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-ink sm:text-4xl">Weather information inside the HCPSS experience</h2>
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Through a multi-year agreement with HCPSS, HoCo Weather Channel will be integrated into the district&apos;s official structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
+      </div>
 
-          <div className="mt-6 divide-y divide-blue-100 border-y border-blue-100">
+      <div className="grid items-start gap-8 border-t border-blue-100 p-5 sm:p-7 xl:grid-cols-[0.82fr_1.18fr] xl:p-8">
+        <div>
+          <div className="divide-y divide-blue-100 border-y border-blue-100">
             <PartnershipPoint icon={<CheckCircle2 className="h-5 w-5" />} title="Working with the HCPSS weather team">Developing useful weather information and literacy resources for the school community.</PartnershipPoint>
             <PartnershipPoint icon={<CheckCircle2 className="h-5 w-5" />} title="Contributing to weather-related discussions">Sitting in on operational decision discussions and contributing weather analysis to help determine those decisions.</PartnershipPoint>
             <PartnershipPoint icon={<Users className="h-5 w-5" />} title="Reaching the full HCPSS community">Serving environmental news through familiar district platforms used by students, staff, and parents.</PartnershipPoint>
@@ -54,18 +56,18 @@ function HcpssPartnership() {
 
 function CapitalWeatherPartnership() {
   return (
-    <section className="overflow-hidden rounded-lg bg-navy text-white shadow-panel">
+    <section className="overflow-hidden rounded-lg bg-blue-50/70 shadow-panel">
       <div className="px-5 py-10 text-center sm:px-8 sm:py-12">
-        <p className="flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-200">
-          <Radio className="h-4 w-4" /> Capital Weather partnership
+        <p className="flex items-center justify-center gap-2 text-lg font-bold text-bay sm:text-xl">
+          <Radio className="h-5 w-5" /> Capital Weather Partnership
         </p>
-        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight sm:text-4xl">Connecting detailed forecasts to the decisions students feel.</h2>
-        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-blue-100 sm:text-lg">
+        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-ink sm:text-4xl">Connecting detailed forecasts to the decisions students feel.</h2>
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
           HoCo Weather Channel and Capital Weather are working together to expand both audiences, translate detailed forecasts into clear school impacts, and strengthen severe-weather communication.
         </p>
       </div>
 
-      <div className="grid border-t border-white/15 md:grid-cols-3">
+      <div className="grid border-t border-blue-100 md:grid-cols-3">
         <CapitalWeatherPoint icon={<TrendingUp className="h-6 w-6" />} title="Growing both audiences">
           Sharing trusted weather information across both communities so more students and families can reach useful local forecasts.
         </CapitalWeatherPoint>
@@ -82,10 +84,10 @@ function CapitalWeatherPartnership() {
 
 function CapitalWeatherPoint({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
   return (
-    <article className="px-6 py-7 text-center md:border-l md:border-white/15 md:first:border-l-0 sm:px-8">
-      <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-blue-200">{icon}</span>
-      <h3 className="mt-4 text-xl font-bold">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-blue-100">{children}</p>
+    <article className="px-6 py-7 text-center md:border-l md:border-blue-100 md:first:border-l-0 sm:px-8">
+      <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-bay shadow-sm">{icon}</span>
+      <h3 className="mt-4 text-xl font-bold text-ink">{title}</h3>
+      <p className="mt-3 text-sm leading-6 text-slate-600">{children}</p>
     </article>
   );
 }
