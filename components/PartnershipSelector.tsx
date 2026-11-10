@@ -3,6 +3,7 @@ export function PartnershipSelector() {
     <div className="px-5 py-8 sm:px-8 sm:py-12">
       <HcpssPartnership />
       <CapitalWeatherPartnership />
+      <VisualCrossingSponsorship />
     </div>
   );
 }
@@ -73,6 +74,40 @@ function CapitalWeatherPartnership() {
           Combining forecasting experience and school-impact analysis to continue improving the prediction model system.
         </CapitalWeatherPoint>
       </div>
+    </section>
+  );
+}
+
+function VisualCrossingSponsorship() {
+  return (
+    <section className="py-12 text-center sm:py-16">
+      <p className="text-lg font-bold text-bay sm:text-xl">Visual Crossing Weather Data Sponsorship</p>
+      <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-ink sm:text-4xl">More weather data for deeper student analysis.</h2>
+      <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
+        Visual Crossing provides HoCo Weather Channel with expanded access to current conditions, forecasts, and historical weather records. These tools support forecast research, model development, and clearer explanations of how past and upcoming conditions may affect schools and communities.
+      </p>
+
+      <div className="mt-10 grid gap-8 md:grid-cols-3">
+        <CapitalWeatherPoint title="Historical weather research">
+          Comparing past storms, temperatures, snowfall, and school-day impacts to identify useful patterns.
+        </CapitalWeatherPoint>
+        <CapitalWeatherPoint title="Forecast development">
+          Using broader weather datasets to test assumptions and strengthen school-operation predictions.
+        </CapitalWeatherPoint>
+        <CapitalWeatherPoint title="Student weather literacy">
+          Giving students more evidence to explore trends, compare forecasts, and understand local weather risk.
+        </CapitalWeatherPoint>
+      </div>
+
+      <a
+        href="https://www.visualcrossing.com/"
+        target="_blank"
+        rel="noreferrer"
+        className="mt-10 inline-block transition-opacity hover:opacity-85"
+        aria-label="Visit Visual Crossing Weather"
+      >
+        <img src="/attribution/visual-crossing-weather.png" alt="Powered by Visual Crossing Weather" className="h-auto w-56 sm:w-64" />
+      </a>
     </section>
   );
 }
