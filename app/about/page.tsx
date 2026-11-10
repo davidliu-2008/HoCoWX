@@ -44,11 +44,17 @@ export default function AboutPage() {
     <main className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="about" />
 
-      <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
+      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
+        <div className="mx-auto max-w-4xl">
+          <h1 className="text-4xl font-black leading-tight text-ink sm:text-6xl">Weather insights built for students.</h1>
+        </div>
+      </header>
+
+      <section className="bg-white px-5 py-9 sm:px-8 sm:py-11">
         <div className="text-center">
           <p className="text-sm font-bold uppercase tracking-wide text-bay">Our audience</p>
         </div>
-        <div className="mt-10 grid gap-8 text-center sm:grid-cols-3">
+        <div className="mt-7 grid gap-7 text-center sm:grid-cols-3">
           <div>
             <AnimatedStat target={80000} />
             <p className="mt-2 text-sm leading-6 text-slate-600">Students, staff, and parents served through the HCPSS community.</p>
@@ -64,12 +70,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="grid gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[0.72fr_1.28fr]">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wide text-bay">How it started</p>
-          <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">Weather insights built for students.</h2>
+      <section className="px-5 py-10 sm:px-8 sm:py-12">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-4xl font-black text-ink sm:text-5xl">How it started</h2>
         </div>
-        <div className="space-y-6 text-lg leading-8 text-slate-600">
+        <div className="mx-auto mt-7 max-w-4xl space-y-5 text-lg leading-8 text-slate-600">
           <p>
             Weather information has long been technical and delivered through a top-down system led by experts. {" "}
             <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-bay hover:underline">
@@ -83,7 +88,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-blue-50/60 px-5 py-14 sm:px-8 sm:py-20">
+      <section className="bg-blue-50/60 px-5 py-10 sm:px-8 sm:py-12">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Student leadership</p>
@@ -91,7 +96,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="mt-9 grid gap-4 md:grid-cols-3">
+        <div className="mt-7 grid gap-4 md:grid-cols-3">
           <article className="rounded-lg bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Founder</p>
             <h3 className="mt-3 text-2xl font-black text-ink">David Liu</h3>
@@ -109,7 +114,7 @@ export default function AboutPage() {
           </article>
         </div>
 
-        <figure className="mt-10 grid overflow-hidden rounded-lg bg-navy text-white lg:grid-cols-[1.25fr_0.75fr] lg:items-stretch">
+        <figure className="mt-8 grid overflow-hidden rounded-lg bg-navy text-white lg:grid-cols-[1.25fr_0.75fr] lg:items-stretch">
           <img
             src="/photography/winter-wildlife-squirrel.jpg"
             alt="A squirrel standing in fresh snow in Howard County"
@@ -125,7 +130,7 @@ export default function AboutPage() {
         </figure>
       </section>
 
-      <section className="bg-white px-5 py-14 sm:px-8 sm:py-20">
+      <section className="bg-white px-5 py-10 sm:px-8 sm:py-12">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Expanding this winter</p>
