@@ -37,6 +37,16 @@ NWS_USER_AGENT="Your app name (your-email@example.com)"
 
 The National Weather Service recommends a descriptive `User-Agent` header. The app includes a development fallback if this variable is not set.
 
+Visual Crossing provides the historical observation used for the same-time-yesterday temperature comparison. Add the
+academic account API key locally in `.env.local` and in the Vercel project's Environment Variables settings:
+
+```bash
+VISUAL_CROSSING_API_KEY="your_visual_crossing_api_key"
+```
+
+Keep this credential server-side and never prefix it with `NEXT_PUBLIC_`. If it is unavailable, the app falls back to
+National Weather Service observation history.
+
 To automatically show Instagram posts and captions, the HoCo Weather Channel Instagram account must be a professional
 Creator or Business account connected through a Meta developer app. Add these values locally in `.env.local` and in the
 Vercel project's Environment Variables settings:
@@ -53,7 +63,7 @@ using Instagram's native embeds. With them, the page automatically loads posts a
 ## API Routes
 
 - `/api/hcpss-status` fetches and parses the official HCPSS status page.
-- `/api/weather` fetches NWS forecast, hourly forecast, grid data, and active alerts.
+- `/api/weather` fetches NWS forecast, hourly forecast, grid data, and active alerts, then enriches the historical temperature comparison with Visual Crossing when configured.
 - `/api/prediction` combines current weather data with the local rule-based prediction model.
 - `/api/maryland-operations` checks the Maryland county comparison list with conservative parsing and 30-minute caching.
 
@@ -61,6 +71,7 @@ using Instagram's native embeds. With them, the page automatically loads posts a
 
 - HCPSS status parsing happens in `lib/hcpss-status.ts`. The parser looks for the official page's `Important Status Message` section, then reads the current status heading and message below it.
 - NWS API calls happen in `lib/weather.ts`. The app uses the Ellicott City point coordinates and reads forecast, hourly forecast, grid snowfall, and active alerts.
+- Visual Crossing API calls happen in `lib/visual-crossing.ts`. The API key remains on the server, and failed requests fall back without breaking the weather dashboard.
 - Prediction rules live in `lib/prediction.ts`. They score winter alerts, freezing rain or ice wording, snowfall amounts, wind gusts, temperature, precipitation chance, and likely timing.
 - Maryland district source URLs live in `lib/maryland-districts.ts`. Non-HCPSS status parsing is experimental because districts publish operational updates in different formats.
 - HCPSS responses are cached briefly for 5 minutes. NWS responses are cached for 10 minutes.

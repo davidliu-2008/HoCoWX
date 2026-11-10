@@ -1,4 +1,5 @@
 import type { WeatherAlert, WeatherSummary } from "./types";
+import { getVisualCrossingHistory } from "./visual-crossing";
 
 const CACHE_TTL_MS = 10 * 60 * 1000;
 
@@ -215,25 +216,33 @@ export async function getWeatherSummary({
     };
   }>(`https://api.weather.gov/points/${latitude},${longitude}`);
 
-  const [forecast, hourly, grid, alerts, yesterdayTemperatureF] = await Promise.all([
+  const [forecast, hourly, grid, alerts, nwsYesterdayTemperatureF, visualCrossingHistory] = await Promise.all([
     fetchNwsJson<{ properties: { periods: NwsPeriod[] } }>(point.properties.forecast),
     fetchNwsJson<{ properties: { periods: NwsPeriod[] } }>(point.properties.forecastHourly),
     fetchNwsJson<{ properties: { snowfall?: { values: GridValue[] } } }>(point.properties.forecastGridData),
     fetchNwsJson<{ features: Array<Parameters<typeof formatAlert>[0]> }>(
       `https://api.weather.gov/alerts/active?point=${latitude},${longitude}`
     ),
-    fetchYesterdayTemperature(point.properties.observationStations)
+    fetchYesterdayTemperature(point.properties.observationStations),
+    getVisualCrossingHistory({ latitude, longitude }).catch(() => null)
   ]);
 
   const current = hourly.properties.periods[0] ?? null;
   const nextPeriods = forecast.properties.periods.slice(0, 4);
   const overnight = nextPeriods.find((period) => /tonight|overnight/i.test(period.name)) ?? null;
   const morning = chooseMorningPeriod(nextPeriods);
+  const yesterdayTemperatureF =
+    visualCrossingHistory?.yesterdayTemperatureF ?? nwsYesterdayTemperatureF;
 
   const value: WeatherSummary = {
     location,
     currentTemperatureF: current?.temperature ?? null,
     yesterdayTemperatureF,
+    yesterdayTemperatureSource: visualCrossingHistory
+      ? "Visual Crossing"
+      : nwsYesterdayTemperatureF === null
+        ? undefined
+        : "National Weather Service",
     precipitationChance: current?.probabilityOfPrecipitation?.value ?? null,
     expectedSnowfallInches: sumSnowfallBeforeTomorrowMorning(grid.properties.snowfall?.values),
     windSpeed: current?.windSpeed ?? null,

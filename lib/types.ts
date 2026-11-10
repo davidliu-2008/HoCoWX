@@ -18,6 +18,7 @@ export type WeatherSummary = {
   location: string;
   currentTemperatureF: number | null;
   yesterdayTemperatureF?: number | null;
+  yesterdayTemperatureSource?: "Visual Crossing" | "National Weather Service";
   precipitationChance: number | null;
   expectedSnowfallInches: number | null;
   windSpeed: string | null;

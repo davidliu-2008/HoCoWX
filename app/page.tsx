@@ -407,6 +407,18 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
           )}
         </div>
       </div>
+
+      <p className="mt-5 text-xs leading-5 text-slate-500">
+        Forecasts and alerts from the National Weather Service
+        {data.yesterdayTemperatureSource === "Visual Crossing" ? (
+          <>
+            {" · "}Historical comparison powered by{" "}
+            <a href="https://www.visualcrossing.com/" target="_blank" rel="noreferrer" className="font-semibold text-bay hover:underline">
+              Visual Crossing Weather
+            </a>
+          </>
+        ) : null}
+      </p>
     </section>
   );
 }
