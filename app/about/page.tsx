@@ -5,7 +5,6 @@ import {
   Camera,
   CloudSun,
   GraduationCap,
-  Megaphone,
   Radio,
   UsersRound
 } from "lucide-react";
@@ -37,11 +36,6 @@ const openRoles = [
     title: "Weather Literacy Contributors",
     description: "Turn trusted sources into guides that help other students understand the forecast.",
     icon: <GraduationCap className="h-6 w-6" />
-  },
-  {
-    title: "Design and Social Media Contributors",
-    description: "Create clear graphics and help distribute timely updates across platforms.",
-    icon: <Megaphone className="h-6 w-6" />
   }
 ];
 
@@ -98,19 +92,16 @@ export default function AboutPage() {
           <article className="rounded-lg bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Founder</p>
             <h3 className="mt-3 text-2xl font-black text-ink">David Liu</h3>
-            <p className="mt-1 text-sm font-semibold text-slate-500">Marriotts Ridge High School · Class of 2027</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">Leads forecasting, school operation predictions, weather literacy, partnerships, and the overall direction of HoCo Weather Channel. His work brings together environmental science, data, communication, and public service.</p>
           </article>
           <article className="rounded-lg bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Co-founder</p>
             <h3 className="mt-3 text-2xl font-black text-ink">Zia Kapadia</h3>
-            <p className="mt-1 text-sm font-semibold text-slate-500">Reservoir High School · Class of 2030</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">Supports the continued development of the channel and its student-centered weather communication work.</p>
           </article>
           <article className="rounded-lg bg-white p-6">
-            <p className="text-sm font-bold uppercase tracking-wide text-bay">Contributing photographer</p>
+            <p className="text-sm font-bold uppercase tracking-wide text-bay">Photographer</p>
             <h3 className="mt-3 text-2xl font-black text-ink">Ricky He</h3>
-            <p className="mt-1 text-sm font-semibold text-slate-500">Marriotts Ridge High School · Class of 2029</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">Documents local weather and seasonal conditions through photography used across HoCo Weather Channel.</p>
           </article>
         </div>
@@ -123,7 +114,6 @@ export default function AboutPage() {
             loading="lazy"
           />
           <figcaption className="flex flex-col justify-center p-7 sm:p-10">
-            <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Local conditions, documented</p>
             <h3 className="mt-3 text-3xl font-black leading-tight">Weather is part of the community story.</h3>
             <p className="mt-4 text-base leading-7 text-blue-100">
               Student photography records how winter weather changes local landscapes, wildlife, travel, and daily life across Howard County.
@@ -160,7 +150,6 @@ export default function AboutPage() {
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Expanding this winter</p>
-            <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">More students. More perspectives.</h2>
             <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">The next phase will create more ways for students to contribute to local weather reporting and education.</p>
             <a href="mailto:howardcountyweather@gmail.com" className="mt-6 inline-flex items-center gap-2 font-bold text-bay hover:underline">
               Ask about joining the team <ArrowRight className="h-4 w-4" />
