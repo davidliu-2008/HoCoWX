@@ -13,7 +13,6 @@ function HcpssPartnership() {
     <section>
       <div className="py-8 text-center sm:py-10">
         <p className="text-lg font-bold text-bay sm:text-xl">Howard County Public School System Partnership</p>
-        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-ink sm:text-4xl">Weather information inside the HCPSS experience</h2>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Through a multi-year agreement with HCPSS, HoCo Weather Channel will be integrated into the district&apos;s official structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
       </div>
 
@@ -57,7 +56,6 @@ function CapitalWeatherPartnership() {
     <section className="py-12 sm:py-16">
       <div className="text-center">
         <p className="text-lg font-bold text-bay sm:text-xl">Capital Weather Partnership</p>
-        <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-ink sm:text-4xl">Connecting detailed forecasts to the decisions students feel.</h2>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
           HoCo Weather Channel and Capital Weather are working together to expand both audiences, translate detailed forecasts into clear school impacts, and strengthen severe-weather communication.
         </p>
@@ -82,7 +80,6 @@ function VisualCrossingSponsorship() {
   return (
     <section className="py-12 text-center sm:py-16">
       <p className="text-lg font-bold text-bay sm:text-xl">Visual Crossing Weather Data Sponsorship</p>
-      <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-black leading-tight text-ink sm:text-4xl">More weather data for deeper student analysis.</h2>
       <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
         Visual Crossing sponsors HoCo Weather Channel by providing complimentary access to its paid professional weather-data platform. The platform brings together global historical weather, current conditions, forecasts, downloadable datasets, API access, no-code query tools, specialized datasets, and weather-risk monitoring.
       </p>
