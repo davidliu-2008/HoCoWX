@@ -70,14 +70,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 py-10 sm:px-8 sm:py-12">
+      <section className="relative isolate overflow-hidden bg-navy px-5 py-12 text-white sm:px-8 sm:py-16">
+        <img
+          src="/photography/about-school-bus-winter.png"
+          alt="A school bus traveling on a snow-covered road"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 -z-10 bg-navy/85" aria-hidden="true" />
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-black text-ink sm:text-5xl">How it started</h2>
+          <h2 className="text-4xl font-black text-white sm:text-5xl">How it started</h2>
+          <blockquote className="mx-auto mt-6 max-w-3xl border-y border-white/25 py-4 text-xl font-bold leading-8 text-blue-100 sm:text-2xl">
+            “Did you know a 30-ton school bus requires 12 times longer to stop on a road covered in ice or snow?”
+          </blockquote>
         </div>
-        <div className="mx-auto mt-7 max-w-4xl space-y-5 text-lg leading-8 text-slate-600">
+        <div className="mx-auto mt-7 max-w-4xl space-y-5 text-lg leading-8 text-blue-50">
           <p>
             Weather information has long been technical and delivered through a top-down system led by experts. {" "}
-            <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-bay hover:underline">
+            <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-blue-200 hover:underline">
               Older audiences still tend to rely on television, while younger audiences increasingly turn to websites, apps, social media, family, and friends for forecasts
             </a>
             . Students still feel the consequences of weather every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
@@ -86,6 +95,17 @@ export default function AboutPage() {
             HoCo Weather Channel launched in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
           </p>
         </div>
+        <p className="mx-auto mt-7 max-w-4xl text-right text-[11px] text-blue-200/75">
+          Image source:{" "}
+          <a
+            href="https://www.nbcrightnow.com/news/school-buses-and-drivers-prepared-for-winter-safety/article_3606bcdc-fce3-11e8-96dc-4f63c5a8d3fa.html"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-white hover:underline"
+          >
+            NBC Right Now
+          </a>
+        </p>
       </section>
 
       <section className="bg-blue-50/60 px-5 py-10 sm:px-8 sm:py-12">
