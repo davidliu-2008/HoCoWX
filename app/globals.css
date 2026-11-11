@@ -276,6 +276,19 @@ a {
   }
 }
 
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 ::view-transition-old(root) {
   animation: 140ms ease-out both page-fade-out;
 }
@@ -304,5 +317,12 @@ a {
   main > header,
   main article {
     animation: none;
+  }
+
+  .scroll-reveal,
+  .scroll-reveal--visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

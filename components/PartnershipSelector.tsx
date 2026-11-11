@@ -1,9 +1,11 @@
+import { ScrollReveal } from "@/components/ScrollReveal";
+
 export function PartnershipSelector() {
   return (
-    <div className="px-5 py-8 sm:px-8 sm:py-12">
-      <HcpssPartnership />
-      <CapitalWeatherPartnership />
-      <VisualCrossingSponsorship />
+    <div className="px-5 py-5 sm:px-8 sm:py-7">
+      <ScrollReveal><HcpssPartnership /></ScrollReveal>
+      <ScrollReveal><CapitalWeatherPartnership /></ScrollReveal>
+      <ScrollReveal><VisualCrossingSponsorship /></ScrollReveal>
     </div>
   );
 }
@@ -11,12 +13,12 @@ export function PartnershipSelector() {
 function HcpssPartnership() {
   return (
     <section>
-      <div className="py-8 text-center sm:py-10">
+      <div className="py-5 text-center sm:py-6">
         <p className="text-lg font-bold text-bay sm:text-xl">Howard County Public School System Partnership</p>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Through a multi-year agreement with HCPSS, HoCo Weather Channel will be integrated into the district&apos;s official structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
       </div>
 
-      <div className="grid items-start gap-10 py-8 xl:grid-cols-[0.82fr_1.18fr] xl:py-10">
+      <div className="grid items-start gap-8 py-5 xl:grid-cols-[0.82fr_1.18fr] xl:py-6">
         <div>
           <div className="space-y-7 py-2">
             <PartnershipPoint title="Working with the HCPSS weather team">Developing useful weather information and literacy resources for the school community.</PartnershipPoint>
@@ -53,7 +55,7 @@ function HcpssPartnership() {
 
 function CapitalWeatherPartnership() {
   return (
-    <section className="py-12 sm:py-16">
+    <section className="py-8 sm:py-10">
       <div className="text-center">
         <p className="text-lg font-bold text-bay sm:text-xl">Capital Weather Partnership</p>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
@@ -61,7 +63,7 @@ function CapitalWeatherPartnership() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-8 md:grid-cols-3">
+      <div className="mt-7 grid gap-8 md:grid-cols-3">
         <CapitalWeatherPoint title="Growing both audiences">
           Sharing trusted weather information across both communities so more students and families can reach useful local forecasts.
         </CapitalWeatherPoint>
@@ -78,13 +80,13 @@ function CapitalWeatherPartnership() {
 
 function VisualCrossingSponsorship() {
   return (
-    <section className="py-12 text-center sm:py-16">
+    <section className="py-8 text-center sm:py-10">
       <p className="text-lg font-bold text-bay sm:text-xl">Visual Crossing Weather Data Sponsorship</p>
       <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
         Visual Crossing sponsors HoCo Weather Channel by providing complimentary access to its paid professional weather-data platform. The platform brings together global historical weather, current conditions, forecasts, downloadable datasets, API access, no-code query tools, specialized datasets, and weather-risk monitoring.
       </p>
 
-      <div className="mt-10 grid gap-8 md:grid-cols-3">
+      <div className="mt-7 grid gap-8 md:grid-cols-3">
         <CapitalWeatherPoint title="Historical weather research">
           Comparing past storms, temperatures, snowfall, and school-day impacts to identify useful patterns.
         </CapitalWeatherPoint>
