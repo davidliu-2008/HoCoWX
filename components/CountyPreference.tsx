@@ -27,7 +27,7 @@ export function CountyPreference({ counties, selected }: { counties: CountyOptio
   }
 
   return (
-    <section className="flex flex-col gap-3 bg-white px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+    <section className="flex flex-col gap-3 bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
         <span className="grid h-10 w-10 place-items-center rounded-full bg-blue-50 text-bay"><MapPin className="h-5 w-5" /></span>
         <div>
