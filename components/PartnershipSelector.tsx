@@ -1,11 +1,9 @@
-import { ScrollReveal } from "@/components/ScrollReveal";
-
 export function PartnershipSelector() {
   return (
     <div className="px-5 py-5 sm:px-8 sm:py-7">
-      <ScrollReveal><HcpssPartnership /></ScrollReveal>
-      <ScrollReveal><CapitalWeatherPartnership /></ScrollReveal>
-      <ScrollReveal><VisualCrossingSponsorship /></ScrollReveal>
+      <HcpssPartnership />
+      <CapitalWeatherPartnership />
+      <VisualCrossingSponsorship />
     </div>
   );
 }

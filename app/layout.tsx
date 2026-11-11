@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
+import { PageScrollReveal } from "@/components/PageScrollReveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
+        <PageScrollReveal />
         <SiteFooter />
         <Analytics />
       </body>
