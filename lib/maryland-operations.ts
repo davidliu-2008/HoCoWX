@@ -30,16 +30,40 @@ const countySpecificSources: Record<string, string[]> = {
   ],
   "Baltimore County": ["https://www.bcps.org/", "https://www.bcps.org/about_us/emergency_notifications_school_closings_and_delays"],
   "Anne Arundel County": ["https://www.aacps.org/"],
-  "Prince George's County": ["https://www.pgcps.org/", "https://epi.pgcps.org/about-pgcps/emergency-notifications-school-closings-and-delays"]
+  "Prince George's County": ["https://www.pgcps.org/", "https://epi.pgcps.org/about-pgcps/emergency-notifications-school-closings-and-delays"],
+  "Cecil County": ["https://www.ccps.org/"],
+  "Charles County": ["https://www.ccboe.com/"],
+  "Harford County": ["https://www.hcps.org/"],
+  "Queen Anne's County": ["https://www.qacps.org/"],
+  "St. Mary's County": ["https://www.smcps.org/status"]
 };
 
 const normalUnlessPopupCounties = new Set([
   "Anne Arundel County",
   "Baltimore County",
   "Carroll County",
+  "Cecil County",
+  "Charles County",
   "Frederick County",
+  "Harford County",
+  "Queen Anne's County",
   "Prince George's County"
 ]);
+
+const monthNames = [
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december"
+];
 
 function classifyStatus(text: string): ParsedStatus {
   const normalized = text.replace(/\s+/g, " ").toLowerCase();
@@ -67,6 +91,15 @@ function classifyStatus(text: string): ParsedStatus {
 function extractUsefulText(html: string, county?: string) {
   const $ = cheerio.load(html);
   $("script, style, noscript, svg").remove();
+
+  if (county === "St. Mary's County") {
+    return $("a")
+      .filter((_, element) => /^schools\s*:/i.test($(element).text().trim()))
+      .first()
+      .text()
+      .replace(/\s+/g, " ")
+      .trim();
+  }
 
   if (county && normalUnlessPopupCounties.has(county)) {
     const popupText = $(
@@ -129,9 +162,11 @@ function classifyExplicitCurrentStatus(text: string): ParsedStatus {
   const normalized = text.replace(/\s+/g, " ").trim();
   const windows = [
     ...normalized.matchAll(
-      /(?:today|tomorrow|this morning|this afternoon|this evening|due to|because of|operating status|school status|all schools|schools and offices|public schools).{0,260}/gi
+      /(?:today|this morning|this afternoon|this evening|due to|because of|operating status|school status|all schools|schools and offices|public schools).{0,260}/gi
     )
-  ].map((match) => match[0]);
+  ]
+    .map((match) => match[0])
+    .filter((window) => !referencesAnotherDate(window));
 
   const currentText = windows.join(" ");
   if (!currentText) {
@@ -141,9 +176,67 @@ function classifyExplicitCurrentStatus(text: string): ParsedStatus {
   return classifyStatus(currentText);
 }
 
+function referencesAnotherDate(text: string) {
+  const dates = [
+    ...text.toLowerCase().matchAll(
+      /\b(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})(?:st|nd|rd|th)?\b/g
+    )
+  ];
+
+  if (dates.length === 0) {
+    return false;
+  }
+
+  const currentParts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    month: "numeric",
+    day: "numeric"
+  }).formatToParts(new Date());
+  const currentMonth = Number(currentParts.find((part) => part.type === "month")?.value);
+  const currentDay = Number(currentParts.find((part) => part.type === "day")?.value);
+
+  return !dates.some((date) => monthNames.indexOf(date[1]) + 1 === currentMonth && Number(date[2]) === currentDay);
+}
+
 function parseCountySpecificStatus(county: string, url: string, text: string): ParsedStatus {
+  if (county === "St. Mary's County") {
+    const statusMatch = text.match(/schools\s*:\s*([^|]+?)(?:\s+employees\s*:|$)/i)?.[1]?.trim();
+    if (!statusMatch) {
+      return { status: "Unknown", statusKind: "unknown" };
+    }
+
+    if (/^normal$/i.test(statusMatch)) {
+      return { status: "Normal Operations", statusKind: "normal", matchedText: text };
+    }
+
+    return classifyStatus(`Schools: ${statusMatch}`);
+  }
+
   if (normalUnlessPopupCounties.has(county) && text.length === 0) {
     return defaultNormalStatus();
+  }
+
+  if (normalUnlessPopupCounties.has(county)) {
+    const normalized = text.replace(/\s+/g, " ").trim();
+
+    // District homepages often place calendars and policy copy inside elements
+    // whose class names contain "alert" or "notification." Only treat compact,
+    // current notices as operational changes.
+    if (referencesAnotherDate(normalized)) {
+      return { status: "Unknown", statusKind: "unknown" };
+    }
+
+    const hasCurrentMarker = /\b(today|this morning|this afternoon|this evening|currently)\b/i.test(normalized);
+    const isCompactOperationsNotice =
+      normalized.length <= 500 &&
+      /\b(schools?|offices?)\b/i.test(normalized) &&
+      /\b(closed|delay(?:ed)?|late opening|early dismissal|virtual|remote|modified operations?|normal operations)\b/i.test(normalized);
+
+    if (hasCurrentMarker || isCompactOperationsNotice) {
+      return classifyStatus(normalized);
+    }
+
+    return { status: "Unknown", statusKind: "unknown" };
   }
 
   if (county === "Anne Arundel County") {
@@ -250,9 +343,13 @@ async function fetchDistrictStatus(district: MarylandDistrict): Promise<Maryland
 
   const countySources = countySpecificSources[district.county];
   if (countySources) {
+    let reachedOfficialSource = false;
+
     for (const source of countySources) {
       try {
-        const parsed = parseCountySpecificStatus(district.county, source, await fetchText(source, district.county));
+        const text = await fetchText(source, district.county);
+        reachedOfficialSource = true;
+        const parsed = parseCountySpecificStatus(district.county, source, text);
         if (parsed.statusKind !== "unknown") {
           return {
             ...district,
@@ -267,6 +364,18 @@ async function fetchDistrictStatus(district: MarylandDistrict): Promise<Maryland
       } catch {
         continue;
       }
+    }
+
+    if (!reachedOfficialSource) {
+      return {
+        ...district,
+        status: "Unknown",
+        statusKind: "unknown",
+        lastUpdated: null,
+        checkedAt,
+        experimental: false,
+        parserType: "county-specific"
+      };
     }
 
     return {
