@@ -156,7 +156,7 @@ function RiskBreakdownCard({ prediction }: { prediction: PredictionResult }) {
 
 function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
   return (
-    <section id="hourly-forecast" className="scroll-mt-24 rounded-lg bg-white p-5 shadow-panel md:p-7">
+    <section id="hourly-forecast" className="scroll-mt-24 bg-blue-50/45 px-5 py-9 md:px-7 md:py-11">
       <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
         <CloudSun className="h-5 w-5 text-bay" />
         Hourly Forecast Timeline
@@ -203,7 +203,7 @@ function FiveDaySchoolOutlook({ weather }: { weather: WeatherSummary }) {
   const days = weather.schoolDayOutlook ?? [];
 
   return (
-    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
+    <section className="bg-white px-5 py-9 md:px-7 md:py-11">
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">School-week planning</p>
@@ -245,7 +245,7 @@ function LiveRadar() {
   const radarPage = "https://radar.weather.gov/station/KLWX/standard";
 
   return (
-    <section className="overflow-hidden rounded-lg bg-navy text-white shadow-panel">
+    <section className="overflow-hidden bg-navy text-white">
       <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
         <div className="flex flex-col justify-center p-6 md:p-8 lg:p-10">
           <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Updated by the National Weather Service</p>
@@ -292,7 +292,7 @@ function compactTime(value: string | null | undefined) {
 
 function DistrictStatusCard({ status, isHoward }: { status: LoadState<HcpssStatus>; isHoward: boolean }) {
   return (
-    <section className="rounded-lg border border-blue-100 bg-white p-5 shadow-panel md:p-6">
+    <section className="bg-white px-5 py-9 md:px-7 md:py-11">
       <div className="mb-5 flex items-start gap-4">
         <div>
           <div className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
@@ -325,7 +325,7 @@ function DistrictStatusCard({ status, isHoward }: { status: LoadState<HcpssStatu
 function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; county: string }) {
   if (!weather.ok) {
     return (
-      <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
+      <section className="bg-white px-5 py-9 md:px-7 md:py-11">
         <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
           <CloudSun className="h-5 w-5 text-bay" />
           {county} Weather
@@ -340,7 +340,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
   const data = weather.data;
 
   return (
-    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
+    <section className="bg-white px-5 py-9 md:px-7 md:py-11">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
@@ -425,7 +425,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
 
 function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult> }) {
   return (
-    <section className="rounded-lg bg-white p-5 shadow-panel md:p-7">
+    <section className="bg-blue-50/45 px-5 py-9 md:px-7 md:py-11">
       <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-ink">
         <Gauge className="h-5 w-5 text-bay" />
         Prediction
@@ -433,24 +433,24 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
 
       {prediction.ok ? (
         <>
-          <div className="mb-5 flex flex-col gap-4 rounded-lg bg-navy p-5 text-white sm:flex-row sm:items-center sm:justify-between">
+          <div className="mb-6 flex flex-col gap-4 border-y border-blue-200 py-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm font-medium text-blue-100">Weather-based estimate</p>
+              <p className="text-sm font-medium text-slate-500">Weather-based estimate</p>
               <div className="mt-2 flex flex-wrap items-center gap-2">
-                <p className="text-2xl font-bold">{prediction.data.label}</p>
+                <p className="text-2xl font-bold text-ink">{prediction.data.label}</p>
                 <span className={`rounded-full px-3 py-1 text-xs font-bold ring-1 ${predictionBadgeClass(prediction.data.riskLevel)}`}>
                   {prediction.data.riskLevel} risk
                 </span>
               </div>
             </div>
             <div className="text-left sm:text-right">
-              <p className="text-sm text-blue-100">Confidence</p>
-              <p className="text-3xl font-bold">{prediction.data.confidence}%</p>
-              <p className="text-sm text-blue-100">{prediction.data.riskLevel} risk</p>
+              <p className="text-sm text-slate-500">Confidence</p>
+              <p className="text-3xl font-bold text-ink">{prediction.data.confidence}%</p>
+              <p className="text-sm text-slate-500">{prediction.data.riskLevel} risk</p>
             </div>
           </div>
 
-          <div className="mb-5 rounded-lg bg-ice p-4">
+          <div className="mb-5">
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">Top factors</h3>
             <ul className="space-y-2">
               {prediction.data.topFactors.map((factor) => (
@@ -547,21 +547,17 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         </div>
       </header>
 
-      <div className="px-4 pt-6 sm:px-6">
+      <div className="bg-white px-4 py-4 sm:px-6">
         <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} />
       </div>
 
-      <div id="today" className="space-y-6 px-4 py-7 sm:px-6 sm:py-9">
-        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <DistrictStatusCard status={status} isHoward={isHoward} />
-          <PredictionCard prediction={prediction} />
-        </div>
-
+      <div id="today">
+        <DistrictStatusCard status={status} isHoward={isHoward} />
+        <PredictionCard prediction={prediction} />
         <WeatherCard weather={weather} county={district.county} />
         {weather.ok ? <HourlyTimeline weather={weather.data} /> : null}
         {weather.ok ? <FiveDaySchoolOutlook weather={weather.data} /> : null}
         <LiveRadar />
-
       </div>
 
       <section className="home-editorial-band bg-white px-4 py-10 sm:px-6 md:py-14">
