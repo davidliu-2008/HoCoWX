@@ -79,9 +79,11 @@ export default function AboutPage() {
         <div className="absolute inset-0 -z-10 bg-navy/85" aria-hidden="true" />
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-black text-white sm:text-5xl">How it started</h2>
-          <blockquote className="mx-auto mt-6 max-w-3xl border-y border-white/25 py-4 text-xl font-bold leading-8 text-blue-100 sm:text-2xl">
-            “Did you know a 30-ton school bus requires 12 times longer to stop on a road covered in ice or snow?”
-          </blockquote>
+          <div className="mx-auto mt-6 max-w-3xl border-y border-white/25 py-5 text-blue-100">
+            <p className="text-base font-semibold sm:text-lg">A 30-ton school bus requires</p>
+            <p className="my-1 text-4xl font-black text-white sm:text-5xl">12 times longer</p>
+            <p className="text-base font-semibold sm:text-lg">to stop on a road covered in ice or snow.</p>
+          </div>
         </div>
         <div className="mx-auto mt-7 max-w-4xl space-y-5 text-lg leading-8 text-blue-50">
           <p>
