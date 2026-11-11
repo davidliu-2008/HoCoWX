@@ -94,6 +94,15 @@ export default function AboutPage() {
           <p>
             HoCo Weather Channel launched in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
           </p>
+          <blockquote className="border-l-2 border-blue-200/60 pl-5 text-xl font-bold leading-8 text-white">
+            “It was the worst 24 hours of my life.”
+            <cite className="mt-2 block text-sm font-medium not-italic text-blue-200">
+              Bill Barnes, HCPSS Superintendent, reflecting on the winter weather decision in the{" "}
+              <Link href="/interview" className="underline decoration-blue-300/50 hover:text-white">
+                HoCo Weather Channel interview
+              </Link>
+            </cite>
+          </blockquote>
         </div>
         <p className="mx-auto mt-7 max-w-4xl text-right text-[11px] text-blue-200/75">
           Image source:{" "}
