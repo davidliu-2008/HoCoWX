@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/predictions",
     "/maryland-status",
     "/interview",
-    "/instagram",
     "/weather-literacy",
     "/student-polls",
     "/partnerships"

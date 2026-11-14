@@ -13,13 +13,12 @@ import {
   Mail,
   MapPinned,
   Mic2,
-  Newspaper,
   Podcast,
   School,
   UsersRound
 } from "lucide-react";
 
-type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "instagram" | "student-polls" | "literacy" | "partnerships" | "about" | "commute";
+type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "student-polls" | "literacy" | "partnerships" | "about" | "commute";
 
 const groups = [
   {
@@ -40,11 +39,10 @@ const groups = [
   },
   {
     label: "Learn",
-    tabs: ["literacy", "student-polls", "instagram"],
+    tabs: ["literacy", "student-polls"],
     links: [
       { href: "/weather-literacy", label: "Weather Literacy", icon: BookOpen },
-      { href: "/student-polls", label: "Student Prediction Lab", icon: BarChart3 },
-      { href: "/instagram", label: "Weather Insights", icon: Newspaper }
+      { href: "/student-polls", label: "Student Prediction Lab", icon: BarChart3 }
     ]
   },
   {

@@ -122,16 +122,19 @@ export default function AboutPage() {
           <article className="rounded-lg bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Founder</p>
             <h3 className="mt-3 text-2xl font-black text-ink">David Liu</h3>
-            <p className="mt-3 text-sm leading-6 text-slate-600">Leads forecasting, school operation predictions, weather literacy, partnerships, and the overall direction of HoCo Weather Channel. His work brings together environmental science, data, communication, and public service.</p>
+            <p className="mt-1 text-sm font-bold text-bay">Class of 2027</p>
+            <p className="mt-3 text-sm leading-6 text-slate-600">Leads forecasting, school operation predictions, weather literacy, partnerships, and the overall direction of HoCo Weather Channel.</p>
           </article>
           <article className="rounded-lg bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Co-founder</p>
             <h3 className="mt-3 text-2xl font-black text-ink">Zia Kapadia</h3>
+            <p className="mt-1 text-sm font-bold text-bay">Class of 2030</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">Supports the continued development of the channel and its student-centered weather communication work.</p>
           </article>
           <article className="rounded-lg bg-white p-6">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Photographer</p>
             <h3 className="mt-3 text-2xl font-black text-ink">Ricky He</h3>
+            <p className="mt-1 text-sm font-bold text-bay">Class of 2029</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">Documents local weather and seasonal conditions through photography used across HoCo Weather Channel.</p>
           </article>
         </div>

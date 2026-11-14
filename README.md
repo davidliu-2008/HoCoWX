@@ -47,19 +47,6 @@ VISUAL_CROSSING_API_KEY="your_visual_crossing_api_key"
 Keep this credential server-side and never prefix it with `NEXT_PUBLIC_`. If it is unavailable, the app falls back to
 National Weather Service observation history.
 
-To automatically show Instagram posts and captions, the HoCo Weather Channel Instagram account must be a professional
-Creator or Business account connected through a Meta developer app. Add these values locally in `.env.local` and in the
-Vercel project's Environment Variables settings:
-
-```bash
-INSTAGRAM_USER_ID="your_instagram_professional_account_id"
-INSTAGRAM_ACCESS_TOKEN="your_long_lived_instagram_access_token"
-INSTAGRAM_API_VERSION="v25.0"
-```
-
-Never commit the access token to GitHub. Without these values, the Instagram page displays the featured interview posts
-using Instagram's native embeds. With them, the page automatically loads posts and captions and refreshes every 30 minutes.
-
 ## API Routes
 
 - `/api/hcpss-status` fetches and parses the official HCPSS status page.
