@@ -1,4 +1,4 @@
-import { AlertTriangle, CalendarClock, CheckCircle2, Info, Snowflake, ThermometerSnowflake, Wind } from "lucide-react";
+import { AlertTriangle, CalendarClock, CheckCircle2, Snowflake, ThermometerSnowflake, Wind } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 import { createPrediction } from "@/lib/prediction";
 import { getMarylandDistrict } from "@/lib/maryland-districts";
@@ -90,16 +90,11 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
           </section>
 
           <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
-            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
-              <div className="text-center lg:flex lg:flex-col lg:justify-center">
-                <p className="text-sm font-bold uppercase tracking-wide text-bay">2026 prediction record</p>
-                <div className="mt-7 flex justify-center gap-8">
-                  <div><p className="text-4xl font-black text-bay">9/9</p><p className="mt-1 text-sm font-semibold text-slate-500">Matched calls</p></div>
-                  <div><p className="text-4xl font-black text-ink">100%</p><p className="mt-1 text-sm font-semibold text-slate-500">Documented match rate</p></div>
-                </div>
-              </div>
+            <div className="mx-auto max-w-6xl text-center">
+              <h2 className="text-3xl font-black text-ink sm:text-4xl">2026 Predictions</h2>
+              <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600">Each prediction is based on forecast weather conditions and their expected effect on school travel and operations. Final decisions are made by the school district.</p>
 
-              <div className="overflow-hidden rounded-lg bg-blue-50/60">
+              <div className="mt-8 overflow-hidden rounded-lg bg-blue-50/60 text-center">
                 <div className="hidden grid-cols-[1.05fr_1fr_0.8fr_1fr] gap-4 px-5 py-3 text-xs font-bold uppercase tracking-wide text-slate-500 md:grid">
                   <span>Date</span><span>Prediction</span><span>Confidence</span><span>Final outcome</span>
                 </div>
@@ -116,8 +111,6 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
               </div>
             </div>
           </section>
-
-          <aside className="flex gap-4 bg-white px-5 py-6 text-sm leading-6 text-slate-600 sm:px-8"><Info className="mt-0.5 h-5 w-5 shrink-0 text-bay" /><p>This prediction is based on weather conditions. Always use the official school district status for the final operational decision.</p></aside>
         </>
       ) : (
         <section className="bg-red-50 px-5 py-8 text-red-800 sm:px-8"><h2 className="font-bold">Prediction unavailable</h2><p className="mt-2 text-sm">{error}</p></section>
