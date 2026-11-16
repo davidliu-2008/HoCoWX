@@ -65,13 +65,7 @@ export default function AboutPage() {
         </div>
       </header>
 
-      <section className="relative isolate overflow-hidden bg-navy px-5 py-12 text-white sm:px-8 sm:py-16">
-        <img
-          src="/photography/about-school-bus-winter.png"
-          alt="A school bus traveling on a snow-covered road"
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-        />
-        <div className="absolute inset-0 -z-10 bg-navy/85" aria-hidden="true" />
+      <section className="bg-navy px-5 py-12 text-white sm:px-8 sm:py-16">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-black text-white sm:text-5xl">How it started</h2>
           <div className="mx-auto mt-6 max-w-3xl border-y border-white/25 py-5 text-blue-100">
@@ -89,20 +83,9 @@ export default function AboutPage() {
             . Students still feel the consequences of weather every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
           </p>
           <p>
-            HoCo Weather Channel launched in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
+            David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
           </p>
         </div>
-        <p className="mx-auto mt-7 max-w-4xl text-right text-[11px] text-blue-200/75">
-          Image source:{" "}
-          <a
-            href="https://www.nbcrightnow.com/news/school-buses-and-drivers-prepared-for-winter-safety/article_3606bcdc-fce3-11e8-96dc-4f63c5a8d3fa.html"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-white hover:underline"
-          >
-            NBC Right Now
-          </a>
-        </p>
       </section>
 
       <section className="bg-blue-50/60 px-5 py-10 sm:px-8 sm:py-12">
