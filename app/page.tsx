@@ -572,19 +572,16 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
 
           <div className="mt-12 grid gap-8 text-left md:grid-cols-3 md:gap-10">
             <div className="px-2 py-3 md:px-5">
-              <CloudSun className="h-8 w-8 text-bay" />
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">01 · Weather data</p>
-              <p className="mt-3 text-base leading-7 text-slate-700">Combine National Weather Service forecasts and alerts with Visual Crossing observations, historical records, and forecast data.</p>
+              <h3 className="text-2xl font-black text-bay sm:text-3xl">Weather Data</h3>
+              <p className="mt-4 text-lg leading-8 text-slate-700">Combine National Weather Service forecasts and alerts with Visual Crossing observations, historical records, and forecast data.</p>
             </div>
             <div className="px-2 py-3 md:px-5">
-              <Gauge className="h-8 w-8 text-bay" />
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">02 · Impact intelligence</p>
-              <p className="mt-3 text-base leading-7 text-slate-700">Evaluate snowfall, freezing rain, temperature, wind, active alerts, and conditions during the 5–9 AM school commute.</p>
+              <h3 className="text-2xl font-black text-bay sm:text-3xl">Impact Intelligence</h3>
+              <p className="mt-4 text-lg leading-8 text-slate-700">Evaluate snowfall, freezing rain, temperature, wind, active alerts, and conditions during the 5–9 AM school commute.</p>
             </div>
             <div className="px-2 py-3 md:px-5">
-              <School className="h-8 w-8 text-bay" />
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">03 · Community guidance</p>
-              <p className="mt-3 text-base leading-7 text-slate-700">Produce school-operation predictions, morning commute risk scores, confidence levels, and a factor-by-factor explanation.</p>
+              <h3 className="text-2xl font-black text-bay sm:text-3xl">Community Guidance</h3>
+              <p className="mt-4 text-lg leading-8 text-slate-700">Produce school-operation predictions, morning commute risk scores, confidence levels, and a factor-by-factor explanation.</p>
             </div>
           </div>
 
