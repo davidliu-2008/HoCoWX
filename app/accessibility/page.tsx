@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageTabs } from "@/components/PageTabs";
 
 export const metadata: Metadata = {
@@ -44,10 +43,7 @@ export default function AccessibilityPage() {
         <div className="mx-auto max-w-5xl text-center">
           <h2 className="text-3xl font-black text-ink sm:text-4xl">Our accessibility approach</h2>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-slate-700">
-            In accordance with WCAG guidance shared by HCPSS Communications and Engagement, HoCo Weather Channel completed a sitewide accessibility review focused on WCAG 2.1 Level AA and relevant WCAG 2.2 guidance.
-          </p>
-          <p className="mx-auto mt-4 max-w-3xl text-sm leading-6 text-slate-600">
-            This page documents the work completed and the improvements still underway; it is not a statement of third-party certification.
+            This site was reviewed in accordance with WCAG guidance shared by HCPSS Communications and Engagement, with a focus on WCAG 2.1 Level AA and relevant WCAG 2.2 guidance.
           </p>
         </div>
 
@@ -62,8 +58,7 @@ export default function AccessibilityPage() {
       </section>
 
       <section className="bg-blue-50 px-5 py-10 sm:px-8 sm:py-12">
-        <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-2">
-          <div>
+        <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-black text-ink">Tell us about a barrier</h2>
             <p className="mt-4 leading-7 text-slate-700">
               If any content or feature is difficult to use, email us. Include the page address, what you were trying to do, and your device, browser, or assistive technology when possible.
@@ -71,20 +66,6 @@ export default function AccessibilityPage() {
             <a href="mailto:howardcountyweather@gmail.com?subject=Website%20accessibility%20feedback" className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md bg-bay px-5 py-3 font-bold text-white hover:bg-blue-700">
               Send accessibility feedback
             </a>
-          </div>
-          <div>
-            <h2 className="text-3xl font-black text-ink">Work in progress</h2>
-            <p className="mt-4 leading-7 text-slate-700">
-              Our next priorities include publishing captions or a transcript for the superintendent interview and continuing keyboard, screen-reader, contrast, zoom, and mobile testing.
-            </p>
-            <p className="mt-5 text-sm leading-6 text-slate-600">
-              Learn more from the{" "}
-              <Link href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank" rel="noreferrer" className="font-bold text-bay">
-                W3C Web Content Accessibility Guidelines (opens in a new tab)
-              </Link>
-              .
-            </p>
-          </div>
         </div>
         <p className="mx-auto mt-10 max-w-5xl text-sm text-slate-600">Last reviewed: November 16, 2026</p>
       </section>
