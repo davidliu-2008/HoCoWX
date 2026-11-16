@@ -1,118 +1,131 @@
-export function PartnershipSelector() {
+import Link from "next/link";
+
+type Partnership = {
+  id: string;
+  category: string;
+  name: string;
+  summary: string;
+  logo: string;
+  logoAlt: string;
+  panelClass: string;
+  logoClass: string;
+  description: string;
+  details: Array<{ label: string; value: string }>;
+  href?: string;
+  linkLabel?: string;
+};
+
+const partnerships: Partnership[] = [
+  {
+    id: "hcpss",
+    category: "School systems",
+    name: "Howard County Public School System",
+    summary: "A multi-year collaboration connecting student weather communication with the district community.",
+    logo: "/partners/hcpss-logo.png",
+    logoAlt: "Howard County Public School System",
+    panelClass: "bg-navy text-white",
+    logoClass: "max-h-24 w-full object-contain",
+    description: "HoCo Weather Channel works with HCPSS to develop weather information and literacy resources, contribute student analysis to weather-related discussions, and distribute useful environmental news through district channels.",
+    details: [
+      { label: "Agreement", value: "Multi-year" },
+      { label: "Community", value: "80,000 students, staff, and parents" },
+      { label: "Work", value: "Weather literacy and school-impact communication" }
+    ]
+  },
+  {
+    id: "capital-weather",
+    category: "Forecast communication",
+    name: "Capital Weather",
+    summary: "Detailed forecasting translated into clearer school and community impacts.",
+    logo: "/partners/capital-weather-logo.png",
+    logoAlt: "Capital Weather",
+    panelClass: "bg-[#eef75b] text-slate-950",
+    logoClass: "max-h-28 w-full object-contain",
+    description: "The collaboration expands the reach of both weather communities, translates detailed forecasts into direct explanations of timing and school impacts, and strengthens communication during severe weather events.",
+    details: [
+      { label: "Focus", value: "Severe-weather communication" },
+      { label: "Translation", value: "Forecast detail into school impacts" },
+      { label: "Development", value: "A stronger prediction model system" }
+    ]
+  },
+  {
+    id: "visual-crossing",
+    category: "Weather data",
+    name: "Visual Crossing Weather",
+    summary: "Professional weather data infrastructure supporting research, analysis, and model development.",
+    logo: "/attribution/visual-crossing-weather.png",
+    logoAlt: "Powered by Visual Crossing Weather",
+    panelClass: "bg-[#dceeff] text-slate-950",
+    logoClass: "max-h-20 w-full object-contain",
+    description: "Visual Crossing supports HoCo Weather Channel with unrestricted access to its professional weather-data platform, including historical records, current conditions, forecasts, downloadable datasets, API tools, and weather-risk monitoring.",
+    details: [
+      { label: "Coverage", value: "Historical, current, and forecast weather" },
+      { label: "Tools", value: "API, query builder, and downloadable datasets" },
+      { label: "Use", value: "Forecast research and model validation" }
+    ],
+    href: "https://www.visualcrossing.com/",
+    linkLabel: "Visit Visual Crossing"
+  }
+];
+
+export function PartnershipSelector({ homepage = false }: { homepage?: boolean }) {
+  const visiblePartners = homepage ? partnerships.slice(0, 2) : partnerships;
+
   return (
-    <div className="px-5 py-5 sm:px-8 sm:py-7">
-      <HcpssPartnership />
-      <CapitalWeatherPartnership />
-      <VisualCrossingSponsorship />
+    <div className={homepage ? "space-y-5" : "space-y-6 px-5 py-10 sm:px-8 lg:px-12 lg:py-14"}>
+      {visiblePartners.map((partner) => <PartnershipRow key={partner.id} partner={partner} />)}
+      {homepage ? (
+        <div className="pt-3 text-center">
+          <Link href="/partnerships" className="inline-flex min-h-12 items-center bg-navy px-6 py-3 font-bold text-white transition hover:bg-blue-900">
+            Explore all partnerships
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 }
 
-function HcpssPartnership() {
+function PartnershipRow({ partner }: { partner: Partnership }) {
   return (
-    <section>
-      <div className="py-5 text-center sm:py-6">
-        <p className="text-lg font-bold text-bay sm:text-xl">Howard County Public School System Partnership</p>
-        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">Through a multi-year agreement with HCPSS, HoCo Weather Channel will be integrated into the district&apos;s official structure, bringing timely environmental news and weather literacy resources to approximately 80,000 students, staff, and parents.</p>
-      </div>
-
-      <div className="grid items-start gap-8 py-5 xl:grid-cols-[0.82fr_1.18fr] xl:py-6">
+    <article id={partner.id} className="mx-auto grid max-w-[1500px] overflow-hidden border border-slate-200 bg-white lg:min-h-[390px] lg:grid-cols-[0.82fr_1.18fr_1fr]">
+      <div className={`flex flex-col justify-between p-7 sm:p-10 lg:p-12 ${partner.panelClass}`}>
         <div>
-          <div className="space-y-7 py-2">
-            <PartnershipPoint title="Working with the HCPSS weather team">Developing useful weather information and literacy resources for the school community.</PartnershipPoint>
-            <PartnershipPoint title="Contributing to weather-related discussions">Sitting in on operational decision discussions and contributing weather analysis to help determine those decisions.</PartnershipPoint>
-            <PartnershipPoint title="Reaching the full HCPSS community">Serving environmental news through familiar district platforms used by students, staff, and parents.</PartnershipPoint>
-          </div>
+          <p className="text-sm font-bold uppercase tracking-wide opacity-70">{partner.category}</p>
+          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">{partner.name}</h2>
+          <p className="mt-5 max-w-sm text-base leading-7 opacity-80">{partner.summary}</p>
         </div>
-
-        <div>
-          <div className="mb-3 flex items-center justify-between gap-4">
-            <div><p className="text-xs font-semibold uppercase tracking-wide text-bay">Proof of concept</p><h3 className="mt-1 font-bold text-ink">Sample Canvas homepage announcement</h3></div>
-            <span className="text-xs font-semibold text-bay">Concept preview</span>
-          </div>
-          <div className="overflow-hidden rounded-lg bg-white shadow-panel">
-            <div className="flex items-center justify-between bg-slate-50 px-4 py-3">
-              <div className="flex items-center gap-3"><div className="h-8 w-8 bg-red-700" aria-hidden="true" /><div><p className="text-xs text-slate-500">HCPSS Canvas</p><p className="text-sm font-bold text-slate-800">Student Homepage</p></div></div>
-            </div>
-            <div className="grid md:grid-cols-[0.28fr_0.72fr]">
-              <div className="hidden bg-slate-50/70 p-4 md:block"><div className="space-y-3 text-sm text-slate-500"><p className="font-semibold text-slate-800">Home</p><p>Courses</p><p>Calendar</p><p>Resources</p></div></div>
-              <div className="p-4 sm:p-6">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Special Weather Announcement</p>
-                <div className="mt-3 bg-blue-50 p-5">
-                  <div><div className="flex flex-wrap items-center gap-2"><h4 className="text-xl font-bold text-ink">Winter weather update</h4><span className="rounded-full bg-white px-2.5 py-1 text-xs font-bold text-bay">HoCoWX</span></div><p className="mt-2 text-sm leading-6 text-slate-700">A period of winter weather may affect Howard County. Review the latest timing, impacts, and safety information before travel.</p><div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-slate-600"><span>Timing: Overnight into morning</span><span>Primary concern: Icy roads</span></div><span className="mt-4 inline-block bg-bay px-4 py-2 text-sm font-bold text-white">View weather update</span></div>
-                </div>
-                <p className="mt-3 text-xs leading-5 text-slate-500">Sample layout for discussion purposes. Final placement and language will be developed with HCPSS.</p>
-              </div>
-            </div>
+        <div className="mt-12">
+          <p className="mb-5 text-sm font-semibold opacity-65">In partnership with</p>
+          <div className="flex min-h-24 items-center justify-start bg-white p-4">
+            <img src={partner.logo} alt={partner.logoAlt} className={partner.logoClass} />
           </div>
         </div>
       </div>
-    </section>
-  );
-}
 
-function CapitalWeatherPartnership() {
-  return (
-    <section className="py-8 sm:py-10">
-      <div className="text-center">
-        <p className="text-lg font-bold text-bay sm:text-xl">Capital Weather Partnership</p>
-        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
-          HoCo Weather Channel and Capital Weather are working together to expand both audiences, translate detailed forecasts into clear school impacts, and strengthen severe-weather communication.
-        </p>
+      <div className="flex flex-col justify-between border-slate-200 p-7 sm:p-10 lg:border-r lg:p-12">
+        <div>
+          <p className="text-sm font-bold uppercase tracking-wide text-bay">Collaboration</p>
+          <h3 className="mt-4 text-3xl font-black leading-tight text-ink">{partner.name}</h3>
+          <p className="mt-6 text-lg leading-8 text-slate-600">{partner.description}</p>
+        </div>
+        {partner.href ? (
+          <a href={partner.href} target="_blank" rel="noreferrer" className="mt-10 inline-flex min-h-11 w-fit items-center bg-slate-900 px-5 py-2.5 font-bold text-white hover:bg-slate-700">
+            {partner.linkLabel}
+          </a>
+        ) : (
+          <p className="mt-10 text-sm font-bold uppercase tracking-wide text-slate-400">Active collaboration</p>
+        )}
       </div>
 
-      <div className="mt-7 grid gap-8 md:grid-cols-3">
-        <CapitalWeatherPoint title="Growing both audiences">
-          Sharing trusted weather information across both communities so more students and families can reach useful local forecasts.
-        </CapitalWeatherPoint>
-        <CapitalWeatherPoint title="Clear school impact communication">
-          Turning detailed forecasts into direct explanations of timing, travel conditions, and possible effects on the school day during severe weather.
-        </CapitalWeatherPoint>
-        <CapitalWeatherPoint title="Stronger prediction models">
-          Combining forecasting experience and school-impact analysis to continue improving the prediction model system.
-        </CapitalWeatherPoint>
-      </div>
-    </section>
-  );
-}
-
-function VisualCrossingSponsorship() {
-  return (
-    <section className="py-8 text-center sm:py-10">
-      <p className="text-lg font-bold text-bay sm:text-xl">Visual Crossing Weather Data Sponsorship</p>
-      <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
-        Visual Crossing sponsors HoCo Weather Channel by providing complimentary access to its paid professional weather-data platform. The platform brings together global historical weather, current conditions, forecasts, downloadable datasets, API access, no-code query tools, specialized datasets, and weather-risk monitoring.
-      </p>
-
-      <div className="mt-7 grid gap-8 md:grid-cols-3">
-        <CapitalWeatherPoint title="Historical weather research">
-          Comparing past storms, temperatures, snowfall, and school-day impacts to identify useful patterns.
-        </CapitalWeatherPoint>
-        <CapitalWeatherPoint title="Forecast development">
-          Using broader weather datasets to test assumptions and strengthen school-operation predictions.
-        </CapitalWeatherPoint>
-        <CapitalWeatherPoint title="Student weather literacy">
-          Giving students more evidence to explore trends, compare forecasts, and understand local weather risk.
-        </CapitalWeatherPoint>
-      </div>
-
-    </section>
-  );
-}
-
-function CapitalWeatherPoint({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <article className="text-center">
-      <h3 className="text-xl font-bold text-ink">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-600">{children}</p>
+      <dl className="divide-y divide-slate-200 p-7 sm:p-10 lg:p-12">
+        <p className="pb-5 text-sm font-bold uppercase tracking-wide text-slate-500">What it enables</p>
+        {partner.details.map((detail) => (
+          <div key={detail.label} className="py-6 first:pt-3">
+            <dt className="text-sm font-semibold text-slate-500">{detail.label}</dt>
+            <dd className="mt-2 text-xl font-black leading-snug text-ink">{detail.value}</dd>
+          </div>
+        ))}
+      </dl>
     </article>
-  );
-}
-
-function PartnershipPoint({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <h3 className="text-lg font-bold text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{children}</p>
-    </div>
   );
 }

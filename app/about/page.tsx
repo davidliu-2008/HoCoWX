@@ -44,31 +44,26 @@ export default function AboutPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="about" />
 
-      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="text-4xl font-black leading-tight text-ink sm:text-6xl">Weather insights built for students.</h1>
+      <header className="page-hero px-5 py-14 text-center sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">Weather insights built for students.</h1>
+          <p className="mt-8 text-sm font-bold uppercase tracking-wide text-blue-200">Our audience</p>
+          <div className="mt-7 grid gap-8 sm:grid-cols-3">
+            <div>
+              <AnimatedStat target={80000} className="text-white" />
+              <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-blue-100">Students, staff, and parents served through the HCPSS community.</p>
+            </div>
+            <div className="sm:px-6">
+              <AnimatedStat target={700000} className="text-white" />
+              <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-blue-100">People impacted nationwide across HoCo Weather Channel platforms and partnerships.</p>
+            </div>
+            <div>
+              <AnimatedStat target={2.2} suffix="M+" decimals={1} className="text-white" />
+              <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-blue-100">Views across weather updates, forecasts, and educational content.</p>
+            </div>
+          </div>
         </div>
       </header>
-
-      <section className="bg-white px-5 py-9 sm:px-8 sm:py-11">
-        <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-wide text-bay">Our audience</p>
-        </div>
-        <div className="mt-7 grid gap-7 text-center sm:grid-cols-3">
-          <div>
-            <AnimatedStat target={80000} />
-            <p className="mt-2 text-sm leading-6 text-slate-600">Students, staff, and parents served through the HCPSS community.</p>
-          </div>
-          <div>
-            <AnimatedStat target={700000} />
-            <p className="mt-2 text-sm leading-6 text-slate-600">People impacted nationwide across HoCo Weather Channel platforms and partnerships.</p>
-          </div>
-          <div>
-            <AnimatedStat target={2.2} suffix="M+" decimals={1} />
-            <p className="mt-2 text-sm leading-6 text-slate-600">Views across weather updates, forecasts, and educational content.</p>
-          </div>
-        </div>
-      </section>
 
       <section className="relative isolate overflow-hidden bg-navy px-5 py-12 text-white sm:px-8 sm:py-16">
         <img

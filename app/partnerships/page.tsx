@@ -12,20 +12,9 @@ export default function PartnershipsPage() {
       <PageTabs active="partnerships" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-5xl">
           <h1 className="text-4xl font-black text-ink md:text-6xl">Partnerships</h1>
-          <p className="mt-2 text-lg text-slate-600">Building stronger weather communication and literacy for students.</p>
-          <div className="mx-auto mt-7 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <div className="flex h-20 w-full max-w-xs items-center justify-center rounded-lg bg-white px-5 shadow-lg sm:h-24">
-              <img src="/partners/hcpss-logo.png" alt="Howard County Public School System" className="h-16 w-full object-cover object-center sm:h-20" />
-            </div>
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-white p-2 shadow-lg sm:h-24 sm:w-24">
-              <img src="/partners/capital-weather-logo.png" alt="Capital Weather" className="h-full w-full object-contain" />
-            </div>
-            <div className="flex h-20 w-full max-w-xs items-center justify-center rounded-lg bg-white px-4 shadow-lg sm:h-24">
-              <img src="/attribution/visual-crossing-weather.png" alt="Powered by Visual Crossing Weather" className="h-auto w-full object-contain" />
-            </div>
-          </div>
+          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">Organizations contributing distribution, forecasting expertise, and professional weather data to a student-led weather service.</p>
         </div>
       </header>
 

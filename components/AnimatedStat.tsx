@@ -5,11 +5,13 @@ import { useEffect, useRef, useState } from "react";
 export function AnimatedStat({
   target,
   suffix = "+",
-  decimals = 0
+  decimals = 0,
+  className = "text-bay"
 }: {
   target: number;
   suffix?: string;
   decimals?: number;
+  className?: string;
 }) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLParagraphElement>(null);
@@ -51,5 +53,5 @@ export function AnimatedStat({
 
   const accessibleValue = `${target.toLocaleString("en-US", { maximumFractionDigits: decimals })}${suffix}`;
 
-  return <p ref={ref} aria-label={accessibleValue} className="text-4xl font-black text-bay tabular-nums sm:text-5xl"><span aria-hidden="true">{formatted}{suffix}</span></p>;
+  return <p ref={ref} aria-label={accessibleValue} className={`text-4xl font-black tabular-nums sm:text-5xl ${className}`}><span aria-hidden="true">{formatted}{suffix}</span></p>;
 }

@@ -57,18 +57,44 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
 
       {prediction ? (
         <>
-          <section className="px-5 py-12 sm:px-8 sm:py-16">
-            <div className="mx-auto max-w-7xl">
-              <div className="text-center">
-                <p className="text-sm font-bold uppercase tracking-wide text-bay">Current model run</p>
-                <h2 className="mt-3 text-3xl font-black text-ink sm:text-5xl">{prediction.label}</h2>
-                <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600">{prediction.explanation}</p>
+          <section className="px-5 py-10 sm:px-8 lg:px-12 lg:py-14">
+            <div className="mx-auto grid max-w-[1500px] overflow-hidden border border-slate-200 bg-white lg:min-h-[430px] lg:grid-cols-[0.82fr_1.18fr_1fr]">
+              <div className="flex flex-col justify-between bg-navy p-7 text-white sm:p-10 lg:p-12">
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Current model run</p>
+                  <h2 className="mt-5 text-4xl font-black leading-tight text-white sm:text-5xl">{prediction.label}</h2>
+                  <p className="mt-5 text-lg leading-8 text-blue-100">{prediction.explanation}</p>
+                </div>
+                <div className="mt-12 border-t border-white/25 pt-6">
+                  <p className="text-sm text-blue-200">Location</p>
+                  <p className="mt-2 text-2xl font-black">{district.county}</p>
+                </div>
               </div>
-              <dl className="mt-10 grid border-y border-blue-100 sm:grid-cols-3">
-                <Metric label="Impact score" value={`${prediction.confidence}/100`} />
-                <Metric label="Risk level" value={prediction.riskLevel} />
-                <Metric label="Morning commute" value={`${prediction.morningCommuteRisk.label} · ${prediction.morningCommuteRisk.score}/100`} />
-              </dl>
+
+              <div className="border-slate-200 p-7 sm:p-10 lg:border-r lg:p-12">
+                <p className="text-sm font-bold uppercase tracking-wide text-bay">Evidence</p>
+                <h3 className="mt-4 text-3xl font-black text-ink">Weather signals shaping this result</h3>
+                <div className="mt-8 divide-y divide-slate-200">
+                  {prediction.topFactors.map((factor, index) => (
+                    <div key={factor} className="grid grid-cols-[2.5rem_1fr] gap-3 py-5 first:pt-0">
+                      <span className="text-sm font-black text-bay">{String(index + 1).padStart(2, "0")}</span>
+                      <p className="text-base font-semibold leading-7 text-slate-700">{factor}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-7 sm:p-10 lg:p-12">
+                <p className="text-sm font-bold uppercase tracking-wide text-slate-500">Model outputs</p>
+                <div className="mt-7 space-y-9">
+                  <ScoreBar label="Impact score" score={prediction.confidence} note={prediction.riskLevel} />
+                  <ScoreBar label="Morning commute" score={prediction.morningCommuteRisk.score} note={prediction.morningCommuteRisk.label} />
+                </div>
+                <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-slate-200 pt-7">
+                  <div><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">Risk level</dt><dd className="mt-2 text-2xl font-black text-ink">{prediction.riskLevel}</dd></div>
+                  <div><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">Confidence</dt><dd className="mt-2 text-2xl font-black text-ink">{prediction.confidence}%</dd></div>
+                </dl>
+              </div>
             </div>
           </section>
 
@@ -88,7 +114,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
             </div>
           </section>
 
-          <section className="grid gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2">
+          <section className="mx-auto grid w-full max-w-[1500px] gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2 lg:px-12">
             <div className="bg-blue-50/55 p-6 sm:p-8">
               <p className="text-sm font-bold uppercase tracking-wide text-bay">Risk score breakdown</p>
               <h2 className="mt-2 text-3xl font-black text-ink">Today&apos;s score</h2>
@@ -112,17 +138,17 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
           </section>
 
           <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
-            <div className="mx-auto max-w-6xl text-center">
+            <div className="mx-auto max-w-[1400px] text-center">
               <h2 className="text-3xl font-black text-ink sm:text-4xl">2026 Predictions</h2>
               <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600">Each prediction is based on forecast weather conditions and their expected effect on school travel and operations. Final decisions are made by the school district.</p>
 
-              <div className="mt-8 overflow-hidden rounded-lg bg-blue-50/60 text-center">
+              <div className="mt-10 overflow-hidden bg-blue-50/60 text-center">
                 <div className="hidden grid-cols-[1.05fr_1fr_0.8fr_1fr] gap-4 px-5 py-3 text-xs font-bold uppercase tracking-wide text-slate-500 md:grid">
                   <span>Date</span><span>Prediction</span><span>Confidence</span><span>Final outcome</span>
                 </div>
                 <div className="space-y-2 p-2">
                   {predictionHistory.map((entry) => (
-                    <article key={entry.date} className="grid gap-3 rounded-md bg-white/90 px-5 py-4 md:grid-cols-[1.05fr_1fr_0.8fr_1fr] md:items-center md:gap-4">
+                    <article key={entry.date} className="grid gap-3 bg-white/90 px-6 py-5 md:grid-cols-[1.05fr_1fr_0.8fr_1fr] md:items-center md:gap-4">
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Date</span><p className="font-bold text-ink">{entry.date}</p></div>
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Prediction</span><p className="font-semibold text-slate-700">{entry.prediction}</p></div>
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Confidence</span><p className="text-sm font-semibold text-slate-600">{entry.confidence}%</p></div>
@@ -141,8 +167,8 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
   );
 }
 
-function Metric({ label, value }: { label: string; value: string }) {
-  return <div className="px-5 py-6 text-center sm:border-l sm:first:border-l-0 sm:border-blue-100"><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">{label}</dt><dd className="mt-2 text-xl font-black text-ink">{value}</dd></div>;
+function ScoreBar({ label, score, note }: { label: string; score: number; note: string }) {
+  return <div><div className="flex items-end justify-between gap-4"><div><p className="text-lg font-black text-ink">{label}</p><p className="mt-1 text-sm font-semibold text-slate-500">{note}</p></div><strong className="text-3xl text-ink">{score}%</strong></div><div className="mt-4 h-2 bg-slate-100"><div className="h-full bg-bay" style={{ width: `${Math.max(score, 3)}%` }} /></div></div>;
 }
 
 function MethodStep({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
