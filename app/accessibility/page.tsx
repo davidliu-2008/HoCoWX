@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, Mail, MonitorSmartphone, MousePointer2, Volume2 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Accessibility | HoCo Weather Channel",
@@ -98,8 +97,6 @@ export default function AccessibilityPage() {
         </div>
         <p className="mx-auto mt-10 max-w-5xl text-sm text-slate-600">Last reviewed: November 16, 2026</p>
       </section>
-
-      <SiteFooter />
     </main>
   );
 }
