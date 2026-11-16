@@ -4,19 +4,10 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
-  BarChart3,
-  BookOpen,
-  BusFront,
   ChevronDown,
-  CloudSun,
   Instagram,
   Mail,
-  MapPinned,
-  Mic2,
-  Podcast,
-  School,
-  UsersRound,
-  Accessibility
+  Podcast
 } from "lucide-react";
 
 type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "student-polls" | "literacy" | "partnerships" | "about" | "commute" | "accessibility";
@@ -26,33 +17,33 @@ const groups = [
     label: "Weather",
     tabs: ["predictions", "commute"],
     links: [
-      { href: "/predictions", label: "Predictions", icon: CloudSun },
-      { href: "/commute", label: "Commute Planner", icon: BusFront }
+      { href: "/predictions", label: "Predictions" },
+      { href: "/commute", label: "Commute Planner" }
     ]
   },
   {
     label: "Schools",
     tabs: ["maryland", "interview"],
     links: [
-      { href: "/maryland-status", label: "Maryland Status", icon: MapPinned },
-      { href: "/interview", label: "Superintendent Interview", icon: Mic2 }
+      { href: "/maryland-status", label: "Maryland Status" },
+      { href: "/interview", label: "Superintendent Interview" }
     ]
   },
   {
     label: "Learn",
     tabs: ["literacy", "student-polls"],
     links: [
-      { href: "/weather-literacy", label: "Weather Literacy", icon: BookOpen },
-      { href: "/student-polls", label: "Student Prediction Lab", icon: BarChart3 }
+      { href: "/weather-literacy", label: "Weather Literacy" },
+      { href: "/student-polls", label: "Student Prediction Lab" }
     ]
   },
   {
     label: "About",
     tabs: ["about", "partnerships", "accessibility"],
     links: [
-      { href: "/about", label: "Mission and Team", icon: UsersRound },
-      { href: "/partnerships", label: "Partnerships", icon: School },
-      { href: "/accessibility", label: "Accessibility", icon: Accessibility }
+      { href: "/about", label: "Mission and Team" },
+      { href: "/partnerships", label: "Partnerships" },
+      { href: "/accessibility", label: "Accessibility" }
     ]
   }
 ] as const;
@@ -152,9 +143,8 @@ export function PageTabs({ active }: { active: Tab }) {
                   className={`absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 rounded-lg border border-blue-100 bg-white p-2 shadow-xl transition-opacity duration-150 ${isOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"}`}
                 >
                   {group.links.map((item) => {
-                    const Icon = item.icon;
                     const itemActive = pathname === item.href;
-                    return <Link key={item.href} href={countyHref(item.href)} className={menuLink} aria-current={itemActive ? "page" : undefined} onClick={() => setOpenMenu(null)}><Icon aria-hidden="true" className="h-4 w-4 text-bay" />{item.label}</Link>;
+                    return <Link key={item.href} href={countyHref(item.href)} className={menuLink} aria-current={itemActive ? "page" : undefined} onClick={() => setOpenMenu(null)}>{item.label}</Link>;
                   })}
                 </div>
               </div>
