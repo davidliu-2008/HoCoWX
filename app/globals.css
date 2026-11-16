@@ -136,16 +136,8 @@ main {
 main > header,
 main > section,
 main > div {
-  width: min(calc(100% - 2rem), 1440px);
-  margin-inline: auto;
-}
-
-@media (min-width: 640px) {
-  main > header,
-  main > section,
-  main > div {
-    width: min(calc(100% - 3rem), 1440px);
-  }
+  width: 100%;
+  margin-inline: 0;
 }
 
 main section[class*="shadow"],
