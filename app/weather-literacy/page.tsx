@@ -3,7 +3,6 @@ import {
   ExternalLink, Gauge, Layers3, Map, Radar, School, Snowflake, ThermometerSnowflake, Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
-import { AccessibleBackgroundVideo } from "@/components/AccessibleBackgroundVideo";
 
 export const metadata = {
   title: "Weather Literacy Center | HoCo Weather Channel",
@@ -55,7 +54,6 @@ export default function WeatherLiteracyPage() {
       <PageTabs active="literacy" />
 
       <header className="page-hero literacy-video-hero px-5 pb-24 pt-12 text-center sm:px-8 sm:pb-24 sm:pt-16">
-        <AccessibleBackgroundVideo />
         <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather.</h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>
       </header>
