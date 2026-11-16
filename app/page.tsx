@@ -472,7 +472,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     <main id="main-content" tabIndex={-1} className="min-h-screen w-full bg-white pb-0">
       <PageTabs active="dashboard" />
 
-      <header className="home-hero relative mt-4 overflow-hidden rounded-lg bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+      <header className="home-hero relative overflow-hidden bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
         <Image
           src="/photography/howard-county-winter-sunset.jpg"
           alt="Snow-covered Howard County landscape beneath a winter sunset"
@@ -482,7 +482,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#091b36]/95 via-[#102f5c]/82 to-[#12305f]/45" />
-        <div className="relative z-10 grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1440px] items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <div className="mb-4 flex flex-wrap items-center gap-3 text-sm font-bold uppercase tracking-wide">
               <span className="text-blue-200">HoCo Weather Channel</span>
