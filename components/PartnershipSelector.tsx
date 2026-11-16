@@ -25,12 +25,13 @@ const partnerships: Partnership[] = [
     logo: "/partners/hcpss-logo-cropped.png",
     logoAlt: "Howard County Public School System",
     panelClass: "bg-[#b9d7ff] text-slate-950",
-    logoFrameClass: "h-20 w-64 max-w-full",
+    logoFrameClass: "h-16 w-52 max-w-full",
     logoClass: "h-full w-full object-contain object-left mix-blend-multiply",
     description: "Developing weather literacy resources, contributing student analysis to operations conversations, and distributing environmental news through district channels.",
     details: [
       { label: "Community", value: "80,000 students, staff, and parents" },
-      { label: "Work", value: "Weather literacy and school-impact communication" }
+      { label: "Work", value: "Weather literacy and school-impact communication" },
+      { label: "Distribution", value: "HCPSS student and community channels" }
     ]
   },
   {
@@ -41,7 +42,7 @@ const partnerships: Partnership[] = [
     logo: "/partners/capital-weather-logo.png",
     logoAlt: "Capital Weather",
     panelClass: "bg-[#d7ebff] text-slate-950",
-    logoFrameClass: "h-24 w-36",
+    logoFrameClass: "h-20 w-32",
     logoClass: "h-full w-full object-contain mix-blend-multiply",
     description: "Translating detailed forecasts into school impacts and expanding severe-weather communication across both audiences.",
     details: [
@@ -58,7 +59,7 @@ const partnerships: Partnership[] = [
     logo: "/attribution/visual-crossing-weather.png",
     logoAlt: "Powered by Visual Crossing Weather",
     panelClass: "bg-[#edf6ff] text-slate-950",
-    logoFrameClass: "h-16 w-64 max-w-full",
+    logoFrameClass: "h-14 w-52 max-w-full",
     logoClass: "h-full w-full object-contain",
     description: "Providing historical, current, and forecast data for research, model development, validation, and weather-risk analysis.",
     details: [
@@ -90,10 +91,10 @@ export function PartnershipSelector({ homepage = false }: { homepage?: boolean }
 
 function PartnershipRow({ partner }: { partner: Partnership }) {
   return (
-    <article id={partner.id} className="mx-auto grid w-full max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white sm:max-w-[calc(100vw-4rem)] lg:max-w-[min(1500px,calc(100vw-6rem))] xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] 2xl:min-h-[300px] 2xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)_minmax(0,1fr)]">
+    <article id={partner.id} className="mx-auto grid w-full max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white sm:max-w-[calc(100vw-4rem)] lg:min-h-[300px] lg:max-w-[min(1500px,calc(100vw-6rem))] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)_minmax(0,1fr)]">
       <div className={`min-w-0 flex flex-col justify-between p-6 sm:p-8 ${partner.panelClass}`}>
         <div>
-          <h2 className="text-2xl font-normal leading-tight sm:text-3xl">{partner.category}</h2>
+          <h2 className="text-2xl font-normal leading-tight">{partner.category}</h2>
           <p className="mt-3 max-w-sm text-sm leading-6 opacity-80 sm:text-base">{partner.summary}</p>
         </div>
         <div className="mt-8">
@@ -104,9 +105,9 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
         </div>
       </div>
 
-      <div className="min-w-0 flex flex-col justify-between border-slate-200 p-6 sm:p-8 xl:border-r">
+      <div className="min-w-0 flex flex-col justify-between border-slate-200 p-6 sm:p-8 lg:border-r">
         <div>
-          <h3 className="text-2xl font-medium leading-tight text-ink sm:text-3xl">{partner.name}</h3>
+          <h3 className="text-2xl font-medium leading-tight text-ink">{partner.name}</h3>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">{partner.description}</p>
         </div>
         {partner.href ? (
@@ -116,11 +117,11 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
         ) : null}
       </div>
 
-      <dl className="min-w-0 divide-y divide-slate-200 p-6 sm:p-8 xl:col-span-2 xl:grid xl:grid-cols-3 xl:divide-x xl:divide-y-0 2xl:col-span-1 2xl:block 2xl:divide-x-0 2xl:divide-y">
+      <dl className="min-w-0 divide-y divide-slate-200 p-6 sm:p-8">
         {partner.details.map((detail) => (
-          <div key={detail.label} className="py-4 first:pt-0 last:pb-0 xl:px-6 xl:py-0 xl:first:pl-0 xl:last:pr-0 2xl:px-0 2xl:py-4 2xl:first:pt-0 2xl:last:pb-0">
+          <div key={detail.label} className="py-4 first:pt-0 last:pb-0">
             <dt className="text-sm font-semibold text-slate-500">{detail.label}</dt>
-            <dd className="mt-1.5 break-words text-lg font-semibold leading-snug text-ink">{detail.value}</dd>
+            <dd className="mt-1.5 break-words text-base font-semibold leading-snug text-ink">{detail.value}</dd>
           </div>
         ))}
       </dl>
