@@ -24,7 +24,7 @@ const partnerships: Partnership[] = [
     logo: "/partners/hcpss-logo.png",
     logoAlt: "Howard County Public School System",
     panelClass: "bg-navy text-white",
-    logoClass: "max-h-24 w-full object-contain",
+    logoClass: "max-h-16 w-full object-contain",
     description: "HoCo Weather Channel works with HCPSS to develop weather information and literacy resources, contribute student analysis to weather-related discussions, and distribute useful environmental news through district channels.",
     details: [
       { label: "Community", value: "80,000 students, staff, and parents" },
@@ -39,7 +39,7 @@ const partnerships: Partnership[] = [
     logo: "/partners/capital-weather-logo.png",
     logoAlt: "Capital Weather",
     panelClass: "bg-[#cfe8ff] text-slate-950",
-    logoClass: "max-h-28 w-full object-contain mix-blend-multiply",
+    logoClass: "max-h-20 w-full object-contain mix-blend-multiply",
     description: "The collaboration expands the reach of both weather communities, translates detailed forecasts into direct explanations of timing and school impacts, and strengthens communication during severe weather events.",
     details: [
       { label: "Focus", value: "Severe-weather communication" },
@@ -55,7 +55,7 @@ const partnerships: Partnership[] = [
     logo: "/attribution/visual-crossing-weather.png",
     logoAlt: "Powered by Visual Crossing Weather",
     panelClass: "bg-[#e7f3ff] text-slate-950",
-    logoClass: "max-h-20 w-full object-contain",
+    logoClass: "max-h-14 w-full object-contain",
     description: "Visual Crossing supports HoCo Weather Channel with unrestricted access to its professional weather-data platform, including historical records, current conditions, forecasts, downloadable datasets, API tools, and weather-risk monitoring.",
     details: [
       { label: "Coverage", value: "Historical, current, and forecast weather" },
@@ -71,7 +71,7 @@ export function PartnershipSelector({ homepage = false }: { homepage?: boolean }
   const visiblePartners = partnerships;
 
   return (
-    <div className={homepage ? "space-y-5" : "space-y-6 px-5 py-10 sm:px-8 lg:px-12 lg:py-14"}>
+    <div className={homepage ? "space-y-4" : "space-y-4 px-5 py-8 sm:px-8 lg:px-12 lg:py-10"}>
       {visiblePartners.map((partner) => <PartnershipRow key={partner.id} partner={partner} />)}
       {homepage ? (
         <div className="pt-3 text-center">
@@ -86,38 +86,38 @@ export function PartnershipSelector({ homepage = false }: { homepage?: boolean }
 
 function PartnershipRow({ partner }: { partner: Partnership }) {
   return (
-    <article id={partner.id} className="mx-auto grid max-w-[1500px] overflow-hidden rounded-lg border border-slate-200 bg-white lg:min-h-[390px] lg:grid-cols-[0.82fr_1.18fr_1fr]">
-      <div className={`flex flex-col justify-between p-7 sm:p-10 lg:p-12 ${partner.panelClass}`}>
+    <article id={partner.id} className="mx-auto grid max-w-[1500px] overflow-hidden rounded-lg border border-slate-200 bg-white lg:min-h-[300px] lg:grid-cols-[0.82fr_1.18fr_1fr]">
+      <div className={`flex flex-col justify-between p-6 sm:p-8 ${partner.panelClass}`}>
         <div>
           <p className="text-sm font-bold uppercase tracking-wide opacity-70">{partner.category}</p>
-          <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">{partner.name}</h2>
-          <p className="mt-5 max-w-sm text-base leading-7 opacity-80">{partner.summary}</p>
+          <h2 className="mt-3 text-2xl font-black leading-tight sm:text-3xl">{partner.name}</h2>
+          <p className="mt-3 max-w-sm text-sm leading-6 opacity-80 sm:text-base">{partner.summary}</p>
         </div>
-        <div className="mt-12">
-          <p className="mb-5 text-sm font-semibold opacity-65">In partnership with</p>
-          <div className="flex min-h-24 items-center justify-start">
+        <div className="mt-8">
+          <p className="mb-3 text-sm font-semibold opacity-65">In partnership with</p>
+          <div className="flex min-h-16 items-center justify-start">
             <img src={partner.logo} alt={partner.logoAlt} className={partner.logoClass} />
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col justify-between border-slate-200 p-7 sm:p-10 lg:border-r lg:p-12">
+      <div className="flex flex-col justify-between border-slate-200 p-6 sm:p-8 lg:border-r">
         <div>
-          <h3 className="text-3xl font-black leading-tight text-ink">{partner.name}</h3>
-          <p className="mt-6 text-lg leading-8 text-slate-600">{partner.description}</p>
+          <h3 className="text-2xl font-black leading-tight text-ink sm:text-3xl">{partner.name}</h3>
+          <p className="mt-4 text-base leading-7 text-slate-600">{partner.description}</p>
         </div>
         {partner.href ? (
-          <a href={partner.href} target="_blank" rel="noreferrer" className="mt-10 inline-flex min-h-11 w-fit items-center bg-slate-900 px-5 py-2.5 font-bold text-white hover:bg-slate-700">
+          <a href={partner.href} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-10 w-fit items-center rounded-md bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700">
             {partner.linkLabel}
           </a>
         ) : null}
       </div>
 
-      <dl className="divide-y divide-slate-200 p-7 sm:p-10 lg:p-12">
+      <dl className="divide-y divide-slate-200 p-6 sm:p-8">
         {partner.details.map((detail) => (
-          <div key={detail.label} className="py-6 first:pt-0">
+          <div key={detail.label} className="py-4 first:pt-0 last:pb-0">
             <dt className="text-sm font-semibold text-slate-500">{detail.label}</dt>
-            <dd className="mt-2 text-xl font-black leading-snug text-ink">{detail.value}</dd>
+            <dd className="mt-1.5 text-lg font-black leading-snug text-ink">{detail.value}</dd>
           </div>
         ))}
       </dl>
