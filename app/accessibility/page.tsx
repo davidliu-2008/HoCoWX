@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Accessibility | HoCo Weather Channel",
-  description: "Accessibility features, ongoing improvements, and contact information for HoCo Weather Channel."
+  description: "How HoCo Weather Channel is applying accessibility guidance shared through its work with HCPSS."
 };
 
 const features = [
@@ -41,7 +41,7 @@ export default function AccessibilityPage() {
         <div className="mx-auto max-w-4xl">
           <h1 className="text-4xl font-black leading-tight sm:text-6xl">Accessibility</h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-8">
-            HoCo Weather Channel is working to make weather and school information usable by everyone.
+            Accessibility work informed by guidance shared through our collaboration with HCPSS.
           </p>
         </div>
       </header>
@@ -50,7 +50,10 @@ export default function AccessibilityPage() {
         <div className="mx-auto max-w-5xl text-center">
           <h2 className="text-3xl font-black text-ink sm:text-4xl">Our accessibility approach</h2>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-slate-700">
-            We are improving this site toward WCAG 2.1 Level AA and incorporating relevant WCAG 2.2 guidance. Accessibility is reviewed as the website grows, but this statement is not a claim of certification or complete conformance.
+            HCPSS Communications and Engagement shared Web Content Accessibility Guidelines and evaluation resources to support the development of an experience that can serve all users. In response, HoCo Weather Channel completed a sitewide accessibility review focused on WCAG 2.1 Level AA and relevant WCAG 2.2 guidance. Accessibility will continue to be evaluated as the website and HCPSS collaboration grow.
+          </p>
+          <p className="mx-auto mt-4 max-w-3xl text-sm leading-6 text-slate-600">
+            This page documents the work completed and the improvements still underway; it is not a statement of third-party certification.
           </p>
         </div>
 
