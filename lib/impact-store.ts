@@ -2,9 +2,24 @@ import type { ImpactPredictionRun } from "./impact-intelligence";
 
 function configuration() {
   const url = process.env.SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const secretKey = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  return url && serviceRoleKey ? { url, serviceRoleKey } : null;
+  return url && secretKey
+    ? {
+        url,
+        secretKey,
+        usesLegacyJwt: !process.env.SUPABASE_SECRET_KEY
+      }
+    : null;
+}
+
+function requestHeaders(config: NonNullable<ReturnType<typeof configuration>>) {
+  return {
+    apikey: config.secretKey,
+    ...(config.usesLegacyJwt ? { Authorization: `Bearer ${config.secretKey}` } : {}),
+    "Content-Type": "application/json",
+    Prefer: "resolution=merge-duplicates,return=minimal"
+  };
 }
 
 export function impactStoreIsConfigured() {
@@ -22,12 +37,7 @@ export async function saveImpactPredictionRun(run: ImpactPredictionRun) {
     `${config.url}/rest/v1/impact_prediction_runs?on_conflict=run_key`,
     {
       method: "POST",
-      headers: {
-        apikey: config.serviceRoleKey,
-        Authorization: `Bearer ${config.serviceRoleKey}`,
-        "Content-Type": "application/json",
-        Prefer: "resolution=merge-duplicates,return=minimal"
-      },
+      headers: requestHeaders(config),
       body: JSON.stringify({
         run_key: run.runKey,
         model_version: run.modelVersion,
@@ -69,12 +79,7 @@ export async function saveImpactOutcome(outcome: ImpactOutcome) {
     `${config.url}/rest/v1/impact_outcomes?on_conflict=district_slug,target_date`,
     {
       method: "POST",
-      headers: {
-        apikey: config.serviceRoleKey,
-        Authorization: `Bearer ${config.serviceRoleKey}`,
-        "Content-Type": "application/json",
-        Prefer: "resolution=merge-duplicates,return=minimal"
-      },
+      headers: requestHeaders(config),
       body: JSON.stringify({
         district_slug: outcome.districtSlug,
         target_date: outcome.targetDate,

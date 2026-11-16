@@ -55,12 +55,13 @@ Vercel:
 
 ```bash
 SUPABASE_URL="https://your-project.supabase.co"
-SUPABASE_SERVICE_ROLE_KEY="your_service_role_key"
+SUPABASE_SECRET_KEY="sb_secret_your_server-only-key"
 IMPACT_ADMIN_SECRET="use-a-long-random-secret"
 ```
 
-The service-role key must never use a `NEXT_PUBLIC_` prefix. Without these variables, predictions still work normally;
-the archival step is skipped.
+The secret key must never use a `NEXT_PUBLIC_` prefix. Older Supabase projects can use
+`SUPABASE_SERVICE_ROLE_KEY` instead. Without these variables, predictions still work normally; the archival step is
+skipped.
 
 ## API Routes
 
