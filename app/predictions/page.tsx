@@ -1,4 +1,3 @@
-import { AlertTriangle, CalendarClock, CheckCircle2, Snowflake, ThermometerSnowflake, Wind } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 import { createStoredImpactPrediction } from "@/lib/impact-service";
 import { getMarylandDistrict } from "@/lib/maryland-districts";
@@ -53,26 +52,44 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
         <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
-        <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">National Weather Service data is converted into a transparent weather-impact score. Each factor and point adjustment appears below.</p>
+        <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A transparent model for measuring how forecast weather could affect school travel and operations.</p>
       </header>
 
       {prediction ? (
         <>
           <section className="px-5 py-12 sm:px-8 sm:py-16">
-            <p className="text-center text-sm font-bold uppercase tracking-wide text-bay">How predictions are made</p>
-            <p className="mx-auto mt-4 max-w-4xl text-center text-lg leading-8 text-slate-600">The model begins with a low baseline score. It then adds or subtracts points using observable weather factors. More points indicate a greater chance that weather could disrupt school operations.</p>
-            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              <Factor icon={<AlertTriangle className="h-6 w-6" />} title="Official alerts">Winter Storm and Ice Storm Warnings add substantial risk because they signal hazardous travel or significant impacts.</Factor>
-              <Factor icon={<ThermometerSnowflake className="h-6 w-6" />} title="Ice and freezing rain">Ice receives heavy weight because even a thin glaze can make untreated roads, sidewalks, and parking lots dangerous.</Factor>
-              <Factor icon={<Snowflake className="h-6 w-6" />} title="Snow amount">Snow before the morning commute increases risk, with additional weight as expected accumulation rises.</Factor>
-              <Factor icon={<CalendarClock className="h-6 w-6" />} title="Timing">Weather during the 5–9 AM commute matters more than precipitation arriving after students and staff reach school.</Factor>
-              <Factor icon={<Wind className="h-6 w-6" />} title="Wind and cold">Strong gusts during snow or ice, poor visibility, and extreme cold can raise transportation and safety concerns.</Factor>
-              <Factor icon={<CheckCircle2 className="h-6 w-6" />} title="Improving conditions">Later timing, rising temperatures, or precipitation ending before travel can reduce the overall score.</Factor>
+            <div className="mx-auto max-w-7xl">
+              <div className="text-center">
+                <p className="text-sm font-bold uppercase tracking-wide text-bay">Current model run</p>
+                <h2 className="mt-3 text-3xl font-black text-ink sm:text-5xl">{prediction.label}</h2>
+                <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600">{prediction.explanation}</p>
+              </div>
+              <dl className="mt-10 grid border-y border-blue-100 sm:grid-cols-3">
+                <Metric label="Impact score" value={`${prediction.confidence}/100`} />
+                <Metric label="Risk level" value={prediction.riskLevel} />
+                <Metric label="Morning commute" value={`${prediction.morningCommuteRisk.label} · ${prediction.morningCommuteRisk.score}/100`} />
+              </dl>
             </div>
           </section>
 
-          <section className="grid gap-8 bg-blue-50/45 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2">
-            <div className="bg-white/80 p-6 sm:p-8">
+          <section className="bg-blue-50/45 px-5 py-12 sm:px-8 sm:py-16">
+            <div className="mx-auto max-w-7xl">
+              <div className="mx-auto max-w-4xl text-center">
+                <p className="text-sm font-bold uppercase tracking-wide text-bay">Methodology</p>
+                <h2 className="mt-3 text-3xl font-black text-ink sm:text-4xl">How the model works</h2>
+                <p className="mt-4 text-lg leading-8 text-slate-600">The model starts with a low baseline, measures observable weather signals, and converts the total into an operations-risk range.</p>
+              </div>
+              <div className="mt-10 grid gap-px overflow-hidden bg-blue-100 md:grid-cols-2 xl:grid-cols-4">
+                <MethodStep label="Inputs" title="Forecast evidence">Official alerts, temperature, precipitation type and chance, snow, ice, wind, and hourly timing.</MethodStep>
+                <MethodStep label="Scoring" title="Weighted impacts">Ice and warning-level hazards carry the most weight. Snow, cold, wind, and precipitation add risk in smaller increments.</MethodStep>
+                <MethodStep label="Timing" title="School travel window">Conditions from 5–9 AM receive extra attention. Later arrival or improving conditions can reduce the score.</MethodStep>
+                <MethodStep label="Output" title="Operations range">The final 0–100 score maps to normal operations, monitoring, delay, early dismissal, or closure ranges.</MethodStep>
+              </div>
+            </div>
+          </section>
+
+          <section className="grid gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2">
+            <div className="bg-blue-50/55 p-6 sm:p-8">
               <p className="text-sm font-bold uppercase tracking-wide text-bay">Risk score breakdown</p>
               <h2 className="mt-2 text-3xl font-black text-ink">Today&apos;s score</h2>
               <div className="mt-6 space-y-3">
@@ -84,12 +101,12 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                 ))}
               </div>
             </div>
-            <div className="bg-white/80 p-6 sm:p-8">
+            <div className="bg-blue-50/55 p-6 sm:p-8">
               <p className="text-sm font-bold uppercase tracking-wide text-bay">Morning commute</p>
               <h2 className="mt-2 text-3xl font-black text-ink">5 AM–9 AM risk</h2>
               <div className="mt-6">
                 <div className="flex flex-wrap items-center justify-between gap-3"><span className={`px-3 py-1.5 text-sm font-bold ${badgeClass(prediction.morningCommuteRisk.label)}`}>{prediction.morningCommuteRisk.label}</span><strong className="text-3xl text-ink">{prediction.morningCommuteRisk.score}/100</strong></div>
-                <ul className="mt-6 space-y-3">{prediction.morningCommuteRisk.factors.map((factor) => <li key={factor} className="flex gap-3 text-sm leading-6 text-slate-700"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-bay" />{factor}</li>)}</ul>
+                <ul className="mt-6 divide-y divide-blue-100">{prediction.morningCommuteRisk.factors.map((factor) => <li key={factor} className="py-3 text-sm leading-6 text-slate-700">{factor}</li>)}</ul>
               </div>
             </div>
           </section>
@@ -109,7 +126,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Date</span><p className="font-bold text-ink">{entry.date}</p></div>
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Prediction</span><p className="font-semibold text-slate-700">{entry.prediction}</p></div>
                       <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Confidence</span><p className="text-sm font-semibold text-slate-600">{entry.confidence}%</p></div>
-                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Final outcome</span><p className="inline-flex items-center gap-2 font-bold text-emerald-700"><CheckCircle2 aria-hidden="true" className="h-4 w-4" />{entry.outcome}</p></div>
+                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Final outcome</span><p className="font-bold text-emerald-700">{entry.outcome}</p></div>
                     </article>
                   ))}
                 </div>
@@ -124,6 +141,10 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
   );
 }
 
-function Factor({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
-  return <article className="bg-blue-50/55 p-6"><span className="text-bay">{icon}</span><h3 className="mt-4 text-xl font-bold text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{children}</p></article>;
+function Metric({ label, value }: { label: string; value: string }) {
+  return <div className="px-5 py-6 text-center sm:border-l sm:first:border-l-0 sm:border-blue-100"><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">{label}</dt><dd className="mt-2 text-xl font-black text-ink">{value}</dd></div>;
+}
+
+function MethodStep({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
+  return <article className="bg-white p-6 sm:p-8"><p className="text-xs font-bold uppercase tracking-wide text-bay">{label}</p><h3 className="mt-3 text-xl font-bold text-ink">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{children}</p></article>;
 }
