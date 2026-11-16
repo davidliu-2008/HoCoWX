@@ -48,7 +48,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
   }
 
   return (
-    <main className="integrated-page min-h-screen w-full pb-8">
+    <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="predictions" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
@@ -106,10 +106,10 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                 <div className="space-y-2 p-2">
                   {predictionHistory.map((entry) => (
                     <article key={entry.date} className="grid gap-3 rounded-md bg-white/90 px-5 py-4 md:grid-cols-[1.05fr_1fr_0.8fr_1fr] md:items-center md:gap-4">
-                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Date</span><p className="font-bold text-ink">{entry.date}</p></div>
-                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Prediction</span><p className="font-semibold text-slate-700">{entry.prediction}</p></div>
-                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Confidence</span><p className="text-sm font-semibold text-slate-600">{entry.confidence}%</p></div>
-                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-400 md:hidden">Final outcome</span><p className="inline-flex items-center gap-2 font-bold text-emerald-700"><CheckCircle2 className="h-4 w-4" />{entry.outcome}</p></div>
+                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Date</span><p className="font-bold text-ink">{entry.date}</p></div>
+                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Prediction</span><p className="font-semibold text-slate-700">{entry.prediction}</p></div>
+                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Confidence</span><p className="text-sm font-semibold text-slate-600">{entry.confidence}%</p></div>
+                      <div><span className="text-xs font-bold uppercase tracking-wide text-slate-600 md:hidden">Final outcome</span><p className="inline-flex items-center gap-2 font-bold text-emerald-700"><CheckCircle2 aria-hidden="true" className="h-4 w-4" />{entry.outcome}</p></div>
                     </article>
                   ))}
                 </div>

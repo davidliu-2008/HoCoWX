@@ -11,7 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/interview",
     "/weather-literacy",
     "/student-polls",
-    "/partnerships"
+    "/partnerships",
+    "/accessibility"
   ];
 
   return paths.map((path) => ({

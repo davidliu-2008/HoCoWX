@@ -45,12 +45,12 @@ function SectionHeading({ eyebrow, title, children }: { eyebrow: string; title: 
 }
 
 function Step({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
-  return <li className="grid gap-3 py-4 sm:grid-cols-[3rem_1fr]"><span className="text-2xl font-black text-blue-300">{number}</span><div><h3 className="font-bold text-ink">{title}</h3><p className="mt-1 text-sm leading-6 text-slate-600">{children}</p></div></li>;
+  return <li className="grid gap-3 py-4 sm:grid-cols-[3rem_1fr]"><span className="text-2xl font-black text-bay">{number}</span><div><h3 className="font-bold text-ink">{title}</h3><p className="mt-1 text-sm leading-6 text-slate-600">{children}</p></div></li>;
 }
 
 export default function WeatherLiteracyPage() {
   return (
-    <main className="integrated-page min-h-screen w-full pb-8">
+    <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="literacy" />
 
       <header className="page-hero literacy-video-hero px-5 py-12 text-center sm:px-8 sm:py-16">
@@ -94,7 +94,7 @@ export default function WeatherLiteracyPage() {
         <nav className="no-scrollbar flex gap-2 overflow-x-auto rounded-lg bg-white/95 p-2 shadow-panel backdrop-blur" aria-label="Weather literacy guides">
           {guideLinks.map((guide) => (
             <a key={guide.href} href={guide.href} className="group flex min-w-48 shrink-0 items-center gap-3 rounded-md px-4 py-3 transition hover:bg-blue-50">
-              <span className="text-sm font-black text-blue-300">{guide.number}</span>
+              <span className="text-sm font-black text-bay">{guide.number}</span>
               <span className="text-sm font-bold text-ink group-hover:text-bay">{guide.title}</span>
             </a>
           ))}

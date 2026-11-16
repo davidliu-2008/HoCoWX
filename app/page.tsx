@@ -505,7 +505,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     : { ok: false, error: weather.error };
 
   return (
-    <main className="min-h-screen w-full bg-white pb-0">
+    <main id="main-content" tabIndex={-1} className="min-h-screen w-full bg-white pb-0">
       <PageTabs active="dashboard" />
 
       <header className="home-hero relative mt-4 overflow-hidden rounded-lg bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">

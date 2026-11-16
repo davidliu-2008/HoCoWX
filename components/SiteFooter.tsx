@@ -7,7 +7,8 @@ const footerLinks = [
   { href: "/maryland-status", label: "School Status" },
   { href: "/weather-literacy", label: "Weather Literacy" },
   { href: "/about", label: "About" },
-  { href: "/partnerships", label: "Partnerships" }
+  { href: "/partnerships", label: "Partnerships" },
+  { href: "/accessibility", label: "Accessibility" }
 ];
 
 export function SiteFooter() {
@@ -24,9 +25,9 @@ export function SiteFooter() {
             {footerLinks.map((link) => <Link key={link.href} href={link.href} className="hover:text-white">{link.label}</Link>)}
           </nav>
           <div className="flex gap-2 lg:justify-end">
-            <a href="mailto:howardcountyweather@gmail.com" className="footer-icon-button" aria-label="Email"><Mail className="h-4 w-4" /></a>
-            <a href="https://www.instagram.com/hocoweatherchannel/?hl=en" target="_blank" rel="noreferrer" className="footer-icon-button" aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
-            <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="footer-icon-button" aria-label="Podcast"><Podcast className="h-4 w-4" /></a>
+            <a href="mailto:howardcountyweather@gmail.com" className="footer-icon-button" aria-label="Email HoCo Weather Channel"><Mail aria-hidden="true" className="h-4 w-4" /></a>
+            <a href="https://www.instagram.com/hocoweatherchannel/?hl=en" target="_blank" rel="noreferrer" className="footer-icon-button" aria-label="HoCo Weather Channel on Instagram (opens in a new tab)"><Instagram aria-hidden="true" className="h-4 w-4" /></a>
+            <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="footer-icon-button" aria-label="HoCo Weather Channel podcast (opens in a new tab)"><Podcast aria-hidden="true" className="h-4 w-4" /></a>
           </div>
         </div>
       </div>
@@ -36,7 +37,7 @@ export function SiteFooter() {
           target="_blank"
           rel="noreferrer"
           className="inline-block transition-opacity hover:opacity-85"
-          aria-label="Visit Visual Crossing Weather"
+          aria-label="Visit Visual Crossing Weather (opens in a new tab)"
         >
           <Image
             src="/attribution/visual-crossing-weather.png"

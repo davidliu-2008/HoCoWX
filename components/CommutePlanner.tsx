@@ -97,7 +97,7 @@ export function CommutePlanner({ districts, initialCounty }: { districts: Distri
           <legend className="mb-2 text-sm font-bold text-ink">Commute window</legend>
           <div className="grid grid-cols-2 rounded-md bg-blue-50 p-1">
             {(["morning", "afternoon"] as const).map((option) => (
-              <button key={option} type="button" onClick={() => setWindow(option)} className={`min-h-11 rounded px-3 text-sm font-bold capitalize transition ${window === option ? "bg-white text-bay shadow-sm" : "text-slate-500 hover:text-bay"}`}>
+              <button key={option} type="button" aria-pressed={window === option} onClick={() => setWindow(option)} className={`min-h-11 rounded px-3 text-sm font-bold capitalize transition ${window === option ? "bg-white text-bay shadow-sm" : "text-slate-500 hover:text-bay"}`}>
                 {option === "morning" ? "5–9 AM" : "2–5 PM"}
               </button>
             ))}
@@ -107,9 +107,9 @@ export function CommutePlanner({ districts, initialCounty }: { districts: Distri
       </section>
 
       {loading ? (
-        <div className="flex min-h-72 items-center justify-center rounded-lg bg-white"><LoaderCircle className="h-7 w-7 animate-spin text-bay" /><span className="ml-3 font-semibold text-slate-600">Loading your commute outlook…</span></div>
+        <div role="status" className="flex min-h-72 items-center justify-center rounded-lg bg-white"><LoaderCircle aria-hidden="true" className="h-7 w-7 animate-spin text-bay" /><span className="ml-3 font-semibold text-slate-600">Loading your commute outlook…</span></div>
       ) : error ? (
-        <div className="rounded-lg bg-red-50 p-5 text-red-800"><p className="font-bold">Commute outlook unavailable</p><p className="mt-2 text-sm">{error}</p><button type="button" onClick={() => void load()} className="mt-4 font-bold underline">Try again</button></div>
+        <div role="alert" className="rounded-lg bg-red-50 p-5 text-red-800"><p className="font-bold">Commute outlook unavailable</p><p className="mt-2 text-sm">{error}</p><button type="button" onClick={() => void load()} className="mt-4 min-h-11 font-bold underline">Try again</button></div>
       ) : data ? (
         <section className="overflow-hidden rounded-lg bg-navy text-white shadow-panel" aria-live="polite">
           <div className="grid lg:grid-cols-[0.72fr_1.28fr]">

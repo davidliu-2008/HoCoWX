@@ -49,5 +49,7 @@ export function AnimatedStat({
     maximumFractionDigits: decimals
   });
 
-  return <p ref={ref} className="text-4xl font-black text-bay tabular-nums sm:text-5xl">{formatted}{suffix}</p>;
+  const accessibleValue = `${target.toLocaleString("en-US", { maximumFractionDigits: decimals })}${suffix}`;
+
+  return <p ref={ref} aria-label={accessibleValue} className="text-4xl font-black text-bay tabular-nums sm:text-5xl"><span aria-hidden="true">{formatted}{suffix}</span></p>;
 }

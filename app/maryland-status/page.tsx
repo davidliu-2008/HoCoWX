@@ -23,7 +23,7 @@ export default async function MarylandStatusPage() {
   const comparison = await safeLoad<MarylandOperationStatus[]>(getMarylandOperationsComparison);
 
   return (
-    <main className="integrated-page min-h-screen w-full pb-6">
+    <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-6">
       <PageTabs active="maryland" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
