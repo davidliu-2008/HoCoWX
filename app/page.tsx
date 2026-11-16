@@ -4,13 +4,10 @@ import Link from "next/link";
 import {
   ArrowRight,
   AlertTriangle,
-  BookOpen,
   CalendarDays,
   CloudSun,
   Gauge,
-  GraduationCap,
   ExternalLink,
-  Mic2,
   Radar,
   School,
   Snowflake,
@@ -562,46 +559,40 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         <LiveRadar />
       </div>
 
-      <section className="home-editorial-band bg-white px-4 py-10 sm:px-6 md:py-14">
-        <div className="space-y-8">
-          <div className="grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="relative min-h-72 overflow-hidden rounded-lg sm:min-h-96">
-              <Image
-                src="/photography/winter-weather-literacy.jpg"
-                alt="A winter scene with snow-covered holly and local wildlife"
-                fill
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
-              />
+      <section className="bg-navy px-5 py-14 text-white sm:px-8 md:py-20 lg:px-12">
+        <div className="mx-auto max-w-7xl text-center">
+          <p className="text-sm font-bold uppercase tracking-wide text-blue-200">The layer between data and impact</p>
+          <h2 className="mx-auto mt-4 max-w-5xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+            Weather models forecast the atmosphere. HoCo Weather Channel forecasts its impact on people.
+          </h2>
+          <p className="mx-auto mt-6 max-w-4xl text-lg leading-8 text-blue-100 sm:text-xl">
+            Weather forecasting is producing more data, more frequently, from increasingly powerful traditional and AI models. We are building the local impact-intelligence layer that connects those forecasts to the decisions students, families, and school communities face each day.
+          </p>
+
+          <div className="mt-12 grid text-left md:grid-cols-3">
+            <div className="px-2 py-6 md:px-8">
+              <CloudSun className="h-8 w-8 text-blue-300" />
+              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-blue-300">01 · Weather data</p>
+              <h3 className="mt-2 text-2xl font-black">Read the atmosphere</h3>
+              <p className="mt-3 leading-7 text-blue-100">Combine forecasts, alerts, observations, historical records, and multiple weather-data sources.</p>
             </div>
-            <div className="lg:px-6">
-            <p className="text-sm font-bold uppercase tracking-wide text-bay">Beyond the forecast</p>
-            <h2 className="mt-2 text-3xl font-black text-ink md:text-5xl">Weather knowledge built for students.</h2>
-            <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
-              Learn how to read forecasts, understand winter hazards, and make evidence-based predictions with official weather sources.
-            </p>
-            <Link href="/weather-literacy" className="mt-6 inline-flex items-center gap-2 font-bold text-bay hover:underline">
-              Visit the Weather Literacy Center <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="px-2 py-6 md:px-8">
+              <Gauge className="h-8 w-8 text-blue-300" />
+              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-blue-300">02 · Impact intelligence</p>
+              <h3 className="mt-2 text-2xl font-black">Evaluate local consequences</h3>
+              <p className="mt-3 leading-7 text-blue-100">Analyze timing, precipitation type, temperature, wind, travel conditions, and school-day context.</p>
+            </div>
+            <div className="px-2 py-6 md:px-8">
+              <School className="h-8 w-8 text-blue-300" />
+              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-blue-300">03 · Community guidance</p>
+              <h3 className="mt-2 text-2xl font-black">Explain what it means</h3>
+              <p className="mt-3 leading-7 text-blue-100">Deliver clear school-operation predictions, commute risks, confidence levels, and the evidence behind them.</p>
             </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            <Link href="/weather-literacy" className="editorial-link group bg-ice">
-              <BookOpen className="h-7 w-7 text-bay" />
-              <h3>Weather Literacy</h3>
-              <p>Guides, official sources, and forecasting fundamentals.</p>
-            </Link>
-            <Link href="/student-polls" className="editorial-link group bg-sky-50">
-              <GraduationCap className="h-7 w-7 text-bay" />
-              <h3>Student Prediction Lab</h3>
-              <p>See how students evaluated real weather events.</p>
-            </Link>
-            <Link href="/interview" className="editorial-link group bg-blue-50">
-              <Mic2 className="h-7 w-7 text-bay" />
-              <h3>Superintendent Interview</h3>
-              <p>Hear how school operations decisions are made.</p>
-            </Link>
-          </div>
+
+          <Link href="/predictions" className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-6 py-3 font-bold text-navy transition hover:bg-blue-50">
+            Explore the impact model <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </main>
