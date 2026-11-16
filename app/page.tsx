@@ -498,7 +498,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               View today&apos;s forecast <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-5 border-t border-white/20 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+          <div className="grid grid-cols-2 gap-5 border-t border-white/20 pt-6 lg:border-l lg:border-t-0 lg:px-12 lg:pt-0 xl:px-16">
             <div>
               <p className="text-sm font-semibold text-blue-200">Now</p>
               <p className="mt-1 text-4xl font-black">
