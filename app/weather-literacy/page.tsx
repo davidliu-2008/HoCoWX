@@ -3,6 +3,7 @@ import {
   ExternalLink, Gauge, Layers3, Map, Radar, School, Snowflake, ThermometerSnowflake, Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
+import { AccessibleBackgroundVideo } from "@/components/AccessibleBackgroundVideo";
 
 export const metadata = {
   title: "Weather Literacy Center | HoCo Weather Channel",
@@ -53,18 +54,8 @@ export default function WeatherLiteracyPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="literacy" />
 
-      <header className="page-hero literacy-video-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <video
-          className="literacy-video-hero__media"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/photography/snowfall-video-poster.jpg"
-          aria-hidden="true"
-        >
-          <source src="/video/snowfall-background.m4v" type="video/mp4" />
-        </video>
+      <header className="page-hero literacy-video-hero px-5 pb-24 pt-12 text-center sm:px-8 sm:pb-24 sm:pt-16">
+        <AccessibleBackgroundVideo />
         <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather.</h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>
       </header>

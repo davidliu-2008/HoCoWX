@@ -130,8 +130,13 @@ export function PageTabs({ active }: { active: Tab }) {
                   className={desktopItem(isActive)}
                   aria-expanded={isOpen}
                   aria-controls={`nav-menu-${group.label.toLowerCase()}`}
-                  onClick={() => setOpenMenu(isOpen ? null : group.label)}
-                  onFocus={() => setOpenMenu(group.label)}
+                  onClick={(event) => {
+                    if (event.detail === 0) {
+                      setOpenMenu(isOpen ? null : group.label);
+                    } else {
+                      setOpenMenu(group.label);
+                    }
+                  }}
                   onKeyDown={(event) => {
                     if (event.key === "Escape") {
                       setOpenMenu(null);

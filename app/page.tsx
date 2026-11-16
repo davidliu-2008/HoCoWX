@@ -7,8 +7,6 @@ import {
   CalendarDays,
   CloudSun,
   Gauge,
-  ExternalLink,
-  Radar,
   School,
   Snowflake,
   Thermometer,
@@ -18,6 +16,7 @@ import {
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 import { CountyPreference } from "@/components/CountyPreference";
+import { LiveRadar } from "@/components/LiveRadar";
 import { getHcpssStatus } from "@/lib/hcpss-status";
 import { getMarylandDistrictStatus } from "@/lib/maryland-operations";
 import { getMarylandDistrict, marylandDistricts } from "@/lib/maryland-districts";
@@ -234,41 +233,6 @@ function FiveDaySchoolOutlook({ weather }: { weather: WeatherSummary }) {
       ) : (
         <p className="rounded-lg bg-ice p-4 text-sm text-slate-600">The school-day outlook is temporarily unavailable.</p>
       )}
-    </section>
-  );
-}
-
-function LiveRadar() {
-  const radarPage = "https://radar.weather.gov/station/KLWX/standard";
-
-  return (
-    <section className="overflow-hidden bg-navy text-white">
-      <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="flex flex-col justify-center p-6 md:p-8 lg:p-10">
-          <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Updated by the National Weather Service</p>
-          <h2 className="mt-2 flex items-center gap-2 text-3xl font-black">
-            <Radar className="h-7 w-7" /> Live Regional Radar
-          </h2>
-          <p className="mt-4 leading-7 text-blue-100">
-            Animated KLWX radar covers Howard County and the Baltimore-Washington region. The loop updates approximately every five minutes.
-          </p>
-          <a
-            href={radarPage}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 inline-flex w-fit items-center gap-2 rounded-md bg-white px-4 py-3 font-bold text-navy transition hover:bg-blue-50"
-          >
-            Open interactive radar <ExternalLink className="h-4 w-4" />
-          </a>
-        </div>
-        <a href={radarPage} target="_blank" rel="noreferrer" className="relative block min-h-80 bg-black lg:min-h-[520px]">
-          <img
-            src="https://radar.weather.gov/ridge/standard/KLWX_loop.gif"
-            alt="Animated National Weather Service KLWX regional radar loop"
-            className="absolute inset-0 h-full w-full object-contain"
-          />
-        </a>
-      </div>
     </section>
   );
 }
