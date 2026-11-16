@@ -537,10 +537,11 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       </div>
 
       <section className="bg-white px-5 py-14 sm:px-8 md:py-20 lg:px-12">
-        <div className="mx-auto max-w-5xl text-center">
-          <p className="text-sm font-bold uppercase tracking-wide text-bay">Partnerships</p>
-          <h2 className="mt-3 text-4xl font-black leading-tight text-ink sm:text-5xl">Built with institutions that expand what student weather communication can do.</h2>
-          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">District distribution, professional forecasting, and weather-data infrastructure connect the work to more people and stronger evidence.</p>
+        <div className="mx-auto flex max-w-[1500px] justify-end">
+          <div className="max-w-4xl text-left">
+            <h2 className="text-4xl font-black leading-tight text-ink sm:text-5xl">Built with institutions that expand what student weather communication can do.</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">District distribution, professional forecasting, and weather-data infrastructure connect the work to more people and stronger evidence.</p>
+          </div>
         </div>
         <div className="mt-12">
           <PartnershipSelector homepage />

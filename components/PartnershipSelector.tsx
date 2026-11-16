@@ -18,7 +18,7 @@ type Partnership = {
 const partnerships: Partnership[] = [
   {
     id: "hcpss",
-    category: "School systems",
+    category: "School system",
     name: "Howard County Public School System",
     summary: "A multi-year collaboration connecting student weather communication with the district community.",
     logo: "/partners/hcpss-logo.png",
@@ -27,20 +27,19 @@ const partnerships: Partnership[] = [
     logoClass: "max-h-24 w-full object-contain",
     description: "HoCo Weather Channel works with HCPSS to develop weather information and literacy resources, contribute student analysis to weather-related discussions, and distribute useful environmental news through district channels.",
     details: [
-      { label: "Agreement", value: "Multi-year" },
       { label: "Community", value: "80,000 students, staff, and parents" },
       { label: "Work", value: "Weather literacy and school-impact communication" }
     ]
   },
   {
     id: "capital-weather",
-    category: "Forecast communication",
+    category: "Weather company",
     name: "Capital Weather",
     summary: "Detailed forecasting translated into clearer school and community impacts.",
     logo: "/partners/capital-weather-logo.png",
     logoAlt: "Capital Weather",
-    panelClass: "bg-[#eef75b] text-slate-950",
-    logoClass: "max-h-28 w-full object-contain",
+    panelClass: "bg-[#cfe8ff] text-slate-950",
+    logoClass: "max-h-28 w-full object-contain mix-blend-multiply",
     description: "The collaboration expands the reach of both weather communities, translates detailed forecasts into direct explanations of timing and school impacts, and strengthens communication during severe weather events.",
     details: [
       { label: "Focus", value: "Severe-weather communication" },
@@ -50,12 +49,12 @@ const partnerships: Partnership[] = [
   },
   {
     id: "visual-crossing",
-    category: "Weather data",
+    category: "Weather data provider",
     name: "Visual Crossing Weather",
     summary: "Professional weather data infrastructure supporting research, analysis, and model development.",
     logo: "/attribution/visual-crossing-weather.png",
     logoAlt: "Powered by Visual Crossing Weather",
-    panelClass: "bg-[#dceeff] text-slate-950",
+    panelClass: "bg-[#e7f3ff] text-slate-950",
     logoClass: "max-h-20 w-full object-contain",
     description: "Visual Crossing supports HoCo Weather Channel with unrestricted access to its professional weather-data platform, including historical records, current conditions, forecasts, downloadable datasets, API tools, and weather-risk monitoring.",
     details: [
@@ -69,7 +68,7 @@ const partnerships: Partnership[] = [
 ];
 
 export function PartnershipSelector({ homepage = false }: { homepage?: boolean }) {
-  const visiblePartners = homepage ? partnerships.slice(0, 2) : partnerships;
+  const visiblePartners = partnerships;
 
   return (
     <div className={homepage ? "space-y-5" : "space-y-6 px-5 py-10 sm:px-8 lg:px-12 lg:py-14"}>
@@ -87,7 +86,7 @@ export function PartnershipSelector({ homepage = false }: { homepage?: boolean }
 
 function PartnershipRow({ partner }: { partner: Partnership }) {
   return (
-    <article id={partner.id} className="mx-auto grid max-w-[1500px] overflow-hidden border border-slate-200 bg-white lg:min-h-[390px] lg:grid-cols-[0.82fr_1.18fr_1fr]">
+    <article id={partner.id} className="mx-auto grid max-w-[1500px] overflow-hidden rounded-lg border border-slate-200 bg-white lg:min-h-[390px] lg:grid-cols-[0.82fr_1.18fr_1fr]">
       <div className={`flex flex-col justify-between p-7 sm:p-10 lg:p-12 ${partner.panelClass}`}>
         <div>
           <p className="text-sm font-bold uppercase tracking-wide opacity-70">{partner.category}</p>
@@ -96,7 +95,7 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
         </div>
         <div className="mt-12">
           <p className="mb-5 text-sm font-semibold opacity-65">In partnership with</p>
-          <div className="flex min-h-24 items-center justify-start bg-white p-4">
+          <div className="flex min-h-24 items-center justify-start">
             <img src={partner.logo} alt={partner.logoAlt} className={partner.logoClass} />
           </div>
         </div>
@@ -104,23 +103,19 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
 
       <div className="flex flex-col justify-between border-slate-200 p-7 sm:p-10 lg:border-r lg:p-12">
         <div>
-          <p className="text-sm font-bold uppercase tracking-wide text-bay">Collaboration</p>
-          <h3 className="mt-4 text-3xl font-black leading-tight text-ink">{partner.name}</h3>
+          <h3 className="text-3xl font-black leading-tight text-ink">{partner.name}</h3>
           <p className="mt-6 text-lg leading-8 text-slate-600">{partner.description}</p>
         </div>
         {partner.href ? (
           <a href={partner.href} target="_blank" rel="noreferrer" className="mt-10 inline-flex min-h-11 w-fit items-center bg-slate-900 px-5 py-2.5 font-bold text-white hover:bg-slate-700">
             {partner.linkLabel}
           </a>
-        ) : (
-          <p className="mt-10 text-sm font-bold uppercase tracking-wide text-slate-400">Active collaboration</p>
-        )}
+        ) : null}
       </div>
 
       <dl className="divide-y divide-slate-200 p-7 sm:p-10 lg:p-12">
-        <p className="pb-5 text-sm font-bold uppercase tracking-wide text-slate-500">What it enables</p>
         {partner.details.map((detail) => (
-          <div key={detail.label} className="py-6 first:pt-3">
+          <div key={detail.label} className="py-6 first:pt-0">
             <dt className="text-sm font-semibold text-slate-500">{detail.label}</dt>
             <dd className="mt-2 text-xl font-black leading-snug text-ink">{detail.value}</dd>
           </div>
