@@ -13,9 +13,9 @@ export default function PartnershipsPage() {
 
       <header className="page-hero px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
         <div className="mx-auto flex max-w-[1500px] justify-end">
-          <div className="max-w-4xl text-left">
-            <h1 className="text-4xl font-black leading-tight text-ink md:text-6xl">Built with institutions that expand what student weather communication can do.</h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">District distribution, professional forecasting, and weather-data infrastructure connect the work to more people and stronger evidence.</p>
+          <div className="w-full max-w-4xl text-left">
+            <h1 className="text-3xl font-normal leading-tight text-white sm:text-4xl">Built with trusted institutions.</h1>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-blue-100">HoCo Weather Channel works with school systems, weather companies, and data providers to strengthen forecasts, school-impact analysis, and weather literacy.</p>
           </div>
         </div>
       </header>

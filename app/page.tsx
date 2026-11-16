@@ -538,9 +538,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
 
       <section className="bg-white px-5 py-14 sm:px-8 md:py-20 lg:px-12">
         <div className="mx-auto flex max-w-[1500px] justify-end">
-          <div className="max-w-4xl text-left">
-            <h2 className="text-4xl font-black leading-tight text-ink sm:text-5xl">Built with institutions that expand what student weather communication can do.</h2>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">District distribution, professional forecasting, and weather-data infrastructure connect the work to more people and stronger evidence.</p>
+          <div className="w-full max-w-4xl text-left">
+            <h2 className="text-3xl font-normal leading-tight text-ink sm:text-4xl">Built with trusted institutions.</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">HoCo Weather Channel works with school systems, weather companies, and data providers to strengthen forecasts, school-impact analysis, and weather literacy.</p>
           </div>
         </div>
         <div className="mt-12">

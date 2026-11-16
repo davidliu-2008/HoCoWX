@@ -8,6 +8,7 @@ type Partnership = {
   logo: string;
   logoAlt: string;
   panelClass: string;
+  logoFrameClass: string;
   logoClass: string;
   description: string;
   details: Array<{ label: string; value: string }>;
@@ -24,7 +25,8 @@ const partnerships: Partnership[] = [
     logo: "/partners/hcpss-logo.png",
     logoAlt: "Howard County Public School System",
     panelClass: "bg-[#d8ebff] text-slate-950",
-    logoClass: "max-h-16 w-full object-contain mix-blend-multiply",
+    logoFrameClass: "h-20 w-64 max-w-full overflow-hidden",
+    logoClass: "h-auto w-full -translate-y-[34%] scale-110 object-contain mix-blend-multiply",
     description: "HoCo Weather Channel works with HCPSS to develop weather information and literacy resources, contribute student analysis to weather-related discussions, and distribute useful environmental news through district channels.",
     details: [
       { label: "Community", value: "80,000 students, staff, and parents" },
@@ -39,7 +41,8 @@ const partnerships: Partnership[] = [
     logo: "/partners/capital-weather-logo.png",
     logoAlt: "Capital Weather",
     panelClass: "bg-[#cfe8ff] text-slate-950",
-    logoClass: "max-h-20 w-full object-contain mix-blend-multiply",
+    logoFrameClass: "h-24 w-36",
+    logoClass: "h-full w-full object-contain mix-blend-multiply",
     description: "The collaboration expands the reach of both weather communities, translates detailed forecasts into direct explanations of timing and school impacts, and strengthens communication during severe weather events.",
     details: [
       { label: "Focus", value: "Severe-weather communication" },
@@ -55,7 +58,8 @@ const partnerships: Partnership[] = [
     logo: "/attribution/visual-crossing-weather.png",
     logoAlt: "Powered by Visual Crossing Weather",
     panelClass: "bg-[#e7f3ff] text-slate-950",
-    logoClass: "max-h-14 w-full object-contain",
+    logoFrameClass: "h-16 w-64 max-w-full",
+    logoClass: "h-full w-full object-contain",
     description: "Visual Crossing supports HoCo Weather Channel with unrestricted access to its professional weather-data platform, including historical records, current conditions, forecasts, downloadable datasets, API tools, and weather-risk monitoring.",
     details: [
       { label: "Coverage", value: "Historical, current, and forecast weather" },
@@ -95,7 +99,7 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
         </div>
         <div className="mt-8">
           <p className="mb-3 text-sm font-semibold opacity-65">In partnership with</p>
-          <div className="flex min-h-16 items-center justify-start">
+          <div className={`flex items-center justify-start ${partner.logoFrameClass}`}>
             <img src={partner.logo} alt={partner.logoAlt} className={partner.logoClass} />
           </div>
         </div>
