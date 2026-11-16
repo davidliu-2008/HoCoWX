@@ -559,38 +559,39 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         <LiveRadar />
       </div>
 
-      <section className="bg-navy px-5 py-14 text-white sm:px-8 md:py-20 lg:px-12">
+      <section className="bg-blue-50 px-5 py-14 sm:px-8 md:py-20 lg:px-12">
         <div className="mx-auto max-w-7xl text-center">
-          <p className="text-sm font-bold uppercase tracking-wide text-blue-200">The layer between data and impact</p>
-          <h2 className="mx-auto mt-4 max-w-5xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-            Weather models forecast the atmosphere. HoCo Weather Channel forecasts its impact on people.
+          <p className="text-sm font-bold uppercase tracking-wide text-bay">The layer between data and impact</p>
+          <h2 className="mx-auto mt-4 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">
+            <span className="block">Weather models forecast the atmosphere.</span>
+            <span className="mt-2 block text-bay">We forecast its impact on people.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-4xl text-lg leading-8 text-blue-100 sm:text-xl">
-            Weather forecasting is producing more data, more frequently, from increasingly powerful traditional and AI models. We are building the local impact-intelligence layer that connects those forecasts to the decisions students, families, and school communities face each day.
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-700 sm:text-xl">
+            HoCo Weather Channel is building the local intelligence layer that turns forecast data into clear guidance for school, travel, and daily life.
           </p>
 
-          <div className="mt-12 grid text-left md:grid-cols-3">
-            <div className="px-2 py-6 md:px-8">
-              <CloudSun className="h-8 w-8 text-blue-300" />
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-blue-300">01 · Weather data</p>
-              <h3 className="mt-2 text-2xl font-black">Read the atmosphere</h3>
-              <p className="mt-3 leading-7 text-blue-100">Combine forecasts, alerts, observations, historical records, and multiple weather-data sources.</p>
+          <div className="mt-12 grid gap-8 text-left md:grid-cols-3 md:gap-10">
+            <div className="px-2 py-3 md:px-5">
+              <CloudSun className="h-8 w-8 text-bay" />
+              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">01 · Weather data</p>
+              <h3 className="mt-2 text-2xl font-black text-ink">Read the atmosphere</h3>
+              <p className="mt-3 text-base leading-7 text-slate-600">Bring forecasts, alerts, observations, and historical weather into one system.</p>
             </div>
-            <div className="px-2 py-6 md:px-8">
-              <Gauge className="h-8 w-8 text-blue-300" />
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-blue-300">02 · Impact intelligence</p>
-              <h3 className="mt-2 text-2xl font-black">Evaluate local consequences</h3>
-              <p className="mt-3 leading-7 text-blue-100">Analyze timing, precipitation type, temperature, wind, travel conditions, and school-day context.</p>
+            <div className="px-2 py-3 md:px-5">
+              <Gauge className="h-8 w-8 text-bay" />
+              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">02 · Impact intelligence</p>
+              <h3 className="mt-2 text-2xl font-black text-ink">Evaluate local effects</h3>
+              <p className="mt-3 text-base leading-7 text-slate-600">Measure how timing, ice, snow, temperature, and wind could affect the community.</p>
             </div>
-            <div className="px-2 py-6 md:px-8">
-              <School className="h-8 w-8 text-blue-300" />
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-blue-300">03 · Community guidance</p>
-              <h3 className="mt-2 text-2xl font-black">Explain what it means</h3>
-              <p className="mt-3 leading-7 text-blue-100">Deliver clear school-operation predictions, commute risks, confidence levels, and the evidence behind them.</p>
+            <div className="px-2 py-3 md:px-5">
+              <School className="h-8 w-8 text-bay" />
+              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">03 · Community guidance</p>
+              <h3 className="mt-2 text-2xl font-black text-ink">Explain what it means</h3>
+              <p className="mt-3 text-base leading-7 text-slate-600">Share school predictions, commute risks, confidence, and the evidence behind them.</p>
             </div>
           </div>
 
-          <Link href="/predictions" className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-6 py-3 font-bold text-navy transition hover:bg-blue-50">
+          <Link href="/predictions" className="mt-10 inline-flex min-h-12 items-center gap-2 rounded-md bg-navy px-6 py-3 font-bold text-white transition hover:bg-blue-900">
             Explore the impact model <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
