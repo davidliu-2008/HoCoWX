@@ -1,11 +1,29 @@
 import { NextResponse } from "next/server";
-import { createPrediction } from "@/lib/prediction";
+import { createStoredImpactPrediction } from "@/lib/impact-service";
+import { getMarylandDistrict } from "@/lib/maryland-districts";
 import { getWeatherSummary } from "@/lib/weather";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const weather = await getWeatherSummary();
-    return NextResponse.json(createPrediction({ weather }));
+    const county = new URL(request.url).searchParams.get("county") ?? "howard";
+    const district = getMarylandDistrict(county) ?? getMarylandDistrict("howard")!;
+    const weather = await getWeatherSummary({
+      latitude: district.latitude,
+      longitude: district.longitude,
+      location: district.county
+    });
+    const run = await createStoredImpactPrediction({
+      weather,
+      districtSlug: district.slug,
+      county: district.county
+    });
+
+    return NextResponse.json(run.prediction, {
+      headers: {
+        "X-Impact-Model-Version": run.modelVersion,
+        "X-Impact-Target-Date": run.targetDate
+      }
+    });
   } catch (error) {
     return NextResponse.json(
       {

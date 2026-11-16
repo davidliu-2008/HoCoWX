@@ -1,6 +1,6 @@
 import { AlertTriangle, CalendarClock, CheckCircle2, Snowflake, ThermometerSnowflake, Wind } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
-import { createPrediction } from "@/lib/prediction";
+import { createStoredImpactPrediction } from "@/lib/impact-service";
 import { getMarylandDistrict } from "@/lib/maryland-districts";
 import { getWeatherSummary } from "@/lib/weather";
 import type { PredictionResult } from "@/lib/types";
@@ -37,7 +37,12 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
   const district = getMarylandDistrict(requestedCounty) ?? getMarylandDistrict("howard")!;
 
   try {
-    prediction = createPrediction({ weather: await getWeatherSummary({ latitude: district.latitude, longitude: district.longitude, location: district.county }) });
+    const weather = await getWeatherSummary({ latitude: district.latitude, longitude: district.longitude, location: district.county });
+    prediction = (await createStoredImpactPrediction({
+      weather,
+      districtSlug: district.slug,
+      county: district.county
+    })).prediction;
   } catch (caught) {
     error = caught instanceof Error ? caught.message : "Prediction data could not be loaded.";
   }

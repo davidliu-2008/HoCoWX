@@ -47,11 +47,27 @@ VISUAL_CROSSING_API_KEY="your_visual_crossing_api_key"
 Keep this credential server-side and never prefix it with `NEXT_PUBLIC_`. If it is unavailable, the app falls back to
 National Weather Service observation history.
 
+### Impact intelligence archive
+
+The prediction pipeline can archive every versioned forecast run for later outcome matching and model evaluation. Run
+`supabase/impact-intelligence.sql` in the Supabase SQL Editor, then configure these server-only variables locally and in
+Vercel:
+
+```bash
+SUPABASE_URL="https://your-project.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY="your_service_role_key"
+IMPACT_ADMIN_SECRET="use-a-long-random-secret"
+```
+
+The service-role key must never use a `NEXT_PUBLIC_` prefix. Without these variables, predictions still work normally;
+the archival step is skipped.
+
 ## API Routes
 
 - `/api/hcpss-status` fetches and parses the official HCPSS status page.
 - `/api/weather` fetches NWS forecast, hourly forecast, grid data, and active alerts, then enriches the historical temperature comparison with Visual Crossing when configured.
-- `/api/prediction` combines current weather data with the local rule-based prediction model.
+- `/api/prediction` combines current weather data with the versioned impact model and archives the complete source snapshot when Supabase is configured. Pass `?county=montgomery` or another supported county slug to evaluate that location.
+- `/api/impact-outcomes` accepts protected server-side outcome records for later accuracy evaluation. Requests require the `IMPACT_ADMIN_SECRET` as a bearer token.
 - `/api/maryland-operations` checks the Maryland county comparison list with conservative parsing and 30-minute caching.
 
 ## Important Implementation Notes
@@ -60,6 +76,7 @@ National Weather Service observation history.
 - NWS API calls happen in `lib/weather.ts`. The app uses the Ellicott City point coordinates and reads forecast, hourly forecast, grid snowfall, and active alerts.
 - Visual Crossing API calls happen in `lib/visual-crossing.ts`. The API key remains on the server, and failed requests fall back without breaking the weather dashboard.
 - Prediction rules live in `lib/prediction.ts`. They score winter alerts, freezing rain or ice wording, snowfall amounts, wind gusts, temperature, precipitation chance, and likely timing.
+- Impact-run assembly happens in `lib/impact-intelligence.ts`, and server-only archival happens in `lib/impact-store.ts`. Each record includes its model version, county, target school date, weather inputs, factors, and result.
 - Maryland district source URLs live in `lib/maryland-districts.ts`. Non-HCPSS status parsing is experimental because districts publish operational updates in different formats.
 - HCPSS responses are cached briefly for 5 minutes. NWS responses are cached for 10 minutes.
 

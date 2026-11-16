@@ -21,7 +21,7 @@ import { CountyPreference } from "@/components/CountyPreference";
 import { getHcpssStatus } from "@/lib/hcpss-status";
 import { getMarylandDistrictStatus } from "@/lib/maryland-operations";
 import { getMarylandDistrict, marylandDistricts } from "@/lib/maryland-districts";
-import { createPrediction } from "@/lib/prediction";
+import { createStoredImpactPrediction } from "@/lib/impact-service";
 import { getWeatherSummary } from "@/lib/weather";
 import type { HcpssStatus, PredictionResult, WeatherSummary } from "@/lib/types";
 
@@ -494,7 +494,14 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     safeLoad(() => getWeatherSummary({ latitude: district.latitude, longitude: district.longitude, location: district.county }))
   ]);
   const prediction: LoadState<PredictionResult> = weather.ok
-    ? { ok: true, data: createPrediction({ weather: weather.data }) }
+    ? {
+        ok: true,
+        data: (await createStoredImpactPrediction({
+          weather: weather.data,
+          districtSlug: district.slug,
+          county: district.county
+        })).prediction
+      }
     : { ok: false, error: weather.error };
 
   return (
