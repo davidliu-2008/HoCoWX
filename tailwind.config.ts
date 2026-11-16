@@ -16,7 +16,7 @@ const config: Config = {
         navy: "#12305f"
       },
       boxShadow: {
-        panel: "0 18px 50px rgba(37, 99, 235, 0.10)"
+        panel: "0 1px 0 rgba(15, 23, 42, 0.08)"
       }
     }
   },

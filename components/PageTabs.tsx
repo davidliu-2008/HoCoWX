@@ -94,7 +94,7 @@ export function PageTabs({ active }: { active: Tab }) {
   const menuLink = "flex min-h-12 items-center gap-3 rounded-md px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-bay";
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-blue-100 bg-white/95 shadow-sm backdrop-blur" aria-label="Main sections">
+    <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur" aria-label="Main sections">
       <div className="mx-auto flex min-h-16 w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:min-h-20">
         <Link href={countyHref("/")} className="flex shrink-0 items-center" aria-label="HoCo Weather Channel home">
           <img src="/hoco-weather-channel-icon.png" alt="" className="h-14 w-14 shrink-0 object-contain lg:h-16 lg:w-16" />

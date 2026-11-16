@@ -51,18 +51,18 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       <PageTabs active="predictions" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">School Operation Predictions</h1>
+        <h1 className="mx-auto max-w-5xl text-4xl font-medium leading-tight text-ink sm:text-5xl">School Operation Predictions</h1>
         <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A transparent model for measuring how forecast weather could affect school travel and operations.</p>
       </header>
 
       {prediction ? (
         <>
           <section className="px-5 py-10 sm:px-8 lg:px-12 lg:py-14">
-            <div className="mx-auto grid max-w-[1500px] overflow-hidden border border-slate-200 bg-white lg:min-h-[430px] lg:grid-cols-[0.82fr_1.18fr_1fr]">
-              <div className="flex flex-col justify-between bg-navy p-7 text-white sm:p-10 lg:p-12">
+            <div className="mx-auto grid w-full max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white sm:max-w-[calc(100vw-4rem)] lg:max-w-[min(1500px,calc(100vw-6rem))] xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] 2xl:min-h-[360px] 2xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)_minmax(0,1fr)]">
+              <div className="min-w-0 flex flex-col justify-between bg-navy p-7 text-white sm:p-9">
                 <div>
                   <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Current model run</p>
-                  <h2 className="mt-5 text-4xl font-black leading-tight text-white sm:text-5xl">{prediction.label}</h2>
+                  <h2 className="mt-5 text-3xl font-medium leading-tight text-white sm:text-4xl">{prediction.label}</h2>
                   <p className="mt-5 text-lg leading-8 text-blue-100">{prediction.explanation}</p>
                 </div>
                 <div className="mt-12 border-t border-white/25 pt-6">
@@ -71,9 +71,9 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                 </div>
               </div>
 
-              <div className="border-slate-200 p-7 sm:p-10 lg:border-r lg:p-12">
+              <div className="min-w-0 border-slate-200 p-7 sm:p-9 lg:border-r">
                 <p className="text-sm font-bold uppercase tracking-wide text-bay">Evidence</p>
-                <h3 className="mt-4 text-3xl font-black text-ink">Weather signals shaping this result</h3>
+                <h3 className="mt-4 text-2xl font-medium text-ink sm:text-3xl">Weather signals shaping this result</h3>
                 <div className="mt-8 divide-y divide-slate-200">
                   {prediction.topFactors.map((factor, index) => (
                     <div key={factor} className="grid grid-cols-[2.5rem_1fr] gap-3 py-5 first:pt-0">
@@ -84,7 +84,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                 </div>
               </div>
 
-              <div className="p-7 sm:p-10 lg:p-12">
+              <div className="min-w-0 p-7 sm:p-9 xl:col-span-2 xl:grid xl:grid-cols-[1fr_1fr] xl:gap-12 2xl:col-span-1 2xl:block">
                 <p className="text-sm font-bold uppercase tracking-wide text-slate-500">Model outputs</p>
                 <div className="mt-7 space-y-9">
                   <ScoreBar label="Impact score" score={prediction.confidence} note={prediction.riskLevel} />
