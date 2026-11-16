@@ -484,7 +484,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         <div className="absolute inset-0 bg-gradient-to-r from-[#091b36]/95 via-[#102f5c]/82 to-[#12305f]/45" />
         <div className="relative z-10 grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <p className="mb-4 text-sm font-bold uppercase tracking-wide text-blue-200">HoCo Weather Channel</p>
+            <div className="mb-4 flex flex-wrap items-center gap-3 text-sm font-bold uppercase tracking-wide">
+              <span className="text-blue-200">HoCo Weather Channel</span>
+              <Link href="/partnerships" className="rounded-md bg-white/15 px-3 py-1.5 text-white transition hover:bg-white/25">
+                HCPSS Partner
+              </Link>
+            </div>
             <h1 className="max-w-4xl text-4xl font-black leading-tight md:text-6xl">By students. For students.</h1>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-blue-100 md:text-xl">
               Local weather, school operations, and environmental news for the Maryland community.
@@ -532,8 +537,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
 
       <section className="bg-blue-50 px-5 py-14 sm:px-8 md:py-20 lg:px-12">
         <div className="mx-auto max-w-7xl text-center">
-          <p className="text-sm font-bold uppercase tracking-wide text-bay">The layer between data and impact</p>
-          <h2 className="mx-auto mt-4 max-w-5xl text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">
+          <h2 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">
             <span className="block">Weather models forecast the atmosphere.</span>
             <span className="mt-2 block text-bay">We forecast its impact on people.</span>
           </h2>
