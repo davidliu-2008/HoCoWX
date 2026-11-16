@@ -23,8 +23,8 @@ const partnerships: Partnership[] = [
     summary: "A multi-year collaboration connecting student weather communication with the district community.",
     logo: "/partners/hcpss-logo.png",
     logoAlt: "Howard County Public School System",
-    panelClass: "bg-navy text-white",
-    logoClass: "max-h-16 w-full object-contain",
+    panelClass: "bg-[#d8ebff] text-slate-950",
+    logoClass: "max-h-16 w-full object-contain mix-blend-multiply",
     description: "HoCo Weather Channel works with HCPSS to develop weather information and literacy resources, contribute student analysis to weather-related discussions, and distribute useful environmental news through district channels.",
     details: [
       { label: "Community", value: "80,000 students, staff, and parents" },
