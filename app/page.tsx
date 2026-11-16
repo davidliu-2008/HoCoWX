@@ -574,20 +574,17 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
             <div className="px-2 py-3 md:px-5">
               <CloudSun className="h-8 w-8 text-bay" />
               <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">01 · Weather data</p>
-              <h3 className="mt-2 text-2xl font-black text-ink">Read the atmosphere</h3>
-              <p className="mt-3 text-base leading-7 text-slate-600">Bring forecasts, alerts, observations, and historical weather into one system.</p>
+              <p className="mt-3 text-base leading-7 text-slate-700">Combine National Weather Service forecasts and alerts with Visual Crossing observations, historical records, and forecast data.</p>
             </div>
             <div className="px-2 py-3 md:px-5">
               <Gauge className="h-8 w-8 text-bay" />
               <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">02 · Impact intelligence</p>
-              <h3 className="mt-2 text-2xl font-black text-ink">Evaluate local effects</h3>
-              <p className="mt-3 text-base leading-7 text-slate-600">Measure how timing, ice, snow, temperature, and wind could affect the community.</p>
+              <p className="mt-3 text-base leading-7 text-slate-700">Evaluate snowfall, freezing rain, temperature, wind, active alerts, and conditions during the 5–9 AM school commute.</p>
             </div>
             <div className="px-2 py-3 md:px-5">
               <School className="h-8 w-8 text-bay" />
               <p className="mt-5 text-sm font-bold uppercase tracking-wide text-bay">03 · Community guidance</p>
-              <h3 className="mt-2 text-2xl font-black text-ink">Explain what it means</h3>
-              <p className="mt-3 text-base leading-7 text-slate-600">Share school predictions, commute risks, confidence, and the evidence behind them.</p>
+              <p className="mt-3 text-base leading-7 text-slate-700">Produce school-operation predictions, morning commute risk scores, confidence levels, and a factor-by-factor explanation.</p>
             </div>
           </div>
 
