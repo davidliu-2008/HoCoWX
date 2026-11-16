@@ -96,9 +96,8 @@ export function PageTabs({ active }: { active: Tab }) {
   return (
     <nav className="sticky top-0 z-50 border-b border-blue-100 bg-white/95 shadow-sm backdrop-blur" aria-label="Main sections">
       <div className="mx-auto flex min-h-16 w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:min-h-20">
-        <Link href={countyHref("/")} className="mr-auto flex shrink-0 items-center gap-3" aria-label="HoCo Weather Channel home">
+        <Link href={countyHref("/")} className="flex shrink-0 items-center" aria-label="HoCo Weather Channel home">
           <img src="/hoco-weather-channel-icon.png" alt="" className="h-14 w-14 shrink-0 object-contain lg:h-16 lg:w-16" />
-          <span className="hidden text-base font-black leading-tight text-ink sm:block">HoCo Weather<br />Channel</span>
         </Link>
 
         <div className="hidden items-stretch lg:flex">
@@ -152,7 +151,7 @@ export function PageTabs({ active }: { active: Tab }) {
           })}
         </div>
 
-        <div className="flex shrink-0 items-center gap-1">
+        <div className="ml-auto flex shrink-0 items-center gap-1">
           <a href="mailto:howardcountyweather@gmail.com" className="social-nav-button" aria-label="Email HoCo Weather Channel" title="Email"><Mail aria-hidden="true" className="h-4 w-4" /></a>
           <a href="https://www.instagram.com/hocoweatherchannel/?hl=en" target="_blank" rel="noreferrer" className="social-nav-button" aria-label="HoCo Weather Channel on Instagram (opens in a new tab)" title="Instagram"><Instagram aria-hidden="true" className="h-4 w-4" /></a>
           <a href="https://open.spotify.com/show/1lq3ulTfGtY46EsGSm6VXl?si=fbfb99f380c848d5" target="_blank" rel="noreferrer" className="social-nav-button" aria-label="HoCo Weather Channel podcast (opens in a new tab)" title="Podcast"><Podcast aria-hidden="true" className="h-4 w-4" /></a>
