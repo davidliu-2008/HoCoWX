@@ -187,14 +187,22 @@ main article[class*="shadow"] {
     url("/photography/howard-county-winter-sunset.jpg");
   background-position: center, center 58%;
   background-repeat: no-repeat;
-  background-size: cover, 88% auto;
+  background-size: cover, cover;
   background-color: #12305f;
   color: white;
 }
 
 @media (max-width: 767px) {
   .page-hero {
-    background-size: cover, auto 115%;
+    background-size: cover, cover;
+  }
+}
+
+@media (min-width: 1024px) {
+  .integrated-page > header[class*="px-5"],
+  .integrated-page > section[class*="px-5"] {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 }
 

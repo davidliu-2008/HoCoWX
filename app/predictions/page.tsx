@@ -75,9 +75,8 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                 <p className="text-sm font-bold uppercase tracking-wide text-bay">Evidence</p>
                 <h3 className="mt-4 text-2xl font-medium text-ink sm:text-3xl">Weather signals shaping this result</h3>
                 <div className="mt-8 divide-y divide-slate-200">
-                  {prediction.topFactors.map((factor, index) => (
-                    <div key={factor} className="grid grid-cols-[2.5rem_1fr] gap-3 py-5 first:pt-0">
-                      <span className="text-sm font-black text-bay">{String(index + 1).padStart(2, "0")}</span>
+                  {prediction.topFactors.map((factor) => (
+                    <div key={factor} className="py-5 first:pt-0">
                       <p className="text-base font-semibold leading-7 text-slate-700">{factor}</p>
                     </div>
                   ))}

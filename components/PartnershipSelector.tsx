@@ -91,8 +91,8 @@ export function PartnershipSelector({ homepage = false }: { homepage?: boolean }
 
 function PartnershipRow({ partner }: { partner: Partnership }) {
   return (
-    <article id={partner.id} className="mx-auto grid w-full max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white sm:max-w-[calc(100vw-4rem)] lg:min-h-[300px] lg:max-w-[min(1500px,calc(100vw-6rem))] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)_minmax(0,1fr)]">
-      <div className={`min-w-0 flex flex-col justify-between p-6 sm:p-8 ${partner.panelClass}`}>
+    <article id={partner.id} className="mx-auto grid w-full max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white sm:max-w-[calc(100vw-4rem)] min-[900px]:min-h-[300px] min-[900px]:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,1fr)] lg:max-w-[min(1500px,calc(100vw-6rem))]">
+      <div className={`min-w-0 flex flex-col justify-between p-6 xl:p-8 ${partner.panelClass}`}>
         <div>
           <h2 className="text-2xl font-normal leading-tight">{partner.category}</h2>
           <p className="mt-3 max-w-sm text-sm leading-6 opacity-80 sm:text-base">{partner.summary}</p>
@@ -105,7 +105,7 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
         </div>
       </div>
 
-      <div className="min-w-0 flex flex-col justify-between border-slate-200 p-6 sm:p-8 lg:border-r">
+      <div className="min-w-0 flex flex-col justify-between border-slate-200 p-6 min-[900px]:border-r xl:p-8">
         <div>
           <h3 className="text-2xl font-medium leading-tight text-ink">{partner.name}</h3>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">{partner.description}</p>
@@ -117,7 +117,7 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
         ) : null}
       </div>
 
-      <dl className="min-w-0 divide-y divide-slate-200 p-6 sm:p-8">
+      <dl className="min-w-0 divide-y divide-slate-200 p-6 xl:p-8">
         {partner.details.map((detail) => (
           <div key={detail.label} className="py-4 first:pt-0 last:pb-0">
             <dt className="text-sm font-semibold text-slate-500">{detail.label}</dt>

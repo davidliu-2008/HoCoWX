@@ -45,21 +45,21 @@ export default function AboutPage() {
       <PageTabs active="about" />
 
       <header className="page-hero px-5 py-14 text-center sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-5xl">
           <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">Weather insights built for students.</h1>
           <p className="mt-8 text-sm font-bold uppercase tracking-wide text-blue-200">Our audience</p>
-          <div className="mt-7 grid gap-8 sm:grid-cols-3">
-            <div>
+          <div className="mt-7 grid gap-6 px-2 sm:grid-cols-3 lg:gap-8">
+            <div className="min-w-0">
               <AnimatedStat target={80000} className="text-white" />
-              <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-blue-100">Students, staff, and parents served through the HCPSS community.</p>
+              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">Students, staff, and parents served through the HCPSS community.</p>
             </div>
-            <div className="sm:px-6">
+            <div className="min-w-0 sm:px-3 lg:px-6">
               <AnimatedStat target={700000} className="text-white" />
-              <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-blue-100">People impacted nationwide across HoCo Weather Channel platforms and partnerships.</p>
+              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">People impacted nationwide across HoCo Weather Channel platforms and partnerships.</p>
             </div>
-            <div>
+            <div className="min-w-0">
               <AnimatedStat target={2.2} suffix="M+" decimals={1} className="text-white" />
-              <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-blue-100">Views across weather updates, forecasts, and educational content.</p>
+              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">Views across weather updates, forecasts, and educational content.</p>
             </div>
           </div>
         </div>
