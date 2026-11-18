@@ -12,10 +12,12 @@ export default function PartnershipsPage() {
       <PageTabs active="partnerships" />
 
       <header className="page-hero px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
-        <div className="mx-auto flex max-w-[1500px] justify-end">
-          <div className="w-full max-w-4xl text-left">
-            <h1 className="text-3xl font-normal leading-tight text-white sm:text-4xl">Built with trusted institutions.</h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-blue-100">HoCo Weather Channel works with school systems, weather companies, and data providers to strengthen forecasts, school-impact analysis, and weather literacy.</p>
+        <div className="mx-auto grid max-w-[1500px] min-[900px]:grid-cols-[0.8fr_2.2fr]">
+          <div className="min-[900px]:col-start-2">
+            <div className="max-w-3xl text-left">
+              <h1 className="text-3xl font-normal leading-tight text-white sm:text-4xl">Built with trusted institutions.</h1>
+              <p className="mt-5 text-lg leading-7 text-blue-100">HoCo Weather Channel works with school systems, weather companies, and data providers to strengthen forecasts, school-impact analysis, and weather literacy.</p>
+            </div>
           </div>
         </div>
       </header>

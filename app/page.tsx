@@ -153,7 +153,7 @@ function RiskBreakdownCard({ prediction }: { prediction: PredictionResult }) {
 
 function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
   return (
-    <section id="hourly-forecast" className="scroll-mt-24 bg-white p-5 md:p-7">
+    <section id="hourly-forecast" className="scroll-mt-24 bg-white py-7">
       <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
         <CloudSun className="h-5 w-5 text-bay" />
         Hourly Forecast Timeline
@@ -200,7 +200,7 @@ function FiveDaySchoolOutlook({ weather }: { weather: WeatherSummary }) {
   const days = weather.schoolDayOutlook ?? [];
 
   return (
-    <section className="bg-white p-5 md:p-7">
+    <section className="bg-white py-7">
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-bold uppercase tracking-wide text-bay">School-week planning</p>
@@ -254,7 +254,7 @@ function compactTime(value: string | null | undefined) {
 
 function DistrictStatusCard({ status, isHoward }: { status: LoadState<HcpssStatus>; isHoward: boolean }) {
   return (
-    <section className="bg-white p-5 md:p-6">
+    <section className="bg-white py-7 lg:pr-8">
       <div className="mb-5 flex items-start gap-4">
         <div>
           <div className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-bay">
@@ -287,7 +287,7 @@ function DistrictStatusCard({ status, isHoward }: { status: LoadState<HcpssStatu
 function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; county: string }) {
   if (!weather.ok) {
     return (
-      <section className="bg-white p-5 md:p-7">
+      <section className="bg-white py-7">
         <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
           <CloudSun className="h-5 w-5 text-bay" />
           {county} Weather
@@ -302,7 +302,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
   const data = weather.data;
 
   return (
-    <section className="bg-white p-5 md:p-7">
+    <section className="bg-white py-7">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-ink">
@@ -387,7 +387,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
 
 function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult> }) {
   return (
-    <section className="bg-white p-5 md:p-7 lg:border-l lg:border-blue-100">
+    <section className="bg-white py-7 lg:border-l lg:border-blue-100 lg:pl-8">
       <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-ink">
         <Gauge className="h-5 w-5 text-bay" />
         Prediction
@@ -499,7 +499,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               View today&apos;s forecast <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-5 border-t border-white/20 pt-6 lg:border-l lg:border-t-0 lg:px-12 lg:pt-0 xl:px-16">
+          <div className="grid grid-cols-2 gap-6 border-t border-white/20 pt-6 lg:ml-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pr-8 lg:pt-0 xl:ml-10 xl:pl-12 xl:pr-12">
             <div>
               <p className="text-sm font-semibold text-blue-200">Now</p>
               <p className="mt-1 text-4xl font-black">
@@ -521,11 +521,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         </div>
       </header>
 
-      <div className="bg-white px-4 py-4 sm:px-6">
-        <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} />
+      <div className="bg-white py-4">
+        <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
+          <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} />
+        </div>
       </div>
 
-      <div id="today">
+      <div id="today" className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
           <DistrictStatusCard status={status} isHoward={isHoward} />
           <PredictionCard prediction={prediction} />
@@ -536,14 +538,16 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         <LiveRadar />
       </div>
 
-      <section className="bg-white px-5 py-14 sm:px-8 md:py-20 lg:px-12">
-        <div className="mx-auto flex max-w-[1500px] justify-end">
-          <div className="w-full max-w-4xl text-left">
-            <h2 className="text-3xl font-normal leading-tight text-ink sm:text-4xl">Built with trusted institutions.</h2>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">HoCo Weather Channel works with school systems, weather companies, and data providers to strengthen forecasts, school-impact analysis, and weather literacy.</p>
+      <section className="bg-white px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+        <div className="mx-auto grid max-w-[1500px] min-[900px]:grid-cols-[0.8fr_2.2fr]">
+          <div className="min-[900px]:col-start-2">
+            <div className="max-w-3xl text-left">
+              <h2 className="text-3xl font-normal leading-tight text-ink sm:text-4xl">Built with trusted institutions.</h2>
+              <p className="mt-5 text-lg leading-7 text-slate-600">HoCo Weather Channel works with school systems, weather companies, and data providers to strengthen forecasts, school-impact analysis, and weather literacy.</p>
+            </div>
           </div>
         </div>
-        <div className="mt-12">
+        <div className="mt-10">
           <PartnershipSelector homepage />
         </div>
       </section>
