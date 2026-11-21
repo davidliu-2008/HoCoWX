@@ -22,6 +22,7 @@ export type ImpactPredictionRun = {
     overnightForecast: string | null;
     morningForecast: string | null;
     hourlyForecast: WeatherSummary["hourlyForecast"];
+    visualCrossingObservation?: WeatherSummary["visualCrossingObservation"];
   };
   prediction: PredictionResult;
 };
@@ -86,7 +87,8 @@ export function createImpactPredictionRun({
       alerts: weather.alerts,
       overnightForecast: weather.overnightForecast,
       morningForecast: weather.morningForecast,
-      hourlyForecast: weather.hourlyForecast
+      hourlyForecast: weather.hourlyForecast,
+      ...(weather.visualCrossingObservation ? { visualCrossingObservation: weather.visualCrossingObservation } : {})
     },
     prediction
   };

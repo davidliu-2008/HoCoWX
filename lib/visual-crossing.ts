@@ -1,6 +1,10 @@
+import type { WeatherSummary } from "./types";
+
 type VisualCrossingHour = {
   datetimeEpoch?: number;
   temp?: number | null;
+  precip?: number | null;
+  windspeed?: number | null;
 };
 
 type VisualCrossingResponse = {
@@ -9,9 +13,7 @@ type VisualCrossingResponse = {
   }>;
 };
 
-export type VisualCrossingHistory = {
-  yesterdayTemperatureF: number;
-};
+type VisualCrossingHistory = NonNullable<WeatherSummary["visualCrossingObservation"]>;
 
 const VISUAL_CROSSING_BASE_URL =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline";
@@ -35,11 +37,12 @@ export async function getVisualCrossingHistory({
   const query = new URLSearchParams({
     unitGroup: "us",
     include: "hours",
-    elements: "datetime,datetimeEpoch,temp",
+    elements: "datetime,datetimeEpoch,temp,precip,windspeed",
     contentType: "json",
     key: apiKey
   });
   const response = await fetch(`${VISUAL_CROSSING_BASE_URL}/${location}/yesterday?${query}`, {
+    signal: AbortSignal.timeout(4000),
     next: { revalidate: 1800 }
   });
 
@@ -58,7 +61,12 @@ export async function getVisualCrossingHistory({
         Math.abs((b.datetimeEpoch as number) * 1000 - targetTime)
     )[0];
 
-  return typeof closestHour?.temp === "number"
-    ? { yesterdayTemperatureF: Math.round(closestHour.temp) }
+  return typeof closestHour?.temp === "number" && typeof closestHour.datetimeEpoch === "number"
+    ? {
+        observedAt: new Date(closestHour.datetimeEpoch * 1000).toISOString(),
+        temperatureF: closestHour.temp,
+        precipitationInches: closestHour.precip ?? null,
+        windSpeedMph: closestHour.windspeed ?? null
+      }
     : null;
 }

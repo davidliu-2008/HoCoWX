@@ -232,12 +232,13 @@ export async function getWeatherSummary({
   const overnight = nextPeriods.find((period) => /tonight|overnight/i.test(period.name)) ?? null;
   const morning = chooseMorningPeriod(nextPeriods);
   const yesterdayTemperatureF =
-    visualCrossingHistory?.yesterdayTemperatureF ?? nwsYesterdayTemperatureF;
+    visualCrossingHistory ? Math.round(visualCrossingHistory.temperatureF) : nwsYesterdayTemperatureF;
 
   const value: WeatherSummary = {
     location,
     currentTemperatureF: current?.temperature ?? null,
     yesterdayTemperatureF,
+    visualCrossingObservation: visualCrossingHistory ?? undefined,
     yesterdayTemperatureSource: visualCrossingHistory
       ? "Visual Crossing"
       : nwsYesterdayTemperatureF === null

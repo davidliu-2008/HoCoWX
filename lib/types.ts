@@ -19,6 +19,12 @@ export type WeatherSummary = {
   currentTemperatureF: number | null;
   yesterdayTemperatureF?: number | null;
   yesterdayTemperatureSource?: "Visual Crossing" | "National Weather Service";
+  visualCrossingObservation?: {
+    observedAt: string;
+    temperatureF: number;
+    precipitationInches: number | null;
+    windSpeedMph: number | null;
+  };
   precipitationChance: number | null;
   expectedSnowfallInches: number | null;
   windSpeed: string | null;

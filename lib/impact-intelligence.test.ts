@@ -8,6 +8,12 @@ const weather: WeatherSummary = {
   currentTemperatureF: 30,
   yesterdayTemperatureF: 34,
   yesterdayTemperatureSource: "Visual Crossing",
+  visualCrossingObservation: {
+    observedAt: "2026-11-12T18:00:00.000Z",
+    temperatureF: 34.2,
+    precipitationInches: 0,
+    windSpeedMph: 8
+  },
   precipitationChance: 60,
   expectedSnowfallInches: 1,
   windSpeed: "8 mph",
@@ -35,6 +41,7 @@ test("creates a versioned and reproducible impact run", () => {
   assert.equal(run.runKey, `${IMPACT_MODEL_VERSION}:howard:2026-11-16:2026-11-13T18`);
   assert.deepEqual(run.sources, ["National Weather Service", "Visual Crossing"]);
   assert.equal(run.weatherSnapshot.expectedSnowfallInches, 1);
+  assert.deepEqual(run.weatherSnapshot.visualCrossingObservation, weather.visualCrossingObservation);
   assert.ok(run.prediction.scoreBreakdown.length > 0);
 });
 
