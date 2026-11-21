@@ -33,6 +33,13 @@ create table if not exists public.impact_outcomes (
 alter table public.impact_prediction_runs enable row level security;
 alter table public.impact_outcomes enable row level security;
 
+-- These tables are written only by trusted server-side API routes. Explicitly
+-- expose them to the server role while keeping browser roles locked out.
+revoke all on table public.impact_prediction_runs from anon, authenticated;
+revoke all on table public.impact_outcomes from anon, authenticated;
+grant select, insert, update on table public.impact_prediction_runs to service_role;
+grant select, insert, update on table public.impact_outcomes to service_role;
+
 comment on table public.impact_prediction_runs is
   'Versioned weather-impact predictions with the source snapshot used to create each result.';
 
