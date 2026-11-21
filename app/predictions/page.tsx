@@ -64,9 +64,12 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       <PageTabs active="predictions" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <p className="mb-3 text-sm font-semibold">{district.county} school prediction{schoolDate ? ` · ${schoolDate}` : ""}</p>
-        <h1 className="mx-auto max-w-5xl text-4xl font-bold leading-tight sm:text-5xl">{prediction?.label ?? "School operation prediction unavailable"}</h1>
+        <h1 className="mx-auto max-w-5xl text-4xl font-medium leading-tight sm:text-5xl">Predictions</h1>
       </header>
+      <section aria-labelledby="current-school-prediction" className="mx-auto max-w-3xl px-5 pt-8 text-center sm:px-8 sm:pt-10">
+        <p className="text-sm font-semibold text-slate-600">{district.county}{schoolDate ? ` · ${schoolDate}` : ""}</p>
+        <h2 id="current-school-prediction" className="mt-2 text-3xl font-bold leading-tight text-ink sm:text-4xl">{prediction?.label ?? "School operation prediction unavailable"}</h2>
+      </section>
       <aside aria-label="About this prediction" className="mx-5 mt-5 flex items-start gap-2 rounded-md border border-slate-200 bg-white px-4 py-3 text-sm text-ink sm:mx-8 lg:mx-auto lg:max-w-3xl">
         <Info aria-hidden="true" className="h-5 w-5 shrink-0 text-bay" />
         <span>Based on forecast weather. This is not an official school decision.</span>
