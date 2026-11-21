@@ -1,4 +1,5 @@
 import { MarylandComparisonSection } from "@/components/MarylandComparisonSection";
+import { MarylandStatusMap } from "@/components/MarylandStatusMap";
 import { PageTabs } from "@/components/PageTabs";
 import { getMarylandOperationsComparison, type MarylandOperationStatus } from "@/lib/maryland-operations";
 
@@ -33,6 +34,7 @@ export default async function MarylandStatusPage() {
         </div>
       </header>
 
+      <MarylandStatusMap reports={comparison.ok ? comparison.data : []} />
       <MarylandComparisonSection comparison={comparison} />
     </main>
   );
