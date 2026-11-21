@@ -157,12 +157,18 @@ function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
     timeZone: "America/New_York", weekday: "short", hour: "numeric", hourCycle: "h23"
   });
   const nextFreezing = hours.find((hour) => hour.temperatureF <= 32);
+  const nextPrecipitation = hours.find((hour) => (hour.precipitationChance ?? -1) >= 50);
 
   return (
     <section id="hourly-forecast" className="scroll-mt-24 bg-white py-7">
-      <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-2">
+      <div className="mb-5">
         <h2 id="hourly-heading" className="text-2xl font-bold text-ink">Weather through the day</h2>
-        {nextFreezing && <p className="text-sm font-semibold text-slate-600">At or below freezing: {compactTime(nextFreezing.time)}</p>}
+        {(nextFreezing || nextPrecipitation) && (
+          <dl className="mt-3 flex flex-wrap gap-x-8 gap-y-3 border-l-2 border-bay pl-4">
+            {nextFreezing && <div><dt className="text-sm text-slate-600">First hour at or below freezing</dt><dd className="font-semibold text-ink">{compactTime(nextFreezing.time)}</dd></div>}
+            {nextPrecipitation && <div><dt className="text-sm text-slate-600">First hour with 50%+ chance of precipitation</dt><dd className="font-semibold text-ink">{compactTime(nextPrecipitation.time)} · {nextPrecipitation.precipitationChance}%</dd></div>}
+          </dl>
+        )}
       </div>
       {hours.length === 0 ? <p className="text-sm text-slate-600">Hourly forecast unavailable.</p> : (
       <div role="region" aria-labelledby="hourly-heading" tabIndex={0} className="-mx-1 snap-x overflow-x-auto px-1 pb-3">
@@ -177,7 +183,7 @@ function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
           return (
           <li key={hour.time} className={`w-44 shrink-0 snap-start border-t-2 p-4 md:w-48 ${window ? "border-bay bg-ice" : "border-slate-200"}`}>
             <time dateTime={hour.time} className="block text-sm font-bold text-ink">{compactTime(hour.time)}</time>
-            <p className="mt-1 h-5 text-xs font-semibold text-bay">{window}</p>
+            <div className="mt-1 min-h-5 text-xs font-semibold text-bay">{window}</div>
             <div className="mt-2 text-2xl font-bold text-ink">{hour.temperatureF}°F</div>
             <p className="mt-1 min-h-10 text-sm leading-5 text-slate-600">{hour.shortForecast}</p>
             <p className="mt-3 text-xs font-medium text-slate-500">
@@ -424,8 +430,8 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
               </div>
             </div>
             <div className="text-left sm:text-right">
-              <p className="text-sm text-blue-100">Confidence</p>
-              <p className="text-3xl font-bold">{prediction.data.confidence}%</p>
+              <p className="text-sm text-blue-100">Weather impact score</p>
+              <p className="text-3xl font-bold">{prediction.data.confidence}<span className="text-base font-medium"> / 100</span></p>
               <p className="text-sm text-blue-100">{prediction.data.riskLevel} risk</p>
             </div>
           </div>
@@ -498,7 +504,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           fill
           priority
           sizes="(max-width: 1480px) 100vw, 1440px"
-          className="object-cover object-[64%_58%] sm:object-center"
+          className="dashboard-skyline object-cover object-[64%_58%] sm:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#091b36]/95 via-[#102f5c]/82 to-[#12305f]/45" />
         <div className="relative z-10 mx-auto grid w-full max-w-[1440px] items-end gap-5 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -511,15 +517,15 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
             </div>
             <h1 className="dashboard-headline max-w-4xl text-3xl font-black leading-tight sm:text-4xl md:text-6xl">By students. For students.</h1>
             <p className="mt-3 max-w-2xl text-base leading-6 text-blue-100 sm:mt-4 sm:text-lg sm:leading-8 md:text-xl">
-              Local weather, school operations, and environmental news for the Maryland community.
+              Local weather and school operations for the Maryland community.
             </p>
-            <Link href="#hourly-forecast" className="mt-4 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-navy transition hover:bg-blue-50 sm:mt-7">
-              View today&apos;s forecast <ArrowRight className="h-4 w-4" />
+            <Link href={weather.ok && weather.data.hourlyForecast.length > 0 ? "#hourly-forecast" : "#today"} className="mt-4 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-navy transition hover:bg-blue-50 sm:mt-7">
+              {weather.ok && weather.data.hourlyForecast.length > 0 ? "View hourly forecast" : "View dashboard details"} <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-6 border-t border-white/20 pt-6 lg:ml-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pr-8 lg:pt-0 xl:ml-10 xl:pl-12 xl:pr-12">
+          <div key={district.slug} className="county-data-in grid grid-cols-2 gap-6 border-t border-white/20 pt-6 lg:ml-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pr-8 lg:pt-0 xl:ml-10 xl:pl-12 xl:pr-12">
             <div>
-              <p className="text-sm font-semibold text-blue-200">Now</p>
+              <p className="text-sm font-semibold text-blue-200">{district.county} now</p>
               <p className="mt-1 text-4xl font-black">
                 {weather.ok && weather.data.currentTemperatureF !== null ? `${weather.data.currentTemperatureF}°` : "--"}
               </p>
@@ -545,7 +551,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         </div>
       </div>
 
-      <div id="today" className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
+      <div id="today" className="mx-auto w-full max-w-[1440px] scroll-mt-28 px-5 sm:px-8 lg:px-12">
+        <div key={district.slug} className="county-data-in">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
           <DistrictStatusCard status={status} isHoward={isHoward} />
           <PredictionCard prediction={prediction} />
@@ -553,6 +560,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         <WeatherCard weather={weather} county={district.county} />
         {weather.ok ? <HourlyTimeline weather={weather.data} /> : null}
         {weather.ok ? <FiveDaySchoolOutlook weather={weather.data} /> : null}
+        </div>
         <LiveRadar />
       </div>
 
@@ -591,7 +599,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
             </div>
             <div className="px-2 py-3 md:px-5">
               <h3 className="text-2xl font-black text-bay sm:text-3xl">Community Guidance</h3>
-              <p className="mt-4 text-lg leading-8 text-slate-700">Produce school-operation predictions, morning commute risk scores, confidence levels, and a factor-by-factor explanation.</p>
+              <p className="mt-4 text-lg leading-8 text-slate-700">Produce school-operation predictions, morning commute risk scores, and a factor-by-factor explanation.</p>
             </div>
           </div>
 

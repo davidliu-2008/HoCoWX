@@ -7,7 +7,15 @@ import { PageTabs } from "@/components/PageTabs";
 
 export const metadata = {
   title: "Weather Literacy Center | HoCo Weather Channel",
-  description: "A student guide to forecasts, winter weather, alerts, school impacts, and responsible weather communication."
+  description: "A student guide to forecasts, winter weather, alerts, school impacts, and responsible weather communication.",
+  alternates: { canonical: "/weather-literacy" },
+  openGraph: {
+    title: "Weather Literacy Center | HoCo Weather Channel",
+    description: "A student guide to forecasts, winter weather, alerts, school impacts, and responsible weather communication.",
+    url: "/weather-literacy",
+    images: ["/photography/howard-county-winter-sunset.webp"]
+  },
+  twitter: { card: "summary_large_image" }
 };
 
 const guideLinks = [

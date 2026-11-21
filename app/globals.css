@@ -211,11 +211,23 @@ main article[class*="shadow"] {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .dashboard-skyline { animation: dashboard-skyline-in 1100ms cubic-bezier(0.22, 0.8, 0.3, 1) both; }
+  .county-data-in { animation: county-data-in 260ms ease-out; }
   .dashboard-headline { animation: dashboard-headline-in 720ms ease-out both; }
   .prediction-score-fill {
     transform-origin: left;
     animation: prediction-score-in 850ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
   }
+}
+
+@keyframes dashboard-skyline-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes county-data-in {
+  from { opacity: 0.82; }
+  to { opacity: 1; }
 }
 
 @keyframes dashboard-headline-in {

@@ -12,6 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hocoweatherchannel.org"),
   title: "HoCo Weather Channel",
   description: "Howard County school operations, local weather, and student-led weather literacy.",
   icons: {

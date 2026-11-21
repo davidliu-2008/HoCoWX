@@ -3,7 +3,15 @@ import { PartnershipSelector } from "@/components/PartnershipSelector";
 
 export const metadata = {
   title: "Partnerships | HoCo Weather Channel",
-  description: "HoCo Weather Channel partnerships supporting student weather literacy and communication."
+  description: "HoCo Weather Channel partnerships supporting student weather literacy and communication.",
+  alternates: { canonical: "/partnerships" },
+  openGraph: {
+    title: "Partnerships | HoCo Weather Channel",
+    description: "HoCo Weather Channel partnerships supporting student weather literacy and communication.",
+    url: "/partnerships",
+    images: ["/photography/howard-county-winter-sunset.webp"]
+  },
+  twitter: { card: "summary_large_image" }
 };
 
 export default function PartnershipsPage() {

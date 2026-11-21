@@ -8,7 +8,15 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Predictions | HoCo Weather Channel",
-  description: "Current school-operation prediction and a transparent explanation of the weather-based model."
+  description: "Current school-operation prediction and a transparent explanation of the weather-based model.",
+  alternates: { canonical: "/predictions" },
+  openGraph: {
+    title: "Predictions | HoCo Weather Channel",
+    description: "Current school-operation prediction and a transparent explanation of the weather-based model.",
+    url: "/predictions",
+    images: ["/photography/howard-county-winter-sunset.webp"]
+  },
+  twitter: { card: "summary_large_image" }
 };
 
 const predictionHistory = [
@@ -89,10 +97,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                   <ScoreBar label="Impact score" score={prediction.confidence} note={prediction.riskLevel} />
                   <ScoreBar label="Morning commute" score={prediction.morningCommuteRisk.score} note={prediction.morningCommuteRisk.label} />
                 </div>
-                <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-slate-200 pt-5">
-                  <div><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">Risk level</dt><dd className="mt-2 text-2xl font-black text-ink">{prediction.riskLevel}</dd></div>
-                  <div><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">Confidence</dt><dd className="mt-2 text-2xl font-black text-ink">{prediction.confidence}%</dd></div>
-                </dl>
+                <p className="mt-6 border-t border-slate-200 pt-5 text-sm leading-6 text-slate-600">These scores summarize forecast hazards on a scale of 0 to 100. They are not probabilities of a delay or closure.</p>
               </div>
             </div>
           </section>
@@ -167,7 +172,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
 }
 
 function ScoreBar({ label, score, note }: { label: string; score: number; note: string }) {
-  return <div><div className="flex items-end justify-between gap-4"><div><p className="text-lg font-black text-ink">{label}</p><p className="mt-1 text-sm font-semibold text-slate-500">{note}</p></div><strong className="text-3xl text-ink">{score}%</strong></div><div aria-hidden="true" className="mt-4 h-2 bg-slate-100"><div className="prediction-score-fill h-full bg-bay" style={{ width: `${Math.min(100, Math.max(score, 0))}%` }} /></div></div>;
+  return <div><div className="flex items-end justify-between gap-4"><div><p className="text-lg font-black text-ink">{label}</p><p className="mt-1 text-sm font-semibold text-slate-500">{note}</p></div><strong className="shrink-0 text-3xl text-ink">{score}<span className="text-sm font-medium"> / 100</span></strong></div><div aria-hidden="true" className="mt-4 h-2 bg-slate-100"><div className="prediction-score-fill h-full bg-bay" style={{ width: `${Math.min(100, Math.max(score, 0))}%` }} /></div></div>;
 }
 
 function MethodStep({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {
