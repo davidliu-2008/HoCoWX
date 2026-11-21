@@ -4,7 +4,7 @@ import { PageTabs } from "@/components/PageTabs";
 
 export const metadata: Metadata = {
   title: "Announcements | HoCo Weather Channel",
-  description: "Severe weather broadcasting with HCPSS and a December 9 discussion with NOAA on weather AI.",
+  description: "Severe weather broadcasting with HCPSS and a December 9 discussion with NOAA on translating forecasts into local decisions.",
   alternates: { canonical: "/announcements" }
 };
 
@@ -28,9 +28,9 @@ export default function AnnouncementsPage() {
         <article className="grid gap-4 py-10 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-8 sm:py-14">
           <div className="text-sm font-semibold text-bay">Discussion with NOAA leadership <time dateTime="2026-12-09" className="mt-1 block text-slate-600">December 9, 2026</time></div>
           <div>
-            <h2 className="text-2xl font-semibold leading-tight text-ink sm:text-3xl">Presenting HoCo Weather Channel and its weather AI roadmap to NOAA</h2>
-            <p className="mt-4 leading-7 text-slate-700">On December 9, HoCo Weather Channel will meet with <a href="https://www.noaa.gov/our-people/leadership/dr-neil-jacobs-2025" className="font-semibold text-bay underline underline-offset-4">NOAA Administrator Dr. Neil Jacobs</a> to demonstrate the platform, invite his critique, and discuss how AI could make public weather data more useful to the institutions that rely on it.</p>
-            <p className="mt-4 leading-7 text-slate-700">Our work starts with a question a regional forecast cannot answer by itself: Will freezing rain arrive before or after the first school buses leave? We want to build a system that connects forecasts, observations, and alerts to local travel windows, shows the evidence behind each assessment, and keeps uncertainty visible. We archive our predictions so we can compare them with recorded school outcomes and see where the model needs work.</p>
+            <h2 className="text-2xl font-semibold leading-tight text-ink sm:text-3xl">A decision layer for public weather data</h2>
+            <p className="mt-4 leading-7 text-slate-700">On December 9, HoCo Weather Channel will meet with <a href="https://www.noaa.gov/our-people/leadership/dr-neil-jacobs-2025" className="font-semibold text-bay underline underline-offset-4">NOAA Administrator Dr. Neil Jacobs</a> to demonstrate the platform and seek his feedback on our roadmap: building a layer that translates weather forecasts into the local insights school districts and governments need to make decisions.</p>
+            <p className="mt-4 leading-7 text-slate-700">School travel is our first use case. A regional forecast may call for freezing rain; a district needs to know whether it could arrive before the first buses leave. We connect forecasts, observations, and alerts to local travel windows, explain the evidence and uncertainty, and archive our predictions so we can compare them with recorded school outcomes.</p>
             <p className="mt-4 leading-7 text-slate-700">A potential long-term collaboration could start with a school-travel pilot. We want to explore what data and evaluation methods would make that pilot credible, then test whether the briefings help local teams identify the hours of greatest concern and explain the evidence behind their decisions.</p>
           </div>
         </article>
