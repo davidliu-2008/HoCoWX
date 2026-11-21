@@ -211,6 +211,7 @@ main article[class*="shadow"] {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  details[open] > .score-breakdown-content { animation: county-data-in 260ms ease-out; }
   .dashboard-skyline { animation: dashboard-skyline-in 1100ms cubic-bezier(0.22, 0.8, 0.3, 1) both; }
   .county-data-in { animation: county-data-in 260ms ease-out; }
   .dashboard-headline { animation: dashboard-headline-in 720ms ease-out both; }

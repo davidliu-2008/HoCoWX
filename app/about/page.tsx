@@ -164,6 +164,13 @@ export default function AboutPage() {
         </div>
         <Link href="/partnerships" className="inline-flex items-center gap-2 font-bold text-bay hover:underline">View partnerships <ArrowRight className="h-4 w-4" /></Link>
       </section>
+      <section aria-labelledby="our-perspective" className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
+        <h2 id="our-perspective" className="mb-7 text-center text-3xl font-semibold text-ink">Our perspective</h2>
+        <figure className="rounded-lg bg-ice p-6 sm:p-9">
+          <blockquote className="max-w-2xl text-2xl font-medium leading-snug text-ink">Weather models forecast the atmosphere. We forecast its impact on people.</blockquote>
+          <figcaption className="mt-6 text-sm font-semibold text-slate-700">HoCo Weather Channel</figcaption>
+        </figure>
+      </section>
     </main>
   );
 }

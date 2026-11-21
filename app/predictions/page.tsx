@@ -1,4 +1,5 @@
 import { PageTabs } from "@/components/PageTabs";
+import { Info, Minus, Plus } from "lucide-react";
 import { createStoredImpactPrediction } from "@/lib/impact-service";
 import { getMarylandDistrict } from "@/lib/maryland-districts";
 import { getWeatherSummary } from "@/lib/weather";
@@ -39,17 +40,21 @@ function badgeClass(riskLevel: PredictionResult["riskLevel"]) {
 
 export default async function PredictionsPage({ searchParams }: { searchParams: Promise<{ county?: string }> }) {
   let prediction: PredictionResult | null = null;
+  let schoolDate: string | null = null;
   let error: string | null = null;
   const requestedCounty = (await searchParams).county ?? "howard";
   const district = getMarylandDistrict(requestedCounty) ?? getMarylandDistrict("howard")!;
 
   try {
     const weather = await getWeatherSummary({ latitude: district.latitude, longitude: district.longitude, location: district.county });
-    prediction = (await createStoredImpactPrediction({
+    const run = await createStoredImpactPrediction({
       weather,
       districtSlug: district.slug,
       county: district.county
-    })).prediction;
+    });
+    prediction = run.prediction;
+    schoolDate = new Intl.DateTimeFormat("en-US", { dateStyle: "full", timeZone: "UTC" })
+      .format(new Date(`${run.targetDate}T00:00:00Z`));
   } catch (caught) {
     error = caught instanceof Error ? caught.message : "Prediction data could not be loaded.";
   }
@@ -59,9 +64,13 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       <PageTabs active="predictions" />
 
       <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <h1 className="mx-auto max-w-5xl text-4xl font-medium leading-tight text-ink sm:text-5xl">School Operation Predictions</h1>
-        <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A transparent model for measuring how forecast weather could affect school travel and operations.</p>
+        <p className="mb-3 text-sm font-semibold">{district.county} school prediction{schoolDate ? ` · ${schoolDate}` : ""}</p>
+        <h1 className="mx-auto max-w-5xl text-4xl font-bold leading-tight sm:text-5xl">{prediction?.label ?? "School operation prediction unavailable"}</h1>
       </header>
+      <aside aria-label="About this prediction" className="mx-5 mt-5 flex items-start gap-2 rounded-md border border-slate-200 bg-white px-4 py-3 text-sm text-ink sm:mx-8 lg:mx-auto lg:max-w-3xl">
+        <Info aria-hidden="true" className="h-5 w-5 shrink-0 text-bay" />
+        <span>Based on forecast weather. This is not an official school decision.</span>
+      </aside>
 
       {prediction ? (
         <>
@@ -69,13 +78,8 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
             <div className="mx-auto grid w-full max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white sm:max-w-[calc(100vw-4rem)] lg:max-w-[min(1500px,calc(100vw-6rem))] xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] 2xl:min-h-[360px] 2xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)_minmax(0,1fr)]">
               <div className="min-w-0 flex flex-col justify-between bg-navy p-7 text-white sm:p-9">
                 <div>
-                  <p className="text-sm font-bold uppercase tracking-wide text-blue-200">Current model run</p>
-                  <h2 className="mt-5 text-3xl font-medium leading-tight text-white sm:text-4xl">{prediction.label}</h2>
+                  <h2 className="text-2xl font-semibold text-white">Why we made this call</h2>
                   <p className="mt-5 text-lg leading-8 text-blue-100">{prediction.explanation}</p>
-                </div>
-                <div className="mt-12 border-t border-white/25 pt-6">
-                  <p className="text-sm text-blue-200">Location</p>
-                  <p className="mt-2 text-2xl font-black">{district.county}</p>
                 </div>
               </div>
 
@@ -119,10 +123,11 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
           </section>
 
           <section className="mx-auto grid w-full max-w-[1500px] gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2 lg:px-12">
-            <div className="bg-blue-50/55 p-6 sm:p-8">
-              <p className="text-sm font-bold uppercase tracking-wide text-bay">Risk score breakdown</p>
-              <h2 className="mt-2 text-3xl font-black text-ink">Today&apos;s score</h2>
-              <div className="mt-6 space-y-3">
+            <details className="group self-start bg-blue-50/55 p-6 sm:p-8">
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 text-xl font-bold text-ink">
+                Risk score breakdown <span aria-hidden="true" className="text-bay group-open:rotate-45 motion-safe:transition-transform">+</span>
+              </summary>
+              <div className="score-breakdown-content mt-4 space-y-3">
                 {prediction.scoreBreakdown.map((item) => (
                   <div key={`${item.label}-${item.points}`} className="flex items-center justify-between gap-5 bg-white/80 px-5 py-4">
                     <span className="text-sm font-semibold text-slate-700">{item.label}</span>
@@ -130,7 +135,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                   </div>
                 ))}
               </div>
-            </div>
+            </details>
             <div className="bg-blue-50/55 p-6 sm:p-8">
               <p className="text-sm font-bold uppercase tracking-wide text-bay">Morning commute</p>
               <h2 className="mt-2 text-3xl font-black text-ink">5 AM–9 AM risk</h2>
@@ -141,6 +146,25 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
             </div>
           </section>
 
+          <section aria-labelledby="prediction-faq" className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
+            <h2 id="prediction-faq" className="mb-7 text-center text-3xl font-semibold text-ink">Prediction FAQs</h2>
+            <div className="grid gap-2">
+              {[
+                ["Does the prediction tell me whether school is officially closed?", "No. Your school district makes the final decision. Check its official announcements before changing your plans."],
+                ["Is the impact score the chance of a closure?", "No. The score is a 0 to 100 summary of weather hazards, including precipitation, temperature, and travel timing."],
+                ["Why might the prediction change?", "New forecasts and alerts can change what the model expects during the school travel window."]
+              ].map(([question, answer]) => (
+                <details key={question} name="prediction-faq" className="group bg-ice px-5">
+                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-ink">
+                    {question}
+                    <Plus aria-hidden="true" className="h-4 w-4 shrink-0 text-bay group-open:hidden" />
+                    <Minus aria-hidden="true" className="hidden h-4 w-4 shrink-0 text-bay group-open:block" />
+                  </summary>
+                  <p className="pb-5 text-sm leading-6 text-slate-700">{answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
           <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
             <div className="mx-auto max-w-[1400px] text-center">
               <h2 className="text-3xl font-black text-ink sm:text-4xl">2026 Predictions</h2>

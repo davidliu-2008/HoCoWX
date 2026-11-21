@@ -14,6 +14,7 @@ import {
   TrendingUp,
   Wind
 } from "lucide-react";
+import { DashboardAnnouncement } from "@/components/DashboardAnnouncement";
 import { PageTabs } from "@/components/PageTabs";
 import { CountyPreference } from "@/components/CountyPreference";
 import { LiveRadar } from "@/components/LiveRadar";
@@ -496,6 +497,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen w-full bg-white pb-0">
       <PageTabs active="dashboard" />
+      <DashboardAnnouncement />
 
       <header className="home-hero relative overflow-hidden bg-navy px-5 py-6 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
         <Image

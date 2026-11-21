@@ -1,4 +1,7 @@
+"use client";
+
 import { ExternalLink, MapPinned } from "lucide-react";
+import { useState } from "react";
 import type { MarylandOperationStatus } from "@/lib/maryland-operations";
 
 type LoadState<T> =
@@ -39,6 +42,10 @@ export function MarylandComparisonSection({
 }: {
   comparison: LoadState<MarylandOperationStatus[]>;
 }) {
+  const [changesOnly, setChangesOnly] = useState(false);
+  const rows = comparison.ok ? comparison.data.filter(({ statusKind }) =>
+    !changesOnly || statusKind === "closed" || statusKind === "delay" || statusKind === "virtual"
+  ) : [];
   return (
     <section className="mt-6 overflow-hidden bg-white px-5 py-6 sm:px-8 md:py-7">
       <div className="mb-5">
@@ -52,15 +59,20 @@ export function MarylandComparisonSection({
 
       {comparison.ok ? (
         <>
+          <label className="mb-4 flex min-h-11 w-fit cursor-pointer items-center gap-2 text-sm font-semibold text-ink">
+            <input type="checkbox" checked={changesOnly} onChange={(event) => setChangesOnly(event.target.checked)} className="h-4 w-4 accent-blue-700" />
+            Show announced changes only
+          </label>
+          <p role="status" className="mb-3 text-sm text-slate-600">{rows.length ? `${rows.length} districts shown` : changesOnly ? "No announced changes in the available reports." : "No district reports available."}</p>
           <div className="grid gap-3 md:hidden">
-            {comparison.data.map((item) => (
+            {rows.map((item) => (
               <article key={item.county} className={`rounded-lg p-4 ${item.county === "Howard County" ? "bg-blue-50 ring-1 ring-blue-200" : "bg-ice"}`}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h3 className="font-black text-ink">{item.county}</h3>
                     <p className="mt-1 text-xs leading-5 text-slate-500">{item.district}</p>
                   </div>
-                  <span className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ring-1 ${statusBadgeClass(item.statusKind)}`}>{item.status}</span>
+                  <span className={`inline-flex max-w-[50%] rounded-md px-2.5 py-1 text-xs font-bold ring-1 ${statusBadgeClass(item.statusKind)}`}>{item.status}</span>
                 </div>
                 <div className="mt-4 flex items-center justify-between gap-3 border-t border-blue-100 pt-3 text-xs text-slate-500">
                   <span>Updated {compactTime(item.lastUpdated ?? item.checkedAt)}</span>
@@ -82,7 +94,7 @@ export function MarylandComparisonSection({
               </tr>
             </thead>
             <tbody>
-              {comparison.data.map((item) => (
+              {rows.map((item) => (
                 <tr key={item.county} className="align-top odd:bg-ice/60">
                   <td className="border-b border-blue-50 px-3 py-3 font-semibold text-ink">
                     {item.county}
