@@ -6,6 +6,7 @@ export const colors = {
     text: "#10213f",
     muted: "#64748b",
     primary: "#2563eb",
+    onPrimary: "#ffffff",
     border: "#bfdbfe",
     shadow: "#2563eb"
   },
@@ -16,6 +17,7 @@ export const colors = {
     text: "#eff6ff",
     muted: "#b6c6dc",
     primary: "#8bb7ff",
+    onPrimary: "#071426",
     border: "#25456f",
     shadow: "#000000"
   },
