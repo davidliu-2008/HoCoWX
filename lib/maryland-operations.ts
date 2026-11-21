@@ -388,7 +388,22 @@ async function fetchDistrictStatus(district: MarylandDistrict): Promise<Maryland
       }
     }
 
-    if (!reachedOfficialSource || strictNoticeCounties.has(district.county)) {
+    if (strictNoticeCounties.has(district.county)) {
+      return {
+        ...district,
+        status: "Normal Operations (assumed)",
+        statusKind: "normal",
+        lastUpdated: null,
+        checkedAt,
+        experimental: false,
+        parserType: "county-specific",
+        matchedText: reachedOfficialSource
+          ? "No current district-wide operations change was found on the official homepage."
+          : "The official homepage could not be checked. Normal operations are assumed, not confirmed."
+      };
+    }
+
+    if (!reachedOfficialSource) {
       return {
         ...district,
         status: "Unknown",
