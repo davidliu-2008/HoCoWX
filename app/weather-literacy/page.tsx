@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   AlertTriangle, ArrowRight, CheckCircle2, Clock3, CloudRain, CloudSnow,
   ExternalLink, Gauge, Layers3, Map, Radar, School, Snowflake, ThermometerSnowflake, Wind
@@ -107,12 +108,16 @@ export default function WeatherLiteracyPage() {
           </div>
         </div>
         <figure className="mt-10 grid items-center gap-8 bg-white/80 p-5 sm:p-8 lg:grid-cols-[1.15fr_0.85fr]">
-          <img
+          <a href="https://www.weather.gov/images/wrn/Infographics/winter_forecast_challenges.png" aria-label="View the full-size winter forecast infographic">
+          <Image
             src="https://www.weather.gov/images/wrn/Infographics/winter_forecast_challenges.png"
             alt="National Weather Service infographic explaining five things to know about winter weather forecasts"
-            className="mx-auto max-h-[650px] w-full object-contain"
-            loading="lazy"
+            width={1200}
+            height={900}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="mx-auto aspect-[4/3] max-h-[650px] w-full object-contain"
           />
+          </a>
           <figcaption className="text-sm leading-6 text-slate-600">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Forecasts evolve</p>
             <h3 className="mt-2 text-2xl font-black text-ink">Focus on the range of outcomes.</h3>
@@ -133,7 +138,7 @@ export default function WeatherLiteracyPage() {
             <figcaption className="px-2 py-3 text-xs leading-5 text-slate-500">How warm and cold layers determine precipitation type. <a href="https://www.weather.gov/wrn/winter_hazard_infographics" target="_blank" rel="noreferrer" className="font-bold text-bay hover:underline">Source: NOAA National Weather Service</a></figcaption>
           </figure>
           <figure className="overflow-hidden bg-white/80 p-4">
-            <img src="https://www.weather.gov/images/wrn/Infographics/2021/ww-winter.png" alt="National Weather Service infographic comparing a Winter Storm Watch and Winter Storm Warning" className="aspect-[4/3] w-full object-contain" loading="lazy" />
+            <a href="https://www.weather.gov/images/wrn/Infographics/2021/ww-winter.png" aria-label="View the full-size winter watch and warning infographic"><Image src="https://www.weather.gov/images/wrn/Infographics/2021/ww-winter.png" alt="National Weather Service infographic comparing a Winter Storm Watch and Winter Storm Warning" width={1200} height={900} sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[4/3] w-full object-contain" /></a>
             <figcaption className="px-2 py-3 text-xs leading-5 text-slate-500">A watch means prepare; a warning means take action. <a href="https://www.weather.gov/wrn/winter_hazard_infographics" target="_blank" rel="noreferrer" className="font-bold text-bay hover:underline">Source: NOAA National Weather Service</a></figcaption>
           </figure>
         </div>
@@ -144,7 +149,7 @@ export default function WeatherLiteracyPage() {
         <SectionHeading eyebrow="Guide 03" title="Evaluate the school day.">A school-operation forecast is a transportation and timing question. Consider buses, walkers, staff travel, neighborhood roads, parking lots, and treatment time.</SectionHeading>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{schoolFactors.map(({ title, icon: Icon, text }) => <article key={title} className="bg-blue-50/55 p-6"><Icon className="h-6 w-6 text-bay" /><h3 className="mt-4 text-xl font-bold text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></article>)}</div>
         <figure className="mt-10 grid overflow-hidden bg-white/80 p-5 sm:p-8 lg:grid-cols-[0.52fr_0.48fr] lg:items-center">
-          <img src="https://www.weather.gov/images/wrn/Infographics/2020/bridges-freeze-first-2020.png" alt="National Weather Service infographic explaining why bridges freeze before other roads" className="h-full max-h-[620px] w-full object-contain" loading="lazy" />
+          <a href="https://www.weather.gov/images/wrn/Infographics/2020/bridges-freeze-first-2020.png" aria-label="View the full-size bridges freeze first infographic"><Image src="https://www.weather.gov/images/wrn/Infographics/2020/bridges-freeze-first-2020.png" alt="National Weather Service infographic explaining why bridges freeze before other roads" width={1200} height={900} sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[4/3] max-h-[620px] w-full object-contain" /></a>
           <figcaption className="flex flex-col justify-center p-6 sm:p-8">
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Road science</p>
             <h3 className="mt-2 text-2xl font-black text-ink">Why do bridges freeze first?</h3>

@@ -83,13 +83,13 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
                 </div>
               </div>
 
-              <div className="min-w-0 p-7 sm:p-9 xl:col-span-2 xl:grid xl:grid-cols-[1fr_1fr] xl:gap-12 2xl:col-span-1 2xl:block">
+              <div className="min-w-0 border-t border-slate-200 p-7 sm:p-9 xl:col-span-2 2xl:col-span-1 2xl:border-t-0">
                 <p className="text-sm font-bold uppercase tracking-wide text-slate-500">Model outputs</p>
-                <div className="mt-7 space-y-9">
+                <div className="mt-5 grid gap-5 md:grid-cols-2 2xl:grid-cols-1">
                   <ScoreBar label="Impact score" score={prediction.confidence} note={prediction.riskLevel} />
                   <ScoreBar label="Morning commute" score={prediction.morningCommuteRisk.score} note={prediction.morningCommuteRisk.label} />
                 </div>
-                <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-slate-200 pt-7">
+                <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-slate-200 pt-5">
                   <div><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">Risk level</dt><dd className="mt-2 text-2xl font-black text-ink">{prediction.riskLevel}</dd></div>
                   <div><dt className="text-xs font-bold uppercase tracking-wide text-slate-500">Confidence</dt><dd className="mt-2 text-2xl font-black text-ink">{prediction.confidence}%</dd></div>
                 </dl>
@@ -167,7 +167,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
 }
 
 function ScoreBar({ label, score, note }: { label: string; score: number; note: string }) {
-  return <div><div className="flex items-end justify-between gap-4"><div><p className="text-lg font-black text-ink">{label}</p><p className="mt-1 text-sm font-semibold text-slate-500">{note}</p></div><strong className="text-3xl text-ink">{score}%</strong></div><div className="mt-4 h-2 bg-slate-100"><div className="h-full bg-bay" style={{ width: `${Math.max(score, 3)}%` }} /></div></div>;
+  return <div><div className="flex items-end justify-between gap-4"><div><p className="text-lg font-black text-ink">{label}</p><p className="mt-1 text-sm font-semibold text-slate-500">{note}</p></div><strong className="text-3xl text-ink">{score}%</strong></div><div aria-hidden="true" className="mt-4 h-2 bg-slate-100"><div className="prediction-score-fill h-full bg-bay" style={{ width: `${Math.min(100, Math.max(score, 0))}%` }} /></div></div>;
 }
 
 function MethodStep({ label, title, children }: { label: string; title: string; children: React.ReactNode }) {

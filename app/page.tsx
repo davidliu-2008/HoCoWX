@@ -152,24 +152,42 @@ function RiskBreakdownCard({ prediction }: { prediction: PredictionResult }) {
 }
 
 function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
+  const hours = weather.hourlyForecast.slice(0, 12);
+  const localTime = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York", weekday: "short", hour: "numeric", hourCycle: "h23"
+  });
+  const nextFreezing = hours.find((hour) => hour.temperatureF <= 32);
+
   return (
     <section id="hourly-forecast" className="scroll-mt-24 bg-white py-7">
-      <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-ink">
-        <CloudSun className="h-5 w-5 text-bay" />
-        Hourly Forecast Timeline
-      </h2>
-      <div className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2">
-        {weather.hourlyForecast.slice(0, 8).map((hour) => (
-          <div key={hour.time} className="w-52 shrink-0 snap-start rounded-lg bg-ice p-4 md:w-56">
-            <div className="mb-2 text-sm font-bold text-ink">{compactTime(hour.time)}</div>
-            <div className="text-2xl font-bold text-bay">{hour.temperatureF} F</div>
+      <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-2">
+        <h2 id="hourly-heading" className="text-2xl font-bold text-ink">Weather through the day</h2>
+        {nextFreezing && <p className="text-sm font-semibold text-slate-600">At or below freezing: {compactTime(nextFreezing.time)}</p>}
+      </div>
+      {hours.length === 0 ? <p className="text-sm text-slate-600">Hourly forecast unavailable.</p> : (
+      <div role="region" aria-labelledby="hourly-heading" tabIndex={0} className="-mx-1 snap-x overflow-x-auto px-1 pb-3">
+        <ol className="flex w-max min-w-full">
+        {hours.map((hour) => {
+          const parts = localTime.formatToParts(new Date(hour.time));
+          const weekday = parts.find((part) => part.type === "weekday")?.value;
+          const clockHour = Number(parts.find((part) => part.type === "hour")?.value);
+          const weekdayTravel = weekday !== "Sat" && weekday !== "Sun";
+          const window = weekdayTravel && clockHour >= 5 && clockHour < 9 ? "Morning travel" :
+            weekdayTravel && clockHour >= 14 && clockHour < 17 ? "Afternoon travel" : null;
+          return (
+          <li key={hour.time} className={`w-44 shrink-0 snap-start border-t-2 p-4 md:w-48 ${window ? "border-bay bg-ice" : "border-slate-200"}`}>
+            <time dateTime={hour.time} className="block text-sm font-bold text-ink">{compactTime(hour.time)}</time>
+            <p className="mt-1 h-5 text-xs font-semibold text-bay">{window}</p>
+            <div className="mt-2 text-2xl font-bold text-ink">{hour.temperatureF}°F</div>
             <p className="mt-1 min-h-10 text-sm leading-5 text-slate-600">{hour.shortForecast}</p>
             <p className="mt-3 text-xs font-medium text-slate-500">
-              Precip {hour.precipitationChance ?? 0}% - {hour.windSpeed}
+              Precip {hour.precipitationChance == null ? "unavailable" : `${hour.precipitationChance}%`} · {hour.windSpeed}
             </p>
-          </div>
-        ))}
+          </li>
+        );})}
+        </ol>
       </div>
+      )}
     </section>
   );
 }
@@ -473,17 +491,17 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     <main id="main-content" tabIndex={-1} className="min-h-screen w-full bg-white pb-0">
       <PageTabs active="dashboard" />
 
-      <header className="home-hero relative overflow-hidden bg-navy px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+      <header className="home-hero relative overflow-hidden bg-navy px-5 py-6 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
         <Image
           src="/photography/howard-county-winter-sunset.jpg"
           alt="Snow-covered Howard County landscape beneath a winter sunset"
           fill
           priority
           sizes="(max-width: 1480px) 100vw, 1440px"
-          className="object-cover object-center"
+          className="object-cover object-[64%_58%] sm:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#091b36]/95 via-[#102f5c]/82 to-[#12305f]/45" />
-        <div className="relative z-10 mx-auto grid w-full max-w-[1440px] items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1440px] items-end gap-5 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <div className="mb-4 flex flex-wrap items-center gap-3 text-sm font-bold uppercase tracking-wide">
               <span className="text-blue-200">HoCo Weather Channel</span>
@@ -491,11 +509,11 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
                 HCPSS Partner
               </Link>
             </div>
-            <h1 className="max-w-4xl text-4xl font-black leading-tight md:text-6xl">By students. For students.</h1>
-            <p className="mt-4 max-w-2xl text-lg leading-8 text-blue-100 md:text-xl">
+            <h1 className="dashboard-headline max-w-4xl text-3xl font-black leading-tight sm:text-4xl md:text-6xl">By students. For students.</h1>
+            <p className="mt-3 max-w-2xl text-base leading-6 text-blue-100 sm:mt-4 sm:text-lg sm:leading-8 md:text-xl">
               Local weather, school operations, and environmental news for the Maryland community.
             </p>
-            <Link href="#hourly-forecast" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-navy transition hover:bg-blue-50">
+            <Link href="#hourly-forecast" className="mt-4 inline-flex min-h-12 items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-navy transition hover:bg-blue-50 sm:mt-7">
               View today&apos;s forecast <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

@@ -56,11 +56,13 @@ const mobileLinks = [
   { href: "/weather-literacy", label: "Learn", tab: "literacy" },
   { href: "/about", label: "About", tab: "about" },
   { href: "/partnerships", label: "Partners", tab: "partnerships" },
-  { href: "/accessibility", label: "Accessibility", tab: "accessibility" }
+  { href: "/accessibility", label: "Accessibility", tab: "accessibility" },
+  { href: "/student-polls", label: "Student Prediction Lab", tab: "student-polls" },
+  { href: "/interview", label: "Superintendent Interview", tab: "interview" }
 ] as const;
 
 export function PageTabs({ active }: { active: Tab }) {
-  const activeMobileLink = useRef<HTMLAnchorElement>(null);
+  const mobileMenu = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname();
   const router = useRouter();
   const [county, setCounty] = useState("howard");
@@ -69,9 +71,8 @@ export function PageTabs({ active }: { active: Tab }) {
   const countyHref = (href: string) => county === "howard" ? href : `${href}?county=${encodeURIComponent(county)}`;
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    activeMobileLink.current?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest", inline: "center" });
-  }, [active]);
+    mobileMenu.current?.removeAttribute("open");
+  }, [pathname]);
 
   useEffect(() => {
     const queryCounty = new URLSearchParams(window.location.search).get("county");
@@ -97,7 +98,7 @@ export function PageTabs({ active }: { active: Tab }) {
     <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur" aria-label="Main sections">
       <div className="mx-auto flex min-h-16 w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:min-h-20">
         <Link href={countyHref("/")} className="flex shrink-0 items-center" aria-label="HoCo Weather Channel home">
-          <img src="/hoco-weather-channel-icon.png" alt="" className="h-14 w-14 shrink-0 object-contain lg:h-16 lg:w-16" />
+          <img src="/hoco-weather-channel-icon.png" alt="" width={64} height={64} className="h-14 w-14 shrink-0 object-contain lg:h-16 lg:w-16" />
         </Link>
 
         <div className="hidden items-stretch lg:flex">
@@ -158,13 +159,24 @@ export function PageTabs({ active }: { active: Tab }) {
         </div>
       </div>
 
-      <div className="no-scrollbar flex w-full gap-1 overflow-x-auto border-t border-blue-50 px-4 lg:hidden">
+      <details ref={mobileMenu} className="group relative border-t border-blue-50 lg:hidden" onKeyDown={(event) => {
+        if (event.key === "Escape" && event.currentTarget.open) {
+          event.currentTarget.open = false;
+          event.currentTarget.querySelector("summary")?.focus();
+        }
+      }}>
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 px-5 text-sm font-bold text-ink">
+          <span>{mobileLinks.find((item) => item.tab === active)?.label}</span>
+          <span className="flex items-center gap-2">Menu <ChevronDown aria-hidden="true" className="h-4 w-4 group-open:rotate-180" /></span>
+        </summary>
+        <div className="absolute inset-x-0 top-full grid max-h-[65dvh] grid-cols-2 gap-1 overflow-y-auto border-b border-slate-200 bg-white p-3 shadow-lg">
           {mobileLinks.map((item) => (
-            <Link ref={active === item.tab ? activeMobileLink : undefined} key={item.href} href={countyHref(item.href)} aria-current={active === item.tab ? "page" : undefined} className={`min-h-11 shrink-0 border-b-2 px-3 py-3 text-xs font-bold ${active === item.tab ? "border-bay text-bay" : "border-transparent text-slate-600"}`}>
+            <Link key={item.href} href={countyHref(item.href)} aria-current={active === item.tab ? "page" : undefined} className={`${menuLink} ${active === item.tab ? "bg-blue-50 text-bay" : ""}`} onClick={() => mobileMenu.current?.removeAttribute("open")}>
               {item.label}
             </Link>
           ))}
-      </div>
+        </div>
+      </details>
     </nav>
   );
 }

@@ -8,6 +8,7 @@ const config: Config = {
         sans: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       colors: {
+        slate: { 500: "#596a81" },
         bay: "#2563eb",
         ink: "#10213f",
         frost: "#eaf4ff",
