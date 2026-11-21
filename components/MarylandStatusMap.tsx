@@ -18,10 +18,17 @@ const checkedTime = new Intl.DateTimeFormat("en-US", {
 
 export function MarylandStatusMap({ reports }: { reports: MarylandOperationStatus[] }) {
   const [selected, setSelected] = useState("Howard County");
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [selectionVersion, setSelectionVersion] = useState(0);
   const byCounty = new Map(reports.map((report) => [report.county, report]));
   const report = byCounty.get(selected);
   const status = report?.statusKind ?? "unknown";
-  const selectedPath = boundaries.counties.find(({ name }) => name === selected)?.path;
+  const raised = [selected, ...(hovered && hovered !== selected ? [hovered] : [])];
+
+  function selectCounty(name: string) {
+    setSelected(name);
+    setSelectionVersion((version) => version + 1);
+  }
 
   return (
     <section aria-labelledby="maryland-map-heading" className="bg-white px-5 py-8 sm:px-8 lg:px-12">
@@ -33,12 +40,14 @@ export function MarylandStatusMap({ reports }: { reports: MarylandOperationStatu
               {boundaries.counties.map(({ name, path }) => {
                 const item = byCounty.get(name);
                 return (
-                  <path key={name} d={path} fill={legend[item?.statusKind ?? "unknown"].fill} fillRule="evenodd" stroke="#fff" strokeWidth={1.4} strokeLinejoin="round" onClick={() => setSelected(name)} className="cursor-pointer hover:brightness-110 motion-safe:transition-[filter]">
+                  <path key={name} d={path} fill={legend[item?.statusKind ?? "unknown"].fill} fillRule="evenodd" stroke="#fff" strokeWidth={1.4} strokeLinejoin="round" onClick={() => selectCounty(name)} onPointerEnter={(event) => { if (event.pointerType === "mouse") setHovered(name); }} onPointerLeave={() => setHovered(null)} className="cursor-pointer">
                     <title>{name}: {item?.statusKind === "unknown" ? legend.unknown.label : item?.status ?? legend.unknown.label}</title>
                   </path>
                 );
               })}
-              <path key={selected} d={selectedPath} fill="none" stroke="#10213f" strokeWidth={3} strokeLinejoin="round" className="maryland-map-selection pointer-events-none" />
+              {raised.map((name) => (
+                <path key={name === selected ? `${name}-${selectionVersion}` : name} d={boundaries.counties.find((county) => county.name === name)?.path} fill={legend[byCounty.get(name)?.statusKind ?? "unknown"].fill} fillRule="evenodd" stroke={name === selected ? "#10213f" : "#fff"} strokeWidth={name === selected ? 2.5 : 1.6} strokeLinejoin="round" className={`maryland-map-lift pointer-events-none ${name === selected ? "maryland-map-selection" : "maryland-map-hover"}`} />
+              ))}
             </svg>
             <ul aria-label="Map legend" className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-700">
               {Object.values(legend).map(({ label, fill }) => <li key={label} className="flex items-center gap-2"><span aria-hidden="true" className="h-3 w-3 rounded-sm" style={{ backgroundColor: fill }} />{label}</li>)}
@@ -48,7 +57,7 @@ export function MarylandStatusMap({ reports }: { reports: MarylandOperationStatu
           <div className="border-t border-slate-200 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
             <label className="block text-sm font-semibold text-ink">
               Select a county or city
-              <select value={selected} onChange={(event) => setSelected(event.target.value)} className="mt-2 min-h-11 w-full rounded-md border border-blue-200 bg-white px-3 text-sm text-ink">
+              <select value={selected} onChange={(event) => selectCounty(event.target.value)} className="mt-2 min-h-11 w-full rounded-md border border-blue-200 bg-white px-3 text-sm text-ink">
                 {boundaries.counties.map(({ name }) => <option key={name} value={name}>{name}</option>)}
               </select>
             </label>

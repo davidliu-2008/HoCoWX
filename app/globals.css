@@ -214,7 +214,8 @@ main article[class*="shadow"] {
   details[open] > .score-breakdown-content { animation: county-data-in 260ms ease-out; }
   .dashboard-skyline { animation: dashboard-skyline-in 1100ms cubic-bezier(0.22, 0.8, 0.3, 1) both; }
   .county-data-in { animation: county-data-in 260ms ease-out; }
-  .maryland-map-selection { animation: maryland-map-selection-in 420ms ease-out; }
+  .maryland-map-selection { animation: maryland-map-selection-in 380ms ease-out; }
+  .maryland-map-hover { animation: maryland-map-hover-in 150ms ease-out; }
   .dashboard-headline { animation: dashboard-headline-in 720ms ease-out both; }
   .prediction-score-fill {
     transform-origin: left;
@@ -233,9 +234,21 @@ main article[class*="shadow"] {
 }
 
 @keyframes maryland-map-selection-in {
-  0% { stroke-width: 3; }
-  35% { stroke-width: 7; }
-  100% { stroke-width: 3; }
+  0% { transform: scale(1); }
+  45% { transform: translateY(-4px) scale(1.09); }
+  100% { transform: translateY(-2px) scale(1.045); }
+}
+
+@keyframes maryland-map-hover-in {
+  from { transform: scale(1); }
+  to { transform: translateY(-2px) scale(1.045); }
+}
+
+.maryland-map-lift {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: translateY(-2px) scale(1.045);
+  filter: drop-shadow(0 2px 2px rgb(16 33 63 / 35%));
 }
 
 @keyframes dashboard-headline-in {
