@@ -1,7 +1,7 @@
 import { createPrediction } from "./prediction";
 import type { PredictionResult, WeatherSummary } from "./types";
 
-export const IMPACT_MODEL_VERSION = "school-impact-v1";
+export const IMPACT_MODEL_VERSION = "school-impact-v2";
 
 export type ImpactPredictionRun = {
   runKey: string;

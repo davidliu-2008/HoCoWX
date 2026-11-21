@@ -1,5 +1,9 @@
 import type { PredictionInput, PredictionResult } from "./types";
 
+const icyWeather = /\b(?:freezing rain|freezing drizzle|ice|icy|sleet|wintry mix)\b/i;
+const winterWeather = /\b(?:snow(?:fall| showers?)?|freezing rain|freezing drizzle|ice|icy|sleet|wintry mix)\b/i;
+const severeOperationsWarning = /^(?:tornado|severe thunderstorm|flash flood|flood|high wind|hurricane|tropical storm|blizzard|snow squall) warning$/i;
+
 function includesAny(text: string, terms: string[]) {
   const normalized = text.toLowerCase();
   return terms.some((term) => normalized.includes(term));
@@ -34,15 +38,16 @@ function createMorningCommuteRisk(weather: PredictionInput["weather"]) {
   const maxPrecip = Math.max(0, ...commuteHours.map((hour) => hour.precipitationChance ?? 0));
   const minTemp = Math.min(...commuteHours.map((hour) => hour.temperatureF));
 
-  if (commuteText.includes("snow") || commuteText.includes("sleet") || commuteText.includes("freezing rain") || commuteText.includes("ice")) {
+  const wintryCommute = winterWeather.test(commuteText);
+  if (wintryCommute) {
     score += 40;
     factors.push("Wintry precipitation is mentioned during the 5 AM-9 AM commute window.");
   }
 
-  if (maxPrecip >= 70) {
+  if (wintryCommute && maxPrecip >= 70) {
     score += 20;
     factors.push("Precipitation chances are high during the morning commute.");
-  } else if (maxPrecip >= 40) {
+  } else if (wintryCommute && maxPrecip >= 40) {
     score += 10;
     factors.push("Precipitation is possible during the morning commute.");
   }
@@ -80,12 +85,12 @@ export function createPrediction({ weather, now = new Date() }: PredictionInput)
   ];
 
   const alertText = weather.alerts.map((alert) => `${alert.event} ${alert.headline}`).join(" ");
+  const severeWarning = weather.alerts.find(({ event }) => severeOperationsWarning.test(event.trim()));
   const forecastText = [
     weather.shortForecast,
     weather.detailedForecast,
     weather.overnightForecast,
-    weather.morningForecast,
-    alertText
+    weather.morningForecast
   ]
     .filter(Boolean)
     .join(" ");
@@ -100,7 +105,13 @@ export function createPrediction({ weather, now = new Date() }: PredictionInput)
     scoreBreakdown.push({ label: "Winter weather advisory or watch", points: 24 });
   }
 
-  if (includesAny(forecastText, ["freezing rain", "ice", "sleet", "wintry mix"])) {
+  if (severeWarning) {
+    score += 36;
+    factors.push({ label: `${severeWarning.event} is active for the forecast location.`, weight: 36 });
+    scoreBreakdown.push({ label: severeWarning.event, points: 36 });
+  }
+
+  if (icyWeather.test(forecastText)) {
     score += 34;
     factors.push({ label: "Forecast wording mentions freezing rain, ice, sleet, or a wintry mix.", weight: 34 });
     scoreBreakdown.push({ label: "Freezing rain, ice, sleet, or wintry mix", points: 34 });
@@ -122,7 +133,7 @@ export function createPrediction({ weather, now = new Date() }: PredictionInput)
   }
 
   const gust = parseHighestWindGust(weather.windGust, weather.windSpeed);
-  if (gust >= 35 && includesAny(forecastText, ["snow", "ice", "sleet", "freezing rain"])) {
+  if (gust >= 35 && (snowfall > 0 || winterWeather.test(forecastText))) {
     score += 18;
     factors.push({ label: "Strong wind gusts could worsen snow or ice impacts.", weight: 18 });
     scoreBreakdown.push({ label: "Strong gusts with wintry conditions", points: 18 });
@@ -139,14 +150,16 @@ export function createPrediction({ weather, now = new Date() }: PredictionInput)
   }
 
   const hour = now.getHours();
-  if (hour >= 13 && includesAny(forecastText, ["snow", "ice", "freezing rain", "sleet"])) {
+  if (hour >= 13 && winterWeather.test(forecastText)) {
     score -= 12;
     factors.push({ label: "Wintry impacts appear more relevant after the morning commute.", weight: 12 });
     scoreBreakdown.push({ label: "Wintry timing appears later than morning commute", points: -12 });
   }
 
   const precipitationChance = weather.precipitationChance ?? 0;
-  if (precipitationChance >= 70) {
+  const hasDisruptionSignal = snowfall > 0 || winterWeather.test(forecastText) || Boolean(severeWarning) ||
+    includesAny(alertText, ["winter storm warning", "ice storm warning", "winter weather advisory", "winter storm watch"]);
+  if (hasDisruptionSignal && precipitationChance >= 70) {
     score += 8;
     factors.push({ label: "Precipitation chances are high in the near-term forecast.", weight: 8 });
     scoreBreakdown.push({ label: "High near-term precipitation chance", points: 8 });

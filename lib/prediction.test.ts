@@ -38,6 +38,34 @@ const baseWeather: WeatherSummary = {
 };
 
 describe("createPrediction", () => {
+  it("keeps ordinary rain low risk even with high precipitation chances and gusts", () => {
+    const result = createPrediction({
+      weather: {
+        ...baseWeather,
+        precipitationChance: 100,
+        windGust: "42 mph",
+        detailedForecast: "Weather Service forecast: rain throughout the morning.",
+        hourlyForecast: baseWeather.hourlyForecast.map((hour) => ({ ...hour, shortForecast: "Rain", precipitationChance: 100 }))
+      }
+    });
+    assert.equal(result.label, "Normal Operations Likely");
+    assert.equal(result.riskLevel, "Low");
+    assert.equal(result.morningCommuteRisk.label, "Low");
+    assert.ok(!result.scoreBreakdown.some(({ label }) => /ice|precipitation chance/i.test(label)));
+  });
+
+  it("raises operations risk for a flash flood warning during rain", () => {
+    const result = createPrediction({
+      weather: {
+        ...baseWeather,
+        shortForecast: "Heavy Rain",
+        alerts: [{ event: "Flash Flood Warning", severity: "Severe", headline: "Flash flooding", description: "Flooding is expected." }]
+      }
+    });
+    assert.equal(result.riskLevel, "Medium");
+    assert.ok(result.topFactors.some((factor) => factor.includes("Flash Flood Warning")));
+  });
+
   it("keeps normal operations likely when weather signals are quiet", () => {
     const result = createPrediction({
       weather: baseWeather,
