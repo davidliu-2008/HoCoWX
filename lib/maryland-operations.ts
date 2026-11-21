@@ -28,7 +28,8 @@ const countySpecificSources: Record<string, string[]> = {
     "https://www.carrollk12.org/",
     "https://www.carrollk12.org/operation/transportation-services/inclement-weather"
   ],
-  "Baltimore County": ["https://www.bcps.org/", "https://www.bcps.org/about_us/emergency_notifications_school_closings_and_delays"],
+  "Baltimore County": ["https://www.bcps.org/"],
+  "Kent County": ["https://www.kent.k12.md.us/"],
   "Anne Arundel County": ["https://www.aacps.org/"],
   "Prince George's County": ["https://www.pgcps.org/", "https://epi.pgcps.org/about-pgcps/emergency-notifications-school-closings-and-delays"],
   "Calvert County": ["https://www.calvertnet.k12.md.us/"],
@@ -39,9 +40,10 @@ const countySpecificSources: Record<string, string[]> = {
   "St. Mary's County": ["https://www.smcps.org/status"]
 };
 
+const strictNoticeCounties = new Set(["Baltimore County", "Kent County"]);
+
 const normalUnlessPopupCounties = new Set([
   "Anne Arundel County",
-  "Baltimore County",
   "Carroll County",
   "Calvert County",
   "Cecil County",
@@ -93,6 +95,13 @@ function classifyStatus(text: string): ParsedStatus {
 function extractUsefulText(html: string, county?: string) {
   const $ = cheerio.load(html);
   $("script, style, noscript, svg").remove();
+
+  if (county && strictNoticeCounties.has(county)) {
+    $("nav, footer, [hidden], [aria-hidden='true']").remove();
+    return $("[role='alert'], [role='alertdialog'], [aria-modal='true'], .emergency-alert, .emergency-notification, .alert-banner")
+      .toArray().map((element) => $(element).text().replace(/\s+/g, " ").trim())
+      .filter(Boolean).join("\n");
+  }
 
   if (county === "St. Mary's County") {
     return $("a")
@@ -201,6 +210,17 @@ function referencesAnotherDate(text: string) {
 }
 
 function parseCountySpecificStatus(county: string, url: string, text: string): ParsedStatus {
+  if (strictNoticeCounties.has(county)) {
+    for (const notice of text.split("\n")) {
+      if (notice.length > 500 || referencesAnotherDate(notice) ||
+          !/\b(today|this morning|this afternoon)\b/i.test(notice) ||
+          !/\b(all (?:bcps |kcps )?schools|(?:baltimore|kent) county public schools|schools and offices)\b/i.test(notice)) continue;
+      const status = classifyStatus(notice);
+      if (status.statusKind !== "unknown") return status;
+    }
+    return { status: "Unknown", statusKind: "unknown" };
+  }
+
   if (county === "St. Mary's County") {
     const statusMatch = text.match(/schools\s*:\s*([^|]+?)(?:\s+employees\s*:|$)/i)?.[1]?.trim();
     if (!statusMatch) {
@@ -368,7 +388,7 @@ async function fetchDistrictStatus(district: MarylandDistrict): Promise<Maryland
       }
     }
 
-    if (!reachedOfficialSource) {
+    if (!reachedOfficialSource || strictNoticeCounties.has(district.county)) {
       return {
         ...district,
         status: "Unknown",

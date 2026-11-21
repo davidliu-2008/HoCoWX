@@ -11,7 +11,7 @@ export type MarylandDistrict = {
 export const marylandDistricts: MarylandDistrict[] = [
   { slug: "howard", county: "Howard County", district: "Howard County Public School System", statusUrl: "https://status.hcpss.org/", latitude: 39.2673, longitude: -76.7983, priority: 1 },
   { slug: "montgomery", county: "Montgomery County", district: "Montgomery County Public Schools", statusUrl: "https://www.montgomeryschoolsmd.org/emergency/", latitude: 39.1547, longitude: -77.2405, priority: 2 },
-  { slug: "baltimore-county", county: "Baltimore County", district: "Baltimore County Public Schools", statusUrl: "https://www.bcps.org/about_us/emergency_notifications_school_closings_and_delays", latitude: 39.407, longitude: -76.603, priority: 3 },
+  { slug: "baltimore-county", county: "Baltimore County", district: "Baltimore County Public Schools", statusUrl: "https://www.bcps.org/", latitude: 39.407, longitude: -76.603, priority: 3 },
   { slug: "anne-arundel", county: "Anne Arundel County", district: "Anne Arundel County Public Schools", statusUrl: "https://www.aacps.org/", latitude: 39.006, longitude: -76.603, priority: 4 },
   { slug: "carroll", county: "Carroll County", district: "Carroll County Public Schools", statusUrl: "https://www.carrollk12.org/operation/transportation-services/inclement-weather", latitude: 39.563, longitude: -77.016, priority: 5 },
   { slug: "frederick", county: "Frederick County", district: "Frederick County Public Schools", statusUrl: "https://www.fcps.org/weather", latitude: 39.472, longitude: -77.397, priority: 6 },
