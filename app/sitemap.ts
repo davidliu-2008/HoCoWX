@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/weather-literacy",
     "/student-polls",
     "/partnerships",
+    "/announcements",
     "/accessibility"
   ];
 

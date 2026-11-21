@@ -149,25 +149,6 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
             </div>
           </section>
 
-          <section aria-labelledby="prediction-faq" className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
-            <h2 id="prediction-faq" className="mb-7 text-center text-3xl font-semibold text-ink">Prediction FAQs</h2>
-            <div className="grid gap-2">
-              {[
-                ["Does the prediction tell me whether school is officially closed?", "No. Your school district makes the final decision. Check its official announcements before changing your plans."],
-                ["Is the impact score the chance of a closure?", "No. The score is a 0 to 100 summary of weather hazards, including precipitation, temperature, and travel timing."],
-                ["Why might the prediction change?", "New forecasts and alerts can change what the model expects during the school travel window."]
-              ].map(([question, answer]) => (
-                <details key={question} name="prediction-faq" className="group bg-ice px-5">
-                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-ink">
-                    {question}
-                    <Plus aria-hidden="true" className="h-4 w-4 shrink-0 text-bay group-open:hidden" />
-                    <Minus aria-hidden="true" className="hidden h-4 w-4 shrink-0 text-bay group-open:block" />
-                  </summary>
-                  <p className="pb-5 text-sm leading-6 text-slate-700">{answer}</p>
-                </details>
-              ))}
-            </div>
-          </section>
           <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
             <div className="mx-auto max-w-[1400px] text-center">
               <h2 className="text-3xl font-black text-ink sm:text-4xl">2026 Predictions</h2>
@@ -194,6 +175,25 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       ) : (
         <section className="bg-red-50 px-5 py-8 text-red-800 sm:px-8"><h2 className="font-bold">Prediction unavailable</h2><p className="mt-2 text-sm">{error}</p></section>
       )}
+    <section aria-labelledby="prediction-faq" className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
+      <h2 id="prediction-faq" className="mb-7 text-center text-3xl font-semibold text-ink">Prediction FAQs</h2>
+      <div className="grid gap-2">
+        {[
+          ["Does the prediction tell me whether school is officially closed?", "No. Your school district makes the final decision. Check its official announcements before changing your plans."],
+          ["Is the impact score the chance of a closure?", "No. The score is a 0 to 100 summary of weather hazards, including precipitation, temperature, and travel timing."],
+          ["Why might the prediction change?", "New forecasts and alerts can change what the model expects during the school travel window."]
+        ].map(([question, answer]) => (
+          <details key={question} name="prediction-faq" className="group bg-ice px-5">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-ink">
+              {question}
+              <Plus aria-hidden="true" className="h-4 w-4 shrink-0 text-bay group-open:hidden" />
+              <Minus aria-hidden="true" className="hidden h-4 w-4 shrink-0 text-bay group-open:block" />
+            </summary>
+            <p className="pb-5 text-sm leading-6 text-slate-700">{answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
     </main>
   );
 }

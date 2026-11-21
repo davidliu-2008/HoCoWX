@@ -10,7 +10,7 @@ import {
   Podcast
 } from "lucide-react";
 
-type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "student-polls" | "literacy" | "partnerships" | "about" | "commute" | "accessibility";
+type Tab = "dashboard" | "predictions" | "maryland" | "interview" | "student-polls" | "literacy" | "partnerships" | "about" | "commute" | "accessibility" | "announcements";
 
 const groups = [
   {
@@ -39,10 +39,11 @@ const groups = [
   },
   {
     label: "About",
-    tabs: ["about", "partnerships", "accessibility"],
+    tabs: ["about", "partnerships", "accessibility", "announcements"],
     links: [
       { href: "/about", label: "Mission and Team" },
       { href: "/partnerships", label: "Partnerships" },
+      { href: "/announcements", label: "Announcements" },
       { href: "/accessibility", label: "Accessibility" }
     ]
   }
@@ -56,6 +57,7 @@ const mobileLinks = [
   { href: "/weather-literacy", label: "Learn", tab: "literacy" },
   { href: "/about", label: "About", tab: "about" },
   { href: "/partnerships", label: "Partners", tab: "partnerships" },
+  { href: "/announcements", label: "Announcements", tab: "announcements" },
   { href: "/accessibility", label: "Accessibility", tab: "accessibility" },
   { href: "/student-polls", label: "Student Prediction Lab", tab: "student-polls" },
   { href: "/interview", label: "Superintendent Interview", tab: "interview" }
