@@ -47,7 +47,7 @@ export function MarylandComparisonSection({
     !changesOnly || statusKind === "closed" || statusKind === "delay" || statusKind === "virtual"
   ) : [];
   return (
-    <section className="mt-6 overflow-hidden bg-white px-5 py-6 sm:px-8 md:py-7">
+    <section className="mt-6 overflow-hidden bg-white page-content py-6 md:py-7">
       <div className="mb-5">
         <div>
           <h2 className="flex items-center gap-2 text-xl font-bold text-ink">

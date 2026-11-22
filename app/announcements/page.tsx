@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageTabs } from "@/components/PageTabs";
+import { PageHero } from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Announcements | HoCo Weather Channel",
@@ -12,11 +13,9 @@ export default function AnnouncementsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full">
       <PageTabs active="announcements" />
-      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <h1 className="mx-auto max-w-5xl text-4xl font-medium leading-tight sm:text-5xl">Announcements</h1>
-      </header>
-      <div className="mx-auto max-w-5xl divide-y divide-slate-200 px-5 sm:px-8">
-        <article className="grid gap-4 py-10 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-8 sm:py-14">
+      <PageHero title="Announcements" />
+      <div className="page-content">
+        <article className="grid max-w-5xl gap-3 py-8 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-8 sm:py-10">
           <div className="text-sm font-semibold text-bay">HCPSS partnership <span className="mt-1 block text-slate-600">In development</span></div>
           <div>
             <h2 className="text-2xl font-semibold leading-tight text-ink sm:text-3xl">Building a countywide severe weather broadcast for schools</h2>
@@ -25,7 +24,7 @@ export default function AnnouncementsPage() {
             <Link href="/partnerships" className="mt-4 inline-flex min-h-11 items-center font-semibold text-bay underline underline-offset-4">Explore the HCPSS partnership</Link>
           </div>
         </article>
-        <article className="grid gap-4 py-10 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-8 sm:py-14">
+        <article className="grid max-w-5xl gap-3 pb-10 pt-2 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-8 sm:pb-12">
           <div className="text-sm font-semibold text-bay">Discussion with NOAA leadership <time dateTime="2026-12-09" className="mt-1 block text-slate-600">December 9, 2026</time></div>
           <div>
             <h2 className="text-2xl font-semibold leading-tight text-ink sm:text-3xl">A decision layer for public weather data</h2>

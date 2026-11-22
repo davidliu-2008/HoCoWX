@@ -1,5 +1,6 @@
 import { ExternalLink, Eye } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
+import { PageHero } from "@/components/PageHero";
 
 const DRIVE_FILE_ID = "170BiQd-TMKI-smsfuNK4Axoefmho0RQ2";
 const DRIVE_VIEW_URL = `https://drive.google.com/file/d/${DRIVE_FILE_ID}/view?usp=sharing`;
@@ -36,12 +37,7 @@ export default function InterviewPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-6">
       <PageTabs active="interview" />
 
-      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-3xl">
-          <h1 className="text-4xl font-black text-ink md:text-6xl">Inside HCPSS Weather Decisions</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">Superintendent Bill Barnes explains the people, evidence, timing, and operational realities behind weather-related school decisions.</p>
-        </div>
-      </header>
+      <PageHero title="Inside HCPSS Weather Decisions" description="Superintendent Bill Barnes explains how the district makes weather-related school decisions." />
 
       <section className="mb-6 mt-6 overflow-hidden bg-white px-5 sm:px-8">
         <div className="bg-ice/70 p-5 sm:p-7">

@@ -9,6 +9,7 @@ import {
   UsersRound
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
+import { PageHero } from "@/components/PageHero";
 import { AnimatedStat } from "@/components/AnimatedStat";
 
 export const metadata: Metadata = {
@@ -44,11 +45,10 @@ export default function AboutPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="about" />
 
-      <header className="page-hero px-5 py-14 text-center sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-5xl">
-          <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-5xl lg:text-6xl">Weather insights built for students.</h1>
-          <p className="mt-8 text-sm font-bold uppercase tracking-wide text-blue-200">Our audience</p>
-          <div className="mt-7 grid gap-6 px-2 sm:grid-cols-3 lg:gap-8">
+      <PageHero title="Weather insights built for students.">
+        <div className="mx-auto mt-6 max-w-5xl">
+          <h2 className="text-sm font-bold uppercase text-blue-200">Our audience</h2>
+          <div className="audience-stats mt-4 grid gap-3 sm:grid-cols-3 sm:gap-6">
             <div className="min-w-0">
               <AnimatedStat target={80000} className="text-white" />
               <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">Students, staff, and parents served through the HCPSS community.</p>
@@ -63,7 +63,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </header>
+      </PageHero>
 
       <section className="bg-navy px-5 py-12 text-white sm:px-8 sm:py-16">
         <div className="mx-auto max-w-4xl text-center">

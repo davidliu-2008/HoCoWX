@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageTabs } from "@/components/PageTabs";
+import { PageHero } from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "Accessibility | HoCo Weather Channel",
@@ -30,14 +31,7 @@ export default function AccessibilityPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full">
       <PageTabs active="accessibility" />
 
-      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="text-4xl font-black leading-tight sm:text-6xl">Accessibility</h1>
-          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8">
-            Accessibility work informed by guidance shared through our collaboration with HCPSS.
-          </p>
-        </div>
-      </header>
+      <PageHero title="Accessibility" description="Accessibility work informed by guidance shared through our collaboration with HCPSS." />
 
       <section className="bg-white px-5 py-10 sm:px-8 sm:py-12">
         <div className="mx-auto max-w-5xl text-center">

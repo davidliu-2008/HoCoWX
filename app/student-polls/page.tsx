@@ -1,5 +1,6 @@
 import { AnimatedStat } from "@/components/AnimatedStat";
 import { PageTabs } from "@/components/PageTabs";
+import { PageHero } from "@/components/PageHero";
 
 type PollOption = {
   label: string;
@@ -209,12 +210,7 @@ export default function StudentPollsPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-6">
       <PageTabs active="student-polls" />
 
-      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="text-4xl font-black text-ink md:text-6xl">Student Prediction Lab</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-lg leading-8">A record of students researching conditions, weighing uncertainty, and making weather-based school operation predictions.</p>
-        </div>
-      </header>
+      <PageHero title="Student Prediction Lab" description="See how students weighed weather evidence and made their own school predictions." />
 
       <section className="mb-6 mt-6 overflow-hidden bg-white px-5 py-7 text-center sm:px-8">
         <div className="mx-auto max-w-4xl">

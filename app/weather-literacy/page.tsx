@@ -4,6 +4,7 @@ import {
   ExternalLink, Gauge, Layers3, Map, Radar, School, Snowflake, ThermometerSnowflake, Wind
 } from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
+import { PageHero } from "@/components/PageHero";
 import { LiteracyGuideNav } from "@/components/LiteracyGuideNav";
 
 export const metadata = {
@@ -63,12 +64,9 @@ export default function WeatherLiteracyPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="literacy" />
 
-      <header className="page-hero literacy-video-hero px-5 pb-24 pt-12 text-center sm:px-8 sm:pb-24 sm:pt-16">
-        <h1 className="mx-auto max-w-5xl text-4xl font-black leading-tight text-ink sm:text-6xl">Learn to read the weather.</h1>
-        <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">A practical guide for students who want to understand forecasts, evaluate school-day impacts, and communicate weather responsibly.</p>
-      </header>
+      <PageHero title="Learn to read the weather." description="Read forecasts, assess school-day impacts, and explain what the weather means." />
 
-      <section className="bg-white/60 px-5 py-8 sm:px-8 sm:py-10">
+      <section className="bg-white/60 page-content py-8 sm:py-10">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading eyebrow="Choose a guide" title="Start with the skill you need.">Follow all five guides for a complete forecast, or jump directly to one topic.</SectionHeading>
         </div>
@@ -91,7 +89,7 @@ export default function WeatherLiteracyPage() {
 
       <LiteracyGuideNav guides={guideLinks} />
 
-      <section id="forecast" className="scroll-mt-44 px-5 py-12 sm:px-8 sm:py-16">
+      <section id="forecast" className="scroll-mt-44 page-content py-8 sm:py-12">
         <SectionHeading eyebrow="Guide 01" title="Read the whole forecast.">A weather icon or snowfall map never tells the full story. Use multiple official products and identify what is known, what is uncertain, and when conditions matter most.</SectionHeading>
         <div className="mt-9 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <ol>
@@ -127,7 +125,7 @@ export default function WeatherLiteracyPage() {
         </figure>
       </section>
 
-      <section id="winter" className="scroll-mt-44 bg-blue-50/45 px-5 py-12 sm:px-8 sm:py-16">
+      <section id="winter" className="scroll-mt-44 bg-blue-50/45 page-content py-8 sm:py-12">
         <SectionHeading eyebrow="Guide 02" title="Know what is falling and what it will hit.">Winter impacts depend on the temperature profile, pavement temperature, precipitation rate, and previous weather. Snow totals alone do not measure travel risk.</SectionHeading>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {precipitationTypes.map(({ title, icon: Icon, definition, impact }) => <article key={title} className="bg-white/75 p-6"><Icon className="h-6 w-6 text-bay" /><h3 className="mt-4 text-xl font-black text-ink">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{definition}</p><p className="mt-4 pt-2 text-sm font-semibold leading-6 text-slate-700">{impact}</p></article>)}
@@ -145,7 +143,7 @@ export default function WeatherLiteracyPage() {
         <div className="mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]"><div><h3 className="text-2xl font-black text-ink">The alert ladder</h3><p className="mt-3 leading-7 text-slate-600">Alert criteria vary by location. Always read the product issued by the local National Weather Service office.</p></div><div className="space-y-3">{alertLevels.map((level) => <div key={level.label} className="grid gap-2 bg-white/70 px-5 py-4 sm:grid-cols-[7rem_7rem_1fr]"><strong className="text-lg text-ink">{level.label}</strong><span className="text-sm font-bold uppercase tracking-wide text-bay">{level.action}</span><p className="text-sm leading-6 text-slate-600">{level.text}</p></div>)}</div></div>
       </section>
 
-      <section id="school" className="scroll-mt-44 px-5 py-12 sm:px-8 sm:py-16">
+      <section id="school" className="scroll-mt-44 page-content py-8 sm:py-12">
         <SectionHeading eyebrow="Guide 03" title="Evaluate the school day.">A school-operation forecast is a transportation and timing question. Consider buses, walkers, staff travel, neighborhood roads, parking lots, and treatment time.</SectionHeading>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{schoolFactors.map(({ title, icon: Icon, text }) => <article key={title} className="bg-blue-50/55 p-6"><Icon className="h-6 w-6 text-bay" /><h3 className="mt-4 text-xl font-bold text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></article>)}</div>
         <figure className="mt-10 grid overflow-hidden bg-white/80 p-5 sm:p-8 lg:grid-cols-[0.52fr_0.48fr] lg:items-center">
@@ -164,7 +162,7 @@ export default function WeatherLiteracyPage() {
         </div>
       </section>
 
-      <section id="briefing" className="scroll-mt-44 bg-blue-50/45 px-5 py-12 sm:px-8 sm:py-16">
+      <section id="briefing" className="scroll-mt-44 bg-blue-50/45 page-content py-8 sm:py-12">
         <SectionHeading eyebrow="Guide 04" title="Build a briefing people can trust.">The goal is not to sound certain. Explain the evidence clearly enough that someone understands the likely outcome, important alternatives, and what to monitor next.</SectionHeading>
         <div className="mt-9 grid gap-8 lg:grid-cols-2">
           <div><h3 className="text-2xl font-black text-ink">A five-part briefing</h3><ol className="mt-4"><Step number="1" title="Headline">State the main expected weather and impact in one sentence.</Step><Step number="2" title="Timing">Give start, peak, transition, and end windows. Name the school-day period affected.</Step><Step number="3" title="Hazards">Describe snow, ice, wind, cold, flooding, or visibility. Do not focus on totals alone.</Step><Step number="4" title="Confidence">Explain what guidance agrees on and what could still change.</Step><Step number="5" title="Next update">Tell readers when new data or an updated forecast will be available.</Step></ol></div>
@@ -172,7 +170,7 @@ export default function WeatherLiteracyPage() {
         </div>
       </section>
 
-      <section id="practice" className="scroll-mt-44 px-5 py-12 sm:px-8 sm:py-16">
+      <section id="practice" className="scroll-mt-44 page-content py-8 sm:py-12">
         <SectionHeading eyebrow="Guide 05" title="Practice: make the call, then explain it.">Use this fictional scenario to practice evidence-based reasoning. There is no perfect answer; your explanation should match the evidence and acknowledge uncertainty.</SectionHeading>
         <div className="mt-8 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="bg-blue-50 p-6 sm:p-8"><p className="text-sm font-bold uppercase tracking-wide text-bay">Scenario</p><h3 className="mt-2 text-2xl font-black text-ink">A winter system approaches Howard County.</h3><ul className="mt-5 space-y-3 text-sm leading-6 text-slate-700"><li><strong>3 AM:</strong> Rain changes to freezing rain.</li><li><strong>5 AM:</strong> Temperature falls from 33°F to 30°F.</li><li><strong>6–9 AM:</strong> Light freezing rain continues before changing to snow.</li><li><strong>Forecast:</strong> Trace to 0.10 inch of ice, followed by less than one inch of snow.</li><li><strong>Confidence:</strong> Medium; the transition could occur one to two hours later.</li></ul></div>
@@ -180,7 +178,7 @@ export default function WeatherLiteracyPage() {
         </div>
       </section>
 
-      <section className="bg-white/60 px-5 py-12 sm:px-8 sm:py-16">
+      <section className="bg-white/60 page-content py-8 sm:py-12">
         <SectionHeading eyebrow="Official resources" title="Go to the source.">Use official observations, forecasts, alerts, and discussions as the foundation of your analysis. Social media can help you discover information, but it should not replace the original source.</SectionHeading>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Resource href="https://www.weather.gov/lwx/" icon={<Map className="h-5 w-5 text-bay" />} title="NWS Baltimore/Washington">Local forecasts, alerts, discussions, and climate information.</Resource>

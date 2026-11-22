@@ -31,7 +31,7 @@ export function MarylandStatusMap({ reports }: { reports: MarylandOperationStatu
   }
 
   return (
-    <section aria-labelledby="maryland-map-heading" className="bg-white px-5 py-8 sm:px-8 lg:px-12">
+    <section aria-labelledby="maryland-map-heading" className="bg-white page-content py-8">
       <div className="mx-auto max-w-[1440px]">
         <h2 id="maryland-map-heading" className="text-2xl font-bold text-ink">Maryland district status map</h2>
         <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.36fr)] lg:items-start">

@@ -13,7 +13,7 @@ export function AnimatedStat({
   decimals?: number;
   className?: string;
 }) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(target);
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ export function AnimatedStat({
       return;
     }
 
+    let frameId = 0;
     const observer = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting) return;
       observer.disconnect();
@@ -36,14 +37,17 @@ export function AnimatedStat({
         const progress = Math.min((now - startedAt) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         setValue(target * eased);
-        if (progress < 1) requestAnimationFrame(frame);
+        if (progress < 1) frameId = requestAnimationFrame(frame);
       }
 
-      requestAnimationFrame(frame);
+      frameId = requestAnimationFrame(frame);
     }, { threshold: 0.35 });
 
     observer.observe(element);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frameId);
+    };
   }, [target]);
 
   const formatted = value.toLocaleString("en-US", {

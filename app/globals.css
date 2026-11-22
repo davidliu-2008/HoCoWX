@@ -210,6 +210,36 @@ main article[class*="shadow"] {
   margin-inline: auto;
 }
 
+.page-content {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.standard-page-hero { padding-block: 2rem; }
+.standard-page-hero h1 { font-size: 2.25rem; line-height: 1.1; }
+
+@media (max-width: 639px) {
+  .audience-stats > div {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: center;
+    text-align: left;
+  }
+  .audience-stats > div > p:first-child { font-size: 1.5rem; }
+  .audience-stats > div > p + p { margin: 0; }
+}
+
+@media (min-width: 640px) {
+  .page-content { padding-inline: 2rem; }
+  .standard-page-hero { padding-block: 3rem; }
+}
+
+@media (min-width: 1024px) {
+  .page-content { padding-inline: 3rem; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   details[open] > .score-breakdown-content { animation: county-data-in 260ms ease-out; }
   .dashboard-skyline { animation: dashboard-skyline-in 1100ms cubic-bezier(0.22, 0.8, 0.3, 1) both; }

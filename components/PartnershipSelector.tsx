@@ -76,7 +76,7 @@ export function PartnershipSelector({ homepage = false }: { homepage?: boolean }
   const visiblePartners = partnerships;
 
   return (
-    <div className={homepage ? "space-y-4" : "space-y-4 px-5 py-8 sm:px-8 lg:px-12 lg:py-10"}>
+    <div className={homepage ? "space-y-4" : "page-content space-y-4 py-8 sm:py-10"}>
       {visiblePartners.map((partner) => <PartnershipRow key={partner.id} partner={partner} />)}
       {homepage ? (
         <div className="pt-3 text-center">

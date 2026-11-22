@@ -1,4 +1,5 @@
 import { PageTabs } from "@/components/PageTabs";
+import { PageHero } from "@/components/PageHero";
 import { Info, Minus, Plus } from "lucide-react";
 import { createStoredImpactPrediction } from "@/lib/impact-service";
 import { getMarylandDistrict } from "@/lib/maryland-districts";
@@ -63,9 +64,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="predictions" />
 
-      <header className="page-hero px-5 py-12 text-center sm:px-8 sm:py-16">
-        <h1 className="mx-auto max-w-5xl text-4xl font-medium leading-tight sm:text-5xl">Predictions</h1>
-      </header>
+      <PageHero title="Predictions" />
       <section aria-labelledby="current-school-prediction" className="mx-auto max-w-3xl px-5 pt-8 text-center sm:px-8 sm:pt-10">
         <p className="text-sm font-semibold text-slate-600">{district.county}{schoolDate ? ` · ${schoolDate}` : ""}</p>
         <h2 id="current-school-prediction" className="mt-2 text-3xl font-bold leading-tight text-ink sm:text-4xl">{prediction?.label ?? "School operation prediction unavailable"}</h2>
@@ -77,7 +76,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
 
       {prediction ? (
         <>
-          <section className="px-5 py-10 sm:px-8 lg:px-12 lg:py-14">
+          <section className="page-content py-6 sm:py-8">
             <div className="mx-auto grid w-full max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-xl border border-slate-200 bg-white sm:max-w-[calc(100vw-4rem)] lg:max-w-[min(1500px,calc(100vw-6rem))] xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] 2xl:min-h-[360px] 2xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)_minmax(0,1fr)]">
               <div className="min-w-0 flex flex-col justify-between bg-navy p-7 text-white sm:p-9">
                 <div>
@@ -109,23 +108,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
             </div>
           </section>
 
-          <section className="bg-blue-50/45 px-5 py-12 sm:px-8 sm:py-16">
-            <div className="mx-auto max-w-7xl">
-              <div className="mx-auto max-w-4xl text-center">
-                <p className="text-sm font-bold uppercase tracking-wide text-bay">Methodology</p>
-                <h2 className="mt-3 text-3xl font-black text-ink sm:text-4xl">How the model works</h2>
-                <p className="mt-4 text-lg leading-8 text-slate-600">The model starts with a low baseline, measures observable weather signals, and converts the total into an operations-risk range.</p>
-              </div>
-              <div className="mt-10 grid gap-px overflow-hidden bg-blue-100 md:grid-cols-2 xl:grid-cols-4">
-                <MethodStep label="Inputs" title="Forecast evidence">Official alerts, temperature, precipitation type and chance, snow, ice, wind, and hourly timing.</MethodStep>
-                <MethodStep label="Scoring" title="Weighted impacts">Ice and warning-level hazards carry the most weight. Snow, cold, wind, and precipitation add risk in smaller increments.</MethodStep>
-                <MethodStep label="Timing" title="School travel window">Conditions from 5–9 AM receive extra attention. Later arrival or improving conditions can reduce the score.</MethodStep>
-                <MethodStep label="Output" title="Operations range">The final 0–100 score maps to normal operations, monitoring, delay, early dismissal, or closure ranges.</MethodStep>
-              </div>
-            </div>
-          </section>
-
-          <section className="mx-auto grid w-full max-w-[1500px] gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-2 lg:px-12">
+          <section className="page-content grid gap-5 pb-8 sm:pb-10 lg:grid-cols-2">
             <details className="group self-start bg-blue-50/55 p-6 sm:p-8">
               <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 text-xl font-bold text-ink">
                 Risk score breakdown <span aria-hidden="true" className="text-bay group-open:rotate-45 motion-safe:transition-transform">+</span>
@@ -145,6 +128,22 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
               <div className="mt-6">
                 <div className="flex flex-wrap items-center justify-between gap-3"><span className={`px-3 py-1.5 text-sm font-bold ${badgeClass(prediction.morningCommuteRisk.label)}`}>{prediction.morningCommuteRisk.label}</span><strong className="text-3xl text-ink">{prediction.morningCommuteRisk.score}/100</strong></div>
                 <ul className="mt-6 divide-y divide-blue-100">{prediction.morningCommuteRisk.factors.map((factor) => <li key={factor} className="py-3 text-sm leading-6 text-slate-700">{factor}</li>)}</ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-blue-50/45 px-5 py-8 sm:px-8 sm:py-10">
+            <div className="mx-auto max-w-7xl">
+              <div className="mx-auto max-w-4xl text-center">
+                <p className="text-sm font-bold uppercase tracking-wide text-bay">Methodology</p>
+                <h2 className="mt-3 text-3xl font-black text-ink sm:text-4xl">How the model works</h2>
+                <p className="mt-4 text-lg leading-8 text-slate-600">The model starts with a low baseline, measures observable weather signals, and converts the total into an operations-risk range.</p>
+              </div>
+              <div className="mt-10 grid gap-px overflow-hidden bg-blue-100 md:grid-cols-2 xl:grid-cols-4">
+                <MethodStep label="Inputs" title="Forecast evidence">Official alerts, temperature, precipitation type and chance, snow, ice, wind, and hourly timing.</MethodStep>
+                <MethodStep label="Scoring" title="Weighted impacts">Ice and warning-level hazards carry the most weight. Snow, cold, wind, and precipitation add risk in smaller increments.</MethodStep>
+                <MethodStep label="Timing" title="School travel window">Conditions from 5–9 AM receive extra attention. Later arrival or improving conditions can reduce the score.</MethodStep>
+                <MethodStep label="Output" title="Operations range">The final 0–100 score maps to normal operations, monitoring, delay, early dismissal, or closure ranges.</MethodStep>
               </div>
             </div>
           </section>
