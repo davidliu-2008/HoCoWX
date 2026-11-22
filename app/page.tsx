@@ -629,7 +629,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           <div className="mt-12 grid gap-8 text-left md:grid-cols-3 md:gap-10">
             <div className="px-2 py-3 md:px-5">
               <h3 className="text-2xl font-black text-bay sm:text-3xl">Weather Data</h3>
-              <p className="mt-4 text-lg leading-8 text-slate-700">Combine National Weather Service forecasts and alerts with Visual Crossing observations, historical records, and forecast data.</p>
+              <p className="mt-4 text-lg leading-8 text-slate-700">Bring forecasts, alerts, and local observations together to show what is changing and when.</p>
             </div>
             <div className="px-2 py-3 md:px-5">
               <h3 className="text-2xl font-black text-bay sm:text-3xl">Impact Intelligence</h3>
