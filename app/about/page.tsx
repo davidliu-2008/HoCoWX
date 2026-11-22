@@ -55,7 +55,7 @@ export default function AboutPage() {
             </div>
             <div className="min-w-0 sm:px-3 lg:px-6">
               <AnimatedStat target={700000} className="text-white" />
-              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">People impacted nationwide across HoCo Weather Channel platforms and partnerships.</p>
+              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">People impacted nationwide</p>
             </div>
             <div className="min-w-0">
               <AnimatedStat target={2.2} suffix="M+" decimals={1} className="text-white" />
