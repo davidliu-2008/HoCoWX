@@ -25,6 +25,14 @@ export type WeatherSummary = {
     precipitationInches: number | null;
     windSpeedMph: number | null;
   };
+  visualCrossingOvernight?: {
+    date: string;
+    hoursObserved: number;
+    lowTemperatureF: number;
+    precipitationInches: number | null;
+    peakWindSpeedMph: number | null;
+  };
+  visualCrossingAirQuality?: { index: number; validAt: string };
   precipitationChance: number | null;
   expectedSnowfallInches: number | null;
   windSpeed: string | null;

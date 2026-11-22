@@ -395,6 +395,31 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
         </div>
       </div>
 
+      {(data.visualCrossingOvernight || data.visualCrossingAirQuality) && (
+        <div className="mt-6 border-t border-blue-100 pt-5">
+          <div className="grid gap-5 sm:grid-cols-2">
+            {data.visualCrossingOvernight && (
+              <div>
+                <h3 className="font-bold text-ink">Overnight observations</h3>
+                <p className="mt-1 text-xs text-slate-600">{data.visualCrossingOvernight.date} · Midnight to 6 AM ET · {data.visualCrossingOvernight.hoursObserved} hourly readings</p>
+                <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                  <div><dt className="text-slate-600">Observed low</dt><dd className="font-bold text-ink">{Math.round(data.visualCrossingOvernight.lowTemperatureF)}°F</dd></div>
+                  <div><dt className="text-slate-600">Precipitation</dt><dd className="font-bold text-ink">{data.visualCrossingOvernight.precipitationInches === null ? "Unavailable" : `${data.visualCrossingOvernight.precipitationInches.toFixed(2)} in`}</dd></div>
+                  <div><dt className="text-slate-600">Peak hourly wind</dt><dd className="font-bold text-ink">{data.visualCrossingOvernight.peakWindSpeedMph === null ? "Unavailable" : `${Math.round(data.visualCrossingOvernight.peakWindSpeedMph)} mph`}</dd></div>
+                </dl>
+              </div>
+            )}
+            {data.visualCrossingAirQuality && (
+              <div>
+                <h3 className="font-bold text-ink">Air quality</h3>
+                <p className="mt-2 text-2xl font-bold text-ink">{data.visualCrossingAirQuality.index} <span className="text-sm font-semibold">U.S. AQI</span></p>
+                <p className="mt-1 text-xs text-slate-600">Hourly estimate · {compactTime(data.visualCrossingAirQuality.validAt)} ET</p>
+              </div>
+            )}
+          </div>
+          <p className="mt-4 text-xs text-slate-600">Data from <a href="https://www.visualcrossing.com/" className="font-semibold text-bay underline">Visual Crossing Weather</a></p>
+        </div>
+      )}
       <p className="mt-5 text-xs leading-5 text-slate-500">
         Forecasts and alerts from the National Weather Service
         {data.yesterdayTemperatureSource === "Visual Crossing" ? (
