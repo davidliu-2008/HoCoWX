@@ -277,6 +277,15 @@ function compactTime(value: string | null | undefined) {
   }).format(new Date(value));
 }
 
+function airQualityMeaning(index: number): { label: string; meaning: string } {
+  if (index <= 50) return { label: "Good", meaning: "Air pollution poses little or no risk." };
+  if (index <= 100) return { label: "Moderate", meaning: "Air quality is acceptable for most people. Those unusually sensitive to air pollution may still be affected." };
+  if (index <= 150) return { label: "Unhealthy for sensitive groups", meaning: "People sensitive to air pollution may be affected, especially during outdoor activity." };
+  if (index <= 200) return { label: "Unhealthy", meaning: "Anyone may be affected, with greater risk for sensitive groups." };
+  if (index <= 300) return { label: "Very unhealthy", meaning: "Air pollution poses an increased health risk for everyone." };
+  return { label: "Hazardous", meaning: "Everyone is more likely to experience health effects from air pollution." };
+}
+
 function DistrictStatusCard({ status, isHoward }: { status: LoadState<HcpssStatus>; isHoward: boolean }) {
   return (
     <section className="bg-white py-7 lg:pr-8">
@@ -325,6 +334,8 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
   }
 
   const data = weather.data;
+  const airQuality = data.visualCrossingAirQuality;
+  const airQualitySummary = airQuality && airQualityMeaning(airQuality.index);
 
   return (
     <section className="bg-white py-7">
@@ -409,11 +420,12 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
                 </dl>
               </div>
             )}
-            {data.visualCrossingAirQuality && (
+            {airQuality && airQualitySummary && (
               <div>
-                <h3 className="font-bold text-ink">Air quality</h3>
-                <p className="mt-2 text-2xl font-bold text-ink">{data.visualCrossingAirQuality.index} <span className="text-sm font-semibold">U.S. AQI</span></p>
-                <p className="mt-1 text-xs text-slate-600">Hourly estimate · {compactTime(data.visualCrossingAirQuality.validAt)} ET</p>
+                <h3 className="font-bold text-ink">Air quality: {airQualitySummary.label}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-700">{airQualitySummary.meaning}</p>
+                <p className="mt-2 text-xs text-slate-600">U.S. AQI {airQuality.index} · Hourly estimate · {compactTime(airQuality.validAt)} ET</p>
+                <a href="https://www.airnow.gov/aqi/aqi-basics/" className="mt-1 inline-block text-xs font-semibold text-bay underline">About AQI categories</a>
               </div>
             )}
           </div>
