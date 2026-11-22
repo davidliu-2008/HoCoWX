@@ -161,10 +161,6 @@ main article[class*="shadow"] {
   background: #ffffff;
 }
 
-.integrated-page .font-black {
-  font-weight: 600;
-}
-
 .integrated-page > section,
 .integrated-page > div:not(:first-child) {
   transition: background-color 180ms ease;
