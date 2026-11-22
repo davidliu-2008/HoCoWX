@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { MarylandComparisonSection } from "@/components/MarylandComparisonSection";
 import { MarylandStatusMap } from "@/components/MarylandStatusMap";
 import { PageTabs } from "@/components/PageTabs";
@@ -20,9 +21,18 @@ async function safeLoad<T>(loader: () => Promise<T>): Promise<LoadState<T>> {
   }
 }
 
-export default async function MarylandStatusPage() {
+async function DistrictReports() {
   const comparison = await safeLoad<MarylandOperationStatus[]>(getMarylandOperationsComparison);
 
+  return (
+    <>
+      <MarylandStatusMap reports={comparison.ok ? comparison.data : []} />
+      <MarylandComparisonSection comparison={comparison} />
+    </>
+  );
+}
+
+export default function MarylandStatusPage() {
   return (
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-6">
       <PageTabs active="maryland" />
@@ -34,8 +44,9 @@ export default async function MarylandStatusPage() {
         </div>
       </header>
 
-      <MarylandStatusMap reports={comparison.ok ? comparison.data : []} />
-      <MarylandComparisonSection comparison={comparison} />
+      <Suspense fallback={<p role="status" className="mx-auto max-w-[1440px] px-5 py-8 text-slate-600 sm:px-8 lg:px-12">Loading district status reports…</p>}>
+        <DistrictReports />
+      </Suspense>
     </main>
   );
 }

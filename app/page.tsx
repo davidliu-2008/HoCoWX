@@ -96,7 +96,7 @@ function Stat({
   value: string;
 }) {
   return (
-    <div className="border-l-2 border-blue-200 pl-4">
+    <div>
       <div className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-500">
         {icon}
         {label}
@@ -165,7 +165,7 @@ function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
       <div className="mb-5">
         <h2 id="hourly-heading" className="text-2xl font-bold text-ink">Weather through the day</h2>
         {(nextFreezing || nextPrecipitation) && (
-          <dl className="mt-3 flex flex-wrap gap-x-8 gap-y-3 border-l-2 border-bay pl-4">
+          <dl className="mt-3 flex flex-wrap gap-x-8 gap-y-3">
             {nextFreezing && <div><dt className="text-sm text-slate-600">First hour at or below freezing</dt><dd className="font-semibold text-ink">{compactTime(nextFreezing.time)}</dd></div>}
             {nextPrecipitation && <div><dt className="text-sm text-slate-600">First hour with 50%+ chance of precipitation</dt><dd className="font-semibold text-ink">{compactTime(nextPrecipitation.time)} · {nextPrecipitation.precipitationChance}%</dd></div>}
           </dl>
@@ -182,7 +182,7 @@ function HourlyTimeline({ weather }: { weather: WeatherSummary }) {
           const window = weekdayTravel && clockHour >= 5 && clockHour < 9 ? "Morning travel" :
             weekdayTravel && clockHour >= 14 && clockHour < 17 ? "Afternoon travel" : null;
           return (
-          <li key={hour.time} className={`w-44 shrink-0 snap-start border-t-2 p-4 md:w-48 ${window ? "border-bay bg-ice" : "border-slate-200"}`}>
+          <li key={hour.time} className={`w-44 shrink-0 snap-start px-3 py-4 md:w-48 ${window ? "bg-ice" : ""}`}>
             <time dateTime={hour.time} className="block text-sm font-bold text-ink">{compactTime(hour.time)}</time>
             <div className="mt-1 min-h-5 text-xs font-semibold text-bay">{window}</div>
             <div className="mt-2 text-2xl font-bold text-ink">{hour.temperatureF}°F</div>
@@ -351,15 +351,15 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
         </span>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-4">
         <Stat
           icon={<Thermometer className="h-4 w-4" />}
           label="Temperature"
-          value={data.currentTemperatureF === null ? "Unavailable" : `${data.currentTemperatureF} F`}
+          value={data.currentTemperatureF === null ? "Unavailable" : `${data.currentTemperatureF}°F`}
         />
         <Stat
           icon={<CloudSun className="h-4 w-4" />}
-          label="Precipitation"
+          label="Precipitation chance"
           value={data.precipitationChance === null ? "Unavailable" : `${data.precipitationChance}%`}
         />
         <Stat
@@ -380,16 +380,16 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
 
       <div className="mt-5 space-y-4">
         <div>
-          <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-slate-500">
-            Overnight / Morning
+          <h3 className="mb-2 text-base font-bold text-ink">
+            Overnight and morning forecast
           </h3>
           <p className="leading-7 text-slate-600">
             {data.overnightForecast ?? data.morningForecast ?? data.detailedForecast ?? "No forecast text available."}
           </p>
         </div>
         <div>
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
-            Winter Weather Alerts
+          <h3 className="mb-2 text-base font-bold text-ink">
+            Weather alerts
           </h3>
           {data.alerts.length ? (
             <div className="space-y-2">
@@ -407,7 +407,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
       </div>
 
       {(data.visualCrossingOvernight || data.visualCrossingAirQuality) && (
-        <div className="mt-6 border-t border-blue-100 pt-5">
+        <div className="mt-6">
           <div className="grid gap-5 sm:grid-cols-2">
             {data.visualCrossingOvernight && (
               <div>
@@ -429,14 +429,13 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
               </div>
             )}
           </div>
-          <p className="mt-4 text-xs text-slate-600">Data from <a href="https://www.visualcrossing.com/" className="font-semibold text-bay underline">Visual Crossing Weather</a></p>
         </div>
       )}
       <p className="mt-5 text-xs leading-5 text-slate-500">
-        Forecasts and alerts from the National Weather Service
-        {data.yesterdayTemperatureSource === "Visual Crossing" ? (
+        Forecasts and alerts: National Weather Service
+        {(data.yesterdayTemperatureSource === "Visual Crossing" || data.visualCrossingOvernight || airQuality) ? (
           <>
-            {" · "}Historical comparison powered by{" "}
+            {" · "}Historical weather and air quality:{" "}
             <a href="https://www.visualcrossing.com/" target="_blank" rel="noreferrer" className="font-semibold text-bay hover:underline">
               Visual Crossing Weather
             </a>
@@ -449,7 +448,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
 
 function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult> }) {
   return (
-    <section className="bg-white py-7 lg:border-l lg:border-blue-100 lg:pl-8">
+    <section className="bg-white py-7 lg:pl-8">
       <h2 className="mb-5 flex items-center gap-2 text-xl font-bold text-ink">
         <Gauge className="h-5 w-5 text-bay" />
         Prediction
@@ -562,7 +561,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
               {weather.ok && weather.data.hourlyForecast.length > 0 ? "View hourly forecast" : "View dashboard details"} <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </Link>
           </div>
-          <div key={district.slug} className="county-data-in grid grid-cols-2 gap-6 border-t border-white/20 pt-6 lg:ml-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pr-8 lg:pt-0 xl:ml-10 xl:pl-12 xl:pr-12">
+          <div key={district.slug} className="county-data-in grid grid-cols-2 gap-6 pt-3 lg:ml-6 lg:pl-10 lg:pr-8 lg:pt-0 xl:ml-10 xl:pl-12 xl:pr-12">
             <div>
               <p className="text-sm font-semibold text-blue-200">{district.county} now</p>
               <p className="mt-1 text-4xl font-black">
