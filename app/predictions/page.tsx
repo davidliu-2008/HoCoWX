@@ -179,9 +179,12 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       <h2 id="prediction-faq" className="mb-7 text-center text-3xl font-semibold text-ink">Prediction FAQs</h2>
       <div className="grid gap-2">
         {[
-          ["Does the prediction tell me whether school is officially closed?", "No. Your school district makes the final decision. Check its official announcements before changing your plans."],
-          ["Is the impact score the chance of a closure?", "No. The score is a 0 to 100 summary of weather hazards, including precipitation, temperature, and travel timing."],
-          ["Why might the prediction change?", "New forecasts and alerts can change what the model expects during the school travel window."]
+          ["Does the prediction tell me whether school is officially closed?", "No. The prediction describes what the weather could mean for school operations in the county and on the date shown. Your district makes the final decision and can consider road checks, bus routes, and conditions at individual schools that the model cannot see. Follow the district's official announcement if it differs from our prediction."],
+          ["Is the impact score the chance of a closure?", "No. A score of 52 out of 100 does not mean a 52% chance of closing. The model starts at 12 points, adds weight for factors such as expected snow, freezing rain, and severe warnings, and subtracts points in some cases. The risk score breakdown shows which rules affected the current result."],
+          ["Why can freezing rain change the prediction when ordinary rain does not?", "A high chance of rain says how likely precipitation is, not how disruptive it will be. Ordinary rain does not add points on its own. Freezing rain can leave ice on roads and sidewalks, while a flash flood or severe thunderstorm warning can flag a hazard even when no snow is expected."],
+          ["How is the morning commute score different?", "The commute score looks specifically at the available hourly forecast from 5 to 9 AM Eastern time. It highlights factors that could affect the trip to school. The school-operations prediction also considers broader signals such as active warnings and expected snow accumulation. Neither score confirms actual road conditions."],
+          ["Why might the prediction change?", "Forecasts can shift as new observations come in. For example, a new forecast might move freezing rain into the bus travel window, or a warning could be issued or lifted. Check the county and school date shown at the top before comparing two predictions."],
+          ["What does the 2026 archive show?", "It compares documented HoCo calls with the recorded final outcomes. It helps you see where the prediction matched what happened, but it is not a guarantee of future accuracy or a record of every school day."]
         ].map(([question, answer]) => (
           <details key={question} name="prediction-faq" className="group bg-ice px-5">
             <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-ink">
