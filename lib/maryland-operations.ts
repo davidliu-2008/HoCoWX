@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import { unstable_cache } from "next/cache";
 import { getHcpssStatus } from "./hcpss-status";
 import { marylandDistricts, type MarylandDistrict } from "./maryland-districts";
 
@@ -14,10 +15,10 @@ export type MarylandOperationStatus = MarylandDistrict & {
   matchedText?: string;
 };
 
-const CACHE_TTL_MS = 30 * 60 * 1000;
+const CACHE_TTL_SECONDS = 30 * 60;
+const DISTRICT_CONCURRENCY = 8;
 const FETCH_TIMEOUT_MS = 4500;
 
-let cachedComparison: { value: MarylandOperationStatus[]; expiresAt: number } | null = null;
 
 type ParsedStatus = Pick<MarylandOperationStatus, "status" | "statusKind" | "matchedText">;
 
@@ -391,7 +392,7 @@ async function fetchDistrictStatus(district: MarylandDistrict): Promise<Maryland
     if (strictNoticeCounties.has(district.county)) {
       return {
         ...district,
-        status: "Normal Operations (assumed)",
+        status: "Normal Operations",
         statusKind: "normal",
         lastUpdated: null,
         checkedAt,
@@ -464,21 +465,11 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, mapper:
   return results;
 }
 
-export async function getMarylandOperationsComparison() {
-  const now = Date.now();
-
-  if (cachedComparison && cachedComparison.expiresAt > now) {
-    return cachedComparison.value;
-  }
-
-  const value = await mapWithConcurrency(marylandDistricts, 3, fetchDistrictStatus);
-  cachedComparison = {
-    value,
-    expiresAt: now + CACHE_TTL_MS
-  };
-
-  return value;
-}
+export const getMarylandOperationsComparison = unstable_cache(
+  () => mapWithConcurrency(marylandDistricts, DISTRICT_CONCURRENCY, fetchDistrictStatus),
+  ["maryland-operations-comparison-v2"],
+  { revalidate: CACHE_TTL_SECONDS }
+);
 
 export async function getMarylandDistrictStatus(county: string) {
   const district = marylandDistricts.find((item) => item.slug === county);
