@@ -132,7 +132,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
             </div>
           </section>
 
-          <section className="bg-blue-50/45 px-5 py-8 sm:px-8 sm:py-10">
+          <section className="bg-blue-50/45 page-band">
             <div className="mx-auto max-w-7xl">
               <div className="mx-auto max-w-4xl text-center">
                 <p className="text-sm font-bold uppercase tracking-wide text-bay">Methodology</p>
@@ -148,7 +148,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
             </div>
           </section>
 
-          <section className="bg-white px-5 py-12 sm:px-8 sm:py-16">
+          <section className="bg-white page-band">
             <div className="mx-auto max-w-[1400px] text-center">
               <h2 className="text-3xl font-black text-ink sm:text-4xl">2026 Predictions</h2>
               <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600">Each prediction is based on forecast weather conditions and their expected effect on school travel and operations. Final decisions are made by the school district.</p>
@@ -174,9 +174,9 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
       ) : (
         <section className="bg-red-50 px-5 py-8 text-red-800 sm:px-8"><h2 className="font-bold">Prediction unavailable</h2><p className="mt-2 text-sm">{error}</p></section>
       )}
-    <section aria-labelledby="prediction-faq" className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
+    <section aria-labelledby="prediction-faq" className="page-content page-section">
       <h2 id="prediction-faq" className="mb-7 text-center text-3xl font-semibold text-ink">Prediction FAQs</h2>
-      <div className="grid gap-2">
+      <div className="mx-auto grid max-w-3xl gap-2">
         {[
           ["Does the prediction tell me whether school is officially closed?", "No. The prediction describes what the weather could mean for school operations in the county and on the date shown. Your district makes the final decision and can consider road checks, bus routes, and conditions at individual schools that the model cannot see. Follow the district's official announcement if it differs from our prediction."],
           ["Is the impact score the chance of a closure?", "No. A score of 52 out of 100 does not mean a 52% chance of closing. The model starts at 12 points, adds weight for factors such as expected snow, freezing rain, and severe warnings, and subtracts points in some cases. The risk score breakdown shows which rules affected the current result."],

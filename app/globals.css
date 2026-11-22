@@ -216,6 +216,13 @@ main article[class*="shadow"] {
   padding-inline: 1.25rem;
 }
 
+.page-section,
+.page-band {
+  padding-block: 2rem;
+}
+
+.page-band { padding-inline: 1.25rem; }
+
 .standard-page-hero { padding-block: 2rem; }
 .standard-page-hero h1 { font-size: 2.25rem; line-height: 1.1; }
 
@@ -233,11 +240,14 @@ main article[class*="shadow"] {
 
 @media (min-width: 640px) {
   .page-content { padding-inline: 2rem; }
+  .page-band { padding-inline: 2rem; }
+  .page-section, .page-band { padding-block: 2.5rem; }
   .standard-page-hero { padding-block: 3rem; }
 }
 
 @media (min-width: 1024px) {
   .page-content { padding-inline: 3rem; }
+  .page-band { padding-inline: max(3rem, calc((100% - 1344px) / 2)); }
 }
 
 @media (prefers-reduced-motion: no-preference) {

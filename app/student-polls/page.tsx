@@ -212,7 +212,7 @@ export default function StudentPollsPage() {
 
       <PageHero title="Student Prediction Lab" description="See how students weighed weather evidence and made their own school predictions." />
 
-      <section className="mb-6 mt-6 overflow-hidden bg-white px-5 py-7 text-center sm:px-8">
+      <section className="page-content page-section bg-white text-center">
         <div className="mx-auto max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">2025–26 Student Poll Archive</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">Students became the forecasters</h2>
@@ -237,7 +237,7 @@ export default function StudentPollsPage() {
         </div>
       </section>
 
-      <section className="grid gap-5 px-5 sm:px-8 lg:grid-cols-2 lg:px-12 xl:grid-cols-3">
+      <section className="page-content grid gap-5 pb-8 lg:grid-cols-2 xl:grid-cols-3">
         {sortedPolls.map((poll, index) => <PollCard key={`${poll.question}-${index}`} poll={poll} index={index} />)}
       </section>
     </main>

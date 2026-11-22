@@ -33,7 +33,7 @@ export default function AccessibilityPage() {
 
       <PageHero title="Accessibility" description="Accessibility work informed by guidance shared through our collaboration with HCPSS." />
 
-      <section className="bg-white px-5 py-10 sm:px-8 sm:py-12">
+      <section className="bg-white page-band">
         <div className="mx-auto max-w-5xl text-center">
           <h2 className="text-3xl font-black text-ink sm:text-4xl">Our accessibility approach</h2>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-slate-700">
@@ -51,7 +51,7 @@ export default function AccessibilityPage() {
         </div>
       </section>
 
-      <section className="bg-blue-50 px-5 py-10 sm:px-8 sm:py-12">
+      <section className="bg-blue-50 page-band">
         <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-black text-ink">Tell us about a barrier</h2>
             <p className="mt-4 leading-7 text-slate-700">

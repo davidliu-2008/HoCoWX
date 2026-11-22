@@ -13,8 +13,8 @@ const footerLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-4 bg-navy px-4 py-10 text-white sm:px-6">
-      <div className="mx-auto grid w-full max-w-[1440px] gap-9 lg:grid-cols-[1fr_auto] lg:items-end">
+    <footer className="page-section bg-navy text-white">
+      <div className="page-content grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <p className="text-2xl font-black">HoCo Weather Channel</p>
           <p className="mt-2 text-lg font-bold text-blue-200">By students. For students.</p>
@@ -31,7 +31,7 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-8 w-full max-w-[1440px]">
+      <div className="page-content mt-6">
         <a
           href="https://www.visualcrossing.com/"
           target="_blank"
@@ -48,7 +48,7 @@ export function SiteFooter() {
           />
         </a>
       </div>
-      <div className="mx-auto mt-8 flex w-full max-w-[1440px] flex-col gap-2 border-t border-white/15 pt-5 text-xs leading-5 text-blue-200 sm:flex-row sm:justify-between">
+      <div className="page-content mt-6 flex flex-col gap-2 text-xs leading-5 text-blue-200 sm:flex-row sm:justify-between">
         <p>© {new Date().getFullYear()} HoCo Weather Channel. All rights reserved.</p>
         <p>Student-led weather service and formal HCPSS partner.</p>
       </div>

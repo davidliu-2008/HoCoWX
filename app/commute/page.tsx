@@ -16,7 +16,7 @@ export default async function CommutePage({ searchParams }: { searchParams: Prom
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="commute" />
       <PageHero title="Your school commute, at a glance." description="Choose a county and travel window for a focused National Weather Service outlook." />
-      <section className="px-5 py-8 sm:px-8 sm:py-10">
+      <section className="page-content page-section">
         <CommutePlanner districts={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} initialCounty={initialCounty} />
       </section>
     </main>

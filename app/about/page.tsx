@@ -65,7 +65,7 @@ export default function AboutPage() {
         </div>
       </PageHero>
 
-      <section className="bg-navy px-5 py-12 text-white sm:px-8 sm:py-16">
+      <section className="bg-navy page-band text-white">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-4xl font-black text-white sm:text-5xl">How it started</h2>
           <div className="mx-auto mt-6 max-w-3xl border-y border-white/25 py-5 text-blue-100">
@@ -88,7 +88,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-blue-50/60 px-5 py-10 sm:px-8 sm:py-12">
+      <section className="bg-blue-50/60 page-band">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Student leadership</p>
@@ -133,7 +133,7 @@ export default function AboutPage() {
         </figure>
       </section>
 
-      <section className="bg-white px-5 py-10 sm:px-8 sm:py-12">
+      <section className="bg-white page-band">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Expanding this winter</p>
@@ -154,7 +154,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-6 bg-blue-50 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+      <section className="flex flex-col gap-4 bg-blue-50 page-band sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
           <UsersRound className="h-9 w-9 text-bay" />
           <div>
@@ -164,9 +164,9 @@ export default function AboutPage() {
         </div>
         <Link href="/partnerships" className="inline-flex items-center gap-2 font-bold text-bay hover:underline">View partnerships <ArrowRight className="h-4 w-4" /></Link>
       </section>
-      <section aria-labelledby="our-perspective" className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
+      <section aria-labelledby="our-perspective" className="page-content page-section">
         <h2 id="our-perspective" className="mb-7 text-center text-3xl font-semibold text-ink">Our perspective</h2>
-        <figure className="rounded-lg bg-ice p-6 sm:p-9">
+        <figure className="mx-auto max-w-3xl rounded-lg bg-ice p-6 sm:p-9">
           <blockquote className="max-w-2xl text-2xl font-medium leading-snug text-ink">Weather models forecast the atmosphere. We forecast its impact on people.</blockquote>
           <figcaption className="mt-6 text-sm font-semibold text-slate-700">HoCo Weather Channel</figcaption>
         </figure>

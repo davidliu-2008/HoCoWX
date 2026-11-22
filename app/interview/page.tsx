@@ -39,7 +39,7 @@ export default function InterviewPage() {
 
       <PageHero title="Inside HCPSS Weather Decisions" description="Superintendent Bill Barnes explains how the district makes weather-related school decisions." />
 
-      <section className="mb-6 mt-6 overflow-hidden bg-white px-5 sm:px-8">
+      <section className="page-content pt-8">
         <div className="bg-ice/70 p-5 sm:p-7">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">Recorded March 4, 2026</p>
           <h2 className="mt-2 text-2xl font-bold text-ink sm:text-3xl">A conversation with Superintendent Bill Barnes</h2>
@@ -79,7 +79,7 @@ export default function InterviewPage() {
 
       </section>
 
-      <div className="mb-6 grid gap-5 px-5 sm:px-8 lg:h-[clamp(390px,38vw,650px)] lg:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.65fr)] lg:px-12">
+      <div className="page-content grid gap-5 pb-8 pt-5 lg:h-[clamp(390px,38vw,650px)] lg:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.65fr)]">
         <section className="flex min-h-0 flex-col rounded-lg bg-white p-3 shadow-panel sm:p-5">
           <div className="min-h-[260px] flex-1 overflow-hidden rounded-lg bg-slate-950">
             <iframe
@@ -116,7 +116,7 @@ export default function InterviewPage() {
         </section>
       </div>
 
-      <aside className="bg-blue-50 px-5 py-7 sm:px-8 lg:px-12">
+      <aside className="bg-blue-50 page-band">
           <p className="text-sm font-semibold uppercase tracking-wide text-bay">What&apos;s Next</p>
           <h2 className="mt-2 text-xl font-bold text-ink">Upcoming Collaboration</h2>
           <p className="mt-3 leading-6 text-slate-700">
