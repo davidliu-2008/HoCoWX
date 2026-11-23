@@ -73,7 +73,7 @@ export default function AboutPage() {
               <strong className="text-bay">110 people</strong> died in school-transportation-related traffic crashes nationwide in 2024.
             </p>
             <p className="mt-2 text-sm leading-6 text-slate-700">
-              The total includes people outside school buses and crashes from all causes, not just weather.
+              This national total covers crashes from all causes, not just severe weather, and includes people outside school buses.
               {" "}<a href="https://www.nhtsa.gov/road-safety/school-bus-safety" className="font-semibold text-bay underline underline-offset-4">Source: NHTSA</a>
             </p>
           </div>
@@ -87,7 +87,10 @@ export default function AboutPage() {
             . Students still feel the consequences of weather every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
           </p>
           <p>
-            David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
+            David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025 after Maryland school districts stayed open on icy roads that sent school buses sliding. On winter roads, snow and ice can cause buses to lose traction, skid, crash, or overturn. The risk is not limited to winter: heavy rain can reduce visibility or flood roads, and severe thunderstorms can bring strong winds and downed trees across bus routes.
+          </p>
+          <p>
+            HoCo Weather Channel translates forecasts into what students and families need to know: which hazards are expected, when they could affect the trip to school, and where to check the district&apos;s official decision.
           </p>
         </div>
       </section>
