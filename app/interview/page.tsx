@@ -3,7 +3,7 @@ import { PageHero } from "@/components/PageHero";
 import { interviewAnswers } from "./answers";
 
 export const metadata = {
-  title: "Interview with Superintendent Bill Barnes | HoCo Weather Channel",
+  title: "Weather Decisions | HoCo Weather Channel",
   description: "David Liu interviews HCPSS Superintendent Bill Barnes about weather-related school operations decisions."
 };
 
@@ -12,7 +12,7 @@ export default function InterviewPage() {
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-6">
       <PageTabs active="interview" />
 
-      <PageHero title="Inside HCPSS Weather Decisions" description="Superintendent Bill Barnes explains how the district makes weather-related school decisions." />
+      <PageHero title="Weather Decisions" description="Superintendent Bill Barnes explains how the district makes weather-related school decisions." />
 
       <section className="page-content pt-8">
         <div className="mx-auto max-w-3xl bg-ice/70 p-5 sm:p-7">

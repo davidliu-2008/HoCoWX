@@ -26,7 +26,7 @@ const groups = [
     tabs: ["maryland", "interview"],
     links: [
       { href: "/maryland-status", label: "Maryland Status" },
-      { href: "/interview", label: "Superintendent Interview" }
+      { href: "/interview", label: "Weather Decisions" }
     ]
   },
   {
@@ -60,7 +60,7 @@ const mobileLinks = [
   { href: "/announcements", label: "Announcements", tab: "announcements" },
   { href: "/accessibility", label: "Accessibility", tab: "accessibility" },
   { href: "/student-polls", label: "Student Prediction Lab", tab: "student-polls" },
-  { href: "/interview", label: "Superintendent Interview", tab: "interview" }
+  { href: "/interview", label: "Weather Decisions", tab: "interview" }
 ] as const;
 
 export function PageTabs({ active }: { active: Tab }) {
