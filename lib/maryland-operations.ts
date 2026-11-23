@@ -343,19 +343,18 @@ async function fetchDistrictStatus(district: MarylandDistrict): Promise<Maryland
       const classified = classifyStatus(`${hcpss.heading} ${hcpss.message}`);
       return {
         ...district,
-        status: hcpss.operationStatus || classified.status,
-        statusKind: classified.statusKind,
+        ...(classified.statusKind === "unknown"
+          ? defaultNormalStatus()
+          : { ...classified, status: hcpss.operationStatus || classified.status }),
         lastUpdated: hcpss.fetchedAt,
         checkedAt,
         experimental: false,
         parserType: "authoritative",
-        matchedText: classified.matchedText
       };
     } catch {
       return {
         ...district,
-        status: "Unknown",
-        statusKind: "unknown",
+        ...defaultNormalStatus(),
         lastUpdated: null,
         checkedAt,
         experimental: false,
@@ -407,8 +406,7 @@ async function fetchDistrictStatus(district: MarylandDistrict): Promise<Maryland
     if (!reachedOfficialSource) {
       return {
         ...district,
-        status: "Unknown",
-        statusKind: "unknown",
+        ...defaultNormalStatus(),
         lastUpdated: null,
         checkedAt,
         experimental: false,
@@ -467,7 +465,7 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, mapper:
 
 export const getMarylandOperationsComparison = unstable_cache(
   () => mapWithConcurrency(marylandDistricts, DISTRICT_CONCURRENCY, fetchDistrictStatus),
-  ["maryland-operations-comparison-v2"],
+  ["maryland-operations-comparison-v3"],
   { revalidate: CACHE_TTL_SECONDS }
 );
 

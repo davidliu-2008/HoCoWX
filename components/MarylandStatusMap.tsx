@@ -34,6 +34,7 @@ export function MarylandStatusMap({ reports }: { reports: MarylandOperationStatu
     <section aria-labelledby="maryland-map-heading" className="bg-white page-content py-8">
       <div className="mx-auto max-w-[1440px]">
         <h2 id="maryland-map-heading" className="text-2xl font-bold text-ink">Maryland district status map</h2>
+        <p className="mt-2 text-sm text-slate-600">Normal Operations is the default when no district-wide change is detected. Check your district’s official source for confirmation.</p>
         <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.36fr)] lg:items-start">
           <div className="min-w-0">
             <svg aria-hidden="true" viewBox={boundaries.viewBox} className="block h-auto w-full rounded-lg bg-ice">
