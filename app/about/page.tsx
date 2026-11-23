@@ -76,6 +76,12 @@ export default function AboutPage() {
               This national total covers crashes from all causes, not just severe weather, and includes people outside school buses.
               {" "}<a href="https://www.nhtsa.gov/road-safety/school-bus-safety" className="font-semibold text-bay underline underline-offset-4">Source: NHTSA</a>
             </p>
+            <p className="mt-4 text-lg font-semibold leading-7">
+              A 30-ton school bus can take <span className="text-bay">12 times as long</span> to stop on a road covered in ice or snow.
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              That figure comes from a <a href="https://safetyvideos.org/wp-content/uploads/2015/07/Winter-Driving-Guide-and-Test.pdf" className="font-semibold text-bay underline underline-offset-4">winter bus driving guide</a>; actual stopping time varies with road and driving conditions.
+            </p>
           </div>
         </div>
         <div className="mx-auto mt-6 max-w-3xl space-y-4 text-base leading-7 text-slate-700">
