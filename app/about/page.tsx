@@ -74,17 +74,14 @@ export default function AboutPage() {
         </div>
         <div className="mx-auto mt-6 max-w-3xl space-y-4 text-base leading-7 text-slate-700">
           <p>
-            Weather information has long been technical and delivered through a top-down system led by experts. Older audiences tend to rely on television, while{" "}
+            Weather information has long been technical and delivered through a top-down system led by experts. {" "}
             <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-bay underline underline-offset-4">
-              younger audiences look elsewhere for forecasts
+              Older audiences still tend to rely on television, while younger audiences increasingly turn to websites, apps, social media, family, and friends for forecasts
             </a>
-            . Students feel the consequences on bus rides, in school schedules, and during outdoor activities.
+            . Students still feel the consequences of weather every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
           </p>
           <p>
-            David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025, after Maryland school districts stayed open and buses slid on icy roads. Snow and ice can send a bus into a skid or rollover. Heavy rain and severe thunderstorms can flood roads, cut visibility, or block bus routes with fallen trees.
-          </p>
-          <p>
-            HoCo Weather Channel translates forecasts into what students and families need to know: which hazards are expected, when they could affect the trip to school, and where to check the district&apos;s official decision.
+            David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
           </p>
         </div>
       </section>
