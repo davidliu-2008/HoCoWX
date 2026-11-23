@@ -65,17 +65,6 @@ export default function AboutPage() {
         </div>
       </PageHero>
 
-      <section aria-labelledby="mission-title" className="page-band bg-white">
-        <h2 id="mission-title" className="mx-auto max-w-3xl text-balance text-3xl font-medium leading-tight text-ink sm:text-4xl">Building the decision layer for weather</h2>
-        <div className="mx-auto mt-5 max-w-3xl space-y-4 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
-          <p>We started HoCo Weather Channel after watching school buses slide on icy Maryland roads. We could look up the forecast, but we wanted to know something more specific: would the roads freeze before buses picked us up?</p>
-          <p>Most people already have a weather app. The work they still have to do is figure out which part of the forecast matters for their plans. Freezing rain at 6 AM matters differently to a district sending buses out at 6:30 than it does to someone whose commute starts at nine.</p>
-          <p className="font-semibold text-ink">We&apos;re building the layer that turns a weather forecast into an assessment of what it could disrupt, where, and when.</p>
-          <p>We started with school mornings because we know them firsthand. We look at when rain or snow is expected, what temperatures are doing around pickup time, and whether there are active weather alerts. Families can see our prediction and why we made it alongside the district&apos;s official status. We publish a record of our calls so people can see how they held up.</p>
-          <p>Schools are the first place we&apos;re putting this to work. We want to do the same for commuters deciding when to leave, public works crews deciding where to check for flooding, and emergency managers figuring out which roads might become impassable. Those decisions belong to the people making them. Our job is to give them a clearer picture of what they&apos;re deciding on.</p>
-        </div>
-      </section>
-
       <section aria-labelledby="founding-title" className="page-band bg-white text-ink">
         <h2 id="founding-title" className="text-3xl font-medium sm:text-4xl">How it started</h2>
         <div className="mt-6 rounded-lg bg-slate-50 px-5 py-7 sm:px-10 sm:py-12">
@@ -94,6 +83,17 @@ export default function AboutPage() {
             David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
           </p>
         </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="mission-title" className="page-band bg-white">
+        <h2 id="mission-title" className="mx-auto max-w-3xl text-balance text-3xl font-medium leading-tight text-ink sm:text-4xl">Building the decision layer for weather</h2>
+        <div className="mx-auto mt-5 max-w-3xl space-y-4 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
+          <p>We started HoCo Weather Channel after watching school buses slide on icy Maryland roads. We could look up the forecast, but we wanted to know something more specific: would the roads freeze before buses picked us up?</p>
+          <p>Most people already have a weather app. The work they still have to do is figure out which part of the forecast matters for their plans. Freezing rain at 6 AM matters differently to a district sending buses out at 6:30 than it does to someone whose commute starts at nine.</p>
+          <p className="font-semibold text-ink">We&apos;re building the layer that turns a weather forecast into an assessment of what it could disrupt, where, and when.</p>
+          <p>We started with school mornings because we know them firsthand. We look at when rain or snow is expected, what temperatures are doing around pickup time, and whether there are active weather alerts. Families can see our prediction and why we made it alongside the district&apos;s official status. We publish a record of our calls so people can see how they held up.</p>
+          <p>Schools are the first place we&apos;re putting this to work. We want to do the same for commuters deciding when to leave, public works crews deciding where to check for flooding, and emergency managers figuring out which roads might become impassable. Those decisions belong to the people making them. Our job is to give them a clearer picture of what they&apos;re deciding on.</p>
         </div>
       </section>
 
