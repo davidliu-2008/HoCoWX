@@ -98,12 +98,7 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-blue-50/60 page-band">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-bay">Student leadership</p>
-            <h2 className="mt-2 text-3xl font-medium text-ink sm:text-4xl">Meet the team</h2>
-          </div>
-        </div>
+        <h2 className="text-3xl font-medium text-ink sm:text-4xl">Meet the team</h2>
 
         <div className="mt-7 grid gap-4 md:grid-cols-3">
           <article className="rounded-lg bg-white p-6">

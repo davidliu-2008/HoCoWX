@@ -341,6 +341,11 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
   ].some((text) => /\b(?:snow\w*|blizzard|winter storm|winter weather advisory)\b/i.test(text ?? ""));
   const airQuality = data.visualCrossingAirQuality;
   const airQualitySummary = airQuality && airQualityMeaning(airQuality.index);
+  const overnightForecast = (data.overnightForecast ?? data.morningForecast ?? data.detailedForecast)
+    ?.replace(/\s+(?:Calm wind|(?:North|South|East|West|Northeast|Northwest|Southeast|Southwest|Light and variable) wind (?:(?:around|up to) )?(?:\d+ to )?[1-9]?\d mph(?:, with gusts as high as [12]?\d mph)?)\./gi, (sentence) =>
+      /\b(?:[3-9]\d|\d{3,}) mph\b/.test(sentence) ? sentence : ""
+    )
+    .trim();
 
   return (
     <section className="bg-white py-7">
@@ -386,19 +391,18 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
       </div>
 
       <div className="mt-5 space-y-4">
-        <div>
+        {overnightForecast && <div>
           <h3 className="mb-2 text-base font-bold text-ink">
             Overnight and morning forecast
           </h3>
           <p className="leading-7 text-slate-600">
-            {data.overnightForecast ?? data.morningForecast ?? data.detailedForecast ?? "No forecast text available."}
+            {overnightForecast}
           </p>
-        </div>
-        <div>
+        </div>}
+        {data.alerts.length > 0 && <div>
           <h3 className="mb-2 text-base font-bold text-ink">
             Weather alerts
           </h3>
-          {data.alerts.length ? (
             <div className="space-y-2">
               {data.alerts.map((alert) => (
                 <p key={`${alert.event}-${alert.headline}`} className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
@@ -407,40 +411,19 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
                 </p>
               ))}
             </div>
-          ) : (
-            <p className="text-sm text-slate-600">No active NWS weather alerts for this point.</p>
-          )}
-        </div>
+        </div>}
       </div>
 
-      {(data.visualCrossingOvernight || data.visualCrossingAirQuality) && (
+      {airQuality && airQualitySummary && (
         <div className="mt-6">
-          <div className="grid gap-5 sm:grid-cols-2">
-            {data.visualCrossingOvernight && (
-              <div>
-                <h3 className="font-bold text-ink">Overnight observations</h3>
-                <p className="mt-1 text-xs text-slate-600">{data.visualCrossingOvernight.date} · Midnight to 6 AM ET · {data.visualCrossingOvernight.hoursObserved} hourly readings</p>
-                <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                  <div><dt className="text-slate-600">Observed low</dt><dd className="font-bold text-ink">{Math.round(data.visualCrossingOvernight.lowTemperatureF)}°F</dd></div>
-                  <div><dt className="text-slate-600">Precipitation</dt><dd className="font-bold text-ink">{data.visualCrossingOvernight.precipitationInches === null ? "Unavailable" : `${data.visualCrossingOvernight.precipitationInches.toFixed(2)} in`}</dd></div>
-                  <div><dt className="text-slate-600">Peak hourly wind</dt><dd className="font-bold text-ink">{data.visualCrossingOvernight.peakWindSpeedMph === null ? "Unavailable" : `${Math.round(data.visualCrossingOvernight.peakWindSpeedMph)} mph`}</dd></div>
-                </dl>
-              </div>
-            )}
-            {airQuality && airQualitySummary && (
-              <div>
-                <h3 className="font-bold text-ink">Air quality: {airQualitySummary.label}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-700">{airQualitySummary.meaning}</p>
-                <p className="mt-2 text-xs text-slate-600">U.S. AQI {airQuality.index} · Hourly estimate · {compactTime(airQuality.validAt)} ET</p>
-                <a href="https://www.airnow.gov/aqi/aqi-basics/" className="mt-1 inline-block text-xs font-semibold text-bay underline">About AQI categories</a>
-              </div>
-            )}
-          </div>
+          <h3 className="font-bold text-ink">Air quality: {airQualitySummary.label}</h3>
+          <p className="mt-2 text-sm leading-6 text-slate-700">{airQualitySummary.meaning}</p>
+          <a href="https://www.airnow.gov/aqi/aqi-basics/" className="mt-1 inline-block text-xs font-semibold text-bay underline">AQI {airQuality.index}</a>
         </div>
       )}
       <p className="mt-5 text-xs leading-5 text-slate-500">
         Forecasts and alerts: National Weather Service
-        {(data.yesterdayTemperatureSource === "Visual Crossing" || data.visualCrossingOvernight || airQuality) ? (
+        {(data.yesterdayTemperatureSource === "Visual Crossing" || airQuality) ? (
           <>
             {" · "}Historical weather and air quality:{" "}
             <a href="https://www.visualcrossing.com/" target="_blank" rel="noreferrer" className="font-semibold text-bay hover:underline">
