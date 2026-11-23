@@ -606,7 +606,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
             <span className="mt-2 block text-bay">We forecast its impact on people.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-700 sm:text-xl">
-            HoCo Weather Channel is building the local intelligence layer that turns forecast data into clear guidance for school, travel, and daily life.
+            HoCo Weather Channel is building the next generation of weather intelligence: a layer that tells people what the forecast means for the decisions they face, without making them interpret it themselves.
           </p>
 
           <div className="mt-12 grid gap-8 text-left md:grid-cols-3 md:gap-10">
