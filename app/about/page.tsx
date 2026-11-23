@@ -68,14 +68,9 @@ export default function AboutPage() {
       <section className="page-band bg-white text-ink">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold sm:text-4xl">How it started</h2>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:gap-8">
-            <p className="text-lg font-semibold leading-7">
-              <strong className="text-bay">110 people</strong> died in school transportation crashes across the U.S. in 2024.
-            </p>
-            <p className="text-lg font-semibold leading-7">
-              A 30-ton school bus can take <strong className="text-bay">12 times as long</strong> to stop on ice or snow.
-            </p>
-          </div>
+          <p className="mt-5 text-lg font-semibold leading-7">
+            A 30-ton school bus can take <strong className="text-bay">12 times as long</strong> to stop on ice or snow.
+          </p>
         </div>
         <div className="mx-auto mt-6 max-w-3xl space-y-4 text-base leading-7 text-slate-700">
           <p>
