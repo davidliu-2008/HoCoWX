@@ -65,19 +65,23 @@ export default function AboutPage() {
         </div>
       </PageHero>
 
-      <section className="bg-navy page-band text-white">
+      <section className="page-band bg-white text-ink">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-black text-white sm:text-5xl">How it started</h2>
-          <div className="mx-auto mt-6 max-w-3xl border-y border-white/25 py-5 text-blue-100">
-            <p className="text-xl font-bold leading-8 sm:text-2xl">
-              Did you know a 30-ton school bus requires <span className="text-sky-300">12 times longer</span> to stop on a road covered in ice or snow?
+          <h2 className="text-3xl font-bold sm:text-4xl">How it started</h2>
+          <div className="mx-auto mt-5 max-w-3xl bg-ice px-5 py-5 sm:px-8">
+            <p className="text-lg font-semibold leading-7">
+              <strong className="text-bay">110 people</strong> died in school-transportation-related traffic crashes nationwide in 2024.
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              The total includes people outside school buses and crashes from all causes, not just weather.
+              {" "}<a href="https://www.nhtsa.gov/road-safety/school-bus-safety" className="font-semibold text-bay underline underline-offset-4">Source: NHTSA</a>
             </p>
           </div>
         </div>
-        <div className="mx-auto mt-7 max-w-4xl space-y-5 text-lg leading-8 text-blue-50">
+        <div className="mx-auto mt-6 max-w-3xl space-y-4 text-base leading-7 text-slate-700">
           <p>
             Weather information has long been technical and delivered through a top-down system led by experts. {" "}
-            <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-blue-200 hover:underline">
+            <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-bay underline underline-offset-4">
               Older audiences still tend to rely on television, while younger audiences increasingly turn to websites, apps, social media, family, and friends for forecasts
             </a>
             . Students still feel the consequences of weather every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
