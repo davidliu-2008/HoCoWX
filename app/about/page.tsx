@@ -68,11 +68,11 @@ export default function AboutPage() {
       <section aria-labelledby="mission-title" className="page-band bg-white">
         <h2 id="mission-title" className="mx-auto max-w-3xl text-balance text-3xl font-medium leading-tight text-ink sm:text-4xl">Building the decision layer for weather</h2>
         <div className="mx-auto mt-5 max-w-3xl space-y-4 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
-          <p className="font-semibold text-ink">The forecast ends where the decision begins.</p>
-          <p>Weather models forecast the atmosphere. We forecast its impact on people.</p>
-          <p>A forecast says 53°F. You want to know whether to bring a jacket. A forecast says freezing rain at 6 AM. A family wants to know whether it could affect the morning bus ride. We&apos;re building the layer that connects what&apos;s happening in the atmosphere to what people need to know on the ground.</p>
-          <p><strong className="font-semibold text-ink">Schools are where we&apos;re starting.</strong> We combine forecasts, observations, and alerts to explain when weather could affect the school day and why. Families can see our weather-based prediction alongside the district&apos;s official status. We keep a public record of our predictions to see where we got it right and where we need to improve.</p>
-          <p>Our ambition is to make that same approach useful wherever weather changes a plan: for commuters deciding when to leave, local governments preparing for storms, and emergency managers anticipating where flooding could disrupt access. People still make the call. They shouldn&apos;t have to decode the forecast first.</p>
+          <p>We started HoCo Weather Channel after watching school buses slide on icy Maryland roads. We could look up the forecast, but we wanted to know something more specific: would the roads freeze before buses picked us up?</p>
+          <p>Most people already have a weather app. The work they still have to do is figure out which part of the forecast matters for their plans. Freezing rain at 6 AM matters differently to a district sending buses out at 6:30 than it does to someone whose commute starts at nine.</p>
+          <p className="font-semibold text-ink">We&apos;re building the layer that turns a weather forecast into an assessment of what it could disrupt, where, and when.</p>
+          <p>We started with school mornings because we know them firsthand. We look at when rain or snow is expected, what temperatures are doing around pickup time, and whether there are active weather alerts. Families can see our prediction and why we made it alongside the district&apos;s official status. We publish a record of our calls so people can see how they held up.</p>
+          <p>Schools are the first place we&apos;re putting this to work. We want to do the same for commuters deciding when to leave, public works crews deciding where to check for flooding, and emergency managers figuring out which roads might become impassable. Those decisions belong to the people making them. Our job is to give them a clearer picture of what they&apos;re deciding on.</p>
         </div>
       </section>
 
