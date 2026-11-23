@@ -12,8 +12,6 @@ type Partnership = {
   logoClass: string;
   description: string;
   details: Array<{ label: string; value: string }>;
-  href?: string;
-  linkLabel?: string;
 };
 
 const partnerships: Partnership[] = [
@@ -66,9 +64,7 @@ const partnerships: Partnership[] = [
       { label: "Coverage", value: "Historical, current, and forecast weather" },
       { label: "Tools", value: "API, query builder, and downloadable datasets" },
       { label: "Use", value: "Forecast research and model validation" }
-    ],
-    href: "https://www.visualcrossing.com/",
-    linkLabel: "Visit Visual Crossing"
+    ]
   }
 ];
 
@@ -110,11 +106,6 @@ function PartnershipRow({ partner }: { partner: Partnership }) {
           <h3 className="text-2xl font-medium leading-tight text-ink">{partner.name}</h3>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">{partner.description}</p>
         </div>
-        {partner.href ? (
-          <a href={partner.href} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-10 w-fit items-center rounded-md bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700">
-            {partner.linkLabel}
-          </a>
-        ) : null}
       </div>
 
       <dl className="min-w-0 divide-y divide-slate-200 p-6 xl:p-8">

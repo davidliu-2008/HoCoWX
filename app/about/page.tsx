@@ -66,34 +66,27 @@ export default function AboutPage() {
       </PageHero>
 
       <section className="page-band bg-white text-ink">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold sm:text-4xl">How it started</h2>
-          <div className="mx-auto mt-5 max-w-3xl bg-ice px-5 py-5 sm:px-8">
+          <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:gap-8">
             <p className="text-lg font-semibold leading-7">
-              <strong className="text-bay">110 people</strong> died in school-transportation-related traffic crashes nationwide in 2024.
+              <strong className="text-bay">110 people</strong> died in school transportation crashes across the U.S. in 2024.
             </p>
-            <p className="mt-2 text-sm leading-6 text-slate-700">
-              This national total covers crashes from all causes, not just severe weather, and includes people outside school buses.
-              {" "}<a href="https://www.nhtsa.gov/road-safety/school-bus-safety" className="font-semibold text-bay underline underline-offset-4">Source: NHTSA</a>
-            </p>
-            <p className="mt-4 text-lg font-semibold leading-7">
-              A 30-ton school bus can take <span className="text-bay">12 times as long</span> to stop on a road covered in ice or snow.
-            </p>
-            <p className="mt-2 text-sm leading-6 text-slate-700">
-              That figure comes from a <a href="https://safetyvideos.org/wp-content/uploads/2015/07/Winter-Driving-Guide-and-Test.pdf" className="font-semibold text-bay underline underline-offset-4">winter bus driving guide</a>; actual stopping time varies with road and driving conditions.
+            <p className="text-lg font-semibold leading-7">
+              A 30-ton school bus can take <strong className="text-bay">12 times as long</strong> to stop on ice or snow.
             </p>
           </div>
         </div>
         <div className="mx-auto mt-6 max-w-3xl space-y-4 text-base leading-7 text-slate-700">
           <p>
-            Weather information has long been technical and delivered through a top-down system led by experts. {" "}
+            Weather information has long been technical and delivered through a top-down system led by experts. Older audiences tend to rely on television, while{" "}
             <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-bay underline underline-offset-4">
-              Older audiences still tend to rely on television, while younger audiences increasingly turn to websites, apps, social media, family, and friends for forecasts
+              younger audiences look elsewhere for forecasts
             </a>
-            . Students still feel the consequences of weather every day through bus rides, school schedules, outdoor activities, and decisions that affect their families.
+            . Students feel the consequences on bus rides, in school schedules, and during outdoor activities.
           </p>
           <p>
-            David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025 after Maryland school districts stayed open on icy roads that sent school buses sliding. On winter roads, snow and ice can cause buses to lose traction, skid, crash, or overturn. The risk is not limited to winter: heavy rain can reduce visibility or flood roads, and severe thunderstorms can bring strong winds and downed trees across bus routes.
+            David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025, after Maryland school districts stayed open and buses slid on icy roads. Snow and ice can send a bus into a skid or rollover. Heavy rain and severe thunderstorms can flood roads, cut visibility, or block bus routes with fallen trees.
           </p>
           <p>
             HoCo Weather Channel translates forecasts into what students and families need to know: which hazards are expected, when they could affect the trip to school, and where to check the district&apos;s official decision.
