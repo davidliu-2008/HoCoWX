@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Camera,
-  CloudSun,
-  GraduationCap,
-  Radio,
-  UsersRound
-} from "lucide-react";
 import { PageTabs } from "@/components/PageTabs";
 import { PageHero } from "@/components/PageHero";
 import { AnimatedStat } from "@/components/AnimatedStat";
@@ -21,22 +13,18 @@ const openRoles = [
   {
     title: "Student Forecasters",
     description: "Review official weather data and help prepare clear local forecasts.",
-    icon: <CloudSun className="h-6 w-6" />
   },
   {
     title: "School Correspondents",
     description: "Share verified conditions and weather impacts from schools across the county.",
-    icon: <Radio className="h-6 w-6" />
   },
   {
     title: "Photo and Video Contributors",
     description: "Document local weather and help tell visual stories safely and responsibly.",
-    icon: <Camera className="h-6 w-6" />
   },
   {
     title: "Weather Literacy Contributors",
     description: "Turn trusted sources into guides that help other students understand the forecast.",
-    icon: <GraduationCap className="h-6 w-6" />
   }
 ];
 
@@ -135,15 +123,14 @@ export default function AboutPage() {
           <div>
             <h2 id="winter-expansion" className="text-3xl font-medium text-white sm:text-4xl">Expanding this winter</h2>
             <p className="mt-4 max-w-xl text-lg leading-8 text-white">The next phase will create more ways for students to contribute to local weather reporting and education.</p>
-            <a href="mailto:howardcountyweather@gmail.com" className="mt-6 inline-flex items-center gap-2 font-bold text-white underline underline-offset-4 hover:text-blue-100">
-              Ask about joining the team <ArrowRight className="h-4 w-4" />
+            <a href="mailto:howardcountyweather@gmail.com" className="mt-6 inline-block font-bold text-white underline underline-offset-4 hover:text-blue-100">
+              Ask about joining the team
             </a>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             {openRoles.map((role) => (
               <article key={role.title} className="rounded-lg bg-ice p-5">
-                <span className="text-bay">{role.icon}</span>
-                <h3 className="mt-4 text-lg font-bold text-ink">{role.title}</h3>
+                <h3 className="text-lg font-bold text-ink">{role.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">{role.description}</p>
               </article>
             ))}
@@ -153,13 +140,12 @@ export default function AboutPage() {
 
       <section className="flex flex-col gap-4 bg-blue-50 page-band sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
-          <UsersRound className="h-9 w-9 text-bay" />
           <div>
             <h2 className="text-2xl font-black text-ink">Serving Maryland&apos;s school community</h2>
             <p className="mt-1 text-sm text-slate-600">Explore the partnerships helping this student-led work reach more people.</p>
           </div>
         </div>
-        <Link href="/partnerships" className="inline-flex items-center gap-2 font-bold text-bay hover:underline">View partnerships <ArrowRight className="h-4 w-4" /></Link>
+        <Link href="/partnerships" className="inline-block font-bold text-bay hover:underline">View partnerships</Link>
       </section>
     </main>
   );
