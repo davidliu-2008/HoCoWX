@@ -48,31 +48,41 @@ export default function AboutPage() {
       <PageHero title="Weather insights built for students.">
         <div className="mx-auto mt-6 max-w-5xl">
           <h2 className="text-sm font-bold uppercase text-blue-200">Our audience</h2>
-          <div className="audience-stats mt-4 grid gap-3 sm:grid-cols-3 sm:gap-6">
+          <div className="audience-stats mt-5 grid gap-5 sm:grid-cols-3 sm:gap-6">
             <div className="min-w-0">
               <AnimatedStat target={80000} className="text-white" />
-              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">Students, staff, and parents served through the HCPSS community.</p>
+              <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-blue-100">Students, staff, and parents served through the HCPSS community.</p>
             </div>
-            <div className="min-w-0 sm:px-3 lg:px-6">
+            <div className="min-w-0">
               <AnimatedStat target={700000} className="text-white" />
-              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">People impacted nationwide</p>
+              <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-blue-100">People impacted nationwide</p>
             </div>
             <div className="min-w-0">
               <AnimatedStat target={2.2} suffix="M+" decimals={1} className="text-white" />
-              <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-blue-100">Views across weather updates, forecasts, and educational content.</p>
+              <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-blue-100">Views across weather updates, forecasts, and educational content.</p>
             </div>
           </div>
         </div>
       </PageHero>
 
-      <section className="page-band bg-white text-ink">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="text-3xl font-bold sm:text-4xl">How it started</h2>
-          <p className="mt-5 text-lg font-semibold leading-7">
+      <section aria-labelledby="mission-title" className="page-band bg-white">
+        <h2 id="mission-title" className="max-w-3xl text-balance text-3xl font-medium leading-tight text-ink sm:text-4xl">Building the decision layer for weather</h2>
+        <div className="mt-5 max-w-3xl space-y-4 text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
+          <p className="font-semibold text-ink">The forecast ends where the decision begins.</p>
+          <p>Weather models forecast the atmosphere. We forecast its impact on people.</p>
+          <p>53°F is a reading. Do you need a jacket? Freezing rain at 6 AM is a forecast. Could ice form on bus routes before pickup? We&apos;re building the layer that answers the question behind the forecast.</p>
+          <p>We connect forecasts, observations, and alerts to the place, time, and people they affect. <strong className="font-semibold text-ink">We&apos;re starting with schools.</strong> Families can see what we predict, what drives the prediction, and what the district has officially announced. We record our predictions so we can compare them with actual outcomes and improve.</p>
+          <p>Our ambition is to make that same layer useful wherever weather changes a decision, from daily commutes to local government and emergency response. People make the call. They shouldn&apos;t have to decode the forecast first.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="founding-title" className="page-band bg-white text-ink">
+        <h2 id="founding-title" className="text-3xl font-medium sm:text-4xl">How it started</h2>
+        <div className="mt-6 rounded-lg bg-slate-50 px-5 py-7 sm:px-10 sm:py-12">
+        <div className="mx-auto max-w-3xl space-y-5 text-lg leading-8 text-slate-700">
+          <p className="font-semibold text-ink">
             A 30-ton school bus can take <strong className="text-bay">12 times as long</strong> to stop on ice or snow.
           </p>
-        </div>
-        <div className="mx-auto mt-6 max-w-3xl space-y-4 text-base leading-7 text-slate-700">
           <p>
             Weather information has long been technical and delivered through a top-down system led by experts. {" "}
             <a href="https://repository.library.noaa.gov/view/noaa/67719" target="_blank" rel="noreferrer" className="font-semibold text-bay underline underline-offset-4">
@@ -84,13 +94,14 @@ export default function AboutPage() {
             David Liu built HoCo Weather Channel in his computer science class and launched it in November 2025 after Maryland school districts remained open despite icy roads that sent school buses sliding. It brings complex meteorological information to younger audiences through clear local forecasts, school operation predictions, and weather literacy resources built around the decisions students experience.
           </p>
         </div>
+        </div>
       </section>
 
       <section className="bg-blue-50/60 page-band">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-bay">Student leadership</p>
-            <h2 className="mt-2 text-4xl font-black text-ink sm:text-5xl">Meet the team</h2>
+            <h2 className="mt-2 text-3xl font-medium text-ink sm:text-4xl">Meet the team</h2>
           </div>
         </div>
 
@@ -134,7 +145,7 @@ export default function AboutPage() {
       <section className="bg-white page-band">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-bay">Expanding this winter</p>
+            <h2 className="text-3xl font-medium text-ink sm:text-4xl">Expanding this winter</h2>
             <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">The next phase will create more ways for students to contribute to local weather reporting and education.</p>
             <a href="mailto:howardcountyweather@gmail.com" className="mt-6 inline-flex items-center gap-2 font-bold text-bay hover:underline">
               Ask about joining the team <ArrowRight className="h-4 w-4" />
@@ -161,13 +172,6 @@ export default function AboutPage() {
           </div>
         </div>
         <Link href="/partnerships" className="inline-flex items-center gap-2 font-bold text-bay hover:underline">View partnerships <ArrowRight className="h-4 w-4" /></Link>
-      </section>
-      <section aria-labelledby="our-perspective" className="page-content page-section">
-        <h2 id="our-perspective" className="mb-7 text-center text-3xl font-semibold text-ink">Our perspective</h2>
-        <figure className="mx-auto max-w-3xl rounded-lg bg-ice p-6 sm:p-9">
-          <blockquote className="max-w-2xl text-2xl font-medium leading-snug text-ink">Weather models forecast the atmosphere. We forecast its impact on people.</blockquote>
-          <figcaption className="mt-6 text-sm font-semibold text-slate-700">HoCo Weather Channel</figcaption>
-        </figure>
       </section>
     </main>
   );
