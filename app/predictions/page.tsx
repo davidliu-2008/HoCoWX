@@ -64,7 +64,7 @@ export default async function PredictionsPage({ searchParams }: { searchParams: 
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="predictions" />
 
-      <PageHero title="Predictions" />
+      <PageHero title="Predictions" description="See whether local weather could delay or close schools, and what drives our prediction." />
       <section aria-labelledby="current-school-prediction" className="mx-auto max-w-3xl px-5 pt-8 text-center sm:px-8 sm:pt-10">
         <p className="text-sm font-semibold text-slate-600">{district.county}{schoolDate ? ` · ${schoolDate}` : ""}</p>
         <h2 id="current-school-prediction" className="mt-2 text-3xl font-bold leading-tight text-ink sm:text-4xl">{prediction?.label ?? "School operation prediction unavailable"}</h2>
