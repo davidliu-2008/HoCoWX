@@ -334,6 +334,11 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
   }
 
   const data = weather.data;
+  const snowMentioned = [
+    data.shortForecast, data.detailedForecast, data.overnightForecast, data.morningForecast,
+    ...data.hourlyForecast.map(({ shortForecast }) => shortForecast),
+    ...data.alerts.map(({ event }) => event)
+  ].some((text) => /\b(?:snow\w*|blizzard|winter storm|winter weather advisory)\b/i.test(text ?? ""));
   const airQuality = data.visualCrossingAirQuality;
   const airQualitySummary = airQuality && airQualityMeaning(airQuality.index);
 
@@ -365,7 +370,9 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
         <Stat
           icon={<Snowflake className="h-4 w-4" />}
           label="Expected Snow"
-          value={data.expectedSnowfallInches === null ? "Unavailable" : `${data.expectedSnowfallInches} in`}
+          value={data.expectedSnowfallInches === null
+            ? snowMentioned ? "Amount not reported" : "None expected"
+            : `${data.expectedSnowfallInches} in`}
         />
         <Stat
           icon={<Wind className="h-4 w-4" />}
