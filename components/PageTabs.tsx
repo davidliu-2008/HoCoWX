@@ -91,14 +91,14 @@ export function PageTabs({ active }: { active: Tab }) {
   }, [pathname, router]);
 
   const desktopItem = (isActive: boolean) =>
-    `inline-flex min-h-16 items-center gap-2 border-b-2 px-3 text-[0.8125rem] font-bold transition ${
+    `inline-flex min-h-[4.5rem] items-center gap-2 border-b-2 px-3 text-[0.8125rem] font-bold transition ${
       isActive ? "border-bay text-bay" : "border-transparent text-slate-600 hover:border-blue-200 hover:text-bay"
     }`;
   const menuLink = "flex min-h-11 items-center gap-2 rounded-md px-3 py-2 text-[0.8125rem] font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-bay";
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur" aria-label="Main sections">
-      <div className="mx-auto flex min-h-14 w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:min-h-16">
+      <div className="mx-auto flex min-h-16 w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:min-h-[4.5rem]">
         <Link href={countyHref("/")} className="flex shrink-0 items-center" aria-label="HoCo Weather Channel home">
           <img src="/hoco-weather-channel-icon.png" alt="" width={64} height={64} className="h-12 w-12 shrink-0 object-contain lg:h-14 lg:w-14" />
         </Link>
