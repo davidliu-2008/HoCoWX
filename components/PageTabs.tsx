@@ -94,7 +94,7 @@ export function PageTabs({ active }: { active: Tab }) {
     `inline-flex min-h-16 items-center gap-2 border-b-2 px-3 text-[0.8125rem] font-bold transition ${
       isActive ? "border-bay text-bay" : "border-transparent text-slate-600 hover:border-blue-200 hover:text-bay"
     }`;
-  const menuLink = "flex min-h-12 items-center gap-3 rounded-md px-4 py-3 text-[0.8125rem] font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-bay";
+  const menuLink = "flex min-h-11 items-center gap-2 rounded-md px-3 py-2 text-[0.8125rem] font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-bay";
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur" aria-label="Main sections">
@@ -142,7 +142,7 @@ export function PageTabs({ active }: { active: Tab }) {
                 </button>
                 <div
                   id={`nav-menu-${group.label.toLowerCase()}`}
-                  className={`absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 rounded-lg border border-blue-100 bg-white p-2 shadow-xl transition-opacity duration-150 ${isOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"}`}
+                  className={`absolute left-1/2 top-full z-50 w-52 -translate-x-1/2 rounded-lg border border-blue-100 bg-white p-1.5 shadow-xl transition-opacity duration-150 ${isOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"}`}
                 >
                   {group.links.map((item) => {
                     const itemActive = pathname === item.href;
@@ -171,7 +171,7 @@ export function PageTabs({ active }: { active: Tab }) {
           <span>{mobileLinks.find((item) => item.tab === active)?.label}</span>
           <span className="flex items-center gap-2">Menu <ChevronDown aria-hidden="true" className="h-4 w-4 group-open:rotate-180" /></span>
         </summary>
-        <div className="absolute inset-x-0 top-full grid max-h-[65dvh] grid-cols-2 gap-1 overflow-y-auto border-b border-slate-200 bg-white p-3 shadow-lg">
+        <div className="absolute inset-x-0 top-full grid max-h-[65dvh] grid-cols-2 gap-1 overflow-y-auto border-b border-slate-200 bg-white p-2 shadow-lg">
           {mobileLinks.map((item) => (
             <Link key={item.href} href={countyHref(item.href)} aria-current={active === item.tab ? "page" : undefined} className={`${menuLink} ${active === item.tab ? "bg-blue-50 text-bay" : ""}`} onClick={() => mobileMenu.current?.removeAttribute("open")}>
               {item.label}
