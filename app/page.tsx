@@ -391,14 +391,23 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
       </div>
 
       <div className="mt-5 space-y-4">
-        {overnightForecast && <div>
-          <h3 className="mb-2 text-base font-bold text-ink">
-            Overnight and morning forecast
-          </h3>
-          <p className="leading-7 text-slate-600">
-            {overnightForecast}
-          </p>
-        </div>}
+        {(overnightForecast || (airQuality && airQualitySummary)) && (
+          <div className={`grid gap-5 ${overnightForecast && airQuality && airQualitySummary ? "md:grid-cols-2 md:gap-8" : ""}`}>
+            {overnightForecast && (
+              <div>
+                <h3 className="mb-2 text-base font-bold text-ink">Overnight and morning forecast</h3>
+                <p className="leading-7 text-slate-600">{overnightForecast}</p>
+              </div>
+            )}
+            {airQuality && airQualitySummary && (
+              <div>
+                <h3 className="mb-2 text-base font-bold text-ink">Air quality: {airQualitySummary.label}</h3>
+                <p className="text-sm leading-6 text-slate-700">{airQualitySummary.meaning}</p>
+                <a href="https://www.airnow.gov/aqi/aqi-basics/" className="mt-1 inline-block text-xs font-semibold text-bay underline">AQI {airQuality.index}</a>
+              </div>
+            )}
+          </div>
+        )}
         {data.alerts.length > 0 && <div>
           <h3 className="mb-2 text-base font-bold text-ink">
             Weather alerts
@@ -414,13 +423,6 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
         </div>}
       </div>
 
-      {airQuality && airQualitySummary && (
-        <div className="mt-6">
-          <h3 className="font-bold text-ink">Air quality: {airQualitySummary.label}</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-700">{airQualitySummary.meaning}</p>
-          <a href="https://www.airnow.gov/aqi/aqi-basics/" className="mt-1 inline-block text-xs font-semibold text-bay underline">AQI {airQuality.index}</a>
-        </div>
-      )}
       <p className="mt-5 text-xs leading-5 text-slate-500">
         Forecasts and alerts: National Weather Service
         {(data.yesterdayTemperatureSource === "Visual Crossing" || airQuality) ? (
