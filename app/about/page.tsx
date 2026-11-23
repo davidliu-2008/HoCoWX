@@ -121,28 +121,21 @@ export default function AboutPage() {
           </article>
         </div>
 
-        <figure className="mt-8 grid overflow-hidden rounded-lg bg-navy text-white lg:grid-cols-[1.25fr_0.75fr] lg:items-stretch">
-          <img
-            src="/photography/winter-wildlife-squirrel.jpg"
-            alt="A squirrel standing in fresh snow in Howard County"
-            className="h-full min-h-[320px] w-full object-cover"
-            loading="lazy"
-          />
-          <figcaption className="flex flex-col justify-center p-7 sm:p-10">
-            <h3 className="mt-3 text-3xl font-black leading-tight">Weather is part of the community story.</h3>
-            <p className="mt-4 text-base leading-7 text-blue-100">
-              Student photography records how winter weather changes local landscapes, wildlife, travel, and daily life across Howard County.
-            </p>
-          </figcaption>
-        </figure>
       </section>
 
-      <section className="bg-white page-band">
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+      <section aria-labelledby="winter-expansion" className="page-band relative isolate overflow-hidden bg-navy">
+        <img
+          src="/photography/winter-wildlife-squirrel.jpg"
+          alt=""
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+          loading="lazy"
+        />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-navy/75" />
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-10">
           <div>
-            <h2 className="text-3xl font-medium text-ink sm:text-4xl">Expanding this winter</h2>
-            <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">The next phase will create more ways for students to contribute to local weather reporting and education.</p>
-            <a href="mailto:howardcountyweather@gmail.com" className="mt-6 inline-flex items-center gap-2 font-bold text-bay hover:underline">
+            <h2 id="winter-expansion" className="text-3xl font-medium text-white sm:text-4xl">Expanding this winter</h2>
+            <p className="mt-4 max-w-xl text-lg leading-8 text-white">The next phase will create more ways for students to contribute to local weather reporting and education.</p>
+            <a href="mailto:howardcountyweather@gmail.com" className="mt-6 inline-flex items-center gap-2 font-bold text-white underline underline-offset-4 hover:text-blue-100">
               Ask about joining the team <ArrowRight className="h-4 w-4" />
             </a>
           </div>
