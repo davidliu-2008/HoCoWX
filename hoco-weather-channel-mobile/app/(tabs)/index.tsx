@@ -6,7 +6,7 @@ import { AppText } from "@/components/AppText";
 import { Card } from "@/components/Card";
 import { Screen } from "@/components/Screen";
 import { appConfig } from "@/config/appConfig";
-import { counties } from "@/config/counties";
+import { counties, matchCounties } from "@/config/counties";
 import { morningBrief, nextDeparture, parseDeparture } from "@/lib/morningBrief";
 import type { HcpssStatus, HourlyForecastPoint } from "@/types/api";
 
@@ -30,15 +30,16 @@ function Brief({ demo = false }: { demo?: boolean }) {
   const [timeError, setTimeError] = useState(false);
   const [county, setCounty] = useState<County>(counties.find(({ slug }) => slug === "howard")!);
   const [pickingCounty, setPickingCounty] = useState(false);
+  const [countyQuery, setCountyQuery] = useState("");
+  const [countyError, setCountyError] = useState(false);
   const [ready, setReady] = useState(demo);
   const [requestId, setRequestId] = useState(0);
   const [response, setResponse] = useState<{ county: string; requestId: number; data: BriefData | null }>();
   const dark = useColorScheme() === "dark";
   const [expanded, setExpanded] = useState(false);
   useEffect(() => {
-    if (demo) return;
     let active = true;
-    void Promise.all([AsyncStorage.getItem(preferenceKey), AsyncStorage.getItem(countyKey)]).then(([value, savedCounty]) => {
+    void Promise.all([demo ? Promise.resolve(null) : AsyncStorage.getItem(preferenceKey), AsyncStorage.getItem(demo ? `${countyKey}.demo` : countyKey)]).then(([value, savedCounty]) => {
       const saved = parseDeparture(value ?? "") ?? parseDeparture(`${value}:00`);
       if (active && saved) {
         setDeparture(saved.label);
@@ -71,6 +72,14 @@ function Brief({ demo = false }: { demo?: boolean }) {
   const selectedTime = parseDeparture(departure)!;
   const forecast = nextDeparture(hours, selectedTime, demo ? Date.parse("2026-11-25T10:00:00Z") : undefined);
   const brief = morningBrief(forecast);
+  const suggestions = matchCounties(countyQuery);
+  function saveCounty(option?: County) {
+    if (!option) { setCountyError(true); return; }
+    setCounty(option);
+    setPickingCounty(false);
+    setExpanded(false);
+    void AsyncStorage.setItem(demo ? `${countyKey}.demo` : countyKey, option.slug).catch(() => {});
+  }
   function saveTime() {
     const parsed = parseDeparture(draft);
     if (!parsed) { setTimeError(true); return; }
@@ -104,19 +113,22 @@ function Brief({ demo = false }: { demo?: boolean }) {
       </Card>
       <View style={styles.schedule}>
         <AppText variant="heading">County</AppText>
-        <Pressable accessibilityRole="button" accessibilityState={{ expanded: pickingCounty }} onPress={() => setPickingCounty(!pickingCounty)} style={styles.evidence}>
-          <AppText style={styles.action}>{county.county} · {pickingCounty ? "Close county list" : "Change county"}</AppText>
-        </Pressable>
-        {pickingCounty && <View style={styles.options}>
-          {counties.map((option) => <Pressable key={option.slug} accessibilityRole="button"
-            accessibilityState={{ selected: option.slug === county.slug }} style={styles.countyOption}
-            onPress={() => {
-              setCounty(option);
-              setPickingCounty(false);
-              setExpanded(false);
-              if (!demo) void AsyncStorage.setItem(countyKey, option.slug).catch(() => {});
-            }}><AppText>{option.county}</AppText></Pressable>)}
-        </View>}
+        {pickingCounty ? <View style={styles.countySearch}>
+          <View style={styles.options}>
+            <TextInput autoFocus accessibilityLabel="Search Maryland counties" placeholder="Type a county, e.g. Howard" placeholderTextColor={dark ? "#aeb9c8" : "#526079"}
+              value={countyQuery} onChangeText={(value) => { setCountyQuery(value); setCountyError(false); }}
+              onSubmitEditing={() => saveCounty(suggestions[0])} autoCorrect={false} returnKeyType="done"
+              style={[styles.option, styles.flex, { color: dark ? "#fff" : "#14233d" }]} />
+            <Pressable accessibilityRole="button" onPress={() => setPickingCounty(false)} style={styles.evidence}><AppText style={styles.action}>Cancel</AppText></Pressable>
+          </View>
+          {suggestions.map((option) => <Pressable key={option.slug} accessibilityRole="button" style={styles.countyOption}
+            onPress={() => saveCounty(option)}><AppText>{option.county}</AppText></Pressable>)}
+          {(countyError || (countyQuery.trim().length >= 3 && !suggestions.length)) &&
+            <AppText variant="caption" muted>No matching Maryland county. Try a shorter name.</AppText>}
+        </View> : <Pressable accessibilityRole="button" accessibilityLabel={`Change county, currently ${county.county}`}
+          onPress={() => { setCountyQuery(""); setCountyError(false); setPickingCounty(true); }} style={styles.countyOption}>
+          <AppText>{county.county} <AppText variant="caption" muted> · Change</AppText></AppText>
+        </Pressable>}
       </View>
       <View style={styles.schedule}>
         <AppText variant="heading">Morning departure</AppText>
@@ -159,6 +171,7 @@ const styles = StyleSheet.create({
   options: { flexDirection: "row", flexWrap: "wrap", gap: 8, alignItems: "center" },
   option: { minWidth: 82, minHeight: 46, borderWidth: 1, borderColor: "#8495a9", borderRadius: 8, paddingHorizontal: 12, fontSize: 16 },
   countyOption: { minHeight: 44, borderWidth: 1, borderColor: "#8495a9", borderRadius: 8, paddingHorizontal: 10, justifyContent: "center" },
+  countySearch: { gap: 6 },
   save: { minHeight: 46, paddingHorizontal: 14, justifyContent: "center", borderRadius: 8, backgroundColor: "#173762" },
   selectedText: { color: "#ffffff", fontWeight: "700" }
 });
