@@ -415,10 +415,18 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
           </h3>
             <div className="space-y-2">
               {data.alerts.map((alert) => (
-                <p key={`${alert.event}-${alert.headline}`} className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
-                  <span className="font-semibold">{alert.event}</span>
-                  {alert.headline ? `: ${alert.headline}` : ""}
-                </p>
+                <article key={`${alert.event}-${alert.headline}-${alert.description}`} className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
+                  <h4 className="font-semibold">{alert.event}</h4>
+                  {alert.headline.trim() && alert.headline.trim().toLowerCase() !== alert.event.trim().toLowerCase() && (
+                    <p className="mt-1">{alert.headline}</p>
+                  )}
+                  {alert.description.trim() && (
+                    <details className="mt-2" open={alert.event === "Special Weather Statement"}>
+                      <summary className="cursor-pointer font-semibold">National Weather Service details</summary>
+                      <p className="mt-2 whitespace-pre-line break-words leading-6">{alert.description.trim()}</p>
+                    </details>
+                  )}
+                </article>
               ))}
             </div>
         </div>}
@@ -529,7 +537,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       <DashboardAnnouncement />
       {weather.ok && weather.data.alerts.length > 0 && (
         <WeatherAlertPopup
-          key={JSON.stringify([district.slug, weather.data.alerts.map(({ event, headline }) => [event, headline])])}
+          key={JSON.stringify([district.slug, weather.data.alerts.map(({ event, headline, description }) => [event, headline, description])])}
           county={district.county}
           events={weather.data.alerts.map(({ event }) => event)}
         />
