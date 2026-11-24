@@ -29,11 +29,13 @@ The scripts use Next's WASM compiler package so the app can also run in stricter
 
 ## Environment Variables
 
-Set `OSRM_BASE_URL` to a production OSRM server that supports the driving
-profile to enable Route Weather in deployed builds. Local development can
-use the public OSRM demo for occasional testing. The route preview sends
-the two selected coordinates to the routing provider and queries NWS
-hourly forecasts at sampled points along the route.
+To enable Route Weather in deployed builds, set `OSRM_BASE_URL` to a production
+OSRM driving server and `ROUTE_GEOCODER_URL` to a private or contracted
+Nominatim-compatible search endpoint approved to handle address queries.
+Local development supports Columbia, Ellicott City, and Howard High School
+without a geocoder. Submitted locations go to the configured geocoder,
+resolved coordinates go to the routing provider, and sampled points along
+the route are used to query NWS hourly forecasts.
 
 Optional for National Weather Service requests:
 
