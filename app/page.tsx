@@ -415,7 +415,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
           </h3>
             <div className="space-y-2">
               {data.alerts.map((alert) => {
-                const points = [...alert.description.matchAll(/^\s*\*\s+(WHAT|WHERE|WHEN|IMPACTS)\.\.\.([\s\S]*?)(?=\n\s*\*|$)/gim)]
+                const points = [...alert.description.matchAll(/^\s*\*\s+(WHAT|WHERE|WHEN|IMPACTS)\.\.\.([\s\S]*?)(?=\n\s*\*|(?![\s\S]))/gim)]
                   .map(([, label, body]) => [label[0].toUpperCase() + label.slice(1).toLowerCase(), body.replace(/\s+/g, " ").trim()])
                   .filter(([, body]) => body);
                 const lead = alert.description.trim().split(/\n\s*\n/)[0]?.replace(/\s+/g, " ");
