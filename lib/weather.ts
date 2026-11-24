@@ -193,14 +193,16 @@ function formatAlert(feature: {
 export async function getWeatherSummary({
   latitude = 39.2673,
   longitude = -76.7983,
-  location = "Howard County"
+  location = "Howard County",
+  forecastHours = 12
 }: {
   latitude?: number;
   longitude?: number;
   location?: string;
+  forecastHours?: number;
 } = {}): Promise<WeatherSummary> {
   const now = Date.now();
-  const cacheKey = `${latitude},${longitude}`;
+  const cacheKey = `${latitude},${longitude},${forecastHours}`;
   const cachedWeather = weatherCache.get(cacheKey);
 
   if (cachedWeather && cachedWeather.expiresAt > now) {
@@ -263,7 +265,7 @@ export async function getWeatherSummary({
     shortForecast: current?.shortForecast ?? nextPeriods[0]?.shortForecast ?? null,
     detailedForecast: nextPeriods[0]?.detailedForecast ?? null,
     forecastDiscussion: point.properties.forecastDiscussion ?? null,
-    hourlyForecast: hourly.properties.periods.slice(0, 12).map(formatHourlyPeriod),
+    hourlyForecast: hourly.properties.periods.slice(0, forecastHours).map(formatHourlyPeriod),
     schoolDayOutlook: buildSchoolDayOutlook(forecast.properties.periods),
     fetchedAt: new Date().toISOString()
   };
