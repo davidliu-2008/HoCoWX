@@ -415,29 +415,22 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
           </h3>
             <div className="space-y-2">
               {data.alerts.map((alert) => {
-                const points = [...alert.description.matchAll(/^\s*\*\s+(WHAT|WHERE|WHEN|IMPACTS)\.\.\.([\s\S]*?)(?=\n\s*\*|(?![\s\S]))/gim)]
-                  .map(([, label, body]) => [label[0].toUpperCase() + label.slice(1).toLowerCase(), body.replace(/\s+/g, " ").trim()])
-                  .filter(([, body]) => body);
-                const lead = alert.description.trim().split(/\n\s*\n/)[0]?.replace(/\s+/g, " ");
-                const brief = lead && (lead.match(/^.{1,240}?[.!?](?=\s+[A-Z]|$)/)?.[0] ?? (lead.length <= 240 ? lead : ""));
+                const fields = [...alert.description.matchAll(/^[ \t]*\*?[ \t]*(WHAT|WHERE|WHEN|IMPACTS|ADDITIONAL DETAILS)\.\.\.([\s\S]*?)(?=\n[ \t]*\*|\n[ \t]*(?:WHAT|WHERE|WHEN|IMPACTS|ADDITIONAL DETAILS)\.\.\.|(?![\s\S]))/gim)];
+                const readField = (label: string) => fields.find((field) => field[1].toUpperCase() === label)?.[2].replace(/\s+/g, " ").trim();
+                const prose = alert.description.slice(0, fields[0]?.index ?? alert.description.length)
+                  .trim().split(/\n\s*\n/).map((paragraph) => paragraph.replace(/\s+/g, " "))
+                  .find((paragraph) => paragraph && !/^(?:\.{2,}|(?:until|through|from|valid until|in effect)\b)/i.test(paragraph));
+                const hazard = readField("WHAT") || readField("IMPACTS") || prose || readField("ADDITIONAL DETAILS") || "";
+                const brief = hazard.match(/^.{1,240}?[.!?](?=\s+[A-Z]|$)/)?.[0] ?? (hazard.length <= 240 ? hazard : "");
+                const timing = readField("WHEN");
                 return (
                 <article key={`${alert.event}-${alert.headline}-${alert.description}`} className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
                   <h4 className="font-semibold">{alert.event}</h4>
-                  {!points.length && alert.headline.trim() && alert.headline.trim().toLowerCase() !== alert.event.trim().toLowerCase() && (
+                  {(!brief || !timing) && alert.headline.trim() && alert.headline.trim().toLowerCase() !== alert.event.trim().toLowerCase() && alert.headline.trim() !== brief && (
                     <p className="mt-1">{alert.headline}</p>
                   )}
-                  {points.length > 0 ? (
-                    <dl className="mt-2 space-y-1 leading-6">
-                      {points.map(([label, body], index) => (
-                        <div key={index}>
-                          <dt className="inline font-semibold">{label}: </dt>
-                          <dd className="inline">{body}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  ) : brief && brief !== alert.headline.trim() ? (
-                    <p className="mt-1 leading-6">{brief}</p>
-                  ) : null}
+                  {brief && <p className="mt-1 leading-6">{brief}</p>}
+                  {timing && <p className="mt-1 leading-6"><strong>When:</strong> {timing}</p>}
                   {alert.description.trim() && (
                     <details className="mt-2">
                       <summary className="cursor-pointer font-semibold">Full National Weather Service statement</summary>
