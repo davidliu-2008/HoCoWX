@@ -47,9 +47,12 @@ function localDate(value: string) {
 
 function selectCommutePeriods(periods: NwsPeriod[], window: CommuteWindow) {
   const [startHour, endHour] = window === "morning" ? [5, 9] : [14, 17];
+  const now = Date.now();
   const candidates = periods.filter((period) => {
     const hour = localHour(period.startTime);
-    return hour >= startHour && hour < endHour;
+    const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "America/New_York" }).format(new Date(period.startTime));
+    return Date.parse(period.startTime) + 3_600_000 > now &&
+      weekday !== "Sat" && weekday !== "Sun" && hour >= startHour && hour < endHour;
   });
   const firstDate = candidates[0] ? localDate(candidates[0].startTime) : null;
   return firstDate ? candidates.filter((period) => localDate(period.startTime) === firstDate) : [];
@@ -62,18 +65,22 @@ function windNumber(value: string) {
 
 function commuteRisk(periods: NwsPeriod[], alerts: string[]) {
   const text = `${periods.map((period) => period.shortForecast).join(" ")} ${alerts.join(" ")}`.toLowerCase();
-  const maxPrecipitation = Math.max(0, ...periods.map((period) => period.probabilityOfPrecipitation?.value ?? 0));
   const maxWind = Math.max(0, ...periods.map((period) => windNumber(period.windSpeed)));
 
-  if (/ice storm|freezing rain|blizzard|heavy snow|tornado|hurricane|snow squall/.test(text)) {
-    return { level: "High", explanation: "Hazardous weather may create difficult or unsafe school travel conditions." };
+  if (/ice storm|freezing (?:rain|drizzle)|\bice\b/.test(text)) {
+    return { level: "High", explanation: "Ice could make sidewalks, bus stops, and roads slippery." };
+  }
+  if (/blizzard|heavy snow|tornado|hurricane|snow squall|flash flood|severe thunderstorm/.test(text)) {
+    return { level: "High", explanation: "Severe weather could disrupt travel. Check official alerts and district updates before leaving." };
   }
 
-  if (/snow|sleet|thunderstorm|heavy rain|dense fog/.test(text) || maxPrecipitation >= 60 || maxWind >= 30) {
-    return { level: "Medium", explanation: "Weather may slow travel or affect visibility during the selected commute." };
+  if (/snow|sleet|thunderstorm|heavy rain|dense fog/.test(text) || maxWind >= 30) {
+    return { level: "Medium", explanation: "Conditions could slow the trip. Check the hourly outlook for the part of the commute that affects you." };
   }
 
-  return { level: "Low", explanation: "No major weather-related commute disruptions are indicated for this window." };
+  return { level: "Low", explanation: /rain|showers/.test(text)
+    ? "Rain is in the outlook, but no major travel impacts are indicated for this window."
+    : "No major weather-related travel impacts are indicated for this window." };
 }
 
 export async function GET(request: NextRequest) {
@@ -91,14 +98,28 @@ export async function GET(request: NextRequest) {
     );
     const [hourly, alerts, operation] = await Promise.all([
       fetchNws<{ properties: { periods: NwsPeriod[] } }>(point.properties.forecastHourly),
-      fetchNws<{ features: Array<{ properties: { event?: string; headline?: string } }> }>(
+      fetchNws<{ features: Array<{ properties: { event?: string; status?: string; description?: string; onset?: string; effective?: string; ends?: string; expires?: string } }> }>(
         `https://api.weather.gov/alerts/active?point=${district.latitude},${district.longitude}`
       ),
       getMarylandDistrictStatus(county)
     ]);
     const periods = selectCommutePeriods(hourly.properties.periods, commuteWindow);
-    const alertNames = alerts.features.map((feature) => feature.properties.event ?? "Weather alert");
-    const risk = commuteRisk(periods, alertNames);
+    const alertNames = [...new Set(alerts.features.map(({ properties }) => properties)
+      .filter((alert) => (!alert.status || alert.status.toLowerCase() === "actual") &&
+        alert.event?.toLowerCase() !== "test message" && !/^monitoring message only\b/i.test(alert.description?.trim() ?? ""))
+      .filter((alert) => periods.some(({ startTime }) => {
+        const start = Date.parse(startTime);
+        const onset = Date.parse(alert.onset ?? alert.effective ?? "");
+        const end = Date.parse(alert.ends ?? alert.expires ?? "");
+        return (!Number.isFinite(onset) || onset < start + 3_600_000) &&
+          (!Number.isFinite(end) || end > start);
+      }))
+      .map((alert) => alert.event ?? "Weather alert"))];
+    const risk = periods.length ? commuteRisk(periods, alertNames) : null;
+
+    const precipitation = periods.flatMap(({ probabilityOfPrecipitation }) =>
+      typeof probabilityOfPrecipitation?.value === "number" ? [probabilityOfPrecipitation.value] : []
+    );
 
     return NextResponse.json({
       county: district.county,
@@ -110,12 +131,17 @@ export async function GET(request: NextRequest) {
       forecastDate: periods[0]?.startTime ?? null,
       temperatureLowF: periods.length ? Math.min(...periods.map((period) => period.temperature)) : null,
       temperatureHighF: periods.length ? Math.max(...periods.map((period) => period.temperature)) : null,
-      precipitationChance: Math.max(0, ...periods.map((period) => period.probabilityOfPrecipitation?.value ?? 0)),
+      precipitationChance: precipitation.length ? Math.max(...precipitation) : null,
       windSpeed: periods.reduce((strongest, period) => windNumber(period.windSpeed) > windNumber(strongest) ? period.windSpeed : strongest, periods[0]?.windSpeed ?? "Unavailable"),
       forecasts: [...new Set(periods.map((period) => period.shortForecast))],
       alerts: alertNames,
-      riskLevel: risk.level,
-      explanation: risk.explanation,
+      hours: periods.map((period) => ({
+        startTime: period.startTime,
+        temperatureF: period.temperature,
+        forecast: period.shortForecast
+      })),
+      riskLevel: risk?.level ?? null,
+      explanation: risk?.explanation ?? "No hourly forecast is available for the next weekday commute.",
       checkedAt: new Date().toISOString()
     });
   } catch (error) {

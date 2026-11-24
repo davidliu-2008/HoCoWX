@@ -16,11 +16,12 @@ type CommuteData = {
   forecastDate: string | null;
   temperatureLowF: number | null;
   temperatureHighF: number | null;
-  precipitationChance: number;
+  precipitationChance: number | null;
   windSpeed: string;
   forecasts: string[];
   alerts: string[];
-  riskLevel: "Low" | "Medium" | "High";
+  hours: { startTime: string; temperatureF: number; forecast: string }[];
+  riskLevel: "Low" | "Medium" | "High" | null;
   explanation: string;
   checkedAt: string;
 };
@@ -28,11 +29,7 @@ type CommuteData = {
 const STORAGE_KEY = "hocowx-commute-preferences";
 const COUNTY_STORAGE_KEY = "hocowx-county";
 
-function riskClass(level: CommuteData["riskLevel"]) {
-  if (level === "High") return "bg-red-100 text-red-800";
-  if (level === "Medium") return "bg-amber-100 text-amber-900";
-  return "bg-emerald-100 text-emerald-800";
-}
+const commuteTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", timeZone: "America/New_York" });
 
 export function CommutePlanner({ districts, initialCounty }: { districts: DistrictOption[]; initialCounty: string }) {
   const router = useRouter();
@@ -57,25 +54,28 @@ export function CommutePlanner({ districts, initialCounty }: { districts: Distri
     setReady(true);
   }, [districts, initialCounty]);
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (signal?: AbortSignal) => {
     setLoading(true);
     setError(null);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ county, window }));
       localStorage.setItem(COUNTY_STORAGE_KEY, county);
-      const response = await fetch(`/api/county-commute?county=${encodeURIComponent(county)}&window=${window}`);
+      const response = await fetch(`/api/county-commute?county=${encodeURIComponent(county)}&window=${window}`, { signal });
       const result = await response.json();
       if (!response.ok) throw new Error(result.detail ?? result.error ?? "Commute data could not be loaded.");
-      setData(result);
+      if (!signal?.aborted) setData(result);
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Commute data could not be loaded.");
+      if (!signal?.aborted) setError(caught instanceof Error ? caught.message : "Commute data could not be loaded.");
     } finally {
-      setLoading(false);
+      if (!signal?.aborted) setLoading(false);
     }
   }, [county, window]);
 
   useEffect(() => {
-    if (ready) void load();
+    if (!ready) return;
+    const controller = new AbortController();
+    void load(controller.signal);
+    return () => controller.abort();
   }, [load, ready]);
 
   function changeCounty(nextCounty: string) {
@@ -115,20 +115,29 @@ export function CommutePlanner({ districts, initialCounty }: { districts: Distri
           <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
             <div className="p-6 sm:p-8">
               <p className="text-sm font-bold uppercase tracking-wide text-blue-200">{data.county}</p>
-              <div className="mt-3 flex flex-wrap items-center gap-3"><h2 className="text-3xl font-black">{data.riskLevel} commute risk</h2><span className={`rounded-full px-3 py-1 text-xs font-black ${riskClass(data.riskLevel)}`}>{data.riskLevel}</span></div>
+              <h2 className="mt-3 text-3xl font-bold">{data.riskLevel === "High" ? "Hazardous travel possible" : data.riskLevel === "Medium" ? "Weather may slow travel" : data.riskLevel === "Low" ? "No major travel impacts expected" : "Commute outlook unavailable"}</h2>
               <p className="mt-4 leading-7 text-blue-100">{data.explanation}</p>
               <p className="mt-5 text-sm font-semibold text-blue-200">{data.forecastDate ? new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric", timeZone: "America/New_York" }).format(new Date(data.forecastDate)) : "Next available school commute"}</p>
             </div>
             <div className="grid gap-px bg-white/10 sm:grid-cols-2">
               <div className="bg-white/5 p-6"><p className="flex items-center gap-2 text-sm font-bold text-blue-200"><MapPin className="h-4 w-4" />Temperature</p><p className="mt-3 text-3xl font-black">{data.temperatureLowF === null ? "Unavailable" : `${data.temperatureLowF}°–${data.temperatureHighF}°`}</p></div>
-              <div className="bg-white/5 p-6"><p className="flex items-center gap-2 text-sm font-bold text-blue-200"><CloudRain className="h-4 w-4" />Precipitation</p><p className="mt-3 text-3xl font-black">{data.precipitationChance}%</p></div>
+              <div className="bg-white/5 p-6"><p className="flex items-center gap-2 text-sm font-bold text-blue-200"><CloudRain className="h-4 w-4" />Precipitation</p><p className="mt-3 text-3xl font-black">{data.precipitationChance === null ? "Unavailable" : `${data.precipitationChance}%`}</p></div>
               <div className="bg-white/5 p-6"><p className="flex items-center gap-2 text-sm font-bold text-blue-200"><Wind className="h-4 w-4" />Wind</p><p className="mt-3 text-2xl font-black">{data.windSpeed}</p></div>
-              <div className="bg-white/5 p-6"><p className="flex items-center gap-2 text-sm font-bold text-blue-200"><School className="h-4 w-4" />District status</p><p className="mt-3 text-2xl font-black">{data.status}</p><a href={data.statusUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-blue-200 hover:text-white">Official source <ExternalLink className="h-3.5 w-3.5" /></a></div>
+              <div className="bg-white/5 p-6"><p className="flex items-center gap-2 text-sm font-bold text-blue-200"><School className="h-4 w-4" />Current district status</p><p className="mt-3 text-2xl font-black">{data.status}</p><a href={data.statusUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-blue-200 hover:text-white">Official source <ExternalLink className="h-3.5 w-3.5" /></a></div>
             </div>
           </div>
           <div className="grid gap-4 border-t border-white/10 p-6 sm:grid-cols-2 sm:p-8">
-            <div><p className="text-xs font-bold uppercase tracking-wide text-blue-200">Forecast</p><p className="mt-2 leading-7">{data.forecasts.join(" changing to ") || "Forecast text unavailable."}</p></div>
-            <div><p className="text-xs font-bold uppercase tracking-wide text-blue-200">Active alerts</p>{data.alerts.length ? <ul className="mt-2 space-y-2">{data.alerts.map((alert) => <li key={alert} className="flex gap-2 text-sm"><AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />{alert}</li>)}</ul> : <p className="mt-2 text-blue-100">No active NWS alerts for this county point.</p>}</div>
+            {data.hours.length > 0 && <div className="sm:col-span-2">
+              <h3 className="text-sm font-bold text-blue-200">Hour by hour (ET)</h3>
+              <ul className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
+                {data.hours.map((hour) => <li key={hour.startTime} className="min-w-0 rounded-md bg-white/10 p-3">
+                  <time dateTime={hour.startTime} className="text-sm font-bold">{commuteTime.format(new Date(hour.startTime))}</time>
+                  <p className="mt-1 text-sm text-blue-100">{hour.forecast} · {hour.temperatureF}°F</p>
+                </li>)}
+              </ul>
+              <p className="mt-3 text-xs text-blue-100">National Weather Service forecast for a point in {data.county}. Conditions can vary along your route.</p>
+            </div>}
+            {data.alerts.length > 0 && <div className="sm:col-span-2"><h3 className="text-sm font-bold text-blue-200">Alerts during this commute</h3><ul className="mt-2 space-y-2">{data.alerts.map((alert) => <li key={alert} className="flex gap-2 text-sm"><AlertTriangle aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />{alert}</li>)}</ul></div>}
           </div>
         </section>
       ) : null}
