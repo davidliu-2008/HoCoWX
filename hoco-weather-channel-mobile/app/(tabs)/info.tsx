@@ -29,7 +29,7 @@ export default function InfoScreen() {
       <Card>
         <AppText variant="heading">Disclaimer</AppText>
         <AppText muted style={styles.paragraph}>
-          This app is unofficial and is not affiliated with HCPSS. Always check the official HCPSS status page for final decisions.
+          HoCo Weather Channel predictions are not official HCPSS decisions. Always check the official HCPSS status page for final decisions.
         </AppText>
       </Card>
 
@@ -37,6 +37,11 @@ export default function InfoScreen() {
         <AppText variant="heading">Privacy summary</AppText>
         <AppText muted style={styles.paragraph}>{appConfig.privacySummary}</AppText>
       </Card>
+
+      <Pressable accessibilityRole="link" onPress={() => Linking.openURL("https://hocoweatherchannel.org/mobile-support")} style={styles.button}>
+        <ExternalLink color="#ffffff" size={18} />
+        <AppText style={styles.buttonText}>App support and privacy</AppText>
+      </Pressable>
 
       <Pressable onPress={() => Linking.openURL(appConfig.officialHcpssUrl)} style={styles.button}>
         <ExternalLink color="#ffffff" size={18} />

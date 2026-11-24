@@ -72,7 +72,7 @@ export default function PredictionScreen() {
       <Card>
         <AppText variant="heading">Unofficial disclaimer</AppText>
         <AppText muted style={styles.spacing}>
-          This app is unofficial and is not affiliated with HCPSS. Always check the official HCPSS status page for final decisions.
+          HoCo Weather Channel predictions are not official HCPSS decisions. Always check the official HCPSS status page for final decisions.
         </AppText>
       </Card>
     </Screen>

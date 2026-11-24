@@ -31,7 +31,7 @@ Set the deployed website URL in `app.json`:
 
 ```json
 "extra": {
-  "apiBaseUrl": "https://hocoweatherchannel.vercel.app"
+  "apiBaseUrl": "https://hocoweatherchannel.org"
 }
 ```
 
@@ -116,5 +116,5 @@ HoCo Weather Channel only fetches public weather and school status data. It does
 Disclaimer:
 
 ```text
-This app is unofficial and is not affiliated with HCPSS. Always check the official HCPSS status page for final decisions.
+HoCo Weather Channel predictions are not official HCPSS decisions. Always check the official HCPSS status page for final decisions.
 ```

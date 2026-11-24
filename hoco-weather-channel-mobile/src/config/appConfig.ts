@@ -3,7 +3,7 @@ import Constants from "expo-constants";
 const configuredBaseUrl =
   Constants.expoConfig?.extra?.apiBaseUrl ??
   process.env.EXPO_PUBLIC_API_BASE_URL ??
-  "https://hocoweatherchannel.vercel.app";
+  "https://hocoweatherchannel.org";
 
 export const appConfig = {
   apiBaseUrl: configuredBaseUrl.replace(/\/$/, ""),

@@ -30,7 +30,7 @@
       "typedRoutes": true
     },
     "extra": {
-      "apiBaseUrl": "https://hocoweatherchannel.vercel.app"
+      "apiBaseUrl": "https://hocoweatherchannel.org"
     }
   }
 }
