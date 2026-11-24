@@ -19,7 +19,7 @@ export default function AnnouncementsPage() {
           <div className="text-sm font-semibold text-bay">HCPSS partnership <span className="mt-1 block text-slate-600">In development</span></div>
           <div>
             <h2 className="text-2xl font-semibold leading-tight text-ink sm:text-3xl">Building a countywide severe weather broadcast for schools</h2>
-            <p className="mt-4 leading-7 text-slate-700">HoCo Weather Channel is working with the Howard County Public School System to develop a countywide broadcast that pairs local weather information with the reasoning behind school operations decisions. The goal is for families to hear what was decided, why it was decided, and what conditions to expect on the way to school.</p>
+            <p className="mt-4 leading-7 text-slate-700">HoCo Weather Channel is working with the Howard County Public School System to develop a countywide broadcast that pairs local weather information with the reasoning behind school operations decisions. The goal is for families to hear what was decided and why.</p>
             <p className="mt-4 leading-7 text-slate-700">A forecast can tell you when freezing rain may start. A school weather broadcast should also explain whether that timing overlaps with bus routes, what is still uncertain, and where families can find the official decision.</p>
             <Link href="/partnerships" className="mt-4 inline-flex min-h-11 items-center font-semibold text-bay underline underline-offset-4">Explore the HCPSS partnership</Link>
           </div>
