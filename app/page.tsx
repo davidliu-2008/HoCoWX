@@ -15,6 +15,7 @@ import {
   Wind
 } from "lucide-react";
 import { DashboardAnnouncement } from "@/components/DashboardAnnouncement";
+import { WeatherAlertPopup } from "@/components/WeatherAlertPopup";
 import { PageTabs } from "@/components/PageTabs";
 import { CountyPreference } from "@/components/CountyPreference";
 import { LiveRadar } from "@/components/LiveRadar";
@@ -408,7 +409,7 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
             )}
           </div>
         )}
-        {data.alerts.length > 0 && <div>
+        {data.alerts.length > 0 && <div id="weather-alerts" className="scroll-mt-32">
           <h3 className="mb-2 text-base font-bold text-ink">
             Weather alerts
           </h3>
@@ -526,6 +527,13 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     <main id="main-content" tabIndex={-1} className="min-h-screen w-full bg-white pb-0">
       <PageTabs active="dashboard" />
       <DashboardAnnouncement />
+      {weather.ok && weather.data.alerts.length > 0 && (
+        <WeatherAlertPopup
+          key={JSON.stringify([district.slug, weather.data.alerts.map(({ event, headline }) => [event, headline])])}
+          county={district.county}
+          events={weather.data.alerts.map(({ event }) => event)}
+        />
+      )}
 
       <header className="home-hero relative overflow-hidden bg-navy px-5 py-6 text-white sm:px-8 sm:py-10 lg:px-12 lg:py-14">
         <Image
