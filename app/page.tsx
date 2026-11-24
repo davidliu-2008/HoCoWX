@@ -414,20 +414,39 @@ function WeatherCard({ weather, county }: { weather: LoadState<WeatherSummary>; 
             Weather alerts
           </h3>
             <div className="space-y-2">
-              {data.alerts.map((alert) => (
+              {data.alerts.map((alert) => {
+                const points = [...alert.description.matchAll(/^\s*\*\s+(WHAT|WHERE|WHEN|IMPACTS)\.\.\.([\s\S]*?)(?=\n\s*\*|$)/gim)]
+                  .map(([, label, body]) => [label[0].toUpperCase() + label.slice(1).toLowerCase(), body.replace(/\s+/g, " ").trim()])
+                  .filter(([, body]) => body);
+                const lead = alert.description.trim().split(/\n\s*\n/)[0]?.replace(/\s+/g, " ");
+                const brief = lead && (lead.match(/^.{1,240}?[.!?](?=\s+[A-Z]|$)/)?.[0] ?? (lead.length <= 240 ? lead : ""));
+                return (
                 <article key={`${alert.event}-${alert.headline}-${alert.description}`} className="rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
                   <h4 className="font-semibold">{alert.event}</h4>
-                  {alert.headline.trim() && alert.headline.trim().toLowerCase() !== alert.event.trim().toLowerCase() && (
+                  {!points.length && alert.headline.trim() && alert.headline.trim().toLowerCase() !== alert.event.trim().toLowerCase() && (
                     <p className="mt-1">{alert.headline}</p>
                   )}
+                  {points.length > 0 ? (
+                    <dl className="mt-2 space-y-1 leading-6">
+                      {points.map(([label, body], index) => (
+                        <div key={index}>
+                          <dt className="inline font-semibold">{label}: </dt>
+                          <dd className="inline">{body}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  ) : brief && brief !== alert.headline.trim() ? (
+                    <p className="mt-1 leading-6">{brief}</p>
+                  ) : null}
                   {alert.description.trim() && (
-                    <details className="mt-2" open={alert.event === "Special Weather Statement"}>
-                      <summary className="cursor-pointer font-semibold">National Weather Service details</summary>
+                    <details className="mt-2">
+                      <summary className="cursor-pointer font-semibold">Full National Weather Service statement</summary>
                       <p className="mt-2 whitespace-pre-line break-words leading-6">{alert.description.trim()}</p>
                     </details>
                   )}
                 </article>
-              ))}
+                );
+              })}
             </div>
         </div>}
       </div>
