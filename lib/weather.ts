@@ -176,6 +176,7 @@ function sumSnowfallBeforeTomorrowMorning(values: GridValue[] | undefined) {
 function formatAlert(feature: {
   properties: {
     event?: string;
+    status?: string;
     severity?: string;
     headline?: string;
     description?: string;
@@ -250,7 +251,13 @@ export async function getWeatherSummary({
     expectedSnowfallInches: sumSnowfallBeforeTomorrowMorning(grid.properties.snowfall?.values),
     windSpeed: current?.windSpeed ?? null,
     windGust: current?.windGust ?? null,
-    alerts: alerts.features.map(formatAlert),
+    alerts: alerts.features
+      .filter(({ properties }) =>
+        (!properties.status || properties.status.trim().toLowerCase() === "actual") &&
+        properties.event?.trim().toLowerCase() !== "test message" &&
+        !/^monitoring message only\b/i.test(properties.description?.trim() ?? "")
+      )
+      .map(formatAlert),
     overnightForecast: overnight?.detailedForecast ?? overnight?.shortForecast ?? null,
     morningForecast: morning?.detailedForecast ?? morning?.shortForecast ?? null,
     shortForecast: current?.shortForecast ?? nextPeriods[0]?.shortForecast ?? null,
