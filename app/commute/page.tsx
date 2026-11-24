@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default async function CommutePage({ searchParams }: { searchParams: Promise<{ county?: string }> }) {
   const requestedCounty = (await searchParams).county ?? "howard";
   const initialCounty = marylandDistricts.some((district) => district.slug === requestedCounty) ? requestedCounty : "howard";
-  const routeWeatherEnabled = Boolean(process.env.OSRM_BASE_URL && process.env.ROUTE_GEOCODER_URL) || process.env.NODE_ENV === "development";
+  const routeWeatherEnabled = Boolean(process.env.OSRM_BASE_URL) || process.env.NODE_ENV === "development";
   return (
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
       <PageTabs active="commute" />

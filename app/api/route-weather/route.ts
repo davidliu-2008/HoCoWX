@@ -3,26 +3,6 @@ import { NextResponse } from "next/server";
 type Point = [number, number];
 type Hour = { startTime: string; endTime: string; shortForecast: string };
 type Route = { geometry: { coordinates: Point[] }; duration: number; distance: number };
-const previewPlaces: Record<string, Point> = {
-  "columbia": [-76.86, 39.19],
-  "ellicott city": [-76.7983, 39.2673],
-  "howard high school": [-76.8165, 39.2374]
-};
-
-async function findPlace(value: unknown): Promise<Point | null> {
-  if (typeof value !== "string" || !value.trim() || value.length > 200) return null;
-  const base = process.env.ROUTE_GEOCODER_URL;
-  if (!base) return process.env.NODE_ENV === "development" ? previewPlaces[value.trim().toLowerCase()] ?? null : null;
-  const url = new URL(base);
-  url.search = new URLSearchParams({
-    q: value.trim(), format: "jsonv2", countrycodes: "us", viewbox: "-80,41,-74,37", bounded: "1", limit: "1"
-  }).toString();
-  const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(5000) });
-  if (!response.ok) throw new Error("Place search unavailable");
-  const [match] = await response.json();
-  const point = match ? [Number(match.lon), Number(match.lat)] : null;
-  return isPoint(point) ? point : null;
-}
 
 function isPoint(value: unknown): value is Point {
   return Array.isArray(value) && value.length === 2 &&
@@ -66,20 +46,15 @@ export async function POST(request: Request) {
   const input = await request.json().catch(() => null);
   const departure = Date.parse(typeof input?.departure === "string" ? input.departure : "");
   const now = Date.now();
-  if (!Number.isFinite(departure) ||
+  const { start, end } = (input ?? {}) as { start?: unknown; end?: unknown };
+  if (!isPoint(start) || !isPoint(end) || !Number.isFinite(departure) ||
       departure < now - 300_000 || departure > now + 6 * 86_400_000) {
-    return NextResponse.json({ error: "Choose a departure within the next six days." }, { status: 400 });
+    return NextResponse.json({ error: "Choose two points in the Maryland area and a departure within the next six days." }, { status: 400 });
   }
 
   const router = process.env.OSRM_BASE_URL || (process.env.NODE_ENV === "development" ? "https://router.project-osrm.org" : "");
   if (!router) return NextResponse.json({ error: "Driving routes are not available yet. You can still use the county commute forecast below." }, { status: 503 });
   try {
-    const [start, end] = await Promise.all([findPlace(input?.start), findPlace(input?.end)]);
-    if (!start || !end) return NextResponse.json({
-      error: !process.env.ROUTE_GEOCODER_URL && process.env.NODE_ENV === "development"
-        ? "Try Columbia, Ellicott City, or Howard High School in this preview."
-        : `Could not find the ${!start ? "starting point" : "destination"}. Try a full address or include the city and state.`
-    }, { status: 400 });
     const coordinates = [start, end].map((point) => point.map((part) => part.toFixed(5)).join(",")).join(";");
     const response = await fetch(`${router.replace(/\/$/, "")}/route/v1/driving/${coordinates}?overview=full&geometries=geojson&generate_hints=false`, {
       cache: "no-store", signal: AbortSignal.timeout(8000)
@@ -111,8 +86,8 @@ export async function POST(request: Request) {
       const forecast = await forecastAt(sample, time);
       return { path: path.slice(start, end + 1), time: new Date(time).toISOString(), forecast, ...impact(forecast) };
     }));
-    return NextResponse.json({ start, end, segments, minutes: Math.max(1, Math.round(route.duration / 60)) });
+    return NextResponse.json({ segments, minutes: Math.max(1, Math.round(route.duration / 60)) });
   } catch {
-    return NextResponse.json({ error: "A driving route could not be loaded. Check the locations and try again." }, { status: 502 });
+    return NextResponse.json({ error: "A driving route could not be loaded. Move the pins closer to the road and try again." }, { status: 502 });
   }
 }
