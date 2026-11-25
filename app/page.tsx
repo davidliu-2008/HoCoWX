@@ -516,8 +516,9 @@ function PredictionCard({ prediction }: { prediction: LoadState<PredictionResult
 }
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ county?: string }> }) {
-  const requestedCounty = (await searchParams).county ?? "howard";
-  const district = getMarylandDistrict(requestedCounty) ?? getMarylandDistrict("howard")!;
+  const requestedCounty = (await searchParams).county;
+  const explicitCounty = requestedCounty ? getMarylandDistrict(requestedCounty) : undefined;
+  const district = explicitCounty ?? getMarylandDistrict("howard")!;
   const isHoward = district.slug === "howard";
   const [status, weather] = await Promise.all([
     safeLoad(async () => {
@@ -548,7 +549,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
 
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen w-full bg-white pb-0">
-      <PageTabs active="dashboard" />
+      <PageTabs active="dashboard" routeCounty={explicitCounty?.slug} />
       <DashboardAnnouncement />
       {weather.ok && weather.data.alerts.length > 0 && (
         <WeatherAlertPopup
@@ -603,7 +604,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
 
       <div className="bg-white py-4">
         <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
-          <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} />
+          <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} explicitCounty={Boolean(explicitCounty)} />
         </div>
       </div>
 

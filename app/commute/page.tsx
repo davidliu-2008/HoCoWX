@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 };
 
 export default async function CommutePage({ searchParams }: { searchParams: Promise<{ county?: string }> }) {
-  const requestedCounty = (await searchParams).county ?? "howard";
-  const initialCounty = marylandDistricts.some((district) => district.slug === requestedCounty) ? requestedCounty : "howard";
+  const requestedCounty = (await searchParams).county;
+  const initialCounty = marylandDistricts.find((district) => district.slug === requestedCounty)?.slug;
   const routeWeatherEnabled = Boolean(process.env.OSRM_BASE_URL) || process.env.NODE_ENV === "development";
   return (
     <main id="main-content" tabIndex={-1} className="integrated-page min-h-screen w-full pb-8">
-      <PageTabs active="commute" />
+      <PageTabs active="commute" routeCounty={initialCounty} />
       <PageHero title="Your school commute, at a glance." description={routeWeatherEnabled ? "Check weather along your drive or see the morning and afternoon outlook for your county." : "See the morning and afternoon school travel outlook for your county."} />
       <section className="page-content page-section">
         {routeWeatherEnabled && <RouteWeather />}

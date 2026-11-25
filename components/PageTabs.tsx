@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   ChevronDown,
   Instagram,
@@ -63,10 +63,9 @@ const mobileLinks = [
   { href: "/interview", label: "Weather Decisions", tab: "interview" }
 ] as const;
 
-export function PageTabs({ active }: { active: Tab }) {
+export function PageTabs({ active, routeCounty }: { active: Tab; routeCounty?: string }) {
   const mobileMenu = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname();
-  const router = useRouter();
   const [county, setCounty] = useState("howard");
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
@@ -77,18 +76,9 @@ export function PageTabs({ active }: { active: Tab }) {
   }, [pathname]);
 
   useEffect(() => {
-    const queryCounty = new URLSearchParams(window.location.search).get("county");
-    if (queryCounty) {
-      setCounty(queryCounty);
-      localStorage.setItem("hocowx-county", queryCounty);
-      return;
-    }
-    const saved = localStorage.getItem("hocowx-county");
-    if (saved && saved !== "howard") {
-      setCounty(saved);
-      router.replace(`${pathname}?county=${encodeURIComponent(saved)}`);
-    }
-  }, [pathname, router]);
+    const queryCounty = routeCounty ?? new URLSearchParams(window.location.search).get("county");
+    setCounty(localStorage.getItem("hocowx-county") || queryCounty || "howard");
+  }, [pathname, routeCounty]);
 
   const desktopItem = (isActive: boolean) =>
     `inline-flex min-h-[4.5rem] items-center gap-2 border-b-2 px-3 text-[0.8125rem] font-bold transition ${

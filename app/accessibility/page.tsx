@@ -35,16 +35,15 @@ export default function AccessibilityPage() {
 
       <section className="bg-white page-band">
         <div className="mx-auto max-w-5xl text-center">
-          <h2 className="text-3xl font-black text-ink sm:text-4xl">Our accessibility approach</h2>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-slate-700">
+          <p className="mx-auto max-w-3xl text-base leading-7 text-slate-700">
             This site was reviewed in accordance with WCAG guidance shared by HCPSS Communications and Engagement, with a focus on WCAG 2.1 Level AA and relevant WCAG 2.2 guidance.
           </p>
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-5xl gap-x-10 gap-y-8 sm:grid-cols-2">
+        <div className="mx-auto mt-7 grid max-w-5xl gap-x-10 gap-y-6 sm:grid-cols-2">
           {features.map(({ title, description }) => (
             <article key={title}>
-              <h3 className="text-xl font-black text-ink">{title}</h3>
+              <h2 className="text-xl font-black text-ink">{title}</h2>
               <p className="mt-2 leading-7 text-slate-700">{description}</p>
             </article>
           ))}

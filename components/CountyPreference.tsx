@@ -11,19 +11,19 @@ type CountyOption = {
   county: string;
 };
 
-export function CountyPreference({ counties, selected }: { counties: CountyOption[]; selected: string }) {
+export function CountyPreference({ counties, selected, explicitCounty }: { counties: CountyOption[]; selected: string; explicitCounty: boolean }) {
   const router = useRouter();
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (selected === "howard" && saved && saved !== "howard" && counties.some((county) => county.slug === saved)) {
+    if (!explicitCounty && saved && saved !== selected && counties.some((county) => county.slug === saved)) {
       router.replace(`/?county=${encodeURIComponent(saved)}`);
     }
-  }, [counties, router, selected]);
+  }, [counties, explicitCounty, router, selected]);
 
   function updateCounty(slug: string) {
     localStorage.setItem(STORAGE_KEY, slug);
-    router.push(slug === "howard" ? "/" : `/?county=${encodeURIComponent(slug)}`);
+    router.push(`/?county=${encodeURIComponent(slug)}`);
   }
 
   return (

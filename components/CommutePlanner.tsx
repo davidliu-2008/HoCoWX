@@ -31,9 +31,9 @@ const COUNTY_STORAGE_KEY = "hocowx-county";
 
 const commuteTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", timeZone: "America/New_York" });
 
-export function CommutePlanner({ districts, initialCounty }: { districts: DistrictOption[]; initialCounty: string }) {
+export function CommutePlanner({ districts, initialCounty }: { districts: DistrictOption[]; initialCounty?: string }) {
   const router = useRouter();
-  const [county, setCounty] = useState(initialCounty);
+  const [county, setCounty] = useState(initialCounty ?? "howard");
   const [window, setWindow] = useState<CommuteWindow>("morning");
   const [data, setData] = useState<CommuteData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +44,7 @@ export function CommutePlanner({ districts, initialCounty }: { districts: Distri
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null") as { county?: string; window?: CommuteWindow } | null;
       const globalCounty = localStorage.getItem(COUNTY_STORAGE_KEY);
-      if (initialCounty !== "howard") setCounty(initialCounty);
+      if (initialCounty) setCounty(initialCounty);
       else if (globalCounty && districts.some((district) => district.slug === globalCounty)) setCounty(globalCounty);
       else if (saved?.county && districts.some((district) => district.slug === saved.county)) setCounty(saved.county);
       if (saved?.window === "morning" || saved?.window === "afternoon") setWindow(saved.window);
@@ -59,7 +59,6 @@ export function CommutePlanner({ districts, initialCounty }: { districts: Distri
     setError(null);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ county, window }));
-      localStorage.setItem(COUNTY_STORAGE_KEY, county);
       const response = await fetch(`/api/county-commute?county=${encodeURIComponent(county)}&window=${window}`, { signal });
       const result = await response.json();
       if (!response.ok) throw new Error(result.detail ?? result.error ?? "Commute data could not be loaded.");
@@ -81,7 +80,7 @@ export function CommutePlanner({ districts, initialCounty }: { districts: Distri
   function changeCounty(nextCounty: string) {
     setCounty(nextCounty);
     localStorage.setItem(COUNTY_STORAGE_KEY, nextCounty);
-    router.replace(nextCounty === "howard" ? "/commute" : `/commute?county=${encodeURIComponent(nextCounty)}`);
+    router.replace(`/commute?county=${encodeURIComponent(nextCounty)}`);
   }
 
   return (
