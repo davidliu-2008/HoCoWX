@@ -10,7 +10,7 @@ export function DashboardAnnouncement() {
   return (
     <aside aria-label="Dashboard announcement" className="grid grid-cols-[1fr_auto] items-center gap-2 border-b border-blue-100 bg-ice px-4">
       <p className="py-2 text-center text-sm text-slate-700">
-        HCPSS severe weather broadcasting and our December 9 discussion with NOAA.{" "}
+        HCPSS severe weather broadcasting and our discussion with NOAA.{" "}
         <a href="/announcements" className="group inline-flex items-center gap-1 font-semibold text-bay underline underline-offset-4">
           Read the announcements
           <ArrowUpRight aria-hidden="true" className="h-4 w-4 motion-safe:transition-transform motion-safe:group-hover:-translate-y-0.5" />
