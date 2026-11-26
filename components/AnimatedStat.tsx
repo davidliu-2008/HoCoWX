@@ -13,7 +13,7 @@ export function AnimatedStat({
   decimals?: number;
   className?: string;
 }) {
-  const [value, setValue] = useState(target);
+  const [value, setValue] = useState(0);
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
