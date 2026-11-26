@@ -565,11 +565,11 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           alt="Snow-covered Howard County landscape beneath a winter sunset"
           fill
           priority
-          sizes="(max-width: 1480px) 100vw, 1440px"
+          sizes="100vw"
           className="dashboard-skyline object-cover object-[64%_58%] sm:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#091b36]/95 via-[#102f5c]/82 to-[#12305f]/45" />
-        <div className="relative z-10 mx-auto grid w-full max-w-[1440px] items-end gap-5 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="relative z-10 grid w-full items-end gap-5 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <p className="mb-4 text-sm font-bold uppercase tracking-wide text-blue-200">HoCo Weather Channel</p>
             <h1 className="dashboard-headline max-w-4xl text-3xl font-black leading-tight sm:text-4xl md:text-6xl">By students. For students.</h1>
@@ -603,12 +603,12 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       </header>
 
       <div className="bg-white py-4">
-        <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        <div className="page-content">
           <CountyPreference counties={marylandDistricts.map(({ slug, county }) => ({ slug, county }))} selected={district.slug} explicitCounty={Boolean(explicitCounty)} />
         </div>
       </div>
 
-      <div id="today" className="mx-auto w-full max-w-[1440px] scroll-mt-28 px-5 sm:px-8 lg:px-12">
+      <div id="today" className="page-content scroll-mt-28">
         <div key={district.slug} className="county-data-in">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr]">
           <DistrictStatusCard status={status} isHoward={isHoward} />

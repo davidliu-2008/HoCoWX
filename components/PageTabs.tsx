@@ -88,7 +88,7 @@ export function PageTabs({ active, routeCounty }: { active: Tab; routeCounty?: s
 
   return (
     <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur" aria-label="Main sections">
-      <div className="mx-auto flex min-h-16 w-full max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:min-h-[4.5rem]">
+      <div className="flex min-h-16 w-full items-center gap-4 px-4 sm:px-6 lg:min-h-[4.5rem]">
         <Link href={countyHref("/")} className="flex shrink-0 items-center" aria-label="HoCo Weather Channel home">
           <img src="/hoco-weather-channel-icon.png" alt="" width={64} height={64} className="h-12 w-12 shrink-0 object-contain lg:h-14 lg:w-14" />
         </Link>

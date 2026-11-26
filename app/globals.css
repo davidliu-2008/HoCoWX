@@ -207,7 +207,7 @@ main article[class*="shadow"] {
 }
 
 .page-content {
-  width: min(100%, 1440px);
+  width: 100%;
   margin-inline: auto;
   padding-inline: 1.25rem;
 }
@@ -243,7 +243,7 @@ main article[class*="shadow"] {
 
 @media (min-width: 1024px) {
   .page-content { padding-inline: 3rem; }
-  .page-band { padding-inline: max(3rem, calc((100% - 1344px) / 2)); }
+  .page-band { padding-inline: 3rem; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
